@@ -9,7 +9,7 @@ import Data.Lens (preview)
 import Data.Lens.Index (ix)
 import Data.Maybe (Maybe(..), isJust)
 import Data.Traversable (traverse)
-import Data.Tuple (Tuple(..))
+import Data.Tuple (Tuple(..), snd)
 import Effect (Effect)
 import Effect.Aff (Aff, error, launchAff_, throwError)
 import Effect.Class (liftEffect)
@@ -181,7 +181,8 @@ main :: Effect Unit
 main = launchAff_ do 
   types <- getBaseTypes
   interfaces <- getInterfaces
-  let s = hushSpyStringify $ Array.filter (\(Tuple node (Interface { name })) -> name == "ButtonProps") interfaces 
+  let filtered = Array.filter (\(Tuple node (Interface { name })) -> name == "ButtonProps") interfaces 
+  let mapped = hushSpyStringify $ map snd filtered
   pure unit
 
 type R r =  (foo :: String | r)
