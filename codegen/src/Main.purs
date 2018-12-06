@@ -4,7 +4,7 @@ import Prelude
 
 import Control.Lazy (fix)
 import Control.Monad.Except (runExcept)
-import Data.Array (catMaybes, length, zip) as Array
+import Data.Array (catMaybes, filter, length, zip) as Array
 import Data.Lens (preview)
 import Data.Lens.Index (ix)
 import Data.Maybe (Maybe(..), isJust)
@@ -71,7 +71,7 @@ getBaseTypes = nodes <#> Array.catMaybes <<< map makeBaseType
       _typeName <<<
       _Name
  
-getInterfaces :: Aff (Array Interface)
+getInterfaces :: Aff (Array (Tuple Node Interface))
 getInterfaces = nodes <#> Array.catMaybes <<< map makeInterfaces
   where
     makeInterfaces node = do
@@ -81,7 +81,7 @@ getInterfaces = nodes <#> Array.catMaybes <<< map makeInterfaces
                           >>= (traverse (preview (_TypeParameter <<< _name <<< _Name)))
                           <#> (map (\n -> TypeArgument { name : n, typeArguments : [] }))
       fields          <- preview (_InterfaceDeclaration <<< _members) node >>= buildFields
-      pure $ Interface { name, fields, typeArguments, parents }
+      pure $ Tuple node (Interface { name, fields, typeArguments, parents })
     namePrism = 
       _InterfaceDeclaration <<<
       _name <<<
@@ -181,7 +181,7 @@ main :: Effect Unit
 main = launchAff_ do 
   types <- getBaseTypes
   interfaces <- getInterfaces
-  let s = hushSpyStringify interfaces 
+  let s = hushSpyStringify $ Array.filter (\(Tuple node (Interface { name })) -> name == "ButtonProps") interfaces 
   pure unit
 
 type R r =  (foo :: String | r)

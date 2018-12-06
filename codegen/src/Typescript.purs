@@ -154,6 +154,7 @@ import Data.Tuple (Tuple(..))
 import Effect (Effect)
 import Effect.Unsafe (unsafePerformEffect)
 import Foreign (Foreign, ForeignError(..), F, unsafeToForeign)
+import Foreign (isUndefined) as Foreign
 import Foreign.Object (Object)
 import Foreign.Object (keys, lookup) as Object
 import Simple.JSON (class ReadForeign, readImpl)
@@ -874,7 +875,11 @@ handlePropertySignature :: Object Foreign -> F Node
 handlePropertySignature obj = ado
   name <- lookupOrError "name" obj 
   nodeType <- lookupOrError "type" obj 
-  let questionToken = (Object.lookup "questionToken" obj) <#> const (QuestionToken "?")
+  let 
+    questionToken = (Object.lookup "questionToken" obj) >>= \v -> do
+      if Foreign.isUndefined v 
+        then Nothing
+        else Just $ QuestionToken "?"
   in PropertySignature { name, questionToken, type : nodeType }
 
 lookupOrError :: String -> Object Foreign -> F Node 
