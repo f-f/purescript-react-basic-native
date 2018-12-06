@@ -31,7 +31,7 @@ data FieldType
   | NumericLiteralField String
   | ArrayField FieldType 
   | TypeArgumentField TypeArgument
-  | FunctionField { typeParameters :: Array TypeArgument, type :: FieldType, parameters :: Array FieldType }
+  | FunctionField { type :: FieldType, parameters :: Array FieldType }
   | TypeLiteralField (Array Field)
   | UnionTypeField (Array FieldType)
   | ParamField { name :: String, type :: FieldType, isOptional :: Boolean, isDotDotDot :: Boolean }
@@ -97,18 +97,12 @@ buildField (MethodSignature _) = Nothing
 buildField (PropertySignature rec) = do 
   name <- getName rec.name
   let isOptional = isJust rec.questionToken
-  let fieldType = case (buildFieldType rec.type) of 
-        Nothing -> do
-          let s = hushSpy rec.type
-          let s1 = hushSpyStringify rec.type
-          Literal "Dunno"
-        Just a -> a
+  fieldType <- buildFieldType rec.type
   pure $ Field { name, isOptional, type : fieldType }
 buildField (IndexSignature rec) = do
   typeField   <- buildFieldType rec.type
   parameters  <- traverse buildFieldType rec.parameters
   pure $ IndexField { parameters, type : typeField }
-
 buildField node = do
   let s = hushSpy "buildField got a node I don't know"
   let s1 = hushSpy node
@@ -133,21 +127,15 @@ buildFieldType (TypeQuery { exprName }) = TypeOfField <$> getName exprName
 buildFieldType (UnionType { types }) = UnionTypeField <$> (traverse buildFieldType types)
 buildFieldType (ParenthesizedType rec) = UnionTypeField <$> (buildFieldType rec.type <#> \f -> [f])
 buildFieldType node @ (TypeReference _) = TypeArgumentField <$> buildTypeArguments node
-
 buildFieldType (Parameter rec) = do 
   name <- getName rec.name
   fieldType <- buildFieldType rec.type
   let isOptional = isJust rec.questionToken
   let isDotDotDot = isJust rec.dotDotDotToken
   pure $ ParamField { name, isOptional, isDotDotDot, type : fieldType }
-
 buildFieldType (FunctionType rec) = (buildFieldType rec.type) >>= \fieldType -> do
-  typeParameters <- handleTypeParameters rec.typeParameters
   parameters <- traverse buildFieldType rec.parameters
-  pure $ FunctionField { typeParameters, parameters, type : fieldType }
-  where
-    handleTypeParameters ns = Just []
-
+  pure $ FunctionField { parameters, type : fieldType }
 buildFieldType node = do
   let s = hushSpy "buildFieldType got a node I don't know"
   let s1 = hushSpy node
