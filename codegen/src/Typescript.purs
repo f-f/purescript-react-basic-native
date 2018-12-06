@@ -1,108 +1,134 @@
 module Typescript (
   -- Types
   Node(..)
-, PropertySignatureRec
-, TypeReferenceRec
-, ParameterRec
-, FunctionTypeRec
-, InterfaceDeclarationRec
-, UnionTypeRec
-, MethodSignatureRec
+, ArrayTypeRec
+, BindingElementRec
+, ClassDeclarationRec
+, ConstructSignatureRec
+, ConstructorRec
+, ConstructorTypeRec
 , ExpressionWithTypeArgumentsRec
+, FunctionDeclarationRec
+, FunctionTypeRec
 , HeritageClauseRec
+, ImportClauseRec
+, ImportDeclarationRec
+, IndexSignatureRec
+, IndexedAccessTypeRec
+, InterfaceDeclarationRec
+, IntersectionTypeRec
+, MappedTypeRec
+, MethodDeclarationRec
+, MethodSignatureRec
+, ModuleBlockRec
+, ModuleDeclarationRec
+, NamespaceImportRec
+, ObjectBindingPatternRec
+, ParameterRec
+, ParenthesizedTypeRec
+, PropertyAccessExpressionRec
+, PropertyDeclarationRec
+, PropertySignatureRec
+, QualifiedNameRec
+, TupleTypeRec
 , TypeAliasDeclarationRec
-, VariableStatementRec
+, TypeOperatorRec
+, TypeParameterRec
+, TypeQueryRec
+, TypeReferenceRec
+, UnionTypeRec
 , VariableDeclarationListRec
 , VariableDeclarationRec
-, ClassDeclarationRec
-, ArrayTypeRec
-, QualifiedNameRec
-, PropertyAccessExpressionRec
-, MethodDeclarationRec
-, PropertyDeclarationRec
-, TypeQueryRec
-, TypeParameterRec
-, FunctionDeclarationRec
-, IntersectionTypeRec
-, IndexSignatureRec
-, ParenthesizedTypeRec
-, ConstructSignatureRec
-, ModuleDeclarationRec
-, ModuleBlockRec
-, MappedTypeRec
-, BindingElementRec
-, TypeOperatorRec
-, TupleTypeRec
-, ObjectBindingPatternRec
-, NamespaceImportRec
-, ImportDeclarationRec
-, ImportClauseRec
-, ConstructorRec
-, IndexedAccessTypeRec
-, ConstructorTypeRec
+, VariableStatementRec
 
 -- Lenses
-, _FalseKeyword
-, _ObjectKeyword
-, _ReadonlyKeyword 
-, _UndefinedKeyword
-, _StaticKeyword
-, _NullKeyword
-, _DeclareKeyword
 , _AnyKeyword
+, _ArrayType
+, _BindingElement
 , _BooleanKeyword
-, _VoidKeyword
-, _ExportKeyword
-, _StringKeyword
-, _NumberKeyword
-, _QuestionToken
+, _ClassDeclaration
+, _ConstructSignature
+, _Constructor
+, _ConstructorType
+, _DeclareKeyword
 , _DotDotDotToken
 , _EndOfFileToken
-, _Identifier
-, _PropertySignature
-, _TypeReference
-, _Parameter
-, _Name
-, _LiteralType
-, _StringLiteral
-, _NumericLiteral
-, _TypeLiteral
-, _FunctionType
-, _InterfaceDeclaration
-, _UnionType
-, _MethodSignature
+, _ExportKeyword
 , _ExpressionWithTypeArguments
-, _HeritageClause
-, _TypeAliasDeclaration
-, _VariableStatement
-, _VariableDeclarationList
-, _VariableDeclaration
-, _ClassDeclaration
-, _ArrayType
-, _QualifiedName
-, _PropertyAccessExpression
-, _MethodDeclaration
-, _PropertyDeclaration
-, _TypeQuery
-, _TypeParameter
+, _FalseKeyword
 , _FunctionDeclaration
-, _IntersectionType
-, _IndexSignature
-, _ParenthesizedType
-, _ConstructSignature
-, _ModuleDeclaration
-, _ModuleBlock
-, _MappedType
-, _BindingElement
-, _TypeOperator
-, _TupleType
-, _ObjectBindingPattern
-, _NamespaceImport
-, _ImportDeclaration
+, _FunctionType
+, _HeritageClause
+, _Identifier
 , _ImportClause
-, _Constructor
+, _ImportDeclaration
+, _IndexSignature
 , _IndexedAccessType
-, _ConstructorType
+, _InterfaceDeclaration
+, _IntersectionType
+, _LiteralType
+, _MappedType
+, _MethodDeclaration
+, _MethodSignature
+, _ModuleBlock
+, _ModuleDeclaration
+, _Name
+, _NamespaceImport
+, _NullKeyword
+, _NumberKeyword
+, _NumericLiteral
+, _ObjectBindingPattern
+, _ObjectKeyword
+, _Parameter
+, _ParenthesizedType
+, _PropertyAccessExpression
+, _PropertyDeclaration
+, _PropertySignature
+, _QualifiedName
+, _QuestionToken
+, _ReadonlyKeyword 
+, _StaticKeyword
+, _StringKeyword
+, _StringLiteral
+, _TupleType
+, _TypeAliasDeclaration
+, _TypeLiteral
+, _TypeOperator
+, _TypeParameter
+, _TypeQuery
+, _TypeReference
+, _UndefinedKeyword
+, _UnionType
+, _VariableDeclaration
+, _VariableDeclarationList
+, _VariableStatement
+, _VoidKeyword
+, _name
+, _type
+, _body
+, _namedBindings
+, _elementType
+, _indexType
+, _importClause
+, _objectType
+, _moduleSpecifier
+, _expression
+, _exprName
+, _declarationList
+, _dotDotDotToken
+, _questionToken
+, _asteriskToken
+, _default
+, _constraint
+, _members
+, _parameters
+, _typeArguments
+, _typeParameters
+, _statements
+, _declarations
+, _types
+, _heritageClauses
+, _typeName
 
 -- functions
 , hushSpy
@@ -119,8 +145,10 @@ import Data.Array (filter, group', sort) as Array
 import Data.Array.NonEmpty (head, length) as NonEmptyArray
 import Data.Either (Either(..))
 import Data.Either (note) as Either
-import Data.Lens (Prism', prism')
+import Data.Lens (Prism', Lens', prism')
+import Data.Lens.Record (prop)
 import Data.Maybe (Maybe(..))
+import Data.Symbol (SProxy(..))
 import Data.Traversable (traverse)
 import Data.Tuple (Tuple(..))
 import Effect (Effect)
@@ -131,110 +159,191 @@ import Foreign.Object (keys, lookup) as Object
 import Simple.JSON (class ReadForeign, readImpl)
 import Simple.JSON (read') as JSON
 
-type PropertySignatureRec = { name :: Node, questionToken :: Maybe Node, type :: Node } 
-type TypeReferenceRec = { typeName :: Node, typeArguments :: Array Node }
-type ParameterRec = { name :: Node, type :: Node, dotDotDotToken :: Maybe Node, questionToken :: Maybe Node }
-type FunctionTypeRec = { typeParameters :: Array Node, parameters :: Array Node, type :: Node }
-type InterfaceDeclarationRec = { name :: Node, typeParameters :: Array Node, heritageClauses :: Array Node, members :: Array Node }
-type UnionTypeRec = { types :: Array Node }
-type MethodSignatureRec = { name :: Node, questionToken :: Maybe Node, typeParameters :: Array Node, parameters :: Array Node, type :: Node }
+_name :: forall r a. Lens' { name :: a | r} a
+_name = prop (SProxy :: SProxy "name")
+
+_type :: forall r a. Lens' { type :: a | r} a
+_type = prop (SProxy :: SProxy "type")
+
+_body :: forall r a. Lens' { body :: a | r} a
+_body = prop (SProxy :: SProxy "body")
+
+_namedBindings :: forall r a. Lens' { namedBindings :: a | r} a
+_namedBindings = prop (SProxy :: SProxy "namedBindings")
+
+_elementType :: forall r. Lens' { elementType :: Node | r} Node
+_elementType = prop (SProxy :: SProxy "elementType")
+
+_indexType :: forall r. Lens' { indexType :: Node | r} Node
+_indexType = prop (SProxy :: SProxy "indexType")
+
+_importClause :: forall r. Lens' { importClause :: Node | r} Node
+_importClause = prop (SProxy :: SProxy "importClause")
+
+_objectType :: forall r. Lens' { objectType :: Node | r} Node
+_objectType = prop (SProxy :: SProxy "objectType")
+
+_moduleSpecifier :: forall r. Lens' { objectType :: Node | r} Node
+_moduleSpecifier = prop (SProxy :: SProxy "objectType")
+
+_expression :: forall r. Lens' { expression :: Node | r} Node
+_expression = prop (SProxy :: SProxy "expression")
+
+_exprName :: forall r. Lens' { exprName :: Node | r} Node
+_exprName = prop (SProxy :: SProxy "exprName")
+
+_declarationList :: forall r. Lens' { declarationList :: Node | r} Node
+_declarationList = prop (SProxy :: SProxy "declarationList")
+
+
+_dotDotDotToken :: forall r. Lens' { dotDotDotToken :: Maybe Node | r} (Maybe Node)
+_dotDotDotToken = prop (SProxy :: SProxy "dotDotDotToken")
+
+_questionToken :: forall r. Lens' { questionToken :: Maybe Node | r} (Maybe Node)
+_questionToken = prop (SProxy :: SProxy "questionToken")
+
+_asteriskToken :: forall r. Lens' { asteriskToken :: Maybe Node | r} (Maybe Node)
+_asteriskToken = prop (SProxy :: SProxy "asteriskToken")
+
+_default :: forall r. Lens' { default :: Maybe Node | r} (Maybe Node)
+_default = prop (SProxy :: SProxy "default")
+
+_constraint :: forall r. Lens' { constraint :: Maybe Node | r} (Maybe Node)
+_constraint = prop (SProxy :: SProxy "constraint")
+
+
+_members :: forall r. Lens' { members :: Array Node | r} (Array Node)
+_members = prop (SProxy :: SProxy "members")
+
+_parameters :: forall r. Lens' { parameters :: Array Node | r} (Array Node)
+_parameters = prop (SProxy :: SProxy "parameters")
+
+_typeArguments :: forall r. Lens' { typeArguments :: Array Node | r} (Array Node)
+_typeArguments = prop (SProxy :: SProxy "typeArguments")
+
+_typeParameters :: forall r. Lens' { typeParameters :: Array Node | r} (Array Node)
+_typeParameters = prop (SProxy :: SProxy "typeParameters")
+
+_statements :: forall r. Lens' { statements :: Array Node | r} (Array Node)
+_statements = prop (SProxy :: SProxy "statements")
+
+_declarations :: forall r. Lens' { declarations :: Array Node | r} (Array Node)
+_declarations = prop (SProxy :: SProxy "declarations")
+
+_types :: forall r. Lens' { types :: Array Node | r} (Array Node)
+_types = prop (SProxy :: SProxy "types")
+
+_heritageClauses :: forall r. Lens' { heritageClauses :: Array Node | r} (Array Node)
+_heritageClauses = prop (SProxy :: SProxy "heritageClauses")
+
+_typeName :: forall r. Lens' { typeName :: Node | r} Node
+_typeName = prop (SProxy :: SProxy "typeName")
+
+
+
+type ArrayTypeRec = { elementType :: Node }
+type BindingElementRec = { name :: Node, dotDotDotToken :: Maybe Node }
+type ClassDeclarationRec = { name :: Node, typeParameters :: Array Node, heritageClauses :: Array Node, members :: Array Node }
+type ConstructSignatureRec = { typeParameters :: Array Node, parameters :: Array Node, type :: Node }
+type ConstructorRec = { typeParameters :: Array Node, parameters :: Array Node, body :: Maybe Node }
+type ConstructorTypeRec = { typeParameters :: Array Node, parameters :: Array Node, type :: Node }
 type ExpressionWithTypeArgumentsRec = { expression :: Node, typeArguments :: Array Node }
+type FunctionDeclarationRec = { name :: Node, asteriskToken :: Maybe Node, typeParameters :: Array Node, parameters :: Array Node, type :: Node, body :: Maybe Node }
+type FunctionTypeRec = { typeParameters :: Array Node, parameters :: Array Node, type :: Node }
 type HeritageClauseRec = { types :: Array Node }
+type ImportClauseRec = { namedBindings :: Node }
+type ImportDeclarationRec = { importClause :: Node, moduleSpecifier :: Node }
+type IndexSignatureRec = { parameters :: Array Node, type :: Node }
+type IndexedAccessTypeRec = { objectType :: Node, indexType :: Node }
+type InterfaceDeclarationRec = { name :: Node, typeParameters :: Array Node, heritageClauses :: Array Node, members :: Array Node }
+type IntersectionTypeRec = { types :: Array Node }
+type MappedTypeRec = { typeParameters :: Array Node, questionToken :: Maybe Node, type :: Node } 
+type MethodDeclarationRec = { name :: Node, questionToken :: Maybe Node, asteriskToken :: Maybe Node, typeParameters :: Array Node, parameters :: Array Node, type :: Node } 
+type MethodSignatureRec = { name :: Node, questionToken :: Maybe Node, typeParameters :: Array Node, parameters :: Array Node, type :: Node }
+type ModuleBlockRec = { statements :: Array Node }
+type ModuleDeclarationRec = { name :: Node, body :: Node }
+type NamespaceImportRec = { name :: Node }
+type ObjectBindingPatternRec = { elements :: Array Node }
+type ParameterRec = { name :: Node, type :: Node, dotDotDotToken :: Maybe Node, questionToken :: Maybe Node }
+type ParenthesizedTypeRec = { type :: Node }
+type PropertyAccessExpressionRec = { expression :: Node, name :: Node }
+type PropertyDeclarationRec = { name :: Node, questionToken :: Maybe Node, type :: Node } 
+type PropertySignatureRec = { name :: Node, questionToken :: Maybe Node, type :: Node } 
+type QualifiedNameRec = { left :: Node, right :: Node }
+type TupleTypeRec = { elementTypes :: Array Node }
 type TypeAliasDeclarationRec = { name :: Node, typeParameters :: Array Node, type :: Node }
-type VariableStatementRec = { declarationList :: Node }
+type TypeOperatorRec = { type :: Node } 
+type TypeParameterRec = { name :: Node, constraint :: Maybe Node, default :: Maybe Node }
+type TypeQueryRec = { exprName :: Node }
+type TypeReferenceRec = { typeName :: Node, typeArguments :: Array Node }
+type UnionTypeRec = { types :: Array Node }
 type VariableDeclarationListRec =  { declarations :: Array Node }
 type VariableDeclarationRec = { name :: Node, type :: Node }
-type ClassDeclarationRec = { name :: Node, typeParameters :: Array Node, heritageClauses :: Array Node, members :: Array Node }
-type ArrayTypeRec = { elementType :: Node }
-type QualifiedNameRec = { left :: Node, right :: Node }
-type PropertyAccessExpressionRec = { expression :: Node, name :: Node }
-type MethodDeclarationRec = { name :: Node, questionToken :: Maybe Node, asteriskToken :: Maybe Node, typeParameters :: Array Node, parameters :: Array Node, type :: Node } 
-type PropertyDeclarationRec = { name :: Node, questionToken :: Maybe Node, type :: Node } 
-type TypeQueryRec = { exprName :: Node }
-type TypeParameterRec = { name :: Node, constraint :: Maybe Node, default :: Maybe Node }
-type FunctionDeclarationRec = { name :: Node, asteriskToken :: Maybe Node, typeParameters :: Array Node, parameters :: Array Node, type :: Node, body :: Maybe Node }
-type IntersectionTypeRec = { types :: Array Node }
-type IndexSignatureRec = { parameters :: Array Node, type :: Node }
-type ParenthesizedTypeRec = { type :: Node }
-type ConstructSignatureRec = { typeParameters :: Array Node, parameters :: Array Node, type :: Node }
-type ModuleDeclarationRec = { name :: Node, body :: Node }
-type ModuleBlockRec = { statements :: Array Node }
-type MappedTypeRec = { typeParameters :: Array Node, questionToken :: Maybe Node, type :: Node } 
-type BindingElementRec = { name :: Node, dotDotDotToken :: Maybe Node }
-type TypeOperatorRec = { type :: Node } 
-type TupleTypeRec = { elementTypes :: Array Node }
-type ObjectBindingPatternRec = { elements :: Array Node }
-type NamespaceImportRec = { name :: Node }
-type ImportDeclarationRec = { importClause :: Node, moduleSpecifier :: Node }
-type ImportClauseRec = { namedBindings :: Node }
-type ConstructorRec = { typeParameters :: Array Node, parameters :: Array Node, body :: Maybe Node }
-type IndexedAccessTypeRec = { objectType :: Node, indexType :: Node }
-type ConstructorTypeRec = { typeParameters :: Array Node, parameters :: Array Node, type :: Node }
-
+type VariableStatementRec = { declarationList :: Node }
 
 
 data Node 
-   = FalseKeyword String
-   | ObjectKeyword String
-   | ReadonlyKeyword String
-   | UndefinedKeyword String
-   | StaticKeyword String
-   | NullKeyword String
-   | DeclareKeyword String
-   | AnyKeyword String
-   | BooleanKeyword String
-   | VoidKeyword String
-   | ExportKeyword String
-   | StringKeyword String
-   | NumberKeyword String
-   | QuestionToken String
-   | DotDotDotToken String
-   | EndOfFileToken String
-   | Identifier String
-   | PropertySignature PropertySignatureRec
-   | TypeReference TypeReferenceRec
-   | Parameter ParameterRec
-   | Name String
-   | LiteralType Node
-   | StringLiteral String
-   | NumericLiteral String 
-   | TypeLiteral (Array Node)
-   | FunctionType FunctionTypeRec
-   | InterfaceDeclaration InterfaceDeclarationRec
-   | UnionType UnionTypeRec
-   | MethodSignature MethodSignatureRec
-   | ExpressionWithTypeArguments ExpressionWithTypeArgumentsRec
-   | HeritageClause HeritageClauseRec
-   | TypeAliasDeclaration TypeAliasDeclarationRec
-   | VariableStatement VariableStatementRec
-   | VariableDeclarationList VariableDeclarationListRec
-   | VariableDeclaration VariableDeclarationRec
-   | ClassDeclaration ClassDeclarationRec
-   | ArrayType ArrayTypeRec
-   | QualifiedName QualifiedNameRec
-   | PropertyAccessExpression PropertyAccessExpressionRec
-   | MethodDeclaration MethodDeclarationRec
-   | PropertyDeclaration PropertyDeclarationRec
-   | TypeQuery TypeQueryRec
-   | TypeParameter TypeParameterRec
-   | FunctionDeclaration FunctionDeclarationRec
-   | IntersectionType IntersectionTypeRec
-   | IndexSignature IndexSignatureRec
-   | ParenthesizedType ParenthesizedTypeRec
-   | ConstructSignature ConstructSignatureRec
-   | ModuleDeclaration ModuleDeclarationRec
-   | ModuleBlock ModuleBlockRec
-   | MappedType MappedTypeRec
-   | BindingElement BindingElementRec
-   | TypeOperator TypeOperatorRec
-   | TupleType TupleTypeRec
-   | ObjectBindingPattern ObjectBindingPatternRec
-   | NamespaceImport NamespaceImportRec
-   | ImportDeclaration ImportDeclarationRec
-   | ImportClause ImportClauseRec
-   | Constructor ConstructorRec
-   | IndexedAccessType IndexedAccessTypeRec
-   | ConstructorType ConstructorTypeRec
+  = AnyKeyword String
+  | ArrayType ArrayTypeRec
+  | BindingElement BindingElementRec
+  | BooleanKeyword String
+  | ClassDeclaration ClassDeclarationRec
+  | ConstructSignature ConstructSignatureRec
+  | Constructor ConstructorRec
+  | ConstructorType ConstructorTypeRec
+  | DeclareKeyword String
+  | DotDotDotToken String
+  | EndOfFileToken String
+  | ExportKeyword String
+  | ExpressionWithTypeArguments ExpressionWithTypeArgumentsRec
+  | FalseKeyword String
+  | FunctionDeclaration FunctionDeclarationRec
+  | FunctionType FunctionTypeRec
+  | HeritageClause HeritageClauseRec
+  | Identifier String
+  | ImportClause ImportClauseRec
+  | ImportDeclaration ImportDeclarationRec
+  | IndexSignature IndexSignatureRec
+  | IndexedAccessType IndexedAccessTypeRec
+  | InterfaceDeclaration InterfaceDeclarationRec
+  | IntersectionType IntersectionTypeRec
+  | LiteralType Node
+  | MappedType MappedTypeRec
+  | MethodDeclaration MethodDeclarationRec
+  | MethodSignature MethodSignatureRec
+  | ModuleBlock ModuleBlockRec
+  | ModuleDeclaration ModuleDeclarationRec
+  | Name String
+  | NamespaceImport NamespaceImportRec
+  | NullKeyword String
+  | NumberKeyword String
+  | NumericLiteral String 
+  | ObjectBindingPattern ObjectBindingPatternRec
+  | ObjectKeyword String
+  | Parameter ParameterRec
+  | ParenthesizedType ParenthesizedTypeRec
+  | PropertyAccessExpression PropertyAccessExpressionRec
+  | PropertyDeclaration PropertyDeclarationRec
+  | PropertySignature PropertySignatureRec
+  | QualifiedName QualifiedNameRec
+  | QuestionToken String
+  | ReadonlyKeyword String
+  | StaticKeyword String
+  | StringKeyword String
+  | StringLiteral String
+  | TupleType TupleTypeRec
+  | TypeAliasDeclaration TypeAliasDeclarationRec
+  | TypeLiteral (Array Node)
+  | TypeOperator TypeOperatorRec
+  | TypeParameter TypeParameterRec
+  | TypeQuery TypeQueryRec
+  | TypeReference TypeReferenceRec
+  | UndefinedKeyword String
+  | UnionType UnionTypeRec
+  | VariableDeclaration VariableDeclarationRec
+  | VariableDeclarationList VariableDeclarationListRec
+  | VariableStatement VariableStatementRec
+  | VoidKeyword String
 
 instance readForeignNode :: ReadForeign Node where
   readImpl f = do

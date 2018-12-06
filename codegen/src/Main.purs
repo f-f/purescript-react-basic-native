@@ -3,39 +3,96 @@ module Main where
 import Prelude
 
 import Control.Monad.Except (runExcept)
-import Data.Array (filter) as Array
-import Data.Either (Either(..))
+import Data.Array (catMaybes) as Array
+import Data.Lens (preview)
+import Data.Lens.Index (ix)
+import Data.Maybe (Maybe)
+import Data.Traversable (traverse)
 import Effect (Effect)
-import Effect.Aff (Aff, error, launchAff_, throwError)
+import Effect.Aff (Aff, launchAff_)
 import Effect.Class (liftEffect)
-import Typescript (Node(..), hushSpyStringify, typescript)
-
-getClasses :: Aff (Array Node)
-getClasses = filterNodes isClass 
- 
-isClass :: Node -> Boolean
-isClass (ClassDeclaration _) = true
-isClass _ = false
+import Typescript (Node, _ClassDeclaration, _ExpressionWithTypeArguments, _HeritageClause, _InterfaceDeclaration, _Name, _TypeReference, _expression, _heritageClauses, _name, _typeArguments, _typeName, _types, hushSpyStringify, typescript)
+import Util (liftEither)
 
 nodes :: Aff (Array Node)
-nodes = 
-  (typescript <#> runExcept) # liftEffect # liftEither
+nodes = (typescript <#> runExcept) # liftEffect # liftEither
 
-filterNodes :: (Node -> Boolean) -> Aff (Array Node)
-filterNodes predicate = do
-  ns <- nodes
-  pure $ Array.filter predicate ns
+type BaseType = { name :: String, props :: String }
+type Interfaces = { name :: String, parents :: Array String }
 
+getBaseTypes :: Aff (Array BaseType)
+getBaseTypes = nodes <#> Array.catMaybes <<< map makeBaseType 
+  where
+    _head = ix 0
+    makeBaseType node = do
+      name <- preview classNamePrism node
+      props <- preview propsPrism node
+      pure { name, props } 
+    classNamePrism = _ClassDeclaration <<< _name <<< _Name
+    propsPrism = 
+      _ClassDeclaration <<<
+      _heritageClauses <<<
+      _head <<<
+      _HeritageClause <<<
+      _types <<<
+      _head <<<
+      _ExpressionWithTypeArguments <<<
+      _typeArguments <<<
+      _head <<< 
+      _TypeReference <<<
+      _typeName <<<
+      _Name
+ 
+getInterfaces :: Aff (Array Interfaces)
+getInterfaces = nodes <#> Array.catMaybes <<< map makeInterfaces
+  where
+    makeInterfaces node = do
+      name <- preview namePrism node
+      parents <- heritageNames node
+      pure { name, parents }
+    namePrism = 
+      _InterfaceDeclaration <<<
+      _name <<<
+      _Name
 
-liftEither :: forall e a. Show e => Aff (Either e a) -> Aff a
-liftEither aff = do
-  either <- aff
-  case either of 
-    Left bad  -> throwError $ error (show bad)
-    Right value -> pure value
+--heritageNames :: Node -> Maybe (Array String)
+heritageNames :: Node -> Maybe (Array String)
+heritageNames node = 
+  interfaceHeritage
+  where
+    interfaceHeritage = do
+      clauses <- preview (_InterfaceDeclaration <<< _heritageClauses) node
+      types   <- join <$> traverse (preview (_HeritageClause <<< _types)) clauses
+      names   <- traverse (preview (_ExpressionWithTypeArguments <<< _expression <<< _Name)) types
+      pure names
+      
+
+  
+  
+
 
 main :: Effect Unit
 main = launchAff_ do 
-  classes <- getClasses 
-  let s = hushSpyStringify classes
+  types <- getBaseTypes
+  interfaces <- getInterfaces
+  let s = hushSpyStringify interfaces 
   pure unit
+
+type R r =  (foo :: String | r)
+type S r =  (bar :: Int | (R r))
+type T =    (baz :: Number | (S ()))
+
+blah :: Record T
+blah = { foo : "foo", bar : 1, baz : 1.0 }
+
+
+
+
+
+
+
+
+
+
+
+
