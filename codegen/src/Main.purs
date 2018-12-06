@@ -31,7 +31,7 @@ data FieldType
   | NumericLiteralField String
   | ArrayField FieldType 
   | TypeArgumentField TypeArgument
-  | FunctionField { typeParameters :: Array TypeArgument, type :: FieldType, parameters :: Array FieldParam }
+  | FunctionField { typeParameters :: Array TypeArgument, type :: FieldType, parameters :: Array FieldType }
   | TypeLiteralField (Array Field)
   | UnionTypeField (Array FieldType)
   | ParamField { name :: String, type :: FieldType, isOptional :: Boolean, isDotDotDot :: Boolean }
@@ -39,11 +39,11 @@ data FieldType
   | Null
   | Undefined
 
-type FieldParam = { name :: String, type :: FieldType, isOptional :: Boolean, isDotDotDot :: Boolean }
+--type FieldParam = { name :: String, type :: FieldType, isOptional :: Boolean, isDotDotDot :: Boolean }
 
 data Field 
   = Field { name :: String, isOptional :: Boolean, type :: FieldType }
-  | IndexField { type :: FieldType, parameters :: Array FieldParam }
+  | IndexField { type :: FieldType, parameters :: Array FieldType }
   | ConstructorField
   | MethodField
 
@@ -106,7 +106,7 @@ buildField (PropertySignature rec) = do
   pure $ Field { name, isOptional, type : fieldType }
 buildField (IndexSignature rec) = do
   typeField   <- buildFieldType rec.type
-  parameters  <- buildFieldParams rec.parameters
+  parameters  <- traverse buildFieldType rec.parameters
   pure $ IndexField { parameters, type : typeField }
 
 buildField node = do
@@ -130,13 +130,8 @@ buildFieldType (TypeLiteral fields) = TypeLiteralField <$> buildFields fields
 buildFieldType (TypeOperator rec ) = buildFieldType rec.type 
 buildFieldType (VoidKeyword _) = Just $ Literal "Unit" 
 buildFieldType (TypeQuery { exprName }) = TypeOfField <$> getName exprName
-
-
 buildFieldType (UnionType { types }) = UnionTypeField <$> (traverse buildFieldType types)
 buildFieldType (ParenthesizedType rec) = UnionTypeField <$> (buildFieldType rec.type <#> \f -> [f])
---buildFieldType (TupleType { elementTypes }) = UnionTypeField <$> (traverse buildFieldType elementTypes)
---buildFieldType (IntersectionType { types }) = UnionTypeField <$> (traverse buildFieldType types)
-
 buildFieldType node @ (TypeReference _) = TypeArgumentField <$> buildTypeArguments node
 
 buildFieldType (Parameter rec) = do 
@@ -148,7 +143,7 @@ buildFieldType (Parameter rec) = do
 
 buildFieldType (FunctionType rec) = (buildFieldType rec.type) >>= \fieldType -> do
   typeParameters <- handleTypeParameters rec.typeParameters
-  parameters <- buildFieldParams rec.parameters
+  parameters <- traverse buildFieldType rec.parameters
   pure $ FunctionField { typeParameters, parameters, type : fieldType }
   where
     handleTypeParameters ns = Just []
@@ -157,9 +152,6 @@ buildFieldType node = do
   let s = hushSpy "buildFieldType got a node I don't know"
   let s1 = hushSpy node
   Nothing
-
-buildFieldParams :: Array Node -> Maybe (Array FieldParam)
-buildFieldParams = pure $ Just []
 
 heritageNames :: Node -> Maybe (Array Interface)
 heritageNames node = 
