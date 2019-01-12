@@ -17,7 +17,7 @@ This project uses (purescript-spago)[https://github.com/spacchetti/spago] to bui
 
 You can build the project with `spago build` if spago is on your path, or `npx spago build` if not. 
 
-### Running the project
+### Testing/Running 
 
 `purescript-spago` only runs tests, so you've got three options:
 
