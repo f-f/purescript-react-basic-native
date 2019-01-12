@@ -2,9 +2,16 @@
   "name": "empty-project-template",
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "setup": "npm install && npx spago install",
+    "test": "npx spago test"
+  },
   "dependencies": {
     "@types/node": "^10.12.10",
     "typescript": "^3.1.6"
+  },
+  "devDependencies": {
+    "purescript": "^0.12.1",
+    "purescript-spago": "^0.6.2"
   }
 }
