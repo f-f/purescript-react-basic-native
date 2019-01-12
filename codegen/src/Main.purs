@@ -185,15 +185,6 @@ main = launchAff_ do
   let mapped = hushSpyStringify $ map snd filtered
   pure unit
 
-type R r =  (foo :: String | r)
-type S r =  (bar :: Int | (R r))
-type T =    (baz :: Number | (S ()))
-
-blah :: Record T
-blah = { foo : "foo", bar : 1, baz : 1.0 }
-
-
-
 
 
 
