@@ -4,15 +4,16 @@ import Prelude
 
 import Control.Lazy (fix)
 import Control.Monad.Except (runExcept)
-import Data.Array (catMaybes, filter, length, zip) as Array
+import Data.Array (catMaybes, length, sortWith, zip) as Array
 import Data.Lens (preview)
 import Data.Lens.Index (ix)
 import Data.Maybe (Maybe(..), isJust)
 import Data.Traversable (traverse)
-import Data.Tuple (Tuple(..), snd)
+import Data.Tuple (Tuple(..))
 import Effect (Effect)
 import Effect.Aff (Aff, error, launchAff_, throwError)
 import Effect.Class (liftEffect)
+import Effect.Console (log)
 import Typescript (Node(..), _ClassDeclaration, _ExpressionWithTypeArguments, _HeritageClause, _InterfaceDeclaration, _Name, _TypeParameter, _TypeReference, _expression, _heritageClauses, _members, _name, _typeArguments, _typeName, _typeParameters, _types, hushSpy, hushSpyStringify, typescript)
 import Util (liftEither)
 
@@ -49,7 +50,8 @@ data Field
 
 
 getBaseTypes :: Aff (Array BaseType)
-getBaseTypes = nodes <#> Array.catMaybes <<< map makeBaseType 
+getBaseTypes = 
+  nodes <#> (Array.sortWith (\{name} -> name)) <<< Array.catMaybes <<< map makeBaseType
   where
     _head = ix 0
     makeBaseType node = do
@@ -70,7 +72,8 @@ getBaseTypes = nodes <#> Array.catMaybes <<< map makeBaseType
       _TypeReference <<<
       _typeName <<<
       _Name
- 
+
+
 getInterfaces :: Aff (Array (Tuple Node Interface))
 getInterfaces = nodes <#> Array.catMaybes <<< map makeInterfaces
   where
@@ -176,19 +179,30 @@ doError :: forall a. String -> Node -> Aff a
 doError msg node = do
   let s = hushSpyStringify node
   throwError $ error msg
-  
+
+listBaseTypes :: Aff Unit
+listBaseTypes = unit <$ do
+  types <- getBaseTypes <#> map (\{name} -> name)
+  traverse (liftEffect <<< log) types
+
+main :: Effect Unit
+main = launchAff_ do
+  listBaseTypes
+
+{-
 main :: Effect Unit
 main = launchAff_ do 
   types <- getBaseTypes
   interfaces <- getInterfaces
   let filtered = Array.filter (\(Tuple node (Interface { name })) -> name == "ButtonProps") interfaces 
   let mapped = hushSpyStringify $ map snd filtered
+  logShow types # liftEffect
   pure unit
+-}
 
 
 
-
-
+foreign import endsWith :: String -> String -> Boolean
 
 
 
