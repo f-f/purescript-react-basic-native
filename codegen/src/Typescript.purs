@@ -145,7 +145,7 @@ import Data.Array (filter, group', sort) as Array
 import Data.Array.NonEmpty (head, length) as NonEmptyArray
 import Data.Either (Either(..))
 import Data.Either (note) as Either
-import Data.Lens (Prism', Lens', prism')
+import Data.Lens (Lens', Prism', prism', view)
 import Data.Lens.Record (prop)
 import Data.Maybe (Maybe(..))
 import Data.Symbol (SProxy(..))
@@ -824,6 +824,7 @@ handleInterfaceDeclaration obj = ado
   members <- arrayNode "members" obj 
   heritageClauses <- arrayNode "heritageClauses" obj 
   in InterfaceDeclaration { name, typeParameters, members, heritageClauses }
+
 
 handleFunctionType :: Object Foreign -> F Node
 handleFunctionType obj = ado

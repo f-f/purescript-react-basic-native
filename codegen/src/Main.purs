@@ -4,18 +4,19 @@ import Prelude
 
 import Control.Lazy (fix)
 import Control.Monad.Except (runExcept)
-import Data.Array (catMaybes, length, sortWith, zip) as Array
+import Data.Array (catMaybes, filter, head, length, sortWith, zip) as Array
+import Data.Foldable (intercalate)
 import Data.Lens (preview)
 import Data.Lens.Index (ix)
 import Data.Maybe (Maybe(..), isJust)
-import Data.Traversable (traverse)
-import Data.Tuple (Tuple(..))
+import Data.Traversable (sequence, traverse)
+import Data.Tuple (Tuple(..), snd)
 import Effect (Effect)
 import Effect.Aff (Aff, error, launchAff_, throwError)
 import Effect.Class (liftEffect)
-import Effect.Console (log)
+import Effect.Console (log, logShow)
 import Typescript (Node(..), _ClassDeclaration, _ExpressionWithTypeArguments, _HeritageClause, _InterfaceDeclaration, _Name, _TypeParameter, _TypeReference, _expression, _heritageClauses, _members, _name, _typeArguments, _typeName, _typeParameters, _types, hushSpy, hushSpyStringify, typescript)
-import Util (liftEither)
+import Util (liftEither, liftMaybe)
 
 nodes :: Aff (Array Node)
 nodes = (typescript <#> runExcept) # liftEffect # liftEither
@@ -89,6 +90,12 @@ getInterfaces = nodes <#> Array.catMaybes <<< map makeInterfaces
       _InterfaceDeclaration <<<
       _name <<<
       _Name
+
+getInterface :: String -> Aff Interface
+getInterface interfaceName = do
+  interfaces <- getInterfaces
+  let filtered = Array.filter (\(Tuple node (Interface { name })) -> name == interfaceName) interfaces 
+  liftMaybe ("didn't find interface " <> interfaceName) $ Array.head $ map snd filtered
 
 
 buildFields :: Array Node -> Maybe (Array Field)
@@ -182,11 +189,29 @@ doError msg node = do
 
 listBaseTypes :: Aff Unit
 listBaseTypes = unit <$ do
-  types <- getBaseTypes <#> map (\{name} -> name)
-  traverse (liftEffect <<< log) types
+  types <- getBaseTypes -- <#> map (\{name} -> name)
+  -- having some issues with the components listed below. I suspect there is an error in `getInterface` when there is a method in the interface. also ModalProps isn't an interface, it's a type
+  let filtered = Array.filter (\{ name } -> name /= "ImageBackgroundComponent" && name /= "Modal" && name /= "SnapshotViewIOSComponent" && name /= "SwipeableListView") types
+  traverse (\t -> (liftEffect $ logShow t) >>= (const $ logProps t) ) filtered 
+  where
+    logProps :: BaseType -> Aff Unit
+    logProps { props } = (liftEffect <<< log) =<< ((append "  ") <$> (listProps props))
+
+listProps :: String -> Aff String
+listProps propsName = do
+  (Interface interface)   <- getInterface propsName 
+  parentNames <- sequence $ (map (\(Interface { name }) -> listProps name) interface.parents)
+  pure (interface.name <> " " <> (intercalate " " parentNames))
+
+
+listInterfaces :: Aff Unit
+listInterfaces = unit <$ do
+  interfaces <- getInterfaces
+  liftEffect $ traverse (\(Tuple _ (Interface rec)) -> log rec.name) interfaces
 
 main :: Effect Unit
 main = launchAff_ do
+  -- listInterfaces
   listBaseTypes
 
 {-
@@ -199,8 +224,6 @@ main = launchAff_ do
   logShow types # liftEffect
   pure unit
 -}
-
-
 
 foreign import endsWith :: String -> String -> Boolean
 
