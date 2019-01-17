@@ -27,6 +27,58 @@ data TypeArgument = TypeArgument { name :: String, typeArguments :: Array FieldT
 
 data Interface = Interface { name :: String, fields :: Array Field, typeArguments :: Array TypeArgument, parents :: Array Interface }
 
+{-
+button 
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ButtonProps_optional
+  => Record (ButtonProps_required attrs)
+  -> Unit
+button props = unit
+-}
+
+writeProps :: Interface -> String
+writeProps interface @ (Interface rec) = 
+  if Array.length requiredFields > 0
+    then requiredType <> "\n\n" <> optionalType
+    else singleType
+  where
+    requiredType = writeRequiredType rec.name requiredFields 
+    optionalType = writeOptionalType rec.name optionalFields
+    singleType = writeSingleType rec.name optionalFields
+    requiredFields = Array.filter fieldIsRequired rec.fields
+    optionalFields = Array.filter (not fieldIsRequired) rec.fields
+    writeOptionalType name fields = intercalate "\n" 
+      [ "type " <> name <> "_optional = "
+      , "  ( " <> (intercalate "\n  , " (map (writeField interface) fields))
+      , "  )"
+      ]
+    writeRequiredType name fields = intercalate "\n" 
+      [ "type " <> name <> "_required optional = "
+      , "  ( " <> (intercalate "\n  , " (map (writeField interface) fields))
+      , "  | optional"
+      , "  )"
+      ]
+    writeSingleType name fields = intercalate "\n" 
+      [ "type " <> name <> " = "
+      , "  ( " <> (intercalate "\n  , " (map (writeField interface) fields))
+      , "  )"
+      ]
+
+fieldIsRequired :: Field -> Boolean
+fieldIsRequired (Field rec) = not rec.isOptional
+fieldIsRequired _ = false
+
+data Field 
+  = Field { name :: String, isOptional :: Boolean, type :: FieldType }
+  | IndexField { type :: FieldType, parameters :: Array FieldType }
+  | ConstructorField
+  | MethodField
+
+writeField :: Interface -> Field -> String
+writeField interface field @ (Field rec) = 
+  rec.name <> " :: " <> (writeFieldType interface field rec.type)
+writeField _ _ = "" 
+
 data FieldType 
   = Literal String 
   | StringLiteralField String
@@ -41,13 +93,22 @@ data FieldType
   | Null
   | Undefined
 
---type FieldParam = { name :: String, type :: FieldType, isOptional :: Boolean, isDotDotDot :: Boolean }
+writeFieldType :: Interface -> Field -> FieldType -> String
+writeFieldType (Interface interface) (Field field) fieldType = case fieldType of 
+   (Literal str) -> str
+   (StringLiteralField str) -> str 
+   (NumericLiteralField num) -> show num 
+   (ArrayField fieldTpe) -> "ArrayField"
+   (TypeArgumentField typeArgument) -> "TypeArgumentField"
+   (FunctionField rec) -> "FunctionField"
+   (TypeLiteralField fields) -> "TypeLiteralField"
+   (UnionTypeField fieldTypes) -> "UnionFieldType"
+   (ParamField rec) -> "ParamField"
+   (TypeOfField str) -> str 
+   Null -> "Null"
+   Undefined -> "Undefined"
 
-data Field 
-  = Field { name :: String, isOptional :: Boolean, type :: FieldType }
-  | IndexField { type :: FieldType, parameters :: Array FieldType }
-  | ConstructorField
-  | MethodField
+writeFieldType _ _ _ = ""
 
 
 getBaseTypes :: Aff (Array BaseType)
@@ -211,8 +272,10 @@ listInterfaces = unit <$ do
 
 main :: Effect Unit
 main = launchAff_ do
+  interface <- getInterface "ButtonProps"
+  (log $ writeProps interface) # liftEffect
   -- listInterfaces
-  listBaseTypes
+  -- listBaseTypes
 
 {-
 main :: Effect Unit
