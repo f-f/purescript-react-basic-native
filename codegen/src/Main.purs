@@ -2,30 +2,162 @@ module Main where
 
 import Prelude
 
+import Control.Alt ((<|>))
 import Control.Lazy (fix)
 import Control.Monad.Except (runExcept)
-import Data.Array (catMaybes, filter, head, length, sortWith, zip) as Array
+import Control.MonadZero (guard)
+import Data.Array (catMaybes, filter, head, length, sort, sortWith) as Array
 import Data.Foldable (intercalate)
-import Data.Lens (preview)
+import Data.Lens (Lens', Prism', lens, preview, prism')
 import Data.Lens.Index (ix)
-import Data.Maybe (Maybe(..), isJust)
-import Data.Traversable (sequence, traverse)
+import Data.Lens.Record (prop)
+import Data.Maybe (Maybe(..), fromMaybe, isJust)
+import Data.Symbol (SProxy(..))
+import Data.Traversable (traverse)
 import Data.Tuple (Tuple(..), snd)
 import Effect (Effect)
 import Effect.Aff (Aff, error, launchAff_, throwError)
 import Effect.Class (liftEffect)
 import Effect.Console (log, logShow)
-import Typescript (Node(..), _ClassDeclaration, _ExpressionWithTypeArguments, _HeritageClause, _InterfaceDeclaration, _Name, _TypeParameter, _TypeReference, _expression, _heritageClauses, _members, _name, _typeArguments, _typeName, _typeParameters, _types, hushSpy, hushSpyStringify, typescript)
+import Typescript (Node(..), _ClassDeclaration, _ExpressionWithTypeArguments, _HeritageClause, _InterfaceDeclaration, _Name, _TypeParameter, _TypeReference, _expression, _heritageClauses, _members, _name, _parameters, _type, _typeArguments, _typeName, _typeParameters, _types, hushSpy, hushSpyStringify, typescript)
 import Util (liftEither, liftMaybe)
-
-nodes :: Aff (Array Node)
-nodes = (typescript <#> runExcept) # liftEffect # liftEither
 
 type BaseType = { name :: String, props :: String }
 
-data TypeArgument = TypeArgument { name :: String, typeArguments :: Array FieldType }
+type FunctionFieldRec = { type :: FieldType, parameters :: Array FieldType }
+type ParamFieldRec = { name :: String, type :: FieldType, isOptional :: Boolean, isDotDotDot :: Boolean }
 
-data Interface = Interface { name :: String, fields :: Array Field, typeArguments :: Array TypeArgument, parents :: Array Interface }
+data FieldType 
+  = Literal String 
+  | StringLiteralField String
+  | NumericLiteralField String
+  | ArrayField FieldType 
+  | TypeArgumentField TypeArgument
+  | FunctionField FunctionFieldRec
+  | TypeLiteralField (Array Field)
+  | UnionTypeField (Array FieldType)
+  | ParamField ParamFieldRec
+  | TypeOfField String 
+  | Null
+  | Undefined
+
+derive instance eqFieldType :: Eq FieldType
+
+type TypeArgumentRec = { name :: String, typeArguments :: Array FieldType }
+newtype TypeArgument = TypeArgument TypeArgumentRec
+
+derive instance eqTypeArgument :: Eq TypeArgument
+
+type InterfaceRec = { name :: String, fields :: Array Field, typeArguments :: Array TypeArgument, parents :: Array String }
+newtype Interface = Interface InterfaceRec
+
+data Field 
+  = Field FieldRec 
+  | IndexField IndexFieldRec
+  | ConstructorField
+  | MethodField
+
+derive instance eqField :: Eq Field
+instance fieldOrd :: Ord Field where 
+  compare (Field rec1) (Field rec2) = compare rec1.name rec2.name
+  compare  _ (Field _) = LT
+  compare  (Field _) _ = GT
+  compare  _ _ = EQ 
+
+_props :: ∀ a r. Lens' { props :: a | r } a
+_props = prop (SProxy :: SProxy "props")
+
+_TypeArgument :: Lens' TypeArgument TypeArgumentRec
+_TypeArgument = lens (\(TypeArgument rec) -> rec) (\_ -> TypeArgument)
+
+_parents :: ∀ a r. Lens' { parents :: a | r } a
+_parents = prop (SProxy :: SProxy "parents")
+
+_fields :: ∀ a r. Lens' { fields :: a | r } a
+_fields = prop (SProxy :: SProxy "fields")
+
+_Interface :: Lens' Interface InterfaceRec
+_Interface = lens (\(Interface rec) -> rec) (\_ -> Interface)
+
+type FieldRec = { name :: String, isOptional :: Boolean, type :: FieldType }
+type IndexFieldRec = { type :: FieldType, parameters :: Array FieldType }
+
+_isOptional :: ∀ a r. Lens' { isOptional :: a | r } a
+_isOptional = prop (SProxy :: SProxy "isOptional")
+
+_isDotDotDot :: ∀ a r. Lens' { isDotDotDot :: a | r } a
+_isDotDotDot = prop (SProxy :: SProxy "isDotDotDot")
+
+_Field :: Prism' Field FieldRec
+_Field = prism' Field case _ of 
+  Field rec -> Just rec 
+  _ -> Nothing
+
+_IndexField :: Prism' Field IndexFieldRec
+_IndexField = prism' IndexField case _ of 
+  IndexField rec -> Just rec 
+  _ -> Nothing
+
+_Literal :: Prism' FieldType String
+_Literal = prism' Literal case _ of 
+  Literal str -> Just str 
+  _ -> Nothing
+
+_StringLiteralField :: Prism' FieldType String
+_StringLiteralField = prism' StringLiteralField case _ of 
+  StringLiteralField str -> Just str 
+  _ -> Nothing
+
+_NumericLiteralField :: Prism' FieldType String 
+_NumericLiteralField = prism' NumericLiteralField case _ of 
+  NumericLiteralField str -> Just str 
+  _ -> Nothing
+
+_ArrayField :: Prism' FieldType FieldType 
+_ArrayField = prism' ArrayField case _ of 
+  ArrayField fieldType -> Just fieldType 
+  _ -> Nothing
+
+_TypeArgumentField :: Prism' FieldType TypeArgument
+_TypeArgumentField = prism' TypeArgumentField case _ of 
+  TypeArgumentField typeArgument -> Just typeArgument 
+  _ -> Nothing
+
+_FunctionField :: Prism' FieldType FunctionFieldRec
+_FunctionField = prism' FunctionField case _ of 
+  FunctionField rec -> Just rec 
+  _ -> Nothing
+
+_TypeLiteralField :: Prism' FieldType (Array Field)
+_TypeLiteralField = prism' TypeLiteralField case _ of 
+  TypeLiteralField arr -> Just arr 
+  _ -> Nothing
+
+_UnionTypeField :: Prism' FieldType (Array FieldType)
+_UnionTypeField = prism' UnionTypeField case _ of 
+  UnionTypeField arr -> Just arr 
+  _ -> Nothing
+
+_ParamField :: Prism' FieldType ParamFieldRec
+_ParamField = prism' ParamField case _ of 
+  ParamField rec -> Just rec 
+  _ -> Nothing
+
+_TypeOfField :: Prism' FieldType String 
+_TypeOfField = prism' TypeOfField case _ of 
+  TypeOfField str -> Just str 
+  _ -> Nothing
+
+_Null :: Prism' FieldType Unit 
+_Null = prism' (const Null) case _ of 
+  Null -> Just unit 
+  _ -> Nothing
+
+_Undefined :: Prism' FieldType Unit 
+_Undefined = prism' (const Undefined) case _ of 
+  Undefined -> Just unit 
+  _ -> Nothing
+
 
 {-
 button 
@@ -36,17 +168,31 @@ button
 button props = unit
 -}
 
-writeProps :: Interface -> String
-writeProps interface @ (Interface rec) = 
-  if Array.length requiredFields > 0
-    then requiredType <> "\n\n" <> optionalType
+nodes :: Aff (Array Node)
+nodes = (typescript <#> runExcept) # liftEffect # liftEither
+
+collectAllFields :: Interface -> Aff (Array Field)
+collectAllFields (Interface rec) = do
+  parents <- traverse getInterface rec.parents
+  parentFields <- join <$> traverse collectAllFields parents
+  pure $ Array.sort (rec.fields <> parentFields)
+
+writeProps :: Interface -> Aff String
+writeProps interface @ (Interface rec) = do
+  required <- requiredFields
+  if Array.length required > 0
+    then do
+      rType <- requiredType
+      oType <- optionalType
+      pure (rType <> "\n\n" <> oType)
     else singleType
   where
-    requiredType = writeRequiredType rec.name requiredFields 
-    optionalType = writeOptionalType rec.name optionalFields
-    singleType = writeSingleType rec.name optionalFields
-    requiredFields = Array.filter fieldIsRequired rec.fields
-    optionalFields = Array.filter (not fieldIsRequired) rec.fields
+    requiredType = requiredFields <#> writeRequiredType rec.name
+    optionalType = optionalFields <#> writeOptionalType rec.name
+    singleType = optionalFields <#> writeSingleType rec.name
+    allFields = collectAllFields interface
+    requiredFields = allFields <#> Array.filter fieldIsRequired
+    optionalFields = allFields <#> Array.filter (not fieldIsRequired) 
     writeOptionalType name fields = intercalate "\n" 
       [ "type " <> name <> "_optional = "
       , "  ( " <> (intercalate "\n  , " (map (writeField interface) fields))
@@ -68,41 +214,35 @@ fieldIsRequired :: Field -> Boolean
 fieldIsRequired (Field rec) = not rec.isOptional
 fieldIsRequired _ = false
 
-data Field 
-  = Field { name :: String, isOptional :: Boolean, type :: FieldType }
-  | IndexField { type :: FieldType, parameters :: Array FieldType }
-  | ConstructorField
-  | MethodField
-
 writeField :: Interface -> Field -> String
 writeField interface field @ (Field rec) = 
   rec.name <> " :: " <> (writeFieldType interface field rec.type)
 writeField _ _ = "" 
 
-data FieldType 
-  = Literal String 
-  | StringLiteralField String
-  | NumericLiteralField String
-  | ArrayField FieldType 
-  | TypeArgumentField TypeArgument
-  | FunctionField { type :: FieldType, parameters :: Array FieldType }
-  | TypeLiteralField (Array Field)
-  | UnionTypeField (Array FieldType)
-  | ParamField { name :: String, type :: FieldType, isOptional :: Boolean, isDotDotDot :: Boolean }
-  | TypeOfField String 
-  | Null
-  | Undefined
+-- eventHandlerType :: 
+--  | FunctionField { type :: FieldType, parameters :: Array FieldType }
 
 writeFieldType :: Interface -> Field -> FieldType -> String
-writeFieldType (Interface interface) (Field field) fieldType = case fieldType of 
+writeFieldType i @ (Interface interface) f @ (Field field) fieldType = case fieldType of 
    (Literal str) -> str
    (StringLiteralField str) -> str 
    (NumericLiteralField num) -> show num 
-   (ArrayField fieldTpe) -> "ArrayField"
-   (TypeArgumentField typeArgument) -> "TypeArgumentField"
-   (FunctionField rec) -> "FunctionField"
+   (ArrayField fieldTpe) -> do
+    "(Array " <> (writeFieldType i f fieldTpe) <> ")"
+   (TypeArgumentField (TypeArgument { name })) -> case name of
+    "StyleProp" -> "CSS"
+    _           -> name
+   (FunctionField rec) -> do
+    if isEventHandler fieldType
+      then "EventHandler"
+      else "FunctionField"
    (TypeLiteralField fields) -> "TypeLiteralField"
-   (UnionTypeField fieldTypes) -> "UnionFieldType"
+   (UnionTypeField fieldTypes) -> do
+      if unionTypeAsString fieldTypes
+        then "String"
+        else case (isSingleOrArrayOfSameType fieldTypes) of 
+            Nothing -> "UnionFieldType" 
+            Just name -> "(Array " <> name <> ")"
    (ParamField rec) -> "ParamField"
    (TypeOfField str) -> str 
    Null -> "Null"
@@ -110,6 +250,49 @@ writeFieldType (Interface interface) (Field field) fieldType = case fieldType of
 
 writeFieldType _ _ _ = ""
 
+unionTypeAsString :: Array FieldType -> Boolean
+unionTypeAsString fieldTypes = isJust $ traverse (preview (_StringLiteralField)) fieldTypes 
+
+isSingleOrArrayOfSameType :: Array FieldType -> Maybe String
+isSingleOrArrayOfSameType fieldTypes | Array.length fieldTypes == 2 = typeThenArray <|> arrayThenType
+  where
+    aTypePrism = _TypeArgumentField <<< _TypeArgument <<< _name
+    arrayTypePrism  = _ArrayField <<< _TypeArgumentField <<< _TypeArgument <<< _name
+    typeThenArray = do
+      n1 <- preview ((ix 0) <<< aTypePrism) fieldTypes
+      n2 <- preview ((ix 1) <<< arrayTypePrism) fieldTypes
+      guard (n1 == n2)
+      Just n1
+    arrayThenType = do
+      n1 <- preview ((ix 0) <<< arrayTypePrism) fieldTypes
+      n2 <- preview ((ix 1) <<< aTypePrism) fieldTypes
+      guard (n1 == n2)
+      Just n1
+isSingleOrArrayOfSameType _ = Nothing 
+
+isEventHandler :: FieldType -> Boolean
+isEventHandler fieldType = isUnit && paramIsNativeSynthenticEvent
+  where
+    isUnit = Just "Unit" == (preview unitTypePrism fieldType)
+    paramIsNativeSynthenticEvent = eventHandler
+    eventHandler = (isJust $ preview eventTypePrism fieldType) || emptyParams
+    emptyParams = Just true == ((preview paramsPrism fieldType) <#> (\params -> Array.length params == 0))
+    eventTypePrism = 
+      _FunctionField <<< 
+      _parameters <<< 
+      (ix 0) <<< 
+      _ParamField <<< 
+      _type <<< 
+      _TypeArgumentField <<< 
+      _TypeArgument <<< 
+      _name
+    paramsPrism = 
+      _FunctionField <<< 
+      _parameters 
+    unitTypePrism = 
+      _FunctionField <<<
+      _type <<<
+      _Literal 
 
 getBaseTypes :: Aff (Array BaseType)
 getBaseTypes = 
@@ -137,16 +320,18 @@ getBaseTypes =
 
 
 getInterfaces :: Aff (Array (Tuple Node Interface))
-getInterfaces = nodes <#> Array.catMaybes <<< map makeInterfaces
+getInterfaces = nodes <#> (\ns -> Array.catMaybes (map makeInterfaces ns))
   where
-    makeInterfaces node = do
+    makeInterfaces :: Node -> Maybe (Tuple Node Interface)
+    makeInterfaces node = ado
       name            <- preview namePrism node
-      parents         <- heritageNames node
       typeArguments   <- preview (_InterfaceDeclaration <<< _typeParameters) node 
-                          >>= (traverse (preview (_TypeParameter <<< _name <<< _Name)))
-                          <#> (map (\n -> TypeArgument { name : n, typeArguments : [] }))
+                                  >>= (traverse (preview (_TypeParameter <<< _name <<< _Name)))
+                                  <#> (map (\n -> TypeArgument { name : n, typeArguments : [] }))
       fields          <- preview (_InterfaceDeclaration <<< _members) node >>= buildFields
-      pure $ Tuple node (Interface { name, fields, typeArguments, parents })
+      parents         <- Just $ heritageNames node
+      in Tuple node (Interface { name, fields, typeArguments, parents })
+      
     namePrism = 
       _InterfaceDeclaration <<<
       _name <<<
@@ -212,19 +397,27 @@ buildFieldType node = do
   let s1 = hushSpy node
   Nothing
 
-heritageNames :: Node -> Maybe (Array Interface)
+
+heritageNames :: Node -> Array String
 heritageNames node = 
   interfaceHeritage
   where
-    interfaceHeritage = do
+    interfaceHeritage = fromMaybe [] do
       clauses   <- preview (_InterfaceDeclaration <<< _heritageClauses) node
       types     <- join <$> traverse (preview (_HeritageClause <<< _types)) clauses
-      names     <- traverse (preview (_ExpressionWithTypeArguments <<< _expression <<< _Name)) types
-      argNodes  <- traverse (preview (_ExpressionWithTypeArguments <<< _typeArguments)) types
-      let args = Array.catMaybes <$> map (map buildTypeArguments) argNodes
-      let nameAndArgs = Array.zip names args
-      pure $ map (\(Tuple name typeArguments) -> Interface { name, typeArguments, parents : [], fields : [] }) nameAndArgs
+      traverse (preview (_ExpressionWithTypeArguments <<< _expression <<< _Name)) types
 
+
+getParents :: Node -> Aff (Array Interface)
+getParents node = traverse getInterface names
+  where
+    names :: Array String
+    names = fromMaybe [] do
+      clauses   <- preview (_InterfaceDeclaration <<< _heritageClauses) node
+      types     <- join <$> traverse (preview (_HeritageClause <<< _types)) clauses
+      traverse (preview (_ExpressionWithTypeArguments <<< _expression <<< _Name)) types
+      
+      
 buildTypeArguments :: Node -> Maybe TypeArgument
 buildTypeArguments (TypeReference { typeName, typeArguments }) | Array.length typeArguments == 0 = do
   name <- getName typeName
@@ -261,8 +454,7 @@ listBaseTypes = unit <$ do
 listProps :: String -> Aff String
 listProps propsName = do
   (Interface interface)   <- getInterface propsName 
-  parentNames <- sequence $ (map (\(Interface { name }) -> listProps name) interface.parents)
-  pure (interface.name <> " " <> (intercalate " " parentNames))
+  pure (interface.name <> " " <> (intercalate " " interface.parents))
 
 
 listInterfaces :: Aff Unit
@@ -272,8 +464,9 @@ listInterfaces = unit <$ do
 
 main :: Effect Unit
 main = launchAff_ do
-  interface <- getInterface "ButtonProps"
-  (log $ writeProps interface) # liftEffect
+  interface <- getInterface "TextProps"
+  props     <- writeProps interface
+  (log props) # liftEffect
   -- listInterfaces
   -- listBaseTypes
 

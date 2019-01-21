@@ -145,7 +145,7 @@ import Data.Array (filter, group', sort) as Array
 import Data.Array.NonEmpty (head, length) as NonEmptyArray
 import Data.Either (Either(..))
 import Data.Either (note) as Either
-import Data.Lens (Lens', Prism', prism', view)
+import Data.Lens (Lens', Prism', prism')
 import Data.Lens.Record (prop)
 import Data.Maybe (Maybe(..))
 import Data.Symbol (SProxy(..))
@@ -216,7 +216,7 @@ _constraint = prop (SProxy :: SProxy "constraint")
 _members :: forall r. Lens' { members :: Array Node | r} (Array Node)
 _members = prop (SProxy :: SProxy "members")
 
-_parameters :: forall r. Lens' { parameters :: Array Node | r} (Array Node)
+_parameters :: forall r a. Lens' { parameters :: a | r} a 
 _parameters = prop (SProxy :: SProxy "parameters")
 
 _typeArguments :: forall r. Lens' { typeArguments :: Array Node | r} (Array Node)
