@@ -14,12 +14,12 @@ import Data.Lens.Record (prop)
 import Data.Maybe (Maybe(..), fromMaybe, isJust)
 import Data.Symbol (SProxy(..))
 import Data.Traversable (traverse)
-import Data.Tuple (Tuple(..), snd)
+import Data.Tuple (Tuple(..), fst, snd)
 import Effect (Effect)
 import Effect.Aff (Aff, error, launchAff_, throwError)
 import Effect.Class (liftEffect)
 import Effect.Console (log, logShow)
-import Typescript (Node(..), _ClassDeclaration, _ExpressionWithTypeArguments, _HeritageClause, _InterfaceDeclaration, _Name, _TypeParameter, _TypeReference, _expression, _heritageClauses, _members, _name, _parameters, _type, _typeArguments, _typeName, _typeParameters, _types, hushSpy, hushSpyStringify, typescript)
+import Typescript (Node(..), _ClassDeclaration, _ExpressionWithTypeArguments, _HeritageClause, _InterfaceDeclaration, _Name, _TypeAliasDeclaration, _TypeParameter, _TypeReference, _expression, _heritageClauses, _members, _name, _parameters, _type, _typeArguments, _typeName, _typeParameters, _types, hushSpy, hushSpyStringify, typescript)
 import Util (liftEither, liftMaybe)
 
 type BaseType = { name :: String, props :: String }
@@ -63,6 +63,11 @@ instance fieldOrd :: Ord Field where
   compare  _ (Field _) = LT
   compare  (Field _) _ = GT
   compare  _ _ = EQ 
+
+newtype ForeignData = ForeignData String 
+
+_ForeignData :: Lens' ForeignData String
+_ForeignData = lens (\(ForeignData str) -> str) (\_ -> ForeignData)
 
 _props :: ∀ a r. Lens' { props :: a | r } a
 _props = prop (SProxy :: SProxy "props")
@@ -187,68 +192,80 @@ writeProps interface @ (Interface rec) = do
       pure (rType <> "\n\n" <> oType)
     else singleType
   where
-    requiredType = requiredFields <#> writeRequiredType rec.name
-    optionalType = optionalFields <#> writeOptionalType rec.name
-    singleType = optionalFields <#> writeSingleType rec.name
+    requiredType = requiredFields >>= writeRequiredType rec.name
+    optionalType = optionalFields >>= writeOptionalType rec.name
+    singleType = optionalFields >>= writeSingleType rec.name
     allFields = collectAllFields interface
     requiredFields = allFields <#> Array.filter fieldIsRequired
     optionalFields = allFields <#> Array.filter (not fieldIsRequired) 
-    writeOptionalType name fields = intercalate "\n" 
-      [ "type " <> name <> "_optional = "
-      , "  ( " <> (intercalate "\n  , " (map (writeField interface) fields))
-      , "  )"
-      ]
-    writeRequiredType name fields = intercalate "\n" 
-      [ "type " <> name <> "_required optional = "
-      , "  ( " <> (intercalate "\n  , " (map (writeField interface) fields))
-      , "  | optional"
-      , "  )"
-      ]
-    writeSingleType name fields = intercalate "\n" 
-      [ "type " <> name <> " = "
-      , "  ( " <> (intercalate "\n  , " (map (writeField interface) fields))
-      , "  )"
-      ]
+    writeOptionalType name fields = (traverse (writeField interface) fields) <#> (\interfaces ->
+      intercalate "\n" 
+        [ "type " <> name <> "_optional = "
+        , "  ( " <> (intercalate "\n  , " interfaces)
+        , "  )"
+        ])
+    writeRequiredType name fields = (traverse (writeField interface) fields) <#> (\interfaces ->
+      intercalate "\n" 
+        [ "type " <> name <> "_required optional = "
+        , "  ( " <> (intercalate "\n  , " interfaces)
+        , "  | optional"
+        , "  )"
+        ])
+    writeSingleType name fields = (traverse (writeField interface) fields) <#> (\interfaces ->
+      intercalate "\n" 
+        [ "type " <> name <> " = "
+        , "  ( " <> (intercalate "\n  , " interfaces)
+        , "  )"
+        ])
 
 fieldIsRequired :: Field -> Boolean
 fieldIsRequired (Field rec) = not rec.isOptional
 fieldIsRequired _ = false
 
-writeField :: Interface -> Field -> String
-writeField interface field @ (Field rec) = 
-  rec.name <> " :: " <> (writeFieldType interface field rec.type)
-writeField _ _ = "" 
+writeField :: Interface -> Field -> Aff String
+writeField interface field @ (Field rec) = do 
+  tpe <- writeFieldType interface field rec.type
+  pure (rec.name <> " :: " <> (fst tpe) )
+writeField _ _ = pure "" 
 
 -- eventHandlerType :: 
 --  | FunctionField { type :: FieldType, parameters :: Array FieldType }
 
-writeFieldType :: Interface -> Field -> FieldType -> String
+writeFieldType :: Interface -> Field -> FieldType -> Aff (Tuple String (Array ForeignData))
 writeFieldType i @ (Interface interface) f @ (Field field) fieldType = case fieldType of 
-   (Literal str) -> str
-   (StringLiteralField str) -> str 
-   (NumericLiteralField num) -> show num 
+   (Literal str) -> pure (Tuple str [])
+   (StringLiteralField str) -> pure (Tuple str [])
+   (NumericLiteralField num) -> pure $ Tuple (show num) []
    (ArrayField fieldTpe) -> do
-    "(Array " <> (writeFieldType i f fieldTpe) <> ")"
-   (TypeArgumentField (TypeArgument { name })) -> case name of
-    "StyleProp" -> "CSS"
-    _           -> name
-   (FunctionField rec) -> do
+    tpe <- (writeFieldType i f fieldTpe)
+    pure $ Tuple ("(Array " <> (fst tpe) <> ")") (snd tpe) 
+   (TypeArgumentField (TypeArgument { name, typeArguments })) -> case name of
+    "StyleProp" -> pure (Tuple "CSS" [])
+    "Array"     -> do
+                    args <- traverse (writeFieldType i f) typeArguments
+                    pure (Tuple ("(Array " <> (intercalate " " (map fst args)) <> ")") (join $ map snd args))
+    _           ->  (getTypeAlias name >>= writeFieldType i f) <|> pure (Tuple name [])
+   (FunctionField rec) -> pure do
     if isEventHandler fieldType
-      then "EventHandler"
-      else "FunctionField"
-   (TypeLiteralField fields) -> "TypeLiteralField"
+      then Tuple "EventHandler" []
+      else Tuple "FunctionField" []
+   (TypeLiteralField fields) -> pure $ Tuple "TypeLiteralField" []
    (UnionTypeField fieldTypes) -> do
       if unionTypeAsString fieldTypes
-        then "String"
+        then pure $ Tuple "String" []
         else case (isSingleOrArrayOfSameType fieldTypes) of 
-            Nothing -> "UnionFieldType" 
-            Just name -> "(Array " <> name <> ")"
-   (ParamField rec) -> "ParamField"
-   (TypeOfField str) -> str 
-   Null -> "Null"
-   Undefined -> "Undefined"
+            Nothing -> pure $ Tuple "UnionFieldType" []
+            Just name -> (do
+              alias <- getTypeAlias name
+              tpe <- writeFieldType i f alias
+              (pure $ Tuple ("(Array " <> (fst tpe) <> ")") (snd tpe) )) <|> 
+              (pure (Tuple ("(Array " <> name <> ")") []))
+   (ParamField rec) -> pure $ Tuple "ParamField" []
+   (TypeOfField str) -> pure $ Tuple str []
+   Null -> pure $ Tuple "Null" []
+   Undefined -> pure $ Tuple "Undefined" []
 
-writeFieldType _ _ _ = ""
+writeFieldType _ _ _ = pure $ Tuple "" []
 
 unionTypeAsString :: Array FieldType -> Boolean
 unionTypeAsString fieldTypes = isJust $ traverse (preview (_StringLiteralField)) fieldTypes 
@@ -336,6 +353,22 @@ getInterfaces = nodes <#> (\ns -> Array.catMaybes (map makeInterfaces ns))
       _InterfaceDeclaration <<<
       _name <<<
       _Name
+
+
+-- type TypeAliasDeclarationRec = { name :: Node, typeParameters :: Array Node, type :: Node }
+getTypeAliases :: Aff (Array Node)
+getTypeAliases = nodes <#> \ns -> Array.catMaybes (map findTypeAliases ns)
+  where
+    findTypeAliases node = preview _TypeAliasDeclaration node <#> const node
+
+getTypeAlias :: String -> Aff FieldType 
+getTypeAlias name = do
+  aliases <- getTypeAliases
+  let filtered = Array.filter (\node -> preview (_TypeAliasDeclaration <<< _name <<< _Name) node == Just name) aliases
+  typeAlias <- liftMaybe ("didn't find type alias " <> name) $ Array.head $ filtered
+  fieldType <- preview (_TypeAliasDeclaration <<< _type) typeAlias # liftMaybe "couldn't find type alias's type field"
+  liftMaybe "couldn't build node into field type" (buildFieldType fieldType)
+      
 
 getInterface :: String -> Aff Interface
 getInterface interfaceName = do
@@ -464,7 +497,11 @@ listInterfaces = unit <$ do
 
 main :: Effect Unit
 main = launchAff_ do
-  interface <- getInterface "TextProps"
+  -- alias <- getTypeAlias "AccessibilityRole"
+  -- let _ = hushSpy alias
+  -- let _ = hushSpyStringify alias
+  -- pure unit
+  interface <- getInterface "WebViewProps"
   props     <- writeProps interface
   (log props) # liftEffect
   -- listInterfaces
