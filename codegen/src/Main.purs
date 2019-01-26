@@ -198,35 +198,45 @@ writeProps interface @ (Interface rec) = do
     allFields = collectAllFields interface
     requiredFields = allFields <#> Array.filter fieldIsRequired
     optionalFields = allFields <#> Array.filter (not fieldIsRequired) 
-    writeOptionalType name fields = (traverse (writeField interface) fields) <#> (\interfaces ->
+    writeOptionalType name fields = (traverse (writeField interface) fields) <#> (\fieldTuples ->
+      writeForeignData (join $ map snd fieldTuples) <> 
       intercalate "\n" 
         [ "type " <> name <> "_optional = "
-        , "  ( " <> (intercalate "\n  , " interfaces)
+        , "  ( " <> (intercalate "\n  , " (map fst fieldTuples))
         , "  )"
         ])
-    writeRequiredType name fields = (traverse (writeField interface) fields) <#> (\interfaces ->
+    writeRequiredType name fields = (traverse (writeField interface) fields) <#> (\fieldTuples ->
+      writeForeignData (join $ map snd fieldTuples) <> 
       intercalate "\n" 
         [ "type " <> name <> "_required optional = "
-        , "  ( " <> (intercalate "\n  , " interfaces)
+        , "  ( " <> (intercalate "\n  , " (map fst fieldTuples))
         , "  | optional"
         , "  )"
         ])
-    writeSingleType name fields = (traverse (writeField interface) fields) <#> (\interfaces ->
+    writeSingleType name fields = (traverse (writeField interface) fields) <#> (\fieldTuples ->
+      writeForeignData (join $ map snd fieldTuples) <> 
       intercalate "\n" 
         [ "type " <> name <> " = "
-        , "  ( " <> (intercalate "\n  , " interfaces)
+        , "  ( " <> (intercalate "\n  , " (map fst fieldTuples))
         , "  )"
         ])
+
+    writeForeignData :: Array ForeignData -> String
+    writeForeignData foreignData | Array.length foreignData == 0 = ""
+    writeForeignData foreignData = do 
+      let full = map (\(ForeignData f) -> "foreign data " <> f <> " :: Type") foreignData
+      intercalate "\n" full <> "\n"
+
 
 fieldIsRequired :: Field -> Boolean
 fieldIsRequired (Field rec) = not rec.isOptional
 fieldIsRequired _ = false
 
-writeField :: Interface -> Field -> Aff String
+writeField :: Interface -> Field -> Aff (Tuple String (Array ForeignData))
 writeField interface field @ (Field rec) = do 
-  tpe <- writeFieldType interface field rec.type
-  pure (rec.name <> " :: " <> (fst tpe) )
-writeField _ _ = pure "" 
+  tuple <- writeFieldType interface field rec.type
+  pure $ Tuple (rec.name <> " :: " <> (fst tuple)) (snd tuple)
+writeField _ _ = pure (Tuple "" [])
 
 -- eventHandlerType :: 
 --  | FunctionField { type :: FieldType, parameters :: Array FieldType }
@@ -244,7 +254,7 @@ writeFieldType i @ (Interface interface) f @ (Field field) fieldType = case fiel
     "Array"     -> do
                     args <- traverse (writeFieldType i f) typeArguments
                     pure (Tuple ("(Array " <> (intercalate " " (map fst args)) <> ")") (join $ map snd args))
-    _           ->  (getTypeAlias name >>= writeFieldType i f) <|> pure (Tuple name [])
+    foreignData ->  (getTypeAlias name >>= writeFieldType i f) <|> pure (Tuple name [ForeignData foreignData])
    (FunctionField rec) -> pure do
     if isEventHandler fieldType
       then Tuple "EventHandler" []
@@ -417,10 +427,10 @@ buildFieldType (UnionType { types }) = UnionTypeField <$> (traverse buildFieldTy
 buildFieldType (ParenthesizedType rec) = UnionTypeField <$> (buildFieldType rec.type <#> \f -> [f])
 buildFieldType node @ (TypeReference _) = TypeArgumentField <$> buildTypeArguments node
 buildFieldType (Parameter rec) = do 
-  name <- getName rec.name
-  fieldType <- buildFieldType rec.type
-  let isOptional = isJust rec.questionToken
-  let isDotDotDot = isJust rec.dotDotDotToken
+  name            <- getName rec.name
+  fieldType       <- buildFieldType rec.type
+  let isOptional  =  isJust rec.questionToken
+  let isDotDotDot =  isJust rec.dotDotDotToken
   pure $ ParamField { name, isOptional, isDotDotDot, type : fieldType }
 buildFieldType (FunctionType rec) = (buildFieldType rec.type) >>= \fieldType -> do
   parameters <- traverse buildFieldType rec.parameters
