@@ -6,7 +6,7 @@ import Control.Alt ((<|>))
 import Control.Lazy (fix)
 import Control.Monad.Except (runExcept)
 import Control.MonadZero (guard)
-import Data.Array (catMaybes, filter, head, length, sort, sortWith) as Array
+import Data.Array (catMaybes, filter, head, length, nubEq, sort, sortWith) as Array
 import Data.Foldable (intercalate)
 import Data.Lens (Lens', Prism', lens, preview, prism')
 import Data.Lens.Index (ix)
@@ -65,6 +65,7 @@ instance fieldOrd :: Ord Field where
   compare  _ _ = EQ 
 
 newtype ForeignData = ForeignData String 
+derive instance eqForeignData :: Eq ForeignData
 
 _ForeignData :: Lens' ForeignData String
 _ForeignData = lens (\(ForeignData str) -> str) (\_ -> ForeignData)
@@ -182,14 +183,16 @@ collectAllFields (Interface rec) = do
   parentFields <- join <$> traverse collectAllFields parents
   pure $ Array.sort (rec.fields <> parentFields)
 
-writeProps :: Interface -> Aff String
+writeProps :: Interface -> Aff (Tuple String (Array ForeignData))
 writeProps interface @ (Interface rec) = do
   required <- requiredFields
   if Array.length required > 0
     then do
       rType <- requiredType
       oType <- optionalType
-      pure (rType <> "\n\n" <> oType)
+      let str = ((fst rType) <> "\n\n" <> (fst oType))
+      let foreignData = (snd rType) <> (snd oType)
+      pure $ Tuple str foreignData
     else singleType
   where
     requiredType = requiredFields >>= writeRequiredType rec.name
@@ -198,34 +201,34 @@ writeProps interface @ (Interface rec) = do
     allFields = collectAllFields interface
     requiredFields = allFields <#> Array.filter fieldIsRequired
     optionalFields = allFields <#> Array.filter (not fieldIsRequired) 
-    writeOptionalType name fields = (traverse (writeField interface) fields) <#> (\fieldTuples ->
-      writeForeignData (join $ map snd fieldTuples) <> 
-      intercalate "\n" 
-        [ "type " <> name <> "_optional = "
-        , "  ( " <> (intercalate "\n  , " (map fst fieldTuples))
-        , "  )"
-        ])
-    writeRequiredType name fields = (traverse (writeField interface) fields) <#> (\fieldTuples ->
-      writeForeignData (join $ map snd fieldTuples) <> 
-      intercalate "\n" 
-        [ "type " <> name <> "_required optional = "
-        , "  ( " <> (intercalate "\n  , " (map fst fieldTuples))
-        , "  | optional"
-        , "  )"
-        ])
-    writeSingleType name fields = (traverse (writeField interface) fields) <#> (\fieldTuples ->
-      writeForeignData (join $ map snd fieldTuples) <> 
-      intercalate "\n" 
-        [ "type " <> name <> " = "
-        , "  ( " <> (intercalate "\n  , " (map fst fieldTuples))
-        , "  )"
-        ])
+    writeOptionalType name fields = (traverse (writeField interface) fields) <#> (\fieldTuples -> do
+      let str = intercalate "\n" 
+            [ "type " <> name <> "_optional = "
+            , "  ( " <> (intercalate "\n  , " (map fst fieldTuples))
+            , "  )"
+            ]
+      Tuple str (join $ map snd fieldTuples))
+    writeRequiredType name fields = (traverse (writeField interface) fields) <#> (\fieldTuples -> do
+      let str = intercalate "\n" 
+            [ "type " <> name <> "_required optional = "
+            , "  ( " <> (intercalate "\n  , " (map fst fieldTuples))
+            , "  | optional"
+            , "  )"
+            ]
+      Tuple str (join $ map snd fieldTuples))
+    writeSingleType name fields = (traverse (writeField interface) fields) <#> (\fieldTuples -> do
+      let str = intercalate "\n" 
+            [ "type " <> name <> " = "
+            , "  ( " <> (intercalate "\n  , " (map fst fieldTuples))
+            , "  )"
+            ]
+      Tuple str (join $ map snd fieldTuples))
 
-    writeForeignData :: Array ForeignData -> String
-    writeForeignData foreignData | Array.length foreignData == 0 = ""
-    writeForeignData foreignData = do 
-      let full = map (\(ForeignData f) -> "foreign data " <> f <> " :: Type") foreignData
-      intercalate "\n" full <> "\n"
+writeForeignData :: Array ForeignData -> String
+writeForeignData foreignData | Array.length foreignData == 0 = ""
+writeForeignData foreignData = do 
+  let full = map (\(ForeignData f) -> "foreign data " <> f <> " :: Type") (Array.nubEq foreignData)
+  intercalate "\n" full <> "\n"
 
 
 fieldIsRequired :: Field -> Boolean
@@ -513,7 +516,8 @@ main = launchAff_ do
   -- pure unit
   interface <- getInterface "WebViewProps"
   props     <- writeProps interface
-  (log props) # liftEffect
+  (log $ writeForeignData $ snd props) # liftEffect
+  (log $ fst props) # liftEffect
   -- listInterfaces
   -- listBaseTypes
 
