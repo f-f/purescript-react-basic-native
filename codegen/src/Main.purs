@@ -246,23 +246,28 @@ writeField _ _ = pure (Tuple "" [])
 
 writeFieldType :: Interface -> Field -> FieldType -> Aff (Tuple String (Array ForeignData))
 writeFieldType i @ (Interface interface) f @ (Field field) fieldType = case fieldType of 
+   
    (Literal str) -> pure (Tuple str [])
+   
    (StringLiteralField str) -> pure (Tuple str [])
+   
    (NumericLiteralField num) -> pure $ Tuple (show num) []
+   
    (ArrayField fieldTpe) -> do
     tpe <- (writeFieldType i f fieldTpe)
     pure $ Tuple ("(Array " <> (fst tpe) <> ")") (snd tpe) 
+   
    (TypeArgumentField (TypeArgument { name, typeArguments })) -> case name of
     "StyleProp" -> pure (Tuple "CSS" [])
     "Array"     -> do
                     args <- traverse (writeFieldType i f) typeArguments
                     pure (Tuple ("(Array " <> (intercalate " " (map fst args)) <> ")") (join $ map snd args))
     foreignData ->  (getTypeAlias name >>= writeFieldType i f) <|> pure (Tuple name [ForeignData foreignData])
-   (FunctionField rec) -> pure do
-    if isEventHandler fieldType
-      then Tuple "EventHandler" []
-      else Tuple "FunctionField" []
+   
+   (FunctionField rec) -> writeFunctionFieldType i f rec
+   
    (TypeLiteralField fields) -> pure $ Tuple "TypeLiteralField" []
+   
    (UnionTypeField fieldTypes) -> do
       if unionTypeAsString fieldTypes
         then pure $ Tuple "String" []
@@ -273,12 +278,47 @@ writeFieldType i @ (Interface interface) f @ (Field field) fieldType = case fiel
               tpe <- writeFieldType i f alias
               (pure $ Tuple ("(Array " <> (fst tpe) <> ")") (snd tpe) )) <|> 
               (pure (Tuple ("(Array " <> name <> ")") []))
-   (ParamField rec) -> pure $ Tuple "ParamField" []
+   
+   (ParamField rec) -> 
+      if rec.isOptional 
+        then do
+          tuple <- writeFieldType i f rec.type
+          pure $ Tuple ("(Maybe " <> (fst tuple) <> ")") (snd tuple)
+        else writeFieldType i f rec.type
+   
    (TypeOfField str) -> pure $ Tuple str []
+   
    Null -> pure $ Tuple "Null" []
+   
    Undefined -> pure $ Tuple "Undefined" []
 
 writeFieldType _ _ _ = pure $ Tuple "" []
+
+-- type FunctionFieldRec = { type :: FieldType, parameters :: Array FieldType }
+writeFunctionFieldType :: Interface -> Field -> FunctionFieldRec -> Aff (Tuple String (Array ForeignData))
+writeFunctionFieldType i @ (Interface interface) f @ (Field field) rec =
+  if isEventHandler (FunctionField rec)
+   then pure $ Tuple "EventHandler" []
+   else do
+    typeTuple         <- writeFieldType i f rec.type 
+    paramsTuple       <- traverse (writeFieldType i f) rec.parameters
+    let types         =  intercalate " " (map fst (paramsTuple <> [typeTuple]))
+    let foreignData   =  join $ ((map snd paramsTuple) <> [snd typeTuple])
+    pure $ case (Array.length rec.parameters) of 
+       0 -> Tuple ("(Effect " <> types  <> ")") foreignData
+       1 -> Tuple ("(EffectFn1 " <> types  <> ")") foreignData
+       2 -> Tuple ("(EffectFn2 " <> types  <> ")") foreignData
+       3 -> Tuple ("(EffectFn3 " <> types  <> ")") foreignData
+       4 -> Tuple ("(EffectFn4 " <> types  <> ")") foreignData
+       5 -> Tuple ("(EffectFn5 " <> types  <> ")") foreignData
+       6 -> Tuple ("(EffectFn6 " <> types  <> ")") foreignData
+       7 -> Tuple ("(EffectFn7 " <> types  <> ")") foreignData
+       8 -> Tuple ("(EffectFn8 " <> types  <> ")") foreignData
+       9 -> Tuple ("(EffectFn9 " <> types  <> ")") foreignData
+       10 -> Tuple ("(EffectFn10 " <> types  <> ")") foreignData
+       _  -> Tuple "FunctionField - too many params" []
+
+writeFunctionFieldType _ _ _ = pure $ Tuple "" []
 
 unionTypeAsString :: Array FieldType -> Boolean
 unionTypeAsString fieldTypes = isJust $ traverse (preview (_StringLiteralField)) fieldTypes 
