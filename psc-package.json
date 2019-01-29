@@ -1,0 +1,11 @@
+{
+  "name": "valence-iex",
+  "set": "master",
+  "source": "https://github.com/dwhitney/package-sets.git",
+  "depends": [
+    "console",
+    "effect",
+    "prelude",
+    "psci-support"
+  ]
+}

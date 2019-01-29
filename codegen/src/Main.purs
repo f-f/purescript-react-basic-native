@@ -204,14 +204,14 @@ writeProps interface @ (Interface rec) = do
     writeOptionalType name fields = (traverse (writeField interface) fields) <#> (\fieldTuples -> do
       let str = intercalate "\n" 
             [ "type " <> name <> "_optional = "
-            , "  ( " <> (intercalate "\n  , " (map fst fieldTuples))
+            , "  ( " <> (intercalate "\n  , " (Array.nubEq $ map fst fieldTuples))
             , "  )"
             ]
       Tuple str (join $ map snd fieldTuples))
     writeRequiredType name fields = (traverse (writeField interface) fields) <#> (\fieldTuples -> do
       let str = intercalate "\n" 
             [ "type " <> name <> "_required optional = "
-            , "  ( " <> (intercalate "\n  , " (map fst fieldTuples))
+            , "  ( " <> (intercalate "\n  , " (Array.nubEq $ map fst fieldTuples))
             , "  | optional"
             , "  )"
             ]
@@ -219,7 +219,7 @@ writeProps interface @ (Interface rec) = do
     writeSingleType name fields = (traverse (writeField interface) fields) <#> (\fieldTuples -> do
       let str = intercalate "\n" 
             [ "type " <> name <> " = "
-            , "  ( " <> (intercalate "\n  , " (map fst fieldTuples))
+            , "  ( " <> (intercalate "\n  , " (Array.nubEq $ map fst fieldTuples))
             , "  )"
             ]
       Tuple str (join $ map snd fieldTuples))
@@ -245,7 +245,10 @@ writeField _ _ = pure (Tuple "" [])
 --  | FunctionField { type :: FieldType, parameters :: Array FieldType }
 
 writeFieldType :: Interface -> Field -> FieldType -> Aff (Tuple String (Array ForeignData))
-writeFieldType i @ (Interface interface) f @ (Field field) fieldType = case fieldType of 
+writeFieldType i @ (Interface interface) f @ (Field field) fieldType = do
+  --(log $ ("Writing " <> interface.name)) # liftEffect
+
+  case fieldType of 
    
    (Literal str) -> pure (Tuple str [])
    
@@ -272,7 +275,9 @@ writeFieldType i @ (Interface interface) f @ (Field field) fieldType = case fiel
       if unionTypeAsString fieldTypes
         then pure $ Tuple "String" []
         else case (isSingleOrArrayOfSameType fieldTypes) of 
-            Nothing -> pure $ Tuple "UnionFieldType" []
+            Nothing -> do 
+              let typeName = interface.name <> (capitalize field.name)
+              pure $ Tuple typeName [ ForeignData typeName ]
             Just name -> (do
               alias <- getTypeAlias name
               tpe <- writeFieldType i f alias
@@ -554,26 +559,26 @@ main = launchAff_ do
   -- let _ = hushSpy alias
   -- let _ = hushSpyStringify alias
   -- pure unit
-  interface <- getInterface "WebViewProps"
-  props     <- writeProps interface
-  (log $ writeForeignData $ snd props) # liftEffect
-  (log $ fst props) # liftEffect
+  -- interface <- getInterface "WebViewProps"
+  -- props     <- writeProps interface
+  -- (log $ writeForeignData $ snd props) # liftEffect
+  -- (log $ fst props) # liftEffect
   -- listInterfaces
   -- listBaseTypes
+  logAll
 
-{-
-main :: Effect Unit
-main = launchAff_ do 
-  types <- getBaseTypes
-  interfaces <- getInterfaces
-  let filtered = Array.filter (\(Tuple node (Interface { name })) -> name == "ButtonProps") interfaces 
-  let mapped = hushSpyStringify $ map snd filtered
-  logShow types # liftEffect
-  pure unit
--}
+logAll :: Aff Unit
+logAll = do
+  btypes        <- getBaseTypes <#> map \{props} -> props
+  let interfaces = Array.filter (\name -> name /= "ImageBackgroundProps" && name /= "ImageBackgroundComponent" && name /= "Modal"  && name /= "ModalProps" && name /= "SnapshotViewIOSComponent" && name /= "SnapshotViewIOSProps" && name /= "SwipeableListView" && name /= "SwipeableListViewProps") btypes
+  tuples            <- (traverse getInterface interfaces) >>= traverse writeProps
+  let foreignData   =  join $ map snd tuples
+  let types         =  map fst tuples 
+  (log $ writeForeignData foreignData) # liftEffect
+  (log $ intercalate "\n\n" types) # liftEffect
 
 foreign import endsWith :: String -> String -> Boolean
-
+foreign import capitalize :: String -> String
 
 
 
