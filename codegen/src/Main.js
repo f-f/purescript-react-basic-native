@@ -9,3 +9,7 @@ exports.endsWith = function(str){
 exports.capitalize = function(str){
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
+
+exports.lowerCaseFirstLetter = function(str){
+  return str.charAt(0).toLowerCase() + str.slice(1);
+};

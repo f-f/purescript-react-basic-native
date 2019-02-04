@@ -12,6 +12,8 @@ import Data.Lens (Lens', Prism', lens, preview, prism')
 import Data.Lens.Index (ix)
 import Data.Lens.Record (prop)
 import Data.Maybe (Maybe(..), fromMaybe, isJust)
+import Data.Newtype (class Newtype, unwrap, wrap)
+import Data.String (trim)
 import Data.Symbol (SProxy(..))
 import Data.Traversable (traverse)
 import Data.Tuple (Tuple(..), fst, snd)
@@ -43,8 +45,27 @@ data FieldType
 
 derive instance eqFieldType :: Eq FieldType
 
+instance showFieldType :: Show FieldType where
+  show (Literal str) = "(Literal " <> str <> ")"
+  show (StringLiteralField str) = "(StringLiteralField " <> str <> ")"
+  show (NumericLiteralField str) = "(NumericLiteralField " <> str <> ")"
+  show (ArrayField fieldType) = "(ArrayField " <> (show fieldType) <> ")"
+  show (TypeArgumentField typeArgument) = "(TypeArgumentField " <> (show typeArgument) <> ")"
+  show (FunctionField functionFieldRec) = "(FunctionField " <> (show functionFieldRec) <> ")"
+  show (TypeLiteralField fields) = "(TypeLiteralField " <> (show fields) <> ")"
+  show (UnionTypeField fieldTypes) = "(UnionTypeField " <> (show fieldTypes) <> ")"
+  show (ParamField paramFieldRec) = "(PramField " <> (show paramFieldRec) <> ")"
+  show (TypeOfField str) = "(TypeOfField " <> str <> ")"
+  show Null = "null"
+  show Undefined = "undefined"
+
+
+
 type TypeArgumentRec = { name :: String, typeArguments :: Array FieldType }
 newtype TypeArgument = TypeArgument TypeArgumentRec
+
+instance showTypeArgument :: Show TypeArgument where
+  show (TypeArgument rec) = "(TypeArgument " <> (show rec) <> ")"
 
 derive instance eqTypeArgument :: Eq TypeArgument
 
@@ -64,8 +85,15 @@ instance fieldOrd :: Ord Field where
   compare  (Field _) _ = GT
   compare  _ _ = EQ 
 
+instance showField :: Show Field where
+  show (Field rec) = "(Field " <> (show rec) <> ")"
+  show (IndexField rec) = "(IndexField " <> (show rec) <> ")"
+  show ConstructorField = "ConstructorField"
+  show MethodField = "MethodField"
+
 newtype ForeignData = ForeignData String 
 derive instance eqForeignData :: Eq ForeignData
+derive instance newtypeForeignData :: Newtype ForeignData _
 
 _ForeignData :: Lens' ForeignData String
 _ForeignData = lens (\(ForeignData str) -> str) (\_ -> ForeignData)
@@ -227,7 +255,7 @@ writeProps interface @ (Interface rec) = do
 writeForeignData :: Array ForeignData -> String
 writeForeignData foreignData | Array.length foreignData == 0 = ""
 writeForeignData foreignData = do 
-  let full = map (\(ForeignData f) -> "foreign data " <> f <> " :: Type") (Array.nubEq foreignData)
+  let full = map (\(ForeignData f) -> "foreign import data " <> f <> " :: Type") (Array.nubEq foreignData)
   intercalate "\n" full <> "\n"
 
 
@@ -238,15 +266,13 @@ fieldIsRequired _ = false
 writeField :: Interface -> Field -> Aff (Tuple String (Array ForeignData))
 writeField interface field @ (Field rec) = do 
   tuple <- writeFieldType interface field rec.type
-  pure $ Tuple (rec.name <> " :: " <> (fst tuple)) (snd tuple)
+  pure $ Tuple ((lowerCaseFirstLetter rec.name) <> " :: " <> (fst tuple)) (snd tuple)
 writeField _ _ = pure (Tuple "" [])
-
--- eventHandlerType :: 
---  | FunctionField { type :: FieldType, parameters :: Array FieldType }
 
 writeFieldType :: Interface -> Field -> FieldType -> Aff (Tuple String (Array ForeignData))
 writeFieldType i @ (Interface interface) f @ (Field field) fieldType = do
-  --(log $ ("Writing " <> interface.name)) # liftEffect
+
+  -- log (show fieldType) # liftEffect
 
   case fieldType of 
    
@@ -262,27 +288,42 @@ writeFieldType i @ (Interface interface) f @ (Field field) fieldType = do
    
    (TypeArgumentField (TypeArgument { name, typeArguments })) -> case name of
     "StyleProp" -> pure (Tuple "CSS" [])
+    "ScrollViewProps" -> pure (Tuple "(Record ScrollViewProps)" [])
+    "React.ReactElement" -> pure (Tuple "JSX" [])
+    "React.ComponentType" -> do
+      args <- traverse (writeFieldType i f) typeArguments
+      pure (Tuple ("(Component " <> (intercalate " " (map fst args)) <> ")") (join $ map snd args))
     "Array"     -> do
                     args <- traverse (writeFieldType i f) typeArguments
                     pure (Tuple ("(Array " <> (intercalate " " (map fst args)) <> ")") (join $ map snd args))
-    foreignData ->  (getTypeAlias name >>= writeFieldType i f) <|> pure (Tuple name [ForeignData foreignData])
+    foreignData -> (getTypeAlias name >>= writeFieldType i f) <|> pure (Tuple name [ForeignData foreignData])
+      
    
    (FunctionField rec) -> writeFunctionFieldType i f rec
    
-   (TypeLiteralField fields) -> pure $ Tuple "TypeLiteralField" []
+   (TypeLiteralField fields) -> do
+      tuples <- traverse (writeField i) fields
+      let types = intercalate ", " (map fst tuples)
+      let obj = "({ " <> types  <> " })"
+      let foreignData = join $ map snd tuples
+      pure $ Tuple obj foreignData 
    
    (UnionTypeField fieldTypes) -> do
+      -- (log $ show fieldTypes) # liftEffect
       if unionTypeAsString fieldTypes
         then pure $ Tuple "String" []
-        else case (isSingleOrArrayOfSameType fieldTypes) of 
-            Nothing -> do 
-              let typeName = interface.name <> (capitalize field.name)
-              pure $ Tuple typeName [ ForeignData typeName ]
-            Just name -> (do
-              alias <- getTypeAlias name
-              tpe <- writeFieldType i f alias
-              (pure $ Tuple ("(Array " <> (fst tpe) <> ")") (snd tpe) )) <|> 
-              (pure (Tuple ("(Array " <> name <> ")") []))
+        else case (oneIsNull i f fieldTypes) of 
+          Just aff -> aff
+          Nothing -> 
+            case (isSingleOrArrayOfSameType fieldTypes) of 
+                Nothing -> do 
+                  let typeName = interface.name <> (capitalize field.name)
+                  pure $ Tuple typeName [ ForeignData typeName ]
+                Just name -> (do
+                  alias <- getTypeAlias name
+                  tpe <- writeFieldType i f alias
+                  (pure $ Tuple ("(Array " <> (fst tpe) <> ")") (snd tpe) )) <|> 
+                  (pure (Tuple ("(Array " <> name <> ")") []))
    
    (ParamField rec) -> 
       if rec.isOptional 
@@ -301,32 +342,63 @@ writeFieldType _ _ _ = pure $ Tuple "" []
 
 -- type FunctionFieldRec = { type :: FieldType, parameters :: Array FieldType }
 writeFunctionFieldType :: Interface -> Field -> FunctionFieldRec -> Aff (Tuple String (Array ForeignData))
-writeFunctionFieldType i @ (Interface interface) f @ (Field field) rec =
-  if isEventHandler (FunctionField rec)
-   then pure $ Tuple "EventHandler" []
-   else do
-    typeTuple         <- writeFieldType i f rec.type 
-    paramsTuple       <- traverse (writeFieldType i f) rec.parameters
-    let types         =  intercalate " " (map fst (paramsTuple <> [typeTuple]))
-    let foreignData   =  join $ ((map snd paramsTuple) <> [snd typeTuple])
-    pure $ case (Array.length rec.parameters) of 
-       0 -> Tuple ("(Effect " <> types  <> ")") foreignData
-       1 -> Tuple ("(EffectFn1 " <> types  <> ")") foreignData
-       2 -> Tuple ("(EffectFn2 " <> types  <> ")") foreignData
-       3 -> Tuple ("(EffectFn3 " <> types  <> ")") foreignData
-       4 -> Tuple ("(EffectFn4 " <> types  <> ")") foreignData
-       5 -> Tuple ("(EffectFn5 " <> types  <> ")") foreignData
-       6 -> Tuple ("(EffectFn6 " <> types  <> ")") foreignData
-       7 -> Tuple ("(EffectFn7 " <> types  <> ")") foreignData
-       8 -> Tuple ("(EffectFn8 " <> types  <> ")") foreignData
-       9 -> Tuple ("(EffectFn9 " <> types  <> ")") foreignData
-       10 -> Tuple ("(EffectFn10 " <> types  <> ")") foreignData
-       _  -> Tuple "FunctionField - too many params" []
+writeFunctionFieldType i @ (Interface interface) f @ (Field field) rec = do 
+  let tupleAff = if isEventHandler (FunctionField rec)
+        then pure $ Tuple "EventHandler" []
+        else do
+         typeTuple         <- writeFieldType i f rec.type 
+         paramsTuple       <- traverse (writeFieldType i f) rec.parameters
+         let types         =  intercalate " " (map fst (paramsTuple <> [typeTuple]))
+         let foreignData   =  join $ ((map snd paramsTuple) <> [snd typeTuple])
+         pure $ case (Array.length rec.parameters) of 
+            0 -> Tuple ("(Effect " <> types <> ")") foreignData
+            1 -> Tuple ("(EffectFn1 " <> types  <> ")") foreignData
+            2 -> Tuple ("(EffectFn2 " <> types  <> ")") foreignData
+            3 -> Tuple ("(EffectFn3 " <> types  <> ")") foreignData
+            4 -> Tuple ("(EffectFn4 " <> types  <> ")") foreignData
+            5 -> Tuple ("(EffectFn5 " <> types  <> ")") foreignData
+            6 -> Tuple ("(EffectFn6 " <> types  <> ")") foreignData
+            7 -> Tuple ("(EffectFn7 " <> types  <> ")") foreignData
+            8 -> Tuple ("(EffectFn8 " <> types  <> ")") foreignData
+            9 -> Tuple ("(EffectFn9 " <> types  <> ")") foreignData
+            10 -> Tuple ("(EffectFn10 " <> types  <> ")") foreignData
+            _  -> Tuple "FunctionField - too many params" []
+  tupleAff <#> filterTypes
+  where
+    filterTypes (Tuple "React.ReactElement" foreignData) = Tuple "JSX" foreignData
+    filterTypes (Tuple "(Effect React.ReactElement)" foreignData) = Tuple "JSX" foreignData
+    filterTypes (Tuple "(Effect JSX.Element)" foreignData) = Tuple "JSX" foreignData
+    filterTypes (Tuple "JSX.Element" foreignData) = Tuple "JSX" foreignData
+    filterTypes (Tuple "(Effect JSX.Element)" foreignData) = Tuple "JSX" foreignData
+    filterTypes (Tuple "ScrollViewProps" foreignData) = Tuple "(Record ScrollViewProps)" foreignData
+    filterTypes tuple = tuple
 
 writeFunctionFieldType _ _ _ = pure $ Tuple "" []
 
 unionTypeAsString :: Array FieldType -> Boolean
 unionTypeAsString fieldTypes = isJust $ traverse (preview (_StringLiteralField)) fieldTypes 
+
+oneIsNull :: Interface -> Field -> Array FieldType -> Maybe (Aff (Tuple String (Array ForeignData)))
+oneIsNull i f fieldTypes | Array.length fieldTypes == 2 = secondIsNull <|> firstIsNull
+  where
+    firstIsNull = ado 
+      _         <- preview ((ix 0) <<< _Null) fieldTypes
+      fieldType <- preview (ix 1) fieldTypes
+      in writeFieldType i f fieldType
+    secondIsNull = ado
+      fieldType <- preview (ix 0) fieldTypes
+      _         <- preview ((ix 1) <<< _Null) fieldTypes
+      in writeFieldType i f fieldType
+oneIsNull _ _ _ = Nothing
+
+isJSX :: Array FieldType -> Boolean
+isJSX fieldTypes | Array.length fieldTypes == 2 = (firstIsReactElement && secondIsNull) || (firstIsNull && secondIsReactElement)
+  where
+    firstIsReactElement = (Just "React.ReactElement") == (preview ((ix 0) <<< _TypeArgumentField <<< _TypeArgument <<< _name) fieldTypes)
+    secondIsReactElement = (Just "React.ReactElement") == (preview ((ix 1) <<< _TypeArgumentField <<< _TypeArgument <<< _name) fieldTypes)
+    firstIsNull = Just unit == (preview ((ix 0) <<< _Null) fieldTypes)
+    secondIsNull = Just unit == (preview ((ix 1) <<< _Null) fieldTypes)
+isJSX _ = false
 
 isSingleOrArrayOfSameType :: Array FieldType -> Maybe String
 isSingleOrArrayOfSameType fieldTypes | Array.length fieldTypes == 2 = typeThenArray <|> arrayThenType
@@ -346,11 +418,13 @@ isSingleOrArrayOfSameType fieldTypes | Array.length fieldTypes == 2 = typeThenAr
 isSingleOrArrayOfSameType _ = Nothing 
 
 isEventHandler :: FieldType -> Boolean
-isEventHandler fieldType = isUnit && paramIsNativeSynthenticEvent
+isEventHandler fieldType = do
+  isUnit && paramIsNativeSynthenticEvent
   where
     isUnit = Just "Unit" == (preview unitTypePrism fieldType)
     paramIsNativeSynthenticEvent = eventHandler
-    eventHandler = (isJust $ preview eventTypePrism fieldType) || emptyParams
+    -- eventHandler = (isJust $ preview eventTypePrism fieldType) || ((Just "info") == (preview eventTypeTypeLiteral fieldType)) || ((Just "event") == (preview eventTypeTypeLiteral fieldType)) || emptyParams
+    eventHandler = (isJust $ preview eventTypePrism fieldType) || ((Just "event") == (preview eventTypeTypeLiteral fieldType)) || emptyParams
     emptyParams = Just true == ((preview paramsPrism fieldType) <#> (\params -> Array.length params == 0))
     eventTypePrism = 
       _FunctionField <<< 
@@ -360,6 +434,12 @@ isEventHandler fieldType = isUnit && paramIsNativeSynthenticEvent
       _type <<< 
       _TypeArgumentField <<< 
       _TypeArgument <<< 
+      _name
+    eventTypeTypeLiteral = 
+      _FunctionField <<<
+      _parameters <<<
+      (ix 0) <<<
+      _ParamField <<<
       _name
     paramsPrism = 
       _FunctionField <<< 
@@ -555,30 +635,31 @@ listInterfaces = unit <$ do
 
 main :: Effect Unit
 main = launchAff_ do
-  -- alias <- getTypeAlias "AccessibilityRole"
-  -- let _ = hushSpy alias
-  -- let _ = hushSpyStringify alias
-  -- pure unit
-  -- interface <- getInterface "WebViewProps"
-  -- props     <- writeProps interface
-  -- (log $ writeForeignData $ snd props) # liftEffect
-  -- (log $ fst props) # liftEffect
-  -- listInterfaces
-  -- listBaseTypes
+  -- logOne "SectionListProps" 
   logAll
 
+logOne :: String -> Aff Unit
+logOne name = do
+  interface <- getInterface name
+  tuple     <- writeProps interface
+  let foreignData = Array.filter (\(ForeignData f) -> f /= "ScrollViewProps" && f /= "React.ReactElement" && f /= "JSX.Element") (map (wrap <<< trim <<< unwrap) (snd tuple))
+  let types = fst tuple
+  (log $ writeForeignData foreignData) # liftEffect
+  (log types) # liftEffect
+ 
 logAll :: Aff Unit
 logAll = do
   btypes        <- getBaseTypes <#> map \{props} -> props
   let interfaces = Array.filter (\name -> name /= "ImageBackgroundProps" && name /= "ImageBackgroundComponent" && name /= "Modal"  && name /= "ModalProps" && name /= "SnapshotViewIOSComponent" && name /= "SnapshotViewIOSProps" && name /= "SwipeableListView" && name /= "SwipeableListViewProps") btypes
   tuples            <- (traverse getInterface interfaces) >>= traverse writeProps
-  let foreignData   =  join $ map snd tuples
-  let types         =  map fst tuples 
+  let foreignData   =  Array.filter (\(ForeignData f) -> f /= "ScrollViewProps" && f /= "React.ReactElement" && f /= "JSX.Element") (join $ map snd tuples)
+  let types         =  Array.nubEq $ map fst tuples 
   (log $ writeForeignData foreignData) # liftEffect
   (log $ intercalate "\n\n" types) # liftEffect
 
 foreign import endsWith :: String -> String -> Boolean
 foreign import capitalize :: String -> String
+foreign import lowerCaseFirstLetter :: String -> String
 
 
 
