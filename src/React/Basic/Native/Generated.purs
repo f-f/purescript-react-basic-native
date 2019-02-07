@@ -2222,6 +2222,13 @@ aRTText
   -> JSX
 aRTText props = element (unsafeCoerce "ARTText") props
 
+aRTText_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ARTTextProps
+  => Array JSX
+  -> JSX
+aRTText_ children = aRTText { children }
+
 activityIndicator
   :: ∀ attrs attrs_
    . Union attrs attrs_ ActivityIndicatorProps
@@ -2229,12 +2236,26 @@ activityIndicator
   -> JSX
 activityIndicator props = element (unsafeCoerce "ActivityIndicator") props
 
+activityIndicator_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ActivityIndicatorProps
+  => Array JSX
+  -> JSX
+activityIndicator_ children = activityIndicator { children }
+
 activityIndicatorIOS
   :: ∀ attrs attrs_
    . Union attrs attrs_ ActivityIndicatorIOSProps
   => Record attrs
   -> JSX
 activityIndicatorIOS props = element (unsafeCoerce "ActivityIndicatorIOS") props
+
+activityIndicatorIOS_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ActivityIndicatorIOSProps
+  => Array JSX
+  -> JSX
+activityIndicatorIOS_ children = activityIndicatorIOS { children }
 
 button
   :: ∀ attrs attrs_
@@ -2249,6 +2270,13 @@ aRTClippingRectangle
   => Record attrs
   -> JSX
 aRTClippingRectangle props = element (unsafeCoerce "ARTClippingRectangle") props
+
+aRTClippingRectangle_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ARTClippingRectangleProps
+  => Array JSX
+  -> JSX
+aRTClippingRectangle_ children = aRTClippingRectangle { children }
 
 datePickerIOS
   :: ∀ attrs attrs_
@@ -2278,6 +2306,13 @@ aRTGroup
   -> JSX
 aRTGroup props = element (unsafeCoerce "ARTGroup") props
 
+aRTGroup_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ARTGroupProps
+  => Array JSX
+  -> JSX
+aRTGroup_ children = aRTGroup { children }
+
 image
   :: ∀ attrs attrs_
    . Union attrs attrs_ ImageProps_optional
@@ -2292,12 +2327,26 @@ inputAccessoryView
   -> JSX
 inputAccessoryView props = element (unsafeCoerce "InputAccessoryView") props
 
+inputAccessoryView_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ InputAccessoryViewProps
+  => Array JSX
+  -> JSX
+inputAccessoryView_ children = inputAccessoryView { children }
+
 keyboardAvoidingView
   :: ∀ attrs attrs_
    . Union attrs attrs_ KeyboardAvoidingViewProps
   => Record attrs
   -> JSX
 keyboardAvoidingView props = element (unsafeCoerce "KeyboardAvoidingView") props
+
+keyboardAvoidingView_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ KeyboardAvoidingViewProps
+  => Array JSX
+  -> JSX
+keyboardAvoidingView_ children = keyboardAvoidingView { children }
 
 listView
   :: ∀ attrs attrs_
@@ -2312,6 +2361,13 @@ mapView
   => Record attrs
   -> JSX
 mapView props = element (unsafeCoerce "MapView") props
+
+mapView_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ MapViewProps
+  => Array JSX
+  -> JSX
+mapView_ children = mapView { children }
 
 maskedViewIOS
   :: ∀ attrs attrs_
@@ -2334,6 +2390,13 @@ picker
   -> JSX
 picker props = element (unsafeCoerce "Picker") props
 
+picker_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ PickerProps
+  => Array JSX
+  -> JSX
+picker_ children = picker { children }
+
 pickerIOS
   :: ∀ attrs attrs_
    . Union attrs attrs_ PickerIOSProps
@@ -2341,12 +2404,26 @@ pickerIOS
   -> JSX
 pickerIOS props = element (unsafeCoerce "PickerIOS") props
 
+pickerIOS_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ PickerIOSProps
+  => Array JSX
+  -> JSX
+pickerIOS_ children = pickerIOS { children }
+
 pickerIOSItem
   :: ∀ attrs attrs_
    . Union attrs attrs_ PickerIOSItemProps
   => Record attrs
   -> JSX
 pickerIOSItem props = element (unsafeCoerce "PickerIOSItem") props
+
+pickerIOSItem_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ PickerIOSItemProps
+  => Array JSX
+  -> JSX
+pickerIOSItem_ children = pickerIOSItem { children }
 
 pickerItem
   :: ∀ attrs attrs_
@@ -2362,6 +2439,13 @@ progressBarAndroid
   -> JSX
 progressBarAndroid props = element (unsafeCoerce "ProgressBarAndroid") props
 
+progressBarAndroid_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ProgressBarAndroidProps
+  => Array JSX
+  -> JSX
+progressBarAndroid_ children = progressBarAndroid { children }
+
 progressViewIOS
   :: ∀ attrs attrs_
    . Union attrs attrs_ ProgressViewIOSProps
@@ -2369,12 +2453,26 @@ progressViewIOS
   -> JSX
 progressViewIOS props = element (unsafeCoerce "ProgressViewIOS") props
 
+progressViewIOS_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ProgressViewIOSProps
+  => Array JSX
+  -> JSX
+progressViewIOS_ children = progressViewIOS { children }
+
 recyclerViewBackedScrollView
   :: ∀ attrs attrs_
    . Union attrs attrs_ RecyclerViewBackedScrollViewProps
   => Record attrs
   -> JSX
 recyclerViewBackedScrollView props = element (unsafeCoerce "RecyclerViewBackedScrollView") props
+
+recyclerViewBackedScrollView_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ RecyclerViewBackedScrollViewProps
+  => Array JSX
+  -> JSX
+recyclerViewBackedScrollView_ children = recyclerViewBackedScrollView { children }
 
 refreshControl
   :: ∀ attrs attrs_
@@ -2390,6 +2488,13 @@ view
   -> JSX
 view props = element (unsafeCoerce "View") props
 
+view_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ViewProps
+  => Array JSX
+  -> JSX
+view_ children = view { children }
+
 scrollView
   :: ∀ attrs attrs_
    . Union attrs attrs_ ScrollViewProps
@@ -2397,12 +2502,26 @@ scrollView
   -> JSX
 scrollView props = element (unsafeCoerce "ScrollView") props
 
+scrollView_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ScrollViewProps
+  => Array JSX
+  -> JSX
+scrollView_ children = scrollView { children }
+
 segmentedControlIOS
   :: ∀ attrs attrs_
    . Union attrs attrs_ SegmentedControlIOSProps
   => Record attrs
   -> JSX
 segmentedControlIOS props = element (unsafeCoerce "SegmentedControlIOS") props
+
+segmentedControlIOS_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ SegmentedControlIOSProps
+  => Array JSX
+  -> JSX
+segmentedControlIOS_ children = segmentedControlIOS { children }
 
 aRTShape
   :: ∀ attrs attrs_
@@ -2418,12 +2537,26 @@ slider
   -> JSX
 slider props = element (unsafeCoerce "Slider") props
 
+slider_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ SliderProps
+  => Array JSX
+  -> JSX
+slider_ children = slider { children }
+
 statusBar
   :: ∀ attrs attrs_
    . Union attrs attrs_ StatusBarProps
   => Record attrs
   -> JSX
 statusBar props = element (unsafeCoerce "StatusBar") props
+
+statusBar_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ StatusBarProps
+  => Array JSX
+  -> JSX
+statusBar_ children = statusBar { children }
 
 aRTSurface
   :: ∀ attrs attrs_
@@ -2439,12 +2572,26 @@ switch
   -> JSX
 switch props = element (unsafeCoerce "Switch") props
 
+switch_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ SwitchProps
+  => Array JSX
+  -> JSX
+switch_ children = switch { children }
+
 switchIOS
   :: ∀ attrs attrs_
    . Union attrs attrs_ SwitchIOSProps
   => Record attrs
   -> JSX
 switchIOS props = element (unsafeCoerce "SwitchIOS") props
+
+switchIOS_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ SwitchIOSProps
+  => Array JSX
+  -> JSX
+switchIOS_ children = switchIOS { children }
 
 tabBarIOS
   :: ∀ attrs attrs_
@@ -2453,12 +2600,26 @@ tabBarIOS
   -> JSX
 tabBarIOS props = element (unsafeCoerce "TabBarIOS") props
 
+tabBarIOS_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ TabBarIOSProps
+  => Array JSX
+  -> JSX
+tabBarIOS_ children = tabBarIOS { children }
+
 tabBarIOSItem
   :: ∀ attrs attrs_
    . Union attrs attrs_ TabBarIOSItemProps
   => Record attrs
   -> JSX
 tabBarIOSItem props = element (unsafeCoerce "TabBarIOSItem") props
+
+tabBarIOSItem_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ TabBarIOSItemProps
+  => Array JSX
+  -> JSX
+tabBarIOSItem_ children = tabBarIOSItem { children }
 
 text
   :: ∀ attrs attrs_
@@ -2467,12 +2628,26 @@ text
   -> JSX
 text props = element (unsafeCoerce "Text") props
 
+text_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ TextProps
+  => Array JSX
+  -> JSX
+text_ children = text { children }
+
 textInput
   :: ∀ attrs attrs_
    . Union attrs attrs_ TextInputProps
   => Record attrs
   -> JSX
 textInput props = element (unsafeCoerce "TextInput") props
+
+textInput_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ TextInputProps
+  => Array JSX
+  -> JSX
+textInput_ children = textInput { children }
 
 toolbarAndroid
   :: ∀ attrs attrs_
@@ -2481,12 +2656,26 @@ toolbarAndroid
   -> JSX
 toolbarAndroid props = element (unsafeCoerce "ToolbarAndroid") props
 
+toolbarAndroid_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ToolbarAndroidProps
+  => Array JSX
+  -> JSX
+toolbarAndroid_ children = toolbarAndroid { children }
+
 touchableHighlight
   :: ∀ attrs attrs_
    . Union attrs attrs_ TouchableHighlightProps
   => Record attrs
   -> JSX
 touchableHighlight props = element (unsafeCoerce "TouchableHighlight") props
+
+touchableHighlight_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ TouchableHighlightProps
+  => Array JSX
+  -> JSX
+touchableHighlight_ children = touchableHighlight { children }
 
 touchableNativeFeedback
   :: ∀ attrs attrs_
@@ -2495,12 +2684,26 @@ touchableNativeFeedback
   -> JSX
 touchableNativeFeedback props = element (unsafeCoerce "TouchableNativeFeedback") props
 
+touchableNativeFeedback_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ TouchableNativeFeedbackProps
+  => Array JSX
+  -> JSX
+touchableNativeFeedback_ children = touchableNativeFeedback { children }
+
 touchableOpacity
   :: ∀ attrs attrs_
    . Union attrs attrs_ TouchableOpacityProps
   => Record attrs
   -> JSX
 touchableOpacity props = element (unsafeCoerce "TouchableOpacity") props
+
+touchableOpacity_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ TouchableOpacityProps
+  => Array JSX
+  -> JSX
+touchableOpacity_ children = touchableOpacity { children }
 
 touchableWithoutFeedback
   :: ∀ attrs attrs_
@@ -2509,6 +2712,13 @@ touchableWithoutFeedback
   -> JSX
 touchableWithoutFeedback props = element (unsafeCoerce "TouchableWithoutFeedback") props
 
+touchableWithoutFeedback_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ TouchableWithoutFeedbackProps
+  => Array JSX
+  -> JSX
+touchableWithoutFeedback_ children = touchableWithoutFeedback { children }
+
 viewPagerAndroid
   :: ∀ attrs attrs_
    . Union attrs attrs_ ViewPagerAndroidProps
@@ -2516,9 +2726,23 @@ viewPagerAndroid
   -> JSX
 viewPagerAndroid props = element (unsafeCoerce "ViewPagerAndroid") props
 
+viewPagerAndroid_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ViewPagerAndroidProps
+  => Array JSX
+  -> JSX
+viewPagerAndroid_ children = viewPagerAndroid { children }
+
 webView
   :: ∀ attrs attrs_
    . Union attrs attrs_ WebViewProps
   => Record attrs
   -> JSX
 webView props = element (unsafeCoerce "WebView") props
+
+webView_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ WebViewProps
+  => Array JSX
+  -> JSX
+webView_ children = webView { children }

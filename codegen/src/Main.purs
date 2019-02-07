@@ -205,6 +205,7 @@ writeFunction propsName (Tuple props _) = if (isJust $ indexOf (Pattern (propsNa
   where
     componentName = replace (Pattern "Props") (Replacement "") propsName
     functionName = lowerCaseFirstLetter componentName
+
     writeRequired = functionName <> """
   :: ∀ attrs attrs_
    . Union attrs attrs_ """ <> propsName <> """_optional
@@ -215,7 +216,16 @@ writeFunction propsName (Tuple props _) = if (isJust $ indexOf (Pattern (propsNa
   :: ∀ attrs attrs_
    . Union attrs attrs_ """ <> propsName <> """
   => Record attrs
-  -> JSX""" <> "\n" <> functionName <> """ props = element (unsafeCoerce """ <> "\"" <> componentName <> "\") props"
+  -> JSX""" <> "\n" <> functionName <> """ props = element (unsafeCoerce """ <> "\"" <> componentName <> "\") props" <> 
+    writeOptionalChildren
+
+    writeOptionalChildren | (not $ Array.elem propsName noChildren) = "\n\n" <> functionName <> """_
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ """ <> propsName <> """
+  => Array JSX
+  -> JSX""" <> "\n" <> functionName <> """_ children = """ <> functionName <> " { children }"
+    writeOptionalChildren = ""
+
   
 
  
