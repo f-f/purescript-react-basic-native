@@ -219,11 +219,8 @@ writeFunction propsName (Tuple props _) = if (isJust $ indexOf (Pattern (propsNa
   -> JSX""" <> "\n" <> functionName <> """ props = element (unsafeCoerce """ <> "\"" <> componentName <> "\") props" <> 
     writeOptionalChildren
 
-    writeOptionalChildren | (not $ Array.elem propsName noChildren) = "\n\n" <> functionName <> """_
-  :: ∀ attrs attrs_
-   . Union attrs attrs_ """ <> propsName <> """
-  => Array JSX
-  -> JSX""" <> "\n" <> functionName <> """_ children = """ <> functionName <> " { children }"
+    writeOptionalChildren | (not $ Array.elem propsName noChildren) = 
+      "\n\n" <> functionName <> "_ :: Array JSX -> JSX\n" <> functionName <> """_ children = """ <> functionName <> " { children }"
     writeOptionalChildren = ""
 
   
