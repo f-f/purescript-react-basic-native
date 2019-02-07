@@ -93,6 +93,7 @@ type ARTTextProps =
   , visible :: Boolean
   , x :: Number
   , y :: Number
+  , children :: Array JSX
   )
 
 type ActivityIndicatorProps = 
@@ -144,6 +145,7 @@ type ActivityIndicatorProps =
   , size :: ActivityIndicatorPropsSize
   , style :: CSS
   , testID :: String
+  , children :: Array JSX
   )
 
 type ActivityIndicatorIOSProps = 
@@ -195,6 +197,7 @@ type ActivityIndicatorIOSProps =
   , size :: String
   , style :: CSS
   , testID :: String
+  , children :: Array JSX
   )
 
 type ButtonProps_required optional = 
@@ -223,6 +226,7 @@ type ARTClippingRectangleProps =
   , width :: Number
   , x :: Number
   , y :: Number
+  , children :: Array JSX
   )
 
 type DatePickerIOSProps_required optional = 
@@ -282,6 +286,7 @@ type DatePickerIOSProps_optional =
   , style :: CSS
   , testID :: String
   , timeZoneOffsetInMinutes :: Number
+  , children :: Array JSX
   )
 
 type DrawerLayoutAndroidProps_required optional = 
@@ -344,6 +349,7 @@ type DrawerLayoutAndroidProps_optional =
   , statusBarBackgroundColor :: String
   , style :: CSS
   , testID :: String
+  , children :: Array JSX
   )
 
 type FlatListProps_required optional = 
@@ -475,6 +481,7 @@ type FlatListProps_optional =
   , viewabilityConfigCallbackPairs :: ViewabilityConfigCallbackPairs
   , windowSize :: Number
   , zoomScale :: Number
+  , children :: Array JSX
   )
 
 type ARTGroupProps = 
@@ -490,6 +497,7 @@ type ARTGroupProps =
   , width :: Number
   , x :: Number
   , y :: Number
+  , children :: Array JSX
   )
 
 type ImageProps_required optional = 
@@ -535,12 +543,14 @@ type ImageProps_optional =
   , style :: CSS
   , testID :: String
   , width :: Number
+  , children :: Array JSX
   )
 
 type InputAccessoryViewProps = 
   ( backgroundColor :: String
   , nativeID :: String
   , style :: CSS
+  , children :: Array JSX
   )
 
 type KeyboardAvoidingViewProps = 
@@ -592,6 +602,7 @@ type KeyboardAvoidingViewProps =
   , shouldRasterizeIOS :: Boolean
   , style :: CSS
   , testID :: String
+  , children :: Array JSX
   )
 
 type ListViewProps_required optional = 
@@ -702,6 +713,7 @@ type ListViewProps_optional =
   , style :: CSS
   , testID :: String
   , zoomScale :: Number
+  , children :: Array JSX
   )
 
 type MapViewProps = 
@@ -767,6 +779,7 @@ type MapViewProps =
   , style :: CSS
   , testID :: String
   , zoomEnabled :: Boolean
+  , children :: Array JSX
   )
 
 type MaskedViewIOSProps_required optional = 
@@ -819,6 +832,7 @@ type MaskedViewIOSProps_optional =
   , shouldRasterizeIOS :: Boolean
   , style :: CSS
   , testID :: String
+  , children :: Array JSX
   )
 
 type NavigatorIOSProps_required optional = 
@@ -836,6 +850,7 @@ type NavigatorIOSProps_optional =
   , tintColor :: String
   , titleTextColor :: String
   , translucent :: Boolean
+  , children :: Array JSX
   )
 
 type PickerProps = 
@@ -890,6 +905,7 @@ type PickerProps =
   , style :: CSS
   , testID :: String
   , testId :: String
+  , children :: Array JSX
   )
 
 type PickerIOSProps = 
@@ -940,11 +956,13 @@ type PickerIOSProps =
   , shouldRasterizeIOS :: Boolean
   , style :: CSS
   , testID :: String
+  , children :: Array JSX
   )
 
 type PickerIOSItemProps = 
   ( label :: String
   , value :: PickerIOSItemPropsValue
+  , children :: Array JSX
   )
 
 type PickerItemProps_required optional = 
@@ -956,6 +974,7 @@ type PickerItemProps_optional =
   ( color :: String
   , testID :: String
   , value :: Any
+  , children :: Array JSX
   )
 
 type ProgressBarAndroidProps = 
@@ -1007,6 +1026,7 @@ type ProgressBarAndroidProps =
   , style :: CSS
   , styleAttr :: String
   , testID :: String
+  , children :: Array JSX
   )
 
 type ProgressViewIOSProps = 
@@ -1060,6 +1080,7 @@ type ProgressViewIOSProps =
   , testID :: String
   , trackImage :: (Array ImageURISource)
   , trackTintColor :: String
+  , children :: Array JSX
   )
 
 type RecyclerViewBackedScrollViewProps = 
@@ -1151,6 +1172,7 @@ type RecyclerViewBackedScrollViewProps =
   , style :: CSS
   , testID :: String
   , zoomScale :: Number
+  , children :: Array JSX
   )
 
 type RefreshControlProps_required optional = 
@@ -1212,6 +1234,7 @@ type RefreshControlProps_optional =
   , tintColor :: String
   , title :: String
   , titleColor :: String
+  , children :: Array JSX
   )
 
 type ViewProps = 
@@ -1259,6 +1282,7 @@ type ViewProps =
   , shouldRasterizeIOS :: Boolean
   , style :: CSS
   , testID :: String
+  , children :: Array JSX
   )
 
 type ScrollViewProps = 
@@ -1350,6 +1374,7 @@ type ScrollViewProps =
   , style :: CSS
   , testID :: String
   , zoomScale :: Number
+  , children :: Array JSX
   )
 
 type SegmentedControlIOSProps = 
@@ -1404,6 +1429,7 @@ type SegmentedControlIOSProps =
   , testID :: String
   , tintColor :: String
   , values :: (Array String)
+  , children :: Array JSX
   )
 
 type ARTShapeProps_required optional = 
@@ -1430,6 +1456,7 @@ type ARTShapeProps_optional =
   , width :: Number
   , x :: Number
   , y :: Number
+  , children :: Array JSX
   )
 
 type SliderProps = 
@@ -1491,6 +1518,7 @@ type SliderProps =
   , thumbTintColor :: String
   , trackImage :: ImageURISource
   , value :: Number
+  , children :: Array JSX
   )
 
 type StatusBarProps = 
@@ -1501,6 +1529,7 @@ type StatusBarProps =
   , networkActivityIndicatorVisible :: Boolean
   , showHideTransition :: String
   , translucent :: Boolean
+  , children :: Array JSX
   )
 
 type ARTSurfaceProps_required optional = 
@@ -1511,6 +1540,7 @@ type ARTSurfaceProps_required optional =
 
 type ARTSurfaceProps_optional = 
   ( style :: CSS
+  , children :: Array JSX
   )
 
 type SwitchProps = 
@@ -1567,6 +1597,7 @@ type SwitchProps =
   , tintColor :: String
   , trackColor :: ({ false :: String, true :: String })
   , value :: Boolean
+  , children :: Array JSX
   )
 
 type SwitchIOSProps = 
@@ -1620,6 +1651,7 @@ type SwitchIOSProps =
   , thumbTintColor :: String
   , tintColor :: String
   , value :: Boolean
+  , children :: Array JSX
   )
 
 type TabBarIOSProps = 
@@ -1673,6 +1705,7 @@ type TabBarIOSProps =
   , translucent :: Boolean
   , unselectedItemTintColor :: String
   , unselectedTintColor :: String
+  , children :: Array JSX
   )
 
 type TabBarIOSItemProps = 
@@ -1729,6 +1762,7 @@ type TabBarIOSItemProps =
   , systemIcon :: String
   , testID :: String
   , title :: String
+  , children :: Array JSX
   )
 
 type TextProps = 
@@ -1761,6 +1795,7 @@ type TextProps =
   , suppressHighlighting :: Boolean
   , testID :: String
   , textBreakStrategy :: String
+  , children :: Array JSX
   )
 
 type TextInputProps = 
@@ -1855,6 +1890,7 @@ type TextInputProps =
   , textContentType :: String
   , underlineColorAndroid :: String
   , value :: String
+  , children :: Array JSX
   )
 
 type ToolbarAndroidProps = 
@@ -1915,6 +1951,7 @@ type ToolbarAndroidProps =
   , testID :: String
   , title :: String
   , titleColor :: String
+  , children :: Array JSX
   )
 
 type TouchableHighlightProps = 
@@ -1948,6 +1985,7 @@ type TouchableHighlightProps =
   , style :: CSS
   , testID :: String
   , underlayColor :: String
+  , children :: Array JSX
   )
 
 type TouchableNativeFeedbackProps = 
@@ -1979,6 +2017,7 @@ type TouchableNativeFeedbackProps =
   , style :: CSS
   , testID :: String
   , useForeground :: Boolean
+  , children :: Array JSX
   )
 
 type TouchableOpacityProps = 
@@ -2009,6 +2048,7 @@ type TouchableOpacityProps =
   , pressRetentionOffset :: Insets
   , style :: CSS
   , testID :: String
+  , children :: Array JSX
   )
 
 type TouchableWithoutFeedbackProps = 
@@ -2038,6 +2078,7 @@ type TouchableWithoutFeedbackProps =
   , pressRetentionOffset :: Insets
   , style :: CSS
   , testID :: String
+  , children :: Array JSX
   )
 
 type ViewPagerAndroidProps = 
@@ -2092,6 +2133,7 @@ type ViewPagerAndroidProps =
   , shouldRasterizeIOS :: Boolean
   , style :: CSS
   , testID :: String
+  , children :: Array JSX
   )
 
 type WebViewProps = 
@@ -2171,6 +2213,7 @@ type WebViewProps =
   , url :: String
   , useWebKit :: Boolean
   , userAgent :: String
+  , children :: Array JSX
   )
 aRTText
   :: ∀ attrs attrs_

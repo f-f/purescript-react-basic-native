@@ -1,12 +1,12 @@
 module Main where
 
-import Prelude
+import Prelude hiding (top)
 
 import Control.Alt ((<|>))
 import Control.Lazy (fix)
 import Control.Monad.Except (runExcept)
 import Control.MonadZero (guard)
-import Data.Array (catMaybes, filter, length, nubEq, sort, sortWith, zip) as Array
+import Data.Array (catMaybes, elem, filter, length, nubEq, sort, sortWith, zip) as Array
 import Data.Foldable (intercalate)
 import Data.Lens (Lens', Prism', lens, preview, prism')
 import Data.Lens.Index (ix)
@@ -224,7 +224,7 @@ collectAllFields interfaceMap (Interface rec) = do
   parents <- traverse (getInterface interfaceMap) rec.parents
   parentFields <- join <$> traverse (collectAllFields interfaceMap) parents
   pure $ Array.sort (rec.fields <> parentFields)
-
+    
 writeProps :: Map String FieldType -> Map String Interface -> Interface -> Aff (Tuple String (Array ForeignData))
 writeProps fieldTypeMap interfaceMap interface @ (Interface rec) = do
   required <- requiredFields
@@ -243,13 +243,19 @@ writeProps fieldTypeMap interfaceMap interface @ (Interface rec) = do
     allFields = collectAllFields interfaceMap interface
     requiredFields = allFields <#> Array.filter fieldIsRequired
     optionalFields = allFields <#> Array.filter (not fieldIsRequired) 
+    
+    children | (not $ Array.elem rec.name noChildren) = ["children :: Array JSX"]
+    children                                          = []
+
+
     writeOptionalType name fields = (traverse (writeField fieldTypeMap interface) fields) <#> (\fieldTuples -> do
       let str = intercalate "\n" 
             [ "type " <> name <> "_optional = "
-            , "  ( " <> (intercalate "\n  , " (Array.nubEq $ map fst fieldTuples))
+            , "  ( " <> (intercalate "\n  , " ((Array.nubEq $ map fst fieldTuples) <> children))
             , "  )"
             ]
       Tuple str (join $ map snd fieldTuples))
+    
     writeRequiredType name fields = (traverse (writeField fieldTypeMap interface) fields) <#> (\fieldTuples -> do
       let str = intercalate "\n" 
             [ "type " <> name <> "_required optional = "
@@ -258,10 +264,11 @@ writeProps fieldTypeMap interfaceMap interface @ (Interface rec) = do
             , "  )"
             ]
       Tuple str (join $ map snd fieldTuples))
+    
     writeSingleType name fields = (traverse (writeField fieldTypeMap interface) fields) <#> (\fieldTuples -> do
       let str = intercalate "\n" 
             [ "type " <> name <> " = "
-            , "  ( " <> (intercalate "\n  , " (Array.nubEq $ map fst fieldTuples))
+            , "  ( " <> (intercalate "\n  , " ((Array.nubEq $ map fst fieldTuples) <> children))
             , "  )"
             ]
       Tuple str (join $ map snd fieldTuples))
@@ -653,6 +660,9 @@ main = launchAff_ do
   fieldTypeMap <- getFieldTypeMap
   -- logOne fieldTypeMap interfaceMap "WebViewProps" 
   logAll fieldTypeMap interfaceMap
+
+noChildren :: Array String
+noChildren = ["ButtonProps"]
 
 logOne :: Map String FieldType -> Map String Interface -> String -> Aff Unit
 logOne fieldTypeMap interfaceMap name = do
