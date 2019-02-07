@@ -10,10 +10,10 @@ import Data.Maybe (Maybe)
 import Effect (Effect)
 import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4)
 import Prim.Row (class Union)
-import React.Basic (Component, JSX, element)
+import React.Basic (Component, JSX)
 import React.Basic.DOM.Internal (CSS)
 import React.Basic.Events (EventHandler)
-import Unsafe.Coerce (unsafeCoerce)
+import React.Basic.Native.Internal (unsafeCreateNativeElement)
 
 foreign import data Any :: Type
 foreign import data AccessibilityTrait :: Type
@@ -2220,7 +2220,7 @@ aRTText
    . Union attrs attrs_ ARTTextProps
   => Record attrs
   -> JSX
-aRTText props = element (unsafeCoerce "ARTText") props
+aRTText props = unsafeCreateNativeElement "ARTText" props
 
 aRTText_ :: Array JSX -> JSX
 aRTText_ children = aRTText { children }
@@ -2230,7 +2230,7 @@ activityIndicator
    . Union attrs attrs_ ActivityIndicatorProps
   => Record attrs
   -> JSX
-activityIndicator props = element (unsafeCoerce "ActivityIndicator") props
+activityIndicator props = unsafeCreateNativeElement "ActivityIndicator" props
 
 activityIndicator_ :: Array JSX -> JSX
 activityIndicator_ children = activityIndicator { children }
@@ -2240,7 +2240,7 @@ activityIndicatorIOS
    . Union attrs attrs_ ActivityIndicatorIOSProps
   => Record attrs
   -> JSX
-activityIndicatorIOS props = element (unsafeCoerce "ActivityIndicatorIOS") props
+activityIndicatorIOS props = unsafeCreateNativeElement "ActivityIndicatorIOS" props
 
 activityIndicatorIOS_ :: Array JSX -> JSX
 activityIndicatorIOS_ children = activityIndicatorIOS { children }
@@ -2250,14 +2250,14 @@ button
    . Union attrs attrs_ ButtonProps_optional
   => Record (ButtonProps_required attrs)
   -> JSX
-button props = element (unsafeCoerce "Button") props
+button props = unsafeCreateNativeElement "Button" props
 
 aRTClippingRectangle
   :: ∀ attrs attrs_
    . Union attrs attrs_ ARTClippingRectangleProps
   => Record attrs
   -> JSX
-aRTClippingRectangle props = element (unsafeCoerce "ARTClippingRectangle") props
+aRTClippingRectangle props = unsafeCreateNativeElement "ARTClippingRectangle" props
 
 aRTClippingRectangle_ :: Array JSX -> JSX
 aRTClippingRectangle_ children = aRTClippingRectangle { children }
@@ -2267,28 +2267,28 @@ datePickerIOS
    . Union attrs attrs_ DatePickerIOSProps_optional
   => Record (DatePickerIOSProps_required attrs)
   -> JSX
-datePickerIOS props = element (unsafeCoerce "DatePickerIOS") props
+datePickerIOS props = unsafeCreateNativeElement "DatePickerIOS" props
 
 drawerLayoutAndroid
   :: ∀ attrs attrs_
    . Union attrs attrs_ DrawerLayoutAndroidProps_optional
   => Record (DrawerLayoutAndroidProps_required attrs)
   -> JSX
-drawerLayoutAndroid props = element (unsafeCoerce "DrawerLayoutAndroid") props
+drawerLayoutAndroid props = unsafeCreateNativeElement "DrawerLayoutAndroid" props
 
 flatList
   :: ∀ attrs attrs_
    . Union attrs attrs_ FlatListProps_optional
   => Record (FlatListProps_required attrs)
   -> JSX
-flatList props = element (unsafeCoerce "FlatList") props
+flatList props = unsafeCreateNativeElement "FlatList" props
 
 aRTGroup
   :: ∀ attrs attrs_
    . Union attrs attrs_ ARTGroupProps
   => Record attrs
   -> JSX
-aRTGroup props = element (unsafeCoerce "ARTGroup") props
+aRTGroup props = unsafeCreateNativeElement "ARTGroup" props
 
 aRTGroup_ :: Array JSX -> JSX
 aRTGroup_ children = aRTGroup { children }
@@ -2298,14 +2298,14 @@ image
    . Union attrs attrs_ ImageProps_optional
   => Record (ImageProps_required attrs)
   -> JSX
-image props = element (unsafeCoerce "Image") props
+image props = unsafeCreateNativeElement "Image" props
 
 inputAccessoryView
   :: ∀ attrs attrs_
    . Union attrs attrs_ InputAccessoryViewProps
   => Record attrs
   -> JSX
-inputAccessoryView props = element (unsafeCoerce "InputAccessoryView") props
+inputAccessoryView props = unsafeCreateNativeElement "InputAccessoryView" props
 
 inputAccessoryView_ :: Array JSX -> JSX
 inputAccessoryView_ children = inputAccessoryView { children }
@@ -2315,7 +2315,7 @@ keyboardAvoidingView
    . Union attrs attrs_ KeyboardAvoidingViewProps
   => Record attrs
   -> JSX
-keyboardAvoidingView props = element (unsafeCoerce "KeyboardAvoidingView") props
+keyboardAvoidingView props = unsafeCreateNativeElement "KeyboardAvoidingView" props
 
 keyboardAvoidingView_ :: Array JSX -> JSX
 keyboardAvoidingView_ children = keyboardAvoidingView { children }
@@ -2325,14 +2325,14 @@ listView
    . Union attrs attrs_ ListViewProps_optional
   => Record (ListViewProps_required attrs)
   -> JSX
-listView props = element (unsafeCoerce "ListView") props
+listView props = unsafeCreateNativeElement "ListView" props
 
 mapView
   :: ∀ attrs attrs_
    . Union attrs attrs_ MapViewProps
   => Record attrs
   -> JSX
-mapView props = element (unsafeCoerce "MapView") props
+mapView props = unsafeCreateNativeElement "MapView" props
 
 mapView_ :: Array JSX -> JSX
 mapView_ children = mapView { children }
@@ -2342,21 +2342,21 @@ maskedViewIOS
    . Union attrs attrs_ MaskedViewIOSProps_optional
   => Record (MaskedViewIOSProps_required attrs)
   -> JSX
-maskedViewIOS props = element (unsafeCoerce "MaskedViewIOS") props
+maskedViewIOS props = unsafeCreateNativeElement "MaskedViewIOS" props
 
 navigatorIOS
   :: ∀ attrs attrs_
    . Union attrs attrs_ NavigatorIOSProps_optional
   => Record (NavigatorIOSProps_required attrs)
   -> JSX
-navigatorIOS props = element (unsafeCoerce "NavigatorIOS") props
+navigatorIOS props = unsafeCreateNativeElement "NavigatorIOS" props
 
 picker
   :: ∀ attrs attrs_
    . Union attrs attrs_ PickerProps
   => Record attrs
   -> JSX
-picker props = element (unsafeCoerce "Picker") props
+picker props = unsafeCreateNativeElement "Picker" props
 
 picker_ :: Array JSX -> JSX
 picker_ children = picker { children }
@@ -2366,7 +2366,7 @@ pickerIOS
    . Union attrs attrs_ PickerIOSProps
   => Record attrs
   -> JSX
-pickerIOS props = element (unsafeCoerce "PickerIOS") props
+pickerIOS props = unsafeCreateNativeElement "PickerIOS" props
 
 pickerIOS_ :: Array JSX -> JSX
 pickerIOS_ children = pickerIOS { children }
@@ -2376,7 +2376,7 @@ pickerIOSItem
    . Union attrs attrs_ PickerIOSItemProps
   => Record attrs
   -> JSX
-pickerIOSItem props = element (unsafeCoerce "PickerIOSItem") props
+pickerIOSItem props = unsafeCreateNativeElement "PickerIOSItem" props
 
 pickerIOSItem_ :: Array JSX -> JSX
 pickerIOSItem_ children = pickerIOSItem { children }
@@ -2386,14 +2386,14 @@ pickerItem
    . Union attrs attrs_ PickerItemProps_optional
   => Record (PickerItemProps_required attrs)
   -> JSX
-pickerItem props = element (unsafeCoerce "PickerItem") props
+pickerItem props = unsafeCreateNativeElement "PickerItem" props
 
 progressBarAndroid
   :: ∀ attrs attrs_
    . Union attrs attrs_ ProgressBarAndroidProps
   => Record attrs
   -> JSX
-progressBarAndroid props = element (unsafeCoerce "ProgressBarAndroid") props
+progressBarAndroid props = unsafeCreateNativeElement "ProgressBarAndroid" props
 
 progressBarAndroid_ :: Array JSX -> JSX
 progressBarAndroid_ children = progressBarAndroid { children }
@@ -2403,7 +2403,7 @@ progressViewIOS
    . Union attrs attrs_ ProgressViewIOSProps
   => Record attrs
   -> JSX
-progressViewIOS props = element (unsafeCoerce "ProgressViewIOS") props
+progressViewIOS props = unsafeCreateNativeElement "ProgressViewIOS" props
 
 progressViewIOS_ :: Array JSX -> JSX
 progressViewIOS_ children = progressViewIOS { children }
@@ -2413,7 +2413,7 @@ recyclerViewBackedScrollView
    . Union attrs attrs_ RecyclerViewBackedScrollViewProps
   => Record attrs
   -> JSX
-recyclerViewBackedScrollView props = element (unsafeCoerce "RecyclerViewBackedScrollView") props
+recyclerViewBackedScrollView props = unsafeCreateNativeElement "RecyclerViewBackedScrollView" props
 
 recyclerViewBackedScrollView_ :: Array JSX -> JSX
 recyclerViewBackedScrollView_ children = recyclerViewBackedScrollView { children }
@@ -2423,14 +2423,14 @@ refreshControl
    . Union attrs attrs_ RefreshControlProps_optional
   => Record (RefreshControlProps_required attrs)
   -> JSX
-refreshControl props = element (unsafeCoerce "RefreshControl") props
+refreshControl props = unsafeCreateNativeElement "RefreshControl" props
 
 view
   :: ∀ attrs attrs_
    . Union attrs attrs_ ViewProps
   => Record attrs
   -> JSX
-view props = element (unsafeCoerce "View") props
+view props = unsafeCreateNativeElement "View" props
 
 view_ :: Array JSX -> JSX
 view_ children = view { children }
@@ -2440,7 +2440,7 @@ scrollView
    . Union attrs attrs_ ScrollViewProps
   => Record attrs
   -> JSX
-scrollView props = element (unsafeCoerce "ScrollView") props
+scrollView props = unsafeCreateNativeElement "ScrollView" props
 
 scrollView_ :: Array JSX -> JSX
 scrollView_ children = scrollView { children }
@@ -2450,7 +2450,7 @@ segmentedControlIOS
    . Union attrs attrs_ SegmentedControlIOSProps
   => Record attrs
   -> JSX
-segmentedControlIOS props = element (unsafeCoerce "SegmentedControlIOS") props
+segmentedControlIOS props = unsafeCreateNativeElement "SegmentedControlIOS" props
 
 segmentedControlIOS_ :: Array JSX -> JSX
 segmentedControlIOS_ children = segmentedControlIOS { children }
@@ -2460,14 +2460,14 @@ aRTShape
    . Union attrs attrs_ ARTShapeProps_optional
   => Record (ARTShapeProps_required attrs)
   -> JSX
-aRTShape props = element (unsafeCoerce "ARTShape") props
+aRTShape props = unsafeCreateNativeElement "ARTShape" props
 
 slider
   :: ∀ attrs attrs_
    . Union attrs attrs_ SliderProps
   => Record attrs
   -> JSX
-slider props = element (unsafeCoerce "Slider") props
+slider props = unsafeCreateNativeElement "Slider" props
 
 slider_ :: Array JSX -> JSX
 slider_ children = slider { children }
@@ -2477,7 +2477,7 @@ statusBar
    . Union attrs attrs_ StatusBarProps
   => Record attrs
   -> JSX
-statusBar props = element (unsafeCoerce "StatusBar") props
+statusBar props = unsafeCreateNativeElement "StatusBar" props
 
 statusBar_ :: Array JSX -> JSX
 statusBar_ children = statusBar { children }
@@ -2487,14 +2487,14 @@ aRTSurface
    . Union attrs attrs_ ARTSurfaceProps_optional
   => Record (ARTSurfaceProps_required attrs)
   -> JSX
-aRTSurface props = element (unsafeCoerce "ARTSurface") props
+aRTSurface props = unsafeCreateNativeElement "ARTSurface" props
 
 switch
   :: ∀ attrs attrs_
    . Union attrs attrs_ SwitchProps
   => Record attrs
   -> JSX
-switch props = element (unsafeCoerce "Switch") props
+switch props = unsafeCreateNativeElement "Switch" props
 
 switch_ :: Array JSX -> JSX
 switch_ children = switch { children }
@@ -2504,7 +2504,7 @@ switchIOS
    . Union attrs attrs_ SwitchIOSProps
   => Record attrs
   -> JSX
-switchIOS props = element (unsafeCoerce "SwitchIOS") props
+switchIOS props = unsafeCreateNativeElement "SwitchIOS" props
 
 switchIOS_ :: Array JSX -> JSX
 switchIOS_ children = switchIOS { children }
@@ -2514,7 +2514,7 @@ tabBarIOS
    . Union attrs attrs_ TabBarIOSProps
   => Record attrs
   -> JSX
-tabBarIOS props = element (unsafeCoerce "TabBarIOS") props
+tabBarIOS props = unsafeCreateNativeElement "TabBarIOS" props
 
 tabBarIOS_ :: Array JSX -> JSX
 tabBarIOS_ children = tabBarIOS { children }
@@ -2524,7 +2524,7 @@ tabBarIOSItem
    . Union attrs attrs_ TabBarIOSItemProps
   => Record attrs
   -> JSX
-tabBarIOSItem props = element (unsafeCoerce "TabBarIOSItem") props
+tabBarIOSItem props = unsafeCreateNativeElement "TabBarIOSItem" props
 
 tabBarIOSItem_ :: Array JSX -> JSX
 tabBarIOSItem_ children = tabBarIOSItem { children }
@@ -2534,7 +2534,7 @@ text
    . Union attrs attrs_ TextProps
   => Record attrs
   -> JSX
-text props = element (unsafeCoerce "Text") props
+text props = unsafeCreateNativeElement "Text" props
 
 text_ :: Array JSX -> JSX
 text_ children = text { children }
@@ -2544,7 +2544,7 @@ textInput
    . Union attrs attrs_ TextInputProps
   => Record attrs
   -> JSX
-textInput props = element (unsafeCoerce "TextInput") props
+textInput props = unsafeCreateNativeElement "TextInput" props
 
 textInput_ :: Array JSX -> JSX
 textInput_ children = textInput { children }
@@ -2554,7 +2554,7 @@ toolbarAndroid
    . Union attrs attrs_ ToolbarAndroidProps
   => Record attrs
   -> JSX
-toolbarAndroid props = element (unsafeCoerce "ToolbarAndroid") props
+toolbarAndroid props = unsafeCreateNativeElement "ToolbarAndroid" props
 
 toolbarAndroid_ :: Array JSX -> JSX
 toolbarAndroid_ children = toolbarAndroid { children }
@@ -2564,7 +2564,7 @@ touchableHighlight
    . Union attrs attrs_ TouchableHighlightProps
   => Record attrs
   -> JSX
-touchableHighlight props = element (unsafeCoerce "TouchableHighlight") props
+touchableHighlight props = unsafeCreateNativeElement "TouchableHighlight" props
 
 touchableHighlight_ :: Array JSX -> JSX
 touchableHighlight_ children = touchableHighlight { children }
@@ -2574,7 +2574,7 @@ touchableNativeFeedback
    . Union attrs attrs_ TouchableNativeFeedbackProps
   => Record attrs
   -> JSX
-touchableNativeFeedback props = element (unsafeCoerce "TouchableNativeFeedback") props
+touchableNativeFeedback props = unsafeCreateNativeElement "TouchableNativeFeedback" props
 
 touchableNativeFeedback_ :: Array JSX -> JSX
 touchableNativeFeedback_ children = touchableNativeFeedback { children }
@@ -2584,7 +2584,7 @@ touchableOpacity
    . Union attrs attrs_ TouchableOpacityProps
   => Record attrs
   -> JSX
-touchableOpacity props = element (unsafeCoerce "TouchableOpacity") props
+touchableOpacity props = unsafeCreateNativeElement "TouchableOpacity" props
 
 touchableOpacity_ :: Array JSX -> JSX
 touchableOpacity_ children = touchableOpacity { children }
@@ -2594,7 +2594,7 @@ touchableWithoutFeedback
    . Union attrs attrs_ TouchableWithoutFeedbackProps
   => Record attrs
   -> JSX
-touchableWithoutFeedback props = element (unsafeCoerce "TouchableWithoutFeedback") props
+touchableWithoutFeedback props = unsafeCreateNativeElement "TouchableWithoutFeedback" props
 
 touchableWithoutFeedback_ :: Array JSX -> JSX
 touchableWithoutFeedback_ children = touchableWithoutFeedback { children }
@@ -2604,7 +2604,7 @@ viewPagerAndroid
    . Union attrs attrs_ ViewPagerAndroidProps
   => Record attrs
   -> JSX
-viewPagerAndroid props = element (unsafeCoerce "ViewPagerAndroid") props
+viewPagerAndroid props = unsafeCreateNativeElement "ViewPagerAndroid" props
 
 viewPagerAndroid_ :: Array JSX -> JSX
 viewPagerAndroid_ children = viewPagerAndroid { children }
@@ -2614,7 +2614,7 @@ webView
    . Union attrs attrs_ WebViewProps
   => Record attrs
   -> JSX
-webView props = element (unsafeCoerce "WebView") props
+webView props = unsafeCreateNativeElement "WebView" props
 
 webView_ :: Array JSX -> JSX
 webView_ children = webView { children }

@@ -210,13 +210,13 @@ writeFunction propsName (Tuple props _) = if (isJust $ indexOf (Pattern (propsNa
   :: ∀ attrs attrs_
    . Union attrs attrs_ """ <> propsName <> """_optional
   => Record (""" <> propsName <> """_required attrs)
-  -> JSX""" <> "\n" <> functionName <> """ props = element (unsafeCoerce """ <> "\"" <> componentName <> "\") props"
+  -> JSX""" <> "\n" <> functionName <> """ props = unsafeCreateNativeElement """ <> "\"" <> componentName <> "\" props"
 
     writeOptional = functionName <> """
   :: ∀ attrs attrs_
    . Union attrs attrs_ """ <> propsName <> """
   => Record attrs
-  -> JSX""" <> "\n" <> functionName <> """ props = element (unsafeCoerce """ <> "\"" <> componentName <> "\") props" <> 
+  -> JSX""" <> "\n" <> functionName <> """ props = unsafeCreateNativeElement """ <> "\"" <> componentName <> "\" props" <> 
     writeOptionalChildren
 
     writeOptionalChildren | (not $ Array.elem propsName noChildren) = 
@@ -695,10 +695,10 @@ import Data.Maybe (Maybe)
 import Effect (Effect)
 import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4)
 import Prim.Row (class Union)
-import React.Basic (Component, JSX, element)
+import React.Basic (Component, JSX)
 import React.Basic.DOM.Internal (CSS)
 import React.Basic.Events (EventHandler)
-import Unsafe.Coerce (unsafeCoerce)
+import React.Basic.Native.Internal (unsafeCreateNativeElement)
 
 foreign import data Any :: Type
 foreign import data AccessibilityTrait :: Type
