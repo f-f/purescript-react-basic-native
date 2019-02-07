@@ -1,23 +1,34 @@
-module React.Native.Basic.Props where
+-- | ----------------------------------------
+-- | THIS FILE IS GENERATED -- DO NOT EDIT IT
+-- | ----------------------------------------
+
+module React.Basic.Native.Generated where
 
 import Prelude
 
 import Data.Maybe (Maybe)
 import Effect (Effect)
 import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4)
-import React.Basic (Component, JSX)
+import Prim.Row (class Union)
+import React.Basic (Component, JSX, element)
 import React.Basic.DOM.Internal (CSS)
 import React.Basic.Events (EventHandler)
+import Unsafe.Coerce (unsafeCoerce)
 
 foreign import data Any :: Type
+foreign import data AccessibilityTrait :: Type
+foreign import data DataDetectorTypes :: Type
 
+
+foreign import data AccessibilityRole :: Type
+foreign import data AccessibilityState :: Type
 foreign import data Insets :: Type
 foreign import data GestureResponderEvent :: Type
 foreign import data ActivityIndicatorPropsSize :: Type
 foreign import data Date :: Type
 foreign import data DatePickerIOSPropsMinuteInterval :: Type
 foreign import data ReadonlyArray :: Type
-foreign import data ListRenderItemInfo :: Type
+foreign import data ListRenderItem :: Type
 foreign import data FlatListPropsListEmptyComponent :: Type
 foreign import data FlatListPropsListFooterComponent :: Type
 foreign import data FlatListPropsListHeaderComponent :: Type
@@ -29,10 +40,11 @@ foreign import data FlatListPropsOnEndReached :: Type
 foreign import data FlatListPropsOnRefresh :: Type
 foreign import data FlatListPropsOnViewableItemsChanged :: Type
 foreign import data ViewabilityConfig :: Type
-foreign import data ViewabilityConfigCallbackPair :: Type
-foreign import data ImagePropsSource :: Type
+foreign import data ViewabilityConfigCallbackPairs :: Type
+foreign import data ImageSourcePropType :: Type
 foreign import data ImagePropsDefaultSource :: Type
 foreign import data ImageURISource :: Type
+foreign import data ImageResizeMode :: Type
 foreign import data ListViewDataSource :: Type
 foreign import data ListViewPropsRenderRow :: Type
 foreign import data ListViewPropsDecelerationRate :: Type
@@ -50,11 +62,13 @@ foreign import data RecyclerViewBackedScrollViewPropsDecelerationRate :: Type
 foreign import data RecyclerViewBackedScrollViewPropsKeyboardShouldPersistTaps :: Type
 foreign import data ScrollViewPropsDecelerationRate :: Type
 foreign import data ScrollViewPropsKeyboardShouldPersistTaps :: Type
+foreign import data StatusBarStyle :: Type
 foreign import data TabBarIOSItemPropsBadge :: Type
-foreign import data TextInputPropsKeyboardType :: Type
-foreign import data TextInputPropsReturnKeyType :: Type
+foreign import data KeyboardTypeOptions :: Type
+foreign import data ReturnKeyTypeOptions :: Type
 foreign import data DocumentSelectionState :: Type
-foreign import data TouchableNativeFeedbackPropsBackground :: Type
+foreign import data ToolbarAndroidAction :: Type
+foreign import data BackgroundPropType :: Type
 foreign import data WebViewPropsDecelerationRate :: Type
 foreign import data WebViewNativeConfig :: Type
 foreign import data WebViewIOSLoadRequestEvent :: Type
@@ -89,9 +103,9 @@ type ActivityIndicatorProps =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , animating :: Boolean
@@ -140,9 +154,9 @@ type ActivityIndicatorIOSProps =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , animating :: Boolean
@@ -225,9 +239,9 @@ type DatePickerIOSProps_optional =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
@@ -283,9 +297,9 @@ type DrawerLayoutAndroidProps_optional =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
@@ -334,7 +348,7 @@ type DrawerLayoutAndroidProps_optional =
 
 type FlatListProps_required optional = 
   ( data :: ReadonlyArray
-  , renderItem :: (EffectFn1 ListRenderItemInfo JSX)
+  , renderItem :: ListRenderItem
   | optional
   )
 
@@ -350,9 +364,9 @@ type FlatListProps_optional =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , alwaysBounceHorizontal :: Boolean
@@ -458,7 +472,7 @@ type FlatListProps_optional =
   , updateCellsBatchingPeriod :: Number
   , viewabilityConfig :: Any
   , viewabilityConfig :: ViewabilityConfig
-  , viewabilityConfigCallbackPairs :: (Array ViewabilityConfigCallbackPair)
+  , viewabilityConfigCallbackPairs :: ViewabilityConfigCallbackPairs
   , windowSize :: Number
   , zoomScale :: Number
   )
@@ -479,7 +493,7 @@ type ARTGroupProps =
   )
 
 type ImageProps_required optional = 
-  ( source :: ImagePropsSource
+  ( source :: ImageSourcePropType
   | optional
   )
 
@@ -490,9 +504,9 @@ type ImageProps_optional =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessible :: Boolean
   , blurRadius :: Number
   , borderBottomLeftRadius :: Number
@@ -517,7 +531,7 @@ type ImageProps_optional =
   , onProgress :: EventHandler
   , progressiveRenderingEnabled :: Boolean
   , resizeMethod :: String
-  , resizeMode :: String
+  , resizeMode :: ImageResizeMode
   , style :: CSS
   , testID :: String
   , width :: Number
@@ -537,9 +551,9 @@ type KeyboardAvoidingViewProps =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , behavior :: String
@@ -594,9 +608,9 @@ type ListViewProps_optional =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , alwaysBounceHorizontal :: Boolean
@@ -698,9 +712,9 @@ type MapViewProps =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , annotations :: (Array MapViewAnnotation)
@@ -768,9 +782,9 @@ type MaskedViewIOSProps_optional =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
@@ -832,9 +846,9 @@ type PickerProps =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
@@ -886,9 +900,9 @@ type PickerIOSProps =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
@@ -952,9 +966,9 @@ type ProgressBarAndroidProps =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
@@ -1003,9 +1017,9 @@ type ProgressViewIOSProps =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
@@ -1056,9 +1070,9 @@ type RecyclerViewBackedScrollViewProps =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , alwaysBounceHorizontal :: Boolean
@@ -1152,9 +1166,9 @@ type RefreshControlProps_optional =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
@@ -1208,9 +1222,9 @@ type ViewProps =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
@@ -1255,9 +1269,9 @@ type ScrollViewProps =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , alwaysBounceHorizontal :: Boolean
@@ -1346,9 +1360,9 @@ type SegmentedControlIOSProps =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
@@ -1426,9 +1440,9 @@ type SliderProps =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
@@ -1482,7 +1496,7 @@ type SliderProps =
 type StatusBarProps = 
   ( animated :: Boolean
   , backgroundColor :: String
-  , barStyle :: String
+  , barStyle :: StatusBarStyle
   , hidden :: Boolean
   , networkActivityIndicatorVisible :: Boolean
   , showHideTransition :: String
@@ -1507,9 +1521,9 @@ type SwitchProps =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
@@ -1563,9 +1577,9 @@ type SwitchIOSProps =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
@@ -1616,9 +1630,9 @@ type TabBarIOSProps =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , barTintColor :: String
@@ -1669,9 +1683,9 @@ type TabBarIOSItemProps =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , badge :: TabBarIOSItemPropsBadge
@@ -1724,9 +1738,9 @@ type TextProps =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessible :: Boolean
   , adjustsFontSizeToFit :: Boolean
   , allowFontScaling :: Boolean
@@ -1757,9 +1771,9 @@ type TextInputProps =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , allowFontScaling :: Boolean
@@ -1772,7 +1786,7 @@ type TextInputProps =
   , clearTextOnFocus :: Boolean
   , collapsable :: Boolean
   , contextMenuHidden :: Boolean
-  , dataDetectorTypes :: (Array String)
+  , dataDetectorTypes :: (Array DataDetectorTypes)
   , defaultValue :: String
   , disableFullscreenUI :: Boolean
   , editable :: Boolean
@@ -1783,7 +1797,7 @@ type TextInputProps =
   , inlineImagePadding :: Number
   , inputAccessoryViewID :: String
   , keyboardAppearance :: String
-  , keyboardType :: TextInputPropsKeyboardType
+  , keyboardType :: KeyboardTypeOptions
   , maxLength :: Number
   , multiline :: Boolean
   , nativeID :: String
@@ -1826,7 +1840,7 @@ type TextInputProps =
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
   , returnKeyLabel :: String
-  , returnKeyType :: TextInputPropsReturnKeyType
+  , returnKeyType :: ReturnKeyTypeOptions
   , scrollEnabled :: Boolean
   , secureTextEntry :: Boolean
   , selectTextOnFocus :: Boolean
@@ -1851,12 +1865,12 @@ type ToolbarAndroidProps =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
-  , actions :: (Array ({ title :: String, icon :: ImageURISource, show :: String, showWithText :: Boolean }))
+  , actions :: (Array ToolbarAndroidAction)
   , collapsable :: Boolean
   , contentInsetEnd :: Number
   , contentInsetStart :: Number
@@ -1910,9 +1924,9 @@ type TouchableHighlightProps =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessible :: Boolean
   , activeOpacity :: Number
   , delayLongPress :: Number
@@ -1943,11 +1957,11 @@ type TouchableNativeFeedbackProps =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessible :: Boolean
-  , background :: TouchableNativeFeedbackPropsBackground
+  , background :: BackgroundPropType
   , delayLongPress :: Number
   , delayPressIn :: Number
   , delayPressOut :: Number
@@ -1974,9 +1988,9 @@ type TouchableOpacityProps =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessible :: Boolean
   , activeOpacity :: Number
   , delayLongPress :: Number
@@ -2004,9 +2018,9 @@ type TouchableWithoutFeedbackProps =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessible :: Boolean
   , delayLongPress :: Number
   , delayPressIn :: Number
@@ -2034,9 +2048,9 @@ type ViewPagerAndroidProps =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
@@ -2088,9 +2102,9 @@ type WebViewProps =
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
   , accessibilityLiveRegion :: String
-  , accessibilityRole :: String
-  , accessibilityStates :: (Array String)
-  , accessibilityTraits :: (Array String)
+  , accessibilityRole :: AccessibilityRole
+  , accessibilityStates :: (Array AccessibilityState)
+  , accessibilityTraits :: (Array AccessibilityTrait)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , allowFileAccess :: Boolean
@@ -2099,7 +2113,7 @@ type WebViewProps =
   , bounces :: Boolean
   , collapsable :: Boolean
   , contentInset :: Insets
-  , dataDetectorTypes :: (Array String)
+  , dataDetectorTypes :: (Array DataDetectorTypes)
   , decelerationRate :: WebViewPropsDecelerationRate
   , domStorageEnabled :: Boolean
   , hitSlop :: Insets
@@ -2158,4 +2172,310 @@ type WebViewProps =
   , useWebKit :: Boolean
   , userAgent :: String
   )
+aRTText
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ARTTextProps
+  => Record attrs
+  -> JSX
+aRTText props = element (unsafeCoerce "ARTText") props
 
+activityIndicator
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ActivityIndicatorProps
+  => Record attrs
+  -> JSX
+activityIndicator props = element (unsafeCoerce "ActivityIndicator") props
+
+activityIndicatorIOS
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ActivityIndicatorIOSProps
+  => Record attrs
+  -> JSX
+activityIndicatorIOS props = element (unsafeCoerce "ActivityIndicatorIOS") props
+
+button
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ButtonProps_optional
+  => Record (ButtonProps_required attrs)
+  -> JSX
+button props = element (unsafeCoerce "Button") props
+
+aRTClippingRectangle
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ARTClippingRectangleProps
+  => Record attrs
+  -> JSX
+aRTClippingRectangle props = element (unsafeCoerce "ARTClippingRectangle") props
+
+datePickerIOS
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ DatePickerIOSProps_optional
+  => Record (DatePickerIOSProps_required attrs)
+  -> JSX
+datePickerIOS props = element (unsafeCoerce "DatePickerIOS") props
+
+drawerLayoutAndroid
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ DrawerLayoutAndroidProps_optional
+  => Record (DrawerLayoutAndroidProps_required attrs)
+  -> JSX
+drawerLayoutAndroid props = element (unsafeCoerce "DrawerLayoutAndroid") props
+
+flatList
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ FlatListProps_optional
+  => Record (FlatListProps_required attrs)
+  -> JSX
+flatList props = element (unsafeCoerce "FlatList") props
+
+aRTGroup
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ARTGroupProps
+  => Record attrs
+  -> JSX
+aRTGroup props = element (unsafeCoerce "ARTGroup") props
+
+image
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ImageProps_optional
+  => Record (ImageProps_required attrs)
+  -> JSX
+image props = element (unsafeCoerce "Image") props
+
+inputAccessoryView
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ InputAccessoryViewProps
+  => Record attrs
+  -> JSX
+inputAccessoryView props = element (unsafeCoerce "InputAccessoryView") props
+
+keyboardAvoidingView
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ KeyboardAvoidingViewProps
+  => Record attrs
+  -> JSX
+keyboardAvoidingView props = element (unsafeCoerce "KeyboardAvoidingView") props
+
+listView
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ListViewProps_optional
+  => Record (ListViewProps_required attrs)
+  -> JSX
+listView props = element (unsafeCoerce "ListView") props
+
+mapView
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ MapViewProps
+  => Record attrs
+  -> JSX
+mapView props = element (unsafeCoerce "MapView") props
+
+maskedViewIOS
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ MaskedViewIOSProps_optional
+  => Record (MaskedViewIOSProps_required attrs)
+  -> JSX
+maskedViewIOS props = element (unsafeCoerce "MaskedViewIOS") props
+
+navigatorIOS
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ NavigatorIOSProps_optional
+  => Record (NavigatorIOSProps_required attrs)
+  -> JSX
+navigatorIOS props = element (unsafeCoerce "NavigatorIOS") props
+
+picker
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ PickerProps
+  => Record attrs
+  -> JSX
+picker props = element (unsafeCoerce "Picker") props
+
+pickerIOS
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ PickerIOSProps
+  => Record attrs
+  -> JSX
+pickerIOS props = element (unsafeCoerce "PickerIOS") props
+
+pickerIOSItem
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ PickerIOSItemProps
+  => Record attrs
+  -> JSX
+pickerIOSItem props = element (unsafeCoerce "PickerIOSItem") props
+
+pickerItem
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ PickerItemProps_optional
+  => Record (PickerItemProps_required attrs)
+  -> JSX
+pickerItem props = element (unsafeCoerce "PickerItem") props
+
+progressBarAndroid
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ProgressBarAndroidProps
+  => Record attrs
+  -> JSX
+progressBarAndroid props = element (unsafeCoerce "ProgressBarAndroid") props
+
+progressViewIOS
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ProgressViewIOSProps
+  => Record attrs
+  -> JSX
+progressViewIOS props = element (unsafeCoerce "ProgressViewIOS") props
+
+recyclerViewBackedScrollView
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ RecyclerViewBackedScrollViewProps
+  => Record attrs
+  -> JSX
+recyclerViewBackedScrollView props = element (unsafeCoerce "RecyclerViewBackedScrollView") props
+
+refreshControl
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ RefreshControlProps_optional
+  => Record (RefreshControlProps_required attrs)
+  -> JSX
+refreshControl props = element (unsafeCoerce "RefreshControl") props
+
+view
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ViewProps
+  => Record attrs
+  -> JSX
+view props = element (unsafeCoerce "View") props
+
+scrollView
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ScrollViewProps
+  => Record attrs
+  -> JSX
+scrollView props = element (unsafeCoerce "ScrollView") props
+
+segmentedControlIOS
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ SegmentedControlIOSProps
+  => Record attrs
+  -> JSX
+segmentedControlIOS props = element (unsafeCoerce "SegmentedControlIOS") props
+
+aRTShape
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ARTShapeProps_optional
+  => Record (ARTShapeProps_required attrs)
+  -> JSX
+aRTShape props = element (unsafeCoerce "ARTShape") props
+
+slider
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ SliderProps
+  => Record attrs
+  -> JSX
+slider props = element (unsafeCoerce "Slider") props
+
+statusBar
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ StatusBarProps
+  => Record attrs
+  -> JSX
+statusBar props = element (unsafeCoerce "StatusBar") props
+
+aRTSurface
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ARTSurfaceProps_optional
+  => Record (ARTSurfaceProps_required attrs)
+  -> JSX
+aRTSurface props = element (unsafeCoerce "ARTSurface") props
+
+switch
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ SwitchProps
+  => Record attrs
+  -> JSX
+switch props = element (unsafeCoerce "Switch") props
+
+switchIOS
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ SwitchIOSProps
+  => Record attrs
+  -> JSX
+switchIOS props = element (unsafeCoerce "SwitchIOS") props
+
+tabBarIOS
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ TabBarIOSProps
+  => Record attrs
+  -> JSX
+tabBarIOS props = element (unsafeCoerce "TabBarIOS") props
+
+tabBarIOSItem
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ TabBarIOSItemProps
+  => Record attrs
+  -> JSX
+tabBarIOSItem props = element (unsafeCoerce "TabBarIOSItem") props
+
+text
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ TextProps
+  => Record attrs
+  -> JSX
+text props = element (unsafeCoerce "Text") props
+
+textInput
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ TextInputProps
+  => Record attrs
+  -> JSX
+textInput props = element (unsafeCoerce "TextInput") props
+
+toolbarAndroid
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ToolbarAndroidProps
+  => Record attrs
+  -> JSX
+toolbarAndroid props = element (unsafeCoerce "ToolbarAndroid") props
+
+touchableHighlight
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ TouchableHighlightProps
+  => Record attrs
+  -> JSX
+touchableHighlight props = element (unsafeCoerce "TouchableHighlight") props
+
+touchableNativeFeedback
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ TouchableNativeFeedbackProps
+  => Record attrs
+  -> JSX
+touchableNativeFeedback props = element (unsafeCoerce "TouchableNativeFeedback") props
+
+touchableOpacity
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ TouchableOpacityProps
+  => Record attrs
+  -> JSX
+touchableOpacity props = element (unsafeCoerce "TouchableOpacity") props
+
+touchableWithoutFeedback
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ TouchableWithoutFeedbackProps
+  => Record attrs
+  -> JSX
+touchableWithoutFeedback props = element (unsafeCoerce "TouchableWithoutFeedback") props
+
+viewPagerAndroid
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ ViewPagerAndroidProps
+  => Record attrs
+  -> JSX
+viewPagerAndroid props = element (unsafeCoerce "ViewPagerAndroid") props
+
+webView
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ WebViewProps
+  => Record attrs
+  -> JSX
+webView props = element (unsafeCoerce "WebView") props

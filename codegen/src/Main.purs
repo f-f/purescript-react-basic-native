@@ -6,14 +6,16 @@ import Control.Alt ((<|>))
 import Control.Lazy (fix)
 import Control.Monad.Except (runExcept)
 import Control.MonadZero (guard)
-import Data.Array (catMaybes, filter, head, length, nubEq, sort, sortWith) as Array
+import Data.Array (catMaybes, filter, length, nubEq, sort, sortWith, zip) as Array
 import Data.Foldable (intercalate)
 import Data.Lens (Lens', Prism', lens, preview, prism')
 import Data.Lens.Index (ix)
 import Data.Lens.Record (prop)
+import Data.Map (Map)
+import Data.Map (fromFoldable, lookup) as Map
 import Data.Maybe (Maybe(..), fromMaybe, isJust)
 import Data.Newtype (class Newtype, unwrap, wrap)
-import Data.String (trim)
+import Data.String (Pattern(..), Replacement(..), indexOf, replace, trim)
 import Data.Symbol (SProxy(..))
 import Data.Traversable (traverse)
 import Data.Tuple (Tuple(..), fst, snd)
@@ -193,26 +195,38 @@ _Undefined = prism' (const Undefined) case _ of
   _ -> Nothing
 
 
-{-
-button 
-  :: ∀ attrs attrs_
-   . Union attrs attrs_ ButtonProps_optional
-  => Record (ButtonProps_required attrs)
-  -> Unit
-button props = unit
--}
-
 nodes :: Aff (Array Node)
 nodes = (typescript <#> runExcept) # liftEffect # liftEither
 
-collectAllFields :: Interface -> Aff (Array Field)
-collectAllFields (Interface rec) = do
-  parents <- traverse getInterface rec.parents
-  parentFields <- join <$> traverse collectAllFields parents
+writeFunction :: String -> Tuple String (Array ForeignData) -> String
+writeFunction propsName (Tuple props _) = if (isJust $ indexOf (Pattern (propsName <> "_required optional = ")) props)
+  then writeRequired
+  else writeOptional
+  where
+    componentName = replace (Pattern "Props") (Replacement "") propsName
+    functionName = lowerCaseFirstLetter componentName
+    writeRequired = functionName <> """
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ """ <> propsName <> """_optional
+  => Record (""" <> propsName <> """_required attrs)
+  -> JSX""" <> "\n" <> functionName <> """ props = element (unsafeCoerce """ <> "\"" <> componentName <> "\") props"
+
+    writeOptional = functionName <> """
+  :: ∀ attrs attrs_
+   . Union attrs attrs_ """ <> propsName <> """
+  => Record attrs
+  -> JSX""" <> "\n" <> functionName <> """ props = element (unsafeCoerce """ <> "\"" <> componentName <> "\") props"
+  
+
+ 
+collectAllFields :: Map String Interface -> Interface -> Aff (Array Field)
+collectAllFields interfaceMap (Interface rec) = do
+  parents <- traverse (getInterface interfaceMap) rec.parents
+  parentFields <- join <$> traverse (collectAllFields interfaceMap) parents
   pure $ Array.sort (rec.fields <> parentFields)
 
-writeProps :: Interface -> Aff (Tuple String (Array ForeignData))
-writeProps interface @ (Interface rec) = do
+writeProps :: Map String FieldType -> Map String Interface -> Interface -> Aff (Tuple String (Array ForeignData))
+writeProps fieldTypeMap interfaceMap interface @ (Interface rec) = do
   required <- requiredFields
   if Array.length required > 0
     then do
@@ -226,17 +240,17 @@ writeProps interface @ (Interface rec) = do
     requiredType = requiredFields >>= writeRequiredType rec.name
     optionalType = optionalFields >>= writeOptionalType rec.name
     singleType = optionalFields >>= writeSingleType rec.name
-    allFields = collectAllFields interface
+    allFields = collectAllFields interfaceMap interface
     requiredFields = allFields <#> Array.filter fieldIsRequired
     optionalFields = allFields <#> Array.filter (not fieldIsRequired) 
-    writeOptionalType name fields = (traverse (writeField interface) fields) <#> (\fieldTuples -> do
+    writeOptionalType name fields = (traverse (writeField fieldTypeMap interface) fields) <#> (\fieldTuples -> do
       let str = intercalate "\n" 
             [ "type " <> name <> "_optional = "
             , "  ( " <> (intercalate "\n  , " (Array.nubEq $ map fst fieldTuples))
             , "  )"
             ]
       Tuple str (join $ map snd fieldTuples))
-    writeRequiredType name fields = (traverse (writeField interface) fields) <#> (\fieldTuples -> do
+    writeRequiredType name fields = (traverse (writeField fieldTypeMap interface) fields) <#> (\fieldTuples -> do
       let str = intercalate "\n" 
             [ "type " <> name <> "_required optional = "
             , "  ( " <> (intercalate "\n  , " (Array.nubEq $ map fst fieldTuples))
@@ -244,7 +258,7 @@ writeProps interface @ (Interface rec) = do
             , "  )"
             ]
       Tuple str (join $ map snd fieldTuples))
-    writeSingleType name fields = (traverse (writeField interface) fields) <#> (\fieldTuples -> do
+    writeSingleType name fields = (traverse (writeField fieldTypeMap interface) fields) <#> (\fieldTuples -> do
       let str = intercalate "\n" 
             [ "type " <> name <> " = "
             , "  ( " <> (intercalate "\n  , " (Array.nubEq $ map fst fieldTuples))
@@ -263,14 +277,17 @@ fieldIsRequired :: Field -> Boolean
 fieldIsRequired (Field rec) = not rec.isOptional
 fieldIsRequired _ = false
 
-writeField :: Interface -> Field -> Aff (Tuple String (Array ForeignData))
-writeField interface field @ (Field rec) = do 
-  tuple <- writeFieldType interface field rec.type
+writeField :: Map String FieldType -> Interface -> Field -> Aff (Tuple String (Array ForeignData))
+writeField fieldTypeMap interface field @ (Field rec) = do 
+  tuple <- writeFieldType fieldTypeMap interface field rec.type
   pure $ Tuple ((lowerCaseFirstLetter rec.name) <> " :: " <> (fst tuple)) (snd tuple)
-writeField _ _ = pure (Tuple "" [])
+  where
+    fieldName | lowerCaseFirstLetter rec.name == rec.name = rec.name
+    fieldName = "\"" <> rec.name <> "\""
+writeField _ _ _ = pure (Tuple "" [])
 
-writeFieldType :: Interface -> Field -> FieldType -> Aff (Tuple String (Array ForeignData))
-writeFieldType i @ (Interface interface) f @ (Field field) fieldType = do
+writeFieldType :: Map String FieldType -> Interface -> Field -> FieldType -> Aff (Tuple String (Array ForeignData))
+writeFieldType fieldTypeMap i @ (Interface interface) f @ (Field field) fieldType = do
 
   -- log (show fieldType) # liftEffect
 
@@ -283,7 +300,7 @@ writeFieldType i @ (Interface interface) f @ (Field field) fieldType = do
    (NumericLiteralField num) -> pure $ Tuple (show num) []
    
    (ArrayField fieldTpe) -> do
-    tpe <- (writeFieldType i f fieldTpe)
+    tpe <- (writeFieldType fieldTypeMap i f fieldTpe)
     pure $ Tuple ("(Array " <> (fst tpe) <> ")") (snd tpe) 
    
    (TypeArgumentField (TypeArgument { name, typeArguments })) -> case name of
@@ -291,18 +308,18 @@ writeFieldType i @ (Interface interface) f @ (Field field) fieldType = do
     "ScrollViewProps" -> pure (Tuple "(Record ScrollViewProps)" [])
     "React.ReactElement" -> pure (Tuple "JSX" [])
     "React.ComponentType" -> do
-      args <- traverse (writeFieldType i f) typeArguments
+      args <- traverse (writeFieldType fieldTypeMap i f) typeArguments
       pure (Tuple ("(Component " <> (intercalate " " (map fst args)) <> ")") (join $ map snd args))
     "Array"     -> do
-                    args <- traverse (writeFieldType i f) typeArguments
+                    args <- traverse (writeFieldType fieldTypeMap i f) typeArguments
                     pure (Tuple ("(Array " <> (intercalate " " (map fst args)) <> ")") (join $ map snd args))
-    foreignData -> (getTypeAlias name >>= writeFieldType i f) <|> pure (Tuple name [ForeignData foreignData])
+    foreignData -> (getTypeAlias fieldTypeMap name >>= writeFieldType fieldTypeMap i f) <|> pure (Tuple name [ForeignData foreignData])
       
    
-   (FunctionField rec) -> writeFunctionFieldType i f rec
+   (FunctionField rec) -> writeFunctionFieldType fieldTypeMap i f rec
    
    (TypeLiteralField fields) -> do
-      tuples <- traverse (writeField i) fields
+      tuples <- traverse (writeField fieldTypeMap i) fields
       let types = intercalate ", " (map fst tuples)
       let obj = "({ " <> types  <> " })"
       let foreignData = join $ map snd tuples
@@ -312,7 +329,7 @@ writeFieldType i @ (Interface interface) f @ (Field field) fieldType = do
       -- (log $ show fieldTypes) # liftEffect
       if unionTypeAsString fieldTypes
         then pure $ Tuple "String" []
-        else case (oneIsNull i f fieldTypes) of 
+        else case (oneIsNull fieldTypeMap i f fieldTypes) of 
           Just aff -> aff
           Nothing -> 
             case (isSingleOrArrayOfSameType fieldTypes) of 
@@ -320,17 +337,17 @@ writeFieldType i @ (Interface interface) f @ (Field field) fieldType = do
                   let typeName = interface.name <> (capitalize field.name)
                   pure $ Tuple typeName [ ForeignData typeName ]
                 Just name -> (do
-                  alias <- getTypeAlias name
-                  tpe <- writeFieldType i f alias
+                  alias <- getTypeAlias fieldTypeMap name
+                  tpe <- writeFieldType fieldTypeMap i f alias
                   (pure $ Tuple ("(Array " <> (fst tpe) <> ")") (snd tpe) )) <|> 
                   (pure (Tuple ("(Array " <> name <> ")") []))
    
    (ParamField rec) -> 
       if rec.isOptional 
         then do
-          tuple <- writeFieldType i f rec.type
+          tuple <- writeFieldType fieldTypeMap i f rec.type
           pure $ Tuple ("(Maybe " <> (fst tuple) <> ")") (snd tuple)
-        else writeFieldType i f rec.type
+        else writeFieldType fieldTypeMap i f rec.type
    
    (TypeOfField str) -> pure $ Tuple str []
    
@@ -338,16 +355,16 @@ writeFieldType i @ (Interface interface) f @ (Field field) fieldType = do
    
    Undefined -> pure $ Tuple "Undefined" []
 
-writeFieldType _ _ _ = pure $ Tuple "" []
+writeFieldType _ _ _ _ = pure $ Tuple "" []
 
 -- type FunctionFieldRec = { type :: FieldType, parameters :: Array FieldType }
-writeFunctionFieldType :: Interface -> Field -> FunctionFieldRec -> Aff (Tuple String (Array ForeignData))
-writeFunctionFieldType i @ (Interface interface) f @ (Field field) rec = do 
+writeFunctionFieldType :: Map String FieldType -> Interface -> Field -> FunctionFieldRec -> Aff (Tuple String (Array ForeignData))
+writeFunctionFieldType fieldTypeMap i @ (Interface interface) f @ (Field field) rec = do 
   let tupleAff = if isEventHandler (FunctionField rec)
         then pure $ Tuple "EventHandler" []
         else do
-         typeTuple         <- writeFieldType i f rec.type 
-         paramsTuple       <- traverse (writeFieldType i f) rec.parameters
+         typeTuple         <- writeFieldType fieldTypeMap i f rec.type 
+         paramsTuple       <- traverse (writeFieldType fieldTypeMap i f) rec.parameters
          let types         =  intercalate " " (map fst (paramsTuple <> [typeTuple]))
          let foreignData   =  join $ ((map snd paramsTuple) <> [snd typeTuple])
          pure $ case (Array.length rec.parameters) of 
@@ -373,23 +390,23 @@ writeFunctionFieldType i @ (Interface interface) f @ (Field field) rec = do
     filterTypes (Tuple "ScrollViewProps" foreignData) = Tuple "(Record ScrollViewProps)" foreignData
     filterTypes tuple = tuple
 
-writeFunctionFieldType _ _ _ = pure $ Tuple "" []
+writeFunctionFieldType _ _ _ _ = pure $ Tuple "" []
 
 unionTypeAsString :: Array FieldType -> Boolean
 unionTypeAsString fieldTypes = isJust $ traverse (preview (_StringLiteralField)) fieldTypes 
 
-oneIsNull :: Interface -> Field -> Array FieldType -> Maybe (Aff (Tuple String (Array ForeignData)))
-oneIsNull i f fieldTypes | Array.length fieldTypes == 2 = secondIsNull <|> firstIsNull
+oneIsNull :: Map String FieldType -> Interface -> Field -> Array FieldType -> Maybe (Aff (Tuple String (Array ForeignData)))
+oneIsNull fieldTypeMap i f fieldTypes | Array.length fieldTypes == 2 = secondIsNull <|> firstIsNull
   where
     firstIsNull = ado 
       _         <- preview ((ix 0) <<< _Null) fieldTypes
       fieldType <- preview (ix 1) fieldTypes
-      in writeFieldType i f fieldType
+      in writeFieldType fieldTypeMap i f fieldType
     secondIsNull = ado
       fieldType <- preview (ix 0) fieldTypes
       _         <- preview ((ix 1) <<< _Null) fieldTypes
-      in writeFieldType i f fieldType
-oneIsNull _ _ _ = Nothing
+      in writeFieldType fieldTypeMap i f fieldType
+oneIsNull _ _ _ _ = Nothing
 
 isJSX :: Array FieldType -> Boolean
 isJSX fieldTypes | Array.length fieldTypes == 2 = (firstIsReactElement && secondIsNull) || (firstIsNull && secondIsReactElement)
@@ -474,45 +491,59 @@ getBaseTypes =
       _Name
 
 
-getInterfaces :: Aff (Array (Tuple Node Interface))
-getInterfaces = nodes <#> (\ns -> Array.catMaybes (map makeInterfaces ns))
+getInterfaceMap :: Aff (Map String Interface)
+getInterfaceMap = do
+  interfaces <- getInterfaces <#> map snd
+  let tuples = map (\i @ (Interface rec) -> Tuple rec.name i) interfaces
+  pure $ Map.fromFoldable tuples 
   where
-    makeInterfaces :: Node -> Maybe (Tuple Node Interface)
-    makeInterfaces node = ado
-      name            <- preview namePrism node
-      typeArguments   <- preview (_InterfaceDeclaration <<< _typeParameters) node 
-                                  >>= (traverse (preview (_TypeParameter <<< _name <<< _Name)))
-                                  <#> (map (\n -> TypeArgument { name : n, typeArguments : [] }))
-      fields          <- preview (_InterfaceDeclaration <<< _members) node >>= buildFields
-      parents         <- Just $ heritageNames node
-      in Tuple node (Interface { name, fields, typeArguments, parents })
-      
-    namePrism = 
-      _InterfaceDeclaration <<<
-      _name <<<
-      _Name
+    getInterfaces :: Aff (Array (Tuple Node Interface))
+    getInterfaces = nodes <#> (\ns -> Array.catMaybes (map makeInterfaces ns))
+      where
+        makeInterfaces :: Node -> Maybe (Tuple Node Interface)
+        makeInterfaces node = ado
+          name            <- preview namePrism node
+          typeArguments   <- preview (_InterfaceDeclaration <<< _typeParameters) node 
+                                      >>= (traverse (preview (_TypeParameter <<< _name <<< _Name)))
+                                      <#> (map (\n -> TypeArgument { name : n, typeArguments : [] }))
+          fields          <- preview (_InterfaceDeclaration <<< _members) node >>= buildFields
+          parents         <- Just $ heritageNames node
+          in Tuple node (Interface { name, fields, typeArguments, parents })
+          
+        namePrism = 
+          _InterfaceDeclaration <<<
+          _name <<<
+          _Name
 
 
 -- type TypeAliasDeclarationRec = { name :: Node, typeParameters :: Array Node, type :: Node }
-getTypeAliases :: Aff (Array Node)
-getTypeAliases = nodes <#> \ns -> Array.catMaybes (map findTypeAliases ns)
-  where
-    findTypeAliases node = preview _TypeAliasDeclaration node <#> const node
 
-getTypeAlias :: String -> Aff FieldType 
-getTypeAlias name = do
-  aliases <- getTypeAliases
-  let filtered = Array.filter (\node -> preview (_TypeAliasDeclaration <<< _name <<< _Name) node == Just name) aliases
-  typeAlias <- liftMaybe ("didn't find type alias " <> name) $ Array.head $ filtered
-  fieldType <- preview (_TypeAliasDeclaration <<< _type) typeAlias # liftMaybe "couldn't find type alias's type field"
-  liftMaybe "couldn't build node into field type" (buildFieldType fieldType)
+getFieldTypeMap :: Aff (Map String FieldType)
+getFieldTypeMap = do 
+  tuples <- getTypeAliases
+  pure $ Map.fromFoldable tuples 
+  where
+    getTypeAliases = nodes <#> 
+      (\ns -> Array.catMaybes (map (\(Tuple name node) -> 
+        (buildFieldType node) <#> Tuple name) 
+          (Array.catMaybes $ map findTypeAliases ns)))
+   
+    findTypeAliases :: Node -> Maybe (Tuple String Node)
+    findTypeAliases node = ado
+      n     <- (preview _TypeAliasDeclaration node) <#> const node
+      name  <- preview (_TypeAliasDeclaration <<< _name <<< _Name) node 
+      in Tuple name n
+
+getTypeAlias :: Map String FieldType -> String -> Aff FieldType 
+getTypeAlias fieldTypeMap name = do
+  let alias = Map.lookup name fieldTypeMap
+  liftMaybe "couldn't build node into field type" alias
       
 
-getInterface :: String -> Aff Interface
-getInterface interfaceName = do
-  interfaces <- getInterfaces
-  let filtered = Array.filter (\(Tuple node (Interface { name })) -> name == interfaceName) interfaces 
-  liftMaybe ("didn't find interface " <> interfaceName) $ Array.head $ map snd filtered
+getInterface :: (Map String Interface) -> String -> Aff Interface
+getInterface interfaceMap interfaceName = do
+  let interface = Map.lookup interfaceName interfaceMap
+  liftMaybe ("didn't find interface " <> interfaceName) interface
 
 
 buildFields :: Array Node -> Maybe (Array Field)
@@ -564,8 +595,8 @@ buildFieldType (FunctionType rec) = (buildFieldType rec.type) >>= \fieldType -> 
   parameters <- traverse buildFieldType rec.parameters
   pure $ FunctionField { parameters, type : fieldType }
 buildFieldType node = do
-  let s = hushSpy "buildFieldType got a node I don't know"
-  let s1 = hushSpy node
+  -- let s = hushSpy "buildFieldType got a node I don't know"
+  -- let s1 = hushSpy node
   Nothing
 
 
@@ -578,17 +609,6 @@ heritageNames node =
       types     <- join <$> traverse (preview (_HeritageClause <<< _types)) clauses
       traverse (preview (_ExpressionWithTypeArguments <<< _expression <<< _Name)) types
 
-
-getParents :: Node -> Aff (Array Interface)
-getParents node = traverse getInterface names
-  where
-    names :: Array String
-    names = fromMaybe [] do
-      clauses   <- preview (_InterfaceDeclaration <<< _heritageClauses) node
-      types     <- join <$> traverse (preview (_HeritageClause <<< _types)) clauses
-      traverse (preview (_ExpressionWithTypeArguments <<< _expression <<< _Name)) types
-      
-      
 buildTypeArguments :: Node -> Maybe TypeArgument
 buildTypeArguments (TypeReference { typeName, typeArguments }) | Array.length typeArguments == 0 = do
   name <- getName typeName
@@ -612,50 +632,80 @@ doError msg node = do
   let s = hushSpyStringify node
   throwError $ error msg
 
-listBaseTypes :: Aff Unit
-listBaseTypes = unit <$ do
+listBaseTypes :: Map String Interface -> Aff Unit
+listBaseTypes interfaceMap = unit <$ do
   types <- getBaseTypes -- <#> map (\{name} -> name)
   -- having some issues with the components listed below. I suspect there is an error in `getInterface` when there is a method in the interface. also ModalProps isn't an interface, it's a type
   let filtered = Array.filter (\{ name } -> name /= "ImageBackgroundComponent" && name /= "Modal" && name /= "SnapshotViewIOSComponent" && name /= "SwipeableListView") types
   traverse (\t -> (liftEffect $ logShow t) >>= (const $ logProps t) ) filtered 
   where
     logProps :: BaseType -> Aff Unit
-    logProps { props } = (liftEffect <<< log) =<< ((append "  ") <$> (listProps props))
+    logProps { props } = (liftEffect <<< log) =<< ((append "  ") <$> (listProps interfaceMap props))
 
-listProps :: String -> Aff String
-listProps propsName = do
-  (Interface interface)   <- getInterface propsName 
+listProps :: Map String Interface -> String -> Aff String
+listProps interfaceMap propsName = do
+  (Interface interface) <- getInterface interfaceMap propsName 
   pure (interface.name <> " " <> (intercalate " " interface.parents))
-
-
-listInterfaces :: Aff Unit
-listInterfaces = unit <$ do
-  interfaces <- getInterfaces
-  liftEffect $ traverse (\(Tuple _ (Interface rec)) -> log rec.name) interfaces
 
 main :: Effect Unit
 main = launchAff_ do
-  -- logOne "SectionListProps" 
-  logAll
+  interfaceMap <- getInterfaceMap
+  fieldTypeMap <- getFieldTypeMap
+  -- logOne fieldTypeMap interfaceMap "WebViewProps" 
+  logAll fieldTypeMap interfaceMap
 
-logOne :: String -> Aff Unit
-logOne name = do
-  interface <- getInterface name
-  tuple     <- writeProps interface
+logOne :: Map String FieldType -> Map String Interface -> String -> Aff Unit
+logOne fieldTypeMap interfaceMap name = do
+  interface <- getInterface interfaceMap name
+  tuple     <- writeProps fieldTypeMap interfaceMap interface
+  let fn = writeFunction name tuple
   let foreignData = Array.filter (\(ForeignData f) -> f /= "ScrollViewProps" && f /= "React.ReactElement" && f /= "JSX.Element") (map (wrap <<< trim <<< unwrap) (snd tuple))
   let types = fst tuple
   (log $ writeForeignData foreignData) # liftEffect
   (log types) # liftEffect
+  (log ("\n" <> fn)) # liftEffect
+
+top :: String
+top = """-- | ----------------------------------------
+-- | THIS FILE IS GENERATED -- DO NOT EDIT IT
+-- | ----------------------------------------
+
+module React.Basic.Native.Generated where
+
+import Prelude
+
+import Data.Maybe (Maybe)
+import Effect (Effect)
+import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4)
+import Prim.Row (class Union)
+import React.Basic (Component, JSX, element)
+import React.Basic.DOM.Internal (CSS)
+import React.Basic.Events (EventHandler)
+import Unsafe.Coerce (unsafeCoerce)
+
+foreign import data Any :: Type
+foreign import data AccessibilityTrait :: Type
+foreign import data DataDetectorTypes :: Type
+
+"""
+
  
-logAll :: Aff Unit
-logAll = do
+logAll :: Map String FieldType -> Map String Interface -> Aff Unit
+logAll fieldTypeMap interfaceMap = do
   btypes        <- getBaseTypes <#> map \{props} -> props
   let interfaces = Array.filter (\name -> name /= "ImageBackgroundProps" && name /= "ImageBackgroundComponent" && name /= "Modal"  && name /= "ModalProps" && name /= "SnapshotViewIOSComponent" && name /= "SnapshotViewIOSProps" && name /= "SwipeableListView" && name /= "SwipeableListViewProps") btypes
-  tuples            <- (traverse getInterface interfaces) >>= traverse writeProps
+  tuples            <- (traverse (getInterface interfaceMap) interfaces) >>= traverse (writeProps fieldTypeMap interfaceMap)
   let foreignData   =  Array.filter (\(ForeignData f) -> f /= "ScrollViewProps" && f /= "React.ReactElement" && f /= "JSX.Element") (join $ map snd tuples)
   let types         =  Array.nubEq $ map fst tuples 
+  let fns           =  Array.nubEq $ map (\(Tuple name tuple) -> writeFunction name tuple) (Array.zip interfaces tuples)
+  -- liftEffect $ log $ show $ Array.length interfaces 
+  -- liftEffect $ log $ show $ Array.length tuples 
+  -- liftEffect $ log $ show $ Array.length fns 
+  -- let together      = join (Array.zip types fns <#> \(Tuple t f) -> [t, f])
+  (log top) # liftEffect
   (log $ writeForeignData foreignData) # liftEffect
   (log $ intercalate "\n\n" types) # liftEffect
+  (log $ intercalate "\n\n" fns) # liftEffect
 
 foreign import endsWith :: String -> String -> Boolean
 foreign import capitalize :: String -> String
