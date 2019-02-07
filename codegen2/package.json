@@ -1,0 +1,23 @@
+{
+  "name": "codegen",
+  "version": "1.0.0",
+  "description": "",
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "clean": "rm -rf lib/*",
+    "build": "npm run clean && tsc"
+  },
+  "repository": {},
+  "license": "MIT",
+  "dependencies": {
+    "@types/react-native": "^0.57.34"
+  },
+  "devDependencies": {
+    "@types/node": "7.0.4",
+    "typescript": "^3.2.2"
+  }
+}
