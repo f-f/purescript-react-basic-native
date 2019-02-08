@@ -2,6 +2,22 @@ import * as ts from "typescript"
 
 type InterfaceMap = { [key:string]:ts.InterfaceDeclaration; }
 
+export interface FieldType {
+  name: string
+  foreignData?: string[]
+}
+
+export interface Field {
+  name: string
+  fieldType: FieldType
+  isOptional: boolean
+}
+
+export interface Props {
+  name: string
+  fields: Field[]
+}
+
 const filterTypes = (kind: ts.SyntaxKind) => <T>(top: ts.Node): Array<T> => {
   const types: Array<T> = []
   const find = (node: ts.Node) => {
@@ -14,11 +30,14 @@ const filterTypes = (kind: ts.SyntaxKind) => <T>(top: ts.Node): Array<T> => {
 const getInterfaces = (node: ts.Node): ts.InterfaceDeclaration[] =>
   filterTypes(ts.SyntaxKind.InterfaceDeclaration)(node)
 
-export const getPropertySignatures = (i: ts.InterfaceDeclaration): ts.PropertySignature[] => 
+const getPropertySignatures = (i: ts.InterfaceDeclaration): ts.PropertySignature[] => 
   i.members.filter((member) => ts.isPropertySignature(member)) as unknown as ts.PropertySignature[]
 
-export const createInterfaceMap = (is: ts.InterfaceDeclaration[]): InterfaceMap => 
-  is.reduce((map: InterfaceMap, i) => map[i.name.escapedText.toString()] = i, {})
+export const createInterfaceMap = (is: ts.InterfaceDeclaration[]): InterfaceMap => {
+  const map: InterfaceMap = {}
+  is.forEach((i) => map[i.name.escapedText.toString()] = i)
+  return map;
+}
 
 export const printKind = (kind: ts.SyntaxKind) => 
   console.log(ts.SyntaxKind[kind])
@@ -30,28 +49,6 @@ export const printKinds = (kinds: ts.SyntaxKind[]) => {
   })
   console.log(map)
 }
-
-export interface FieldType {
-  name?: string
-  foreignData?: string[]
-}
-
-/*
-{
-  '120': 'AnyKeyword',
-  '123': 'BooleanKeyword',
-  '135': 'NumberKeyword',
-  '136': 'ObjectKeyword',
-  '138': 'StringKeyword',
-  '164': 'TypeReference',
-  '165': 'FunctionType',
-  '167': 'TypeQuery',
-  '168': 'TypeLiteral',
-  '169': 'ArrayType',
-  '173': 'UnionType',
-  '182': 'LiteralType'
-}
-*/
 
 const capitalize = (str: string): string => 
   str.charAt(0).toUpperCase() + str.slice(1)
@@ -71,6 +68,15 @@ const getName = (item: ts.EntityName): string => {
   }else{
     return (item as ts.Identifier).escapedText.toString()
   }
+}
+
+const getExpressionName = (expression: ts.Expression): string => {
+  if(ts.isIdentifier(expression)){
+    return expression.escapedText.toString()
+  }else if(ts.isPropertyAccessExpression(expression)){
+    return expression.name.escapedText.toString()
+  }
+  throw ("Got an ExpressionName I don't know how to handle " + ts.SyntaxKind[expression.kind])
 }
 
 export const getBindingName = (name: ts.BindingName): string => {
@@ -185,7 +191,7 @@ const handleUnionType = (interfaceName: string) => (fieldName: string) => (u: ts
   }
 }
 
-export const handleTypes = (interfaceName: string) => (fieldName: string) =>  (type: ts.TypeNode): FieldType => {
+const handleTypes = (interfaceName: string) => (fieldName: string) =>  (type: ts.TypeNode): FieldType => {
   switch (type.kind) {
     case ts.SyntaxKind.AnyKeyword:          return { name : "Any" }
     case ts.SyntaxKind.VoidKeyword:         return { name : "Unit" }
@@ -205,6 +211,43 @@ export const handleTypes = (interfaceName: string) => (fieldName: string) =>  (t
   }
 }
 
+export const handleInterface = (interfaceMap: InterfaceMap) => (int: ts.InterfaceDeclaration): Props => {
+ 
+  const getParents = (): Props[] => {
+    const array: Props[] = []
+    if(int.heritageClauses !== undefined){
+      int.heritageClauses.forEach((clause) => {
+        clause.types.forEach((type) => {
+          const name = getExpressionName(type.expression)
+          const maybeInterface = interfaceMap[name]
+          if(maybeInterface) array.push(handleInterface(interfaceMap)(maybeInterface))
+        })
+      })
+    }
+    return array
+  }
+
+  const parents = getParents()
+  const parentFields = ([] as Field[]).concat(...parents.map((p) => p.fields))
+
+  const properties: ts.PropertySignature[] = getPropertySignatures(int)
+  const names: string[] = properties.map((p) => getPropertyName(p.name))
+  const types: ts.TypeNode[] = properties.map((prop) => prop.type).filter((type) => type !== undefined) as ts.TypeNode[]
+  
+  if(properties.length !== types.length) throw ("Properties and types don't match" + int)
+
+  const interfaceName = int.name.escapedText.toString()
+  const fields = properties.map((prop, i) => {
+    const name = names[i]
+    const fieldType = handleTypes(interfaceName)(name)(types[i])
+    const isOptional = prop.questionToken !== undefined
+    const field = { fieldType, name, isOptional } 
+    return field
+  }).concat(parentFields)
+
+  return { name: interfaceName, fields }
+}
+
 
 const options = ts.getDefaultCompilerOptions()
 const program = ts.createProgram(["./node_modules/@types/react-native/index.d.ts"], options)
@@ -216,10 +259,15 @@ const sources =
     .filter((src) => src.fileName.indexOf("@types/react-native/index.d.ts") >= 0)
 
 export const interfaces: ts.InterfaceDeclaration[] = getInterfaces(sources[0])
-export const properties: ts.PropertySignature[] = ([] as ts.PropertySignature[]).concat(... interfaces.map(getPropertySignatures))
-export const types: ts.TypeNode[] = properties.map((prop) => prop.type).filter((type) => type !== undefined) as ts.TypeNode[]
-export const kinds: ts.SyntaxKind[] = types.map((type) => type.kind)
-types.forEach(handleTypes("StubInterface")("StubField"))
+// export const properties: ts.PropertySignature[] = ([] as ts.PropertySignature[]).concat(... interfaces.map(getPropertySignatures))
+// export const types: ts.TypeNode[] = properties.map((prop) => prop.type).filter((type) => type !== undefined) as ts.TypeNode[]
+// export const kinds: ts.SyntaxKind[] = types.map((type) => type.kind)
+// types.forEach(handleTypes("StubInterface")("StubField"))
+const interfaceMap = createInterfaceMap(interfaces)
+interfaces
+  .map(handleInterface(interfaceMap))
+  .filter((p) => p.name === "WebViewProps")
+  .forEach((p) => console.log(JSON.stringify(p, null, 2)) )
 
 
 
