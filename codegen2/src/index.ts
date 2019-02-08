@@ -24,6 +24,19 @@ export interface WrittenProps {
   foreignData: string[] 
 }
 
+const fieldTypeNameReplacements: {[key:string]:string;} = 
+  { "StyleProp" : "CSS",
+    "Element.JSX" : "JSX",
+    "ReactElement.React" : "React",
+    "ScrollViewProps" : "(Record ScrollViewProps)"
+  }
+
+export const ignoreForeignDataList: string[] =
+  [ "Array", "CSS", "Element.JSX", "JSX", "StyleProp", "(Record ScrollViewProps)", "ReactElement.React" ]
+
+export const noChildren: string[] =
+  [ "button" ]
+
 const filterTypes = (kind: ts.SyntaxKind) => <T>(top: ts.Node): Array<T> => {
   const types: Array<T> = []
   const find = (node: ts.Node) => {
@@ -65,7 +78,8 @@ const lowerCaseFirstLetter = (str: string): string =>
 
 const handleLiteralType = (interfaceName: string) => (fieldName: string) => (literal: ts.LiteralTypeNode): FieldType => {
   if(ts.isStringLiteral(literal.literal)){
-    const name = capitalize((literal.literal as unknown as ts.StringLiteral).text)
+    const tmpName = capitalize((literal.literal as unknown as ts.StringLiteral).text)
+    const name = (fieldTypeNameReplacements[tmpName]) ? fieldTypeNameReplacements[tmpName] : tmpName
     return { name, foreignData:  [ name ] }  
   }
   throw ("Got a type that I don't know in handleLiteralType: " + ts.SyntaxKind[literal.literal.kind])
@@ -105,9 +119,26 @@ export const getPropertyName = (name: ts.PropertyName): string => {
   throw ("Got a PropertyName I don't know how to deal with" + name.toString())
 }
 
+const handleTypeArguments = (interfaceName: string) => (fieldName: string) => (nodeArray: ts.NodeArray<ts.TypeNode>): FieldType[] => {
+  const fieldTypes: FieldType[] = []
+  nodeArray.forEach((node) => {
+    fieldTypes.push(handleTypes(interfaceName)(fieldName)(node))
+  });
+  return fieldTypes
+}
+
 const handleTypeReference = (interfaceName: string) => (fieldName: string) => (type: ts.TypeReferenceNode): FieldType => {
-  const name = getName(type.typeName)
-  return { name, foreignData: [ name ] } 
+  const tmpName = getName(type.typeName)
+  const typeArgs = (type.typeArguments) ? handleTypeArguments(interfaceName)(fieldName)(type.typeArguments) : []
+  const typeName = ((fieldTypeNameReplacements[tmpName]) ? fieldTypeNameReplacements[tmpName] : tmpName)
+  if(typeName === "React") return { name : "JSX", foreignData : [ "JSX" ] }
+  if(typeName === "CSS") return { name : "CSS", foreignData : [ "CSS" ] }
+  if(typeName === "NativeSyntheticEvent") return { name : "NativeSyntheticEvent", foreignData : [ "NativeSyntheticEvent" ] }
+  if(typeName === "ListRenderItem") return { name : "ListRenderItem", foreignData : [ "ListRenderItem" ] }
+  const name = (typeArgs.length > 0) ? `(${typeName} ${typeArgs.map(f => f.name).join(" ")})` : typeName
+  const foreignData = flattenForeignData(typeArgs)
+  foreignData.push(typeName)
+  return { name, foreignData } 
 }
 
 const handleFunctionType = (interfaceName: string) => (fieldName: string) => (fn: ts.FunctionTypeNode): FieldType => {
@@ -179,6 +210,7 @@ const handleParenthesizedType = (interfaceName: string) => (fieldName: string) =
 
 const handleArrayType = (interfaceName: string) => (fieldName: string) => (a: ts.ArrayTypeNode): FieldType => {
   const fieldType = handleTypes(interfaceName)(fieldName)(a.elementType)
+  a.elementType
   const name = "(Array " + fieldType.name + ")"
   return { name, foreignData: fieldType.foreignData }
 }
@@ -187,19 +219,20 @@ const handleUnionType = (interfaceName: string) => (fieldName: string) => (u: ts
   const stringishTypes = u.types.filter((type) => ts.isStringLiteral(type) || type.kind === ts.SyntaxKind.BooleanKeyword || type.kind === ts.SyntaxKind.NumberKeyword || type.kind === ts.SyntaxKind.StringKeyword )
   if(stringishTypes.length == u.types.length) return { name : "String" }
   else {
-    const fieldType = { name : (interfaceName + capitalize(fieldName)) }
+    const name = (interfaceName + capitalize(fieldName))
+    const fieldType = { name, foreignData : [ name ] }
     return fieldType
   }
 }
 
 const handleTypes = (interfaceName: string) => (fieldName: string) =>  (type: ts.TypeNode): FieldType => {
   switch (type.kind) {
-    case ts.SyntaxKind.AnyKeyword:          return { name : "Any" }
+    case ts.SyntaxKind.AnyKeyword:          return { name : "Any", foreignData: [ "Any" ] }
     case ts.SyntaxKind.VoidKeyword:         return { name : "Unit" }
     case ts.SyntaxKind.BooleanKeyword:      return { name : "Boolean" }
     case ts.SyntaxKind.NumberKeyword:       return { name : "Number" }
     case ts.SyntaxKind.StringKeyword:       return { name : "String" }
-    case ts.SyntaxKind.ObjectKeyword:       return { name : "ObjectType" }
+    case ts.SyntaxKind.ObjectKeyword:       return { name : "ObjectType", foreignData: [ "ObjectType" ] }
     case ts.SyntaxKind.ParenthesizedType:   return handleParenthesizedType(interfaceName)(fieldName)(type as unknown as ts.ParenthesizedTypeNode) 
     case ts.SyntaxKind.LiteralType:         return handleLiteralType(interfaceName)(fieldName)(type as unknown as ts.LiteralTypeNode)
     case ts.SyntaxKind.TypeReference:       return handleTypeReference(interfaceName)(fieldName)(type as unknown as ts.TypeReferenceNode) 
@@ -277,8 +310,12 @@ const fieldCompare = (field1: Field, field2: Field) =>
    
 const propsCompare = (props1: Props, props2: Props) => 
   strCompare(props1.name, props2.name)
- 
-const writeField = (field: Field): string => `${field.name} :: ${field.fieldType.name}`
+
+const writeField = (field: Field): string => {
+  const typeName = fieldTypeNameReplacements[field.fieldType.name] || field.fieldType.name
+  const name = (capitalize(field.name) === field.name) ?  `"${field.name}"` : field.name
+  return `${name} :: ${typeName}`
+}
 
 const collectForeignData = (fields: Field[]): string[] => {
   const datas: string[][] = fields.map((field) => (field.fieldType.foreignData !== undefined) ? field.fieldType.foreignData : [])
@@ -288,11 +325,21 @@ const collectForeignData = (fields: Field[]): string[] => {
 
 const writeProps = (props: Props): WrittenProps => {
 
+  const componentName = props.name.replace(/Props$/,"")
+  const functionName = lowerCaseFirstLetter(componentName)
+  const optionalFields = props.fields.filter((field) => field.isOptional)
+  const requiredFields = props.fields.filter((field) => !field.isOptional)
+
+  const commaOrSpace = optionalFields.length ? "," : " "
+  const children = (noChildren.indexOf(functionName) < 0)
+    ? "\n  " + commaOrSpace + " children :: Array JSX"
+    : ""
+
   const writeOptionalType = (fields: Field[]): string =>
   `type ${props.name}_optional = 
-  ( ${fields.map(writeField).join("\n  , ")}
-  )
-  `
+  ( ${fields.map(writeField).join("\n  , ") + children}
+  )`
+
   const writeRequiredType = (fields: Field[]): string =>
   `type ${props.name}_required optional = 
   ( ${fields.map(writeField).join("\n  , ")}
@@ -300,11 +347,8 @@ const writeProps = (props: Props): WrittenProps => {
   )`
   const writeSingleType = (fields: Field[]): string =>
   `type ${props.name} = 
-  ( ${fields.map(writeField).join("\n  , ")}
+  ( ${fields.map(writeField).join("\n  , ") + children}
   )`
-
-  const componentName = props.name.replace(/Props$/,"")
-  const functionName = lowerCaseFirstLetter(componentName)
 
   const writeRequiredFn = () => 
   `${functionName}
@@ -312,7 +356,7 @@ const writeProps = (props: Props): WrittenProps => {
   . Union attrs attrs_ ${props.name}_optional
   => Record (${props.name}_required attrs)
   -> JSX
-${functionName} props = unsafeCreateNativeElement ${componentName} props`
+${functionName} props = unsafeCreateNativeElement "${componentName}" props`
 
   const writeOptionalFn = () => 
   `${functionName}
@@ -320,15 +364,12 @@ ${functionName} props = unsafeCreateNativeElement ${componentName} props`
   . Union attrs attrs_ ${props.name}
   => Record attrs
   -> JSX
-${functionName} props = unsafeCreateNativeElement ${componentName} props`
+${functionName} props = unsafeCreateNativeElement "${componentName}" props`
 
   const writeOptionalChildren = () =>  
     `${functionName}_ :: Array JSX -> JSX
-${functionName} children = ${functionName} { children }`
+${functionName}_ children = ${functionName} { children }`
 
-
-  const optionalFields = props.fields.filter((field) => field.isOptional)
-  const requiredFields = props.fields.filter((field) => !field.isOptional)
 
   const propsStrs: string[] = []
   const fns: string[] = []
@@ -339,16 +380,58 @@ ${functionName} children = ${functionName} { children }`
   } else {
     propsStrs.push(writeSingleType(props.fields))
     fns.push(writeOptionalFn())
-    fns.push(writeOptionalChildren()) 
+    if(noChildren.indexOf(functionName) < 0) fns.push(writeOptionalChildren()) 
   }
 
   return { fns, props: propsStrs, foreignData: collectForeignData(props.fields) }
 }
 
+export const filterForeignData = (props: Props[], foreignData: string[]): string[] => 
+  foreignData.filter(d => ignoreForeignDataList.indexOf(d) < 0 && props.map(p => p.name).indexOf(d) < 0)
+
+export const writeForeignData = (props: Props[]) => {
+  const foreignData = collectForeignData(([] as Field[]).concat(...props.map((prop) => prop.fields)))
+  return filterForeignData(props, foreignData).map((d) => `foreign import data ${d} :: Type`)
+}
+
+export const getBaseInterfaces = (interfaceMap: InterfaceMap, root: ts.Node): ts.InterfaceDeclaration[] => {
+  const names: string[] = []
+  const classes: ts.ClassDeclaration[] = filterTypes(ts.SyntaxKind.ClassDeclaration)(root)
+  classes.forEach((c) => {
+    if(c.heritageClauses && c.heritageClauses[0]){
+      const clause = c.heritageClauses[0]
+      if(clause.types[0].typeArguments && clause.types[0].typeArguments && clause.types[0].typeArguments[0]){
+        const type = clause.types[0].typeArguments[0]
+        if(ts.isTypeReferenceNode(type) && ts.isIdentifier(type.typeName)){
+          const interfaceName = type.typeName.escapedText.toString()
+          names.push(interfaceName) 
+        }
+      }
+    }
+  })
+  return names.filter((name, i) => names.indexOf(name) == i && interfaceMap[name]).map((name) => interfaceMap[name])
+}
+
+const top = 
+`-- | ----------------------------------------
+-- | THIS FILE IS GENERATED -- DO NOT EDIT IT
+-- | ----------------------------------------
+
+module React.Basic.Native.Generated where
+
+import Prelude
+import Effect (Effect)
+import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4)
+import Prim.Row (class Union)
+import React.Basic (JSX)
+import React.Basic.DOM.Internal (CSS)
+import React.Basic.Events (EventHandler)
+import React.Basic.Native.Internal (unsafeCreateNativeElement)
+
+`
 
 const options = ts.getDefaultCompilerOptions()
 const program = ts.createProgram(["./node_modules/@types/react-native/index.d.ts"], options)
-
 const sources =
   program
     .getSourceFiles()
@@ -356,21 +439,18 @@ const sources =
     .filter((src) => src.fileName.indexOf("@types/react-native/index.d.ts") >= 0)
 
 export const interfaces: ts.InterfaceDeclaration[] = getInterfaces(sources[0])
-// export const properties: ts.PropertySignature[] = ([] as ts.PropertySignature[]).concat(... interfaces.map(getPropertySignatures))
-// export const types: ts.TypeNode[] = properties.map((prop) => prop.type).filter((type) => type !== undefined) as ts.TypeNode[]
-// export const kinds: ts.SyntaxKind[] = types.map((type) => type.kind)
-// types.forEach(handleTypes("StubInterface")("StubField"))
 const interfaceMap = createInterfaceMap(interfaces)
-interfaces
-  .map(handleInterface(interfaceMap))
-//  .filter((p) => p.name === "WebViewProps")
-  .sort(propsCompare)
-  .map(writeProps)
-  .forEach((p) => {
+const baseInterfaces = getBaseInterfaces(interfaceMap, sources[0])
+const props = baseInterfaces.map(handleInterface(interfaceMap)).sort(propsCompare)
+const writtenForeignData = writeForeignData(props).join("\n")
+const writtenProps = props.map(writeProps)
+console.log(top)
+console.log(writtenForeignData, "\n\n")
+writtenProps.forEach((p) => {
     console.log(p.props.join("\n\n"))
     console.log("\n")
     console.log(p.fns.join("\n\n"))
-  })
-
+    console.log("\n")
+})
 
 

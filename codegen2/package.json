@@ -9,7 +9,8 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "clean": "rm -rf lib/*",
-    "build": "npm run clean && tsc"
+    "build": "npm run clean && tsc",
+    "codegen": "node lib/index.js > ../src/React/Basic/Native/Generated.purs"
   },
   "repository": {},
   "license": "MIT",
