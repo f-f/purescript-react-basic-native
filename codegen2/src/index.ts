@@ -80,6 +80,15 @@ export const getBindingName = (name: ts.BindingName): string => {
   throw ("Got a BindingName I don't know how to deal with" + name.toString())
 }
 
+export const getPropertyName = (name: ts.PropertyName): string => {
+  if(ts.isIdentifier(name)){
+    return name.escapedText.toString()
+  } else if(ts.isStringLiteral(name)){
+    return (name as ts.StringLiteral).text
+  }
+  throw ("Got a PropertyName I don't know how to deal with" + name.toString())
+}
+
 const handleTypeReference = (interfaceName: string) => (fieldName: string) => (type: ts.TypeReferenceNode): FieldType => {
   const name = getName(type.typeName)
   return { name, foreignData: [ name ] } 
@@ -92,9 +101,8 @@ const handleFunctionType = (interfaceName: string) => (fieldName: string) => (fn
   if(isEffectUnit) return { name : "(Effect Unit)" }
 
   const paramNames = fn.parameters.map((param) => getBindingName(param.name))
-  console.log(paramNames)
   
-  if(isEffectUnit && paramNames.length == 1 && (paramNames[0] == "event" || paramNames[0] == "e")) return { name: "EventHandler" }
+  if(isUnit && paramNames.length == 1 && (paramNames[0] == "event" || paramNames[0] == "ev" || paramNames[0] == "e")) return { name: "EventHandler" }
   
   const parameters: FieldType[] = 
     (fn.parameters.map((param) => param.type)
@@ -107,7 +115,6 @@ const handleFunctionType = (interfaceName: string) => (fieldName: string) => (fn
   
   if(parameters.length == 0){
     const fieldType = { name : "(Effect " + finalTypeName + ")", foreignData: finalForeignData }
-    console.log(fieldType)
     return fieldType 
   }
 
@@ -117,7 +124,6 @@ const handleFunctionType = (interfaceName: string) => (fieldName: string) => (fn
     const name = "(" + firstName + " -> Effect " + finalTypeName + ")"
     const foreignData = firstForeignData.concat(finalForeignData) 
     const fieldType = { name, foreignData }
-    console.log(fieldType)
     return fieldType
   }
 
@@ -128,29 +134,73 @@ const handleFunctionType = (interfaceName: string) => (fieldName: string) => (fn
     const foreignData: string[] = ([] as string[]).concat(...foreignDatas).concat(finalForeignData)
     const name = "(EffectFn" + (parameters.length) + " " + types + " " + finalTypeName + ")"
     const fieldType = { name, foreignData }
-    console.log(fieldType)
     return fieldType 
   }
 }
 
+const flattenForeignData = (fieldTypes: FieldType[]): string[] => {
+    const foreignDatas: string[][] = fieldTypes.map((fieldType) => fieldType.foreignData ? fieldType.foreignData : [])
+    return ([] as string[]).concat(...foreignDatas)
+}
+
+const handleTypeQuery = (interfaceName: string) => (fieldName: string) => (tq: ts.TypeQueryNode): FieldType => {
+  const tmpName = getName(tq.exprName)
+  const name = (capitalize(tmpName) === tmpName) ? tmpName : "Effect Unit"
+  const foreignData = (capitalize(tmpName) === tmpName) ?  [ tmpName ] : undefined
+  return { name, foreignData  }
+}
+
+const handleTypeLiteral = (interfaceName: string) => (fieldName: string) => (tl: ts.TypeLiteralNode): FieldType => {
+  const properties = tl.members.filter((m) => ts.isPropertySignature(m)) as ts.PropertySignature[]
+  const propertyNames = properties.map((prop) => getPropertyName(prop.name))
+  const fieldTypes = (properties.map((prop) => prop.type).filter((type) => type !== undefined) as ts.TypeNode[]).map((type, i) => handleTypes(interfaceName)(propertyNames[i])(type))
+
+  if(propertyNames.length == 0) return { name : "IndexSignature", foreignData : [ "IndexSignature" ] }
+  else {
+    const name = "{ " + propertyNames.map((name, i) => name + " :: " + fieldTypes[i].name).join(", ") + " }"
+    const foreignData = flattenForeignData(fieldTypes)
+    const fieldType = { name, foreignData }
+    return fieldType
+  }
+}
+
+const handleParenthesizedType = (interfaceName: string) => (fieldName: string) => (a: ts.ParenthesizedTypeNode): FieldType => {
+  const fieldType = handleTypes(interfaceName)(fieldName)(a.type)
+  const name = "(" + fieldType.name + ")"
+  return { name, foreignData: fieldType.foreignData }
+}
+
+const handleArrayType = (interfaceName: string) => (fieldName: string) => (a: ts.ArrayTypeNode): FieldType => {
+  const fieldType = handleTypes(interfaceName)(fieldName)(a.elementType)
+  const name = "(Array " + fieldType.name + ")"
+  return { name, foreignData: fieldType.foreignData }
+}
+
+const handleUnionType = (interfaceName: string) => (fieldName: string) => (u: ts.UnionTypeNode): FieldType => {
+  const stringishTypes = u.types.filter((type) => ts.isStringLiteral(type) || type.kind === ts.SyntaxKind.BooleanKeyword || type.kind === ts.SyntaxKind.NumberKeyword || type.kind === ts.SyntaxKind.StringKeyword )
+  if(stringishTypes.length == u.types.length) return { name : "String" }
+  else {
+    const fieldType = { name : (interfaceName + capitalize(fieldName)) }
+    return fieldType
+  }
+}
 
 export const handleTypes = (interfaceName: string) => (fieldName: string) =>  (type: ts.TypeNode): FieldType => {
   switch (type.kind) {
-    case ts.SyntaxKind.AnyKeyword: return { name : "Any" }
-    case ts.SyntaxKind.VoidKeyword: return { name : "Unit" }
-    case ts.SyntaxKind.BooleanKeyword: return { name : "Boolean" }
-    case ts.SyntaxKind.NumberKeyword: return { name : "Number" }
-    case ts.SyntaxKind.StringKeyword: return { name : "String" }
-    case ts.SyntaxKind.LiteralType: return handleLiteralType(interfaceName)(fieldName)(type as unknown as ts.LiteralTypeNode)
-    case ts.SyntaxKind.ObjectKeyword: return { name : "ObjectType" }
-    case ts.SyntaxKind.TypeReference: return handleTypeReference(interfaceName)(fieldName)(type as unknown as ts.TypeReferenceNode) 
-
-    case ts.SyntaxKind.FunctionType: return handleFunctionType(interfaceName)(fieldName)(type as unknown as ts.FunctionTypeNode)
-
-    case ts.SyntaxKind.TypeQuery: return { name: "TypeQuery" } 
-    case ts.SyntaxKind.TypeLiteral: return { name: "TypeLiteral" } 
-    case ts.SyntaxKind.ArrayType: return { name: "ArrayType" } 
-    case ts.SyntaxKind.UnionType: return { name: "UnionType" } 
+    case ts.SyntaxKind.AnyKeyword:          return { name : "Any" }
+    case ts.SyntaxKind.VoidKeyword:         return { name : "Unit" }
+    case ts.SyntaxKind.BooleanKeyword:      return { name : "Boolean" }
+    case ts.SyntaxKind.NumberKeyword:       return { name : "Number" }
+    case ts.SyntaxKind.StringKeyword:       return { name : "String" }
+    case ts.SyntaxKind.ObjectKeyword:       return { name : "ObjectType" }
+    case ts.SyntaxKind.ParenthesizedType:   return handleParenthesizedType(interfaceName)(fieldName)(type as unknown as ts.ParenthesizedTypeNode) 
+    case ts.SyntaxKind.LiteralType:         return handleLiteralType(interfaceName)(fieldName)(type as unknown as ts.LiteralTypeNode)
+    case ts.SyntaxKind.TypeReference:       return handleTypeReference(interfaceName)(fieldName)(type as unknown as ts.TypeReferenceNode) 
+    case ts.SyntaxKind.FunctionType:        return handleFunctionType(interfaceName)(fieldName)(type as unknown as ts.FunctionTypeNode)
+    case ts.SyntaxKind.TypeQuery:           return handleTypeQuery(interfaceName)(fieldName)(type as unknown as ts.TypeQueryNode)
+    case ts.SyntaxKind.TypeLiteral:         return handleTypeLiteral(interfaceName)(fieldName)(type as unknown as ts.TypeLiteralNode)
+    case ts.SyntaxKind.ArrayType:           return handleArrayType(interfaceName)(fieldName)(type as unknown as ts.ArrayTypeNode)
+    case ts.SyntaxKind.UnionType:           return handleUnionType(interfaceName)(fieldName)(type as unknown as ts.UnionTypeNode)
     default: throw ("Got a type that I don't know: " + ts.SyntaxKind[type.kind])
   }
 }
