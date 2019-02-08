@@ -18,6 +18,12 @@ export interface Props {
   fields: Field[]
 }
 
+export interface WrittenProps { 
+  fns: string[]
+  props: string[]
+  foreignData: string[] 
+}
+
 const filterTypes = (kind: ts.SyntaxKind) => <T>(top: ts.Node): Array<T> => {
   const types: Array<T> = []
   const find = (node: ts.Node) => {
@@ -52,6 +58,10 @@ export const printKinds = (kinds: ts.SyntaxKind[]) => {
 
 const capitalize = (str: string): string => 
   str.charAt(0).toUpperCase() + str.slice(1)
+
+const lowerCaseFirstLetter = (str: string): string => 
+  str.charAt(0).toLowerCase() + str.slice(1)
+
 
 const handleLiteralType = (interfaceName: string) => (fieldName: string) => (literal: ts.LiteralTypeNode): FieldType => {
   if(ts.isStringLiteral(literal.literal)){
@@ -122,15 +132,6 @@ const handleFunctionType = (interfaceName: string) => (fieldName: string) => (fn
   if(parameters.length == 0){
     const fieldType = { name : "(Effect " + finalTypeName + ")", foreignData: finalForeignData }
     return fieldType 
-  }
-
-  if(parameters.length == 1){
-    const firstName = parameters[0].name ? parameters[0].name : ""
-    const firstForeignData = parameters[0].foreignData ? parameters[0].foreignData : []
-    const name = "(" + firstName + " -> Effect " + finalTypeName + ")"
-    const foreignData = firstForeignData.concat(finalForeignData) 
-    const fieldType = { name, foreignData }
-    return fieldType
   }
 
   if(parameters.length > 10) throw ("Got a function with more than 10 parameters, and I don't know what to do with that")
@@ -237,15 +238,111 @@ export const handleInterface = (interfaceMap: InterfaceMap) => (int: ts.Interfac
   if(properties.length !== types.length) throw ("Properties and types don't match" + int)
 
   const interfaceName = int.name.escapedText.toString()
-  const fields = properties.map((prop, i) => {
+  const allFields = properties.map((prop, i) => {
     const name = names[i]
     const fieldType = handleTypes(interfaceName)(name)(types[i])
     const isOptional = prop.questionToken !== undefined
     const field = { fieldType, name, isOptional } 
     return field
-  }).concat(parentFields)
+  })
+  .concat(parentFields)
+
+  const uniqueFields = (fields: Field[]): Field[] => {
+    const map: {[key:string]:boolean} = {}
+    const uniques: Field[] = []
+    fields.forEach((field) => {
+      if(!map[field.name]){
+        map[field.name] = true
+        uniques.push(field)
+      }
+    })
+    return uniques
+  }
+
+   
+  const fields = uniqueFields(allFields).sort(fieldCompare)
+
 
   return { name: interfaceName, fields }
+}
+
+const strCompare = (str1: string, str2: string) => {
+  if(str1 == str2) return 0
+  if(str1 > str2) return 1
+  return -1
+}
+
+const fieldCompare = (field1: Field, field2: Field) => 
+  strCompare(field1.name, field2.name)
+   
+const propsCompare = (props1: Props, props2: Props) => 
+  strCompare(props1.name, props2.name)
+ 
+const writeField = (field: Field): string => `${field.name} :: ${field.fieldType.name}`
+
+const collectForeignData = (fields: Field[]): string[] => {
+  const datas: string[][] = fields.map((field) => (field.fieldType.foreignData !== undefined) ? field.fieldType.foreignData : [])
+  const data = ([] as string[]).concat(...datas)
+  return data.filter((d, i) => data.indexOf(d) == i).sort()
+}
+
+const writeProps = (props: Props): WrittenProps => {
+
+  const writeOptionalType = (fields: Field[]): string =>
+  `type ${props.name}_optional = 
+  ( ${fields.map(writeField).join("\n  , ")}
+  )
+  `
+  const writeRequiredType = (fields: Field[]): string =>
+  `type ${props.name}_required optional = 
+  ( ${fields.map(writeField).join("\n  , ")}
+  | optional
+  )`
+  const writeSingleType = (fields: Field[]): string =>
+  `type ${props.name} = 
+  ( ${fields.map(writeField).join("\n  , ")}
+  )`
+
+  const componentName = props.name.replace(/Props$/,"")
+  const functionName = lowerCaseFirstLetter(componentName)
+
+  const writeRequiredFn = () => 
+  `${functionName}
+  :: ∀ attrs attrs_
+  . Union attrs attrs_ ${props.name}_optional
+  => Record (${props.name}_required attrs)
+  -> JSX
+${functionName} props = unsafeCreateNativeElement ${componentName} props`
+
+  const writeOptionalFn = () => 
+  `${functionName}
+  :: ∀ attrs attrs_
+  . Union attrs attrs_ ${props.name}
+  => Record attrs
+  -> JSX
+${functionName} props = unsafeCreateNativeElement ${componentName} props`
+
+  const writeOptionalChildren = () =>  
+    `${functionName}_ :: Array JSX -> JSX
+${functionName} children = ${functionName} { children }`
+
+
+  const optionalFields = props.fields.filter((field) => field.isOptional)
+  const requiredFields = props.fields.filter((field) => !field.isOptional)
+
+  const propsStrs: string[] = []
+  const fns: string[] = []
+  if(requiredFields.length){  
+    propsStrs.push(writeOptionalType(optionalFields))
+    propsStrs.push(writeRequiredType(requiredFields))
+    fns.push(writeRequiredFn())
+  } else {
+    propsStrs.push(writeSingleType(props.fields))
+    fns.push(writeOptionalFn())
+    fns.push(writeOptionalChildren()) 
+  }
+
+  return { fns, props: propsStrs, foreignData: collectForeignData(props.fields) }
 }
 
 
@@ -266,8 +363,14 @@ export const interfaces: ts.InterfaceDeclaration[] = getInterfaces(sources[0])
 const interfaceMap = createInterfaceMap(interfaces)
 interfaces
   .map(handleInterface(interfaceMap))
-  .filter((p) => p.name === "WebViewProps")
-  .forEach((p) => console.log(JSON.stringify(p, null, 2)) )
+//  .filter((p) => p.name === "WebViewProps")
+  .sort(propsCompare)
+  .map(writeProps)
+  .forEach((p) => {
+    console.log(p.props.join("\n\n"))
+    console.log("\n")
+    console.log(p.fns.join("\n\n"))
+  })
 
 
 
