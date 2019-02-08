@@ -1,17 +1,24 @@
 {
-  "name": "empty-project-template",
-  "main": "node_modules/expo/AppEntry.js",
-  "private": true,
+  "name": "codegen",
+  "version": "1.0.0",
+  "description": "",
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "scripts": {
-    "setup": "npm install && npx spago install",
-    "test": "npx spago test"
+    "clean": "rm -rf lib/*",
+    "build": "npm run clean && tsc",
+    "codegen": "node lib/index.js > ../src/React/Basic/Native/Generated.purs"
   },
+  "repository": {},
+  "license": "MIT",
   "dependencies": {
-    "@types/node": "^10.12.10",
-    "typescript": "^3.1.6"
+    "@types/react-native": "^0.57.34"
   },
   "devDependencies": {
-    "purescript": "^0.12.1",
-    "purescript-spago": "^0.6.2"
+    "@types/node": "7.0.4",
+    "typescript": "^3.2.2"
   }
 }
