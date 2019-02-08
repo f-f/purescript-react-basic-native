@@ -5,6 +5,8 @@
 module React.Basic.Native.Generated where
 
 import Prelude
+
+import Data.JSDate (JSDate)
 import Effect (Effect)
 import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4)
 import Prim.Row (class Union)
@@ -26,7 +28,6 @@ foreign import data ActivityIndicatorIOSPropsSize :: Type
 foreign import data ActivityIndicatorPropsSize :: Type
 foreign import data Any :: Type
 foreign import data BackgroundPropType :: Type
-foreign import data Date :: Type
 foreign import data DatePickerIOSPropsMinuteInterval :: Type
 foreign import data DatePickerIOSPropsMode :: Type
 foreign import data DocumentSelectionState :: Type
@@ -417,8 +418,8 @@ type DatePickerIOSProps_optional =
   , hitSlop :: Insets
   , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
   , locale :: String
-  , maximumDate :: Date
-  , minimumDate :: Date
+  , maximumDate :: JSDate
+  , minimumDate :: JSDate
   , minuteInterval :: DatePickerIOSPropsMinuteInterval
   , mode :: DatePickerIOSPropsMode
   , nativeID :: String
@@ -455,8 +456,8 @@ type DatePickerIOSProps_optional =
   )
 
 type DatePickerIOSProps_required optional = 
-  ( date :: Date
-  , onDateChange :: (EffectFn1 Date Unit)
+  ( date :: JSDate
+  , onDateChange :: (EffectFn1 JSDate Unit)
   | optional
   )
 

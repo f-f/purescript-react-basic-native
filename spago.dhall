@@ -5,7 +5,7 @@ You can edit this file as you like.
 { name =
     "my-project"
 , dependencies =
-    [ "effect", "console", "react-basic" ]
+    [ "effect", "js-date", "react-basic" ]
 , packages =
     ./packages.dhall
 }

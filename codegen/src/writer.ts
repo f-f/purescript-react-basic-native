@@ -85,3 +85,23 @@ export const writeForeignData = (props: Props[]) => {
   const foreignData = collectForeignData(([] as Field[]).concat(...props.map((prop) => prop.fields)))
   return filterForeignData(props, foreignData).map((d) => `foreign import data ${d} :: Type`)
 }
+
+export const top = 
+`-- | ----------------------------------------
+-- | THIS FILE IS GENERATED -- DO NOT EDIT IT
+-- | ----------------------------------------
+
+module React.Basic.Native.Generated where
+
+import Prelude
+
+import Data.JSDate (JSDate)
+import Effect (Effect)
+import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4)
+import Prim.Row (class Union)
+import React.Basic (JSX)
+import React.Basic.DOM.Internal (CSS)
+import React.Basic.Events (EventHandler)
+import React.Basic.Native.Internal (unsafeCreateNativeElement)
+
+`
