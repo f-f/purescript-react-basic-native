@@ -1,6 +1,6 @@
-# Counter
+# ControlledInput 
 
-Shows how to make a button that modifies internal state - it increments a counter
+You type stuff into a text input and it shows you what you typed
 
 ## Instructions
 

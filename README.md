@@ -1,1 +1,1 @@
-For now checkout the README.md in the codegen dir
+This works, but is still under active development. Checkout the examples
