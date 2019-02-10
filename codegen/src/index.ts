@@ -7,8 +7,8 @@ import {
   handleInterface
 } from "./parser"
 
-import { propsCompare } from "./types" 
-import { top, writeForeignData, writeProps } from "./writer"
+import { propsCompare, Field } from "./types" 
+import { collectForeignData, top, writeForeignData, writeProps } from "./writer"
 
 
 const options = ts.getDefaultCompilerOptions()
@@ -23,8 +23,16 @@ const interfaces: ts.InterfaceDeclaration[] = getInterfaces(sources[0])
 const interfaceMap = createInterfaceMap(interfaces)
 const baseInterfaces = getBaseInterfaces(interfaceMap, sources[0])
 const props = baseInterfaces.map(handleInterface(interfaceMap)).sort(propsCompare)
-const writtenForeignData = writeForeignData(props).join("\n")
-const writtenProps = props.map(writeProps)
+export const writtenForeignData = writeForeignData(props).join("\n")
+export const writtenProps = props.map(writeProps(false))
+const foreignData: string[] = collectForeignData(([] as Field[]).concat(...props.map((prop) => prop.fields)))
+const foo = foreignData.filter(d => interfaceMap[d] === undefined)
+console.log("foreignData", foreignData.length)
+console.log("foo", foo.length)
+console.log("foo", foo)
+console.log("figure out how to make ImageResizeMode a string and then figure out some of the other types you can turn into a string")
+top
+/*
 console.log(top)
 console.log(writtenForeignData, "\n\n")
 writtenProps.forEach((p) => {
@@ -33,5 +41,9 @@ writtenProps.forEach((p) => {
     console.log(p.fns.join("\n\n"))
     console.log("\n")
 })
+*/
+
+//const e = interfaceMap["FlatListProps"]
+//console.log(writeProps(true)(handleInterface(interfaceMap)(e)).props[0])
 
 

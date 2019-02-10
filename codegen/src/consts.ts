@@ -1,7 +1,9 @@
 export const fieldTypeNameReplacements: {[key:string]:string;} = 
   { "Date" : "JSDate",
     "Element.JSX" : "JSX",
+    "ItemT" : "itemT",
     "ReactElement.React" : "React",
+    "SectionT" : "sectionT",
     "StyleProp" : "CSS",
     "ScrollViewProps" : "(Record ScrollViewProps)"
   }

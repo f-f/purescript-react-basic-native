@@ -16,6 +16,7 @@ export interface Field {
 export interface Props {
   name: string
   fields: Field[]
+  typeParameters: string[]
 }
 
 export interface WrittenProps { 

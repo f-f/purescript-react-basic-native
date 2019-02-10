@@ -3,7 +3,7 @@ import { Props, WrittenProps, Field } from "./types"
 import { capitalize, lowerCaseFirstLetter } from "./utils"
 
 
-const collectForeignData = (fields: Field[]): string[] => {
+export const collectForeignData = (fields: Field[]): string[] => {
   const datas: string[][] = fields.map((field) => (field.fieldType.foreignData !== undefined) ? field.fieldType.foreignData : [])
   const data = ([] as string[]).concat(...datas)
   return data.filter((d, i) => data.indexOf(d) == i).sort()
@@ -15,30 +15,31 @@ const writeField = (field: Field): string => {
   return `${name} :: ${typeName}`
 }
 
-export const writeProps = (props: Props): WrittenProps => {
+export const writeProps = (ignoreChildren: boolean) => (props: Props) : WrittenProps => {
 
   const componentName = props.name.replace(/Props$/,"")
   const functionName = lowerCaseFirstLetter(componentName)
   const optionalFields = props.fields.filter((field) => field.isOptional)
   const requiredFields = props.fields.filter((field) => !field.isOptional)
+  const typeVariables = (props.typeParameters) ? props.typeParameters.join(" ") + " " : ""
 
   const commaOrSpace = optionalFields.length ? "," : " "
-  const children = (noChildren.indexOf(functionName) < 0)
+  const children = ((noChildren.indexOf(functionName) < 0) && !ignoreChildren)
     ? "\n  " + commaOrSpace + " children :: Array JSX"
     : ""
 
   const writeOptionalType = (fields: Field[]): string =>
-  `type ${props.name}_optional = 
+  `type ${props.name}_optional ${typeVariables}= 
   ( ${fields.map(writeField).join("\n  , ") + children}
   )`
 
   const writeRequiredType = (fields: Field[]): string =>
-  `type ${props.name}_required optional = 
+  `type ${props.name}_required optional ${typeVariables}= 
   ( ${fields.map(writeField).join("\n  , ")}
   | optional
   )`
   const writeSingleType = (fields: Field[]): string =>
-  `type ${props.name} = 
+  `type ${props.name} ${typeVariables}= 
   ( ${fields.map(writeField).join("\n  , ") + children}
   )`
 

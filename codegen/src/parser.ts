@@ -2,7 +2,7 @@ import * as ts from "typescript"
 
 import { fieldTypeNameReplacements } from "./consts"
 import { fieldCompare, FieldType, Field, InterfaceMap, Props } from "./types"
-import { capitalize } from "./utils"
+import { capitalize, lowerCaseFirstLetter } from "./utils"
 
 const filterTypes = (kind: ts.SyntaxKind) => <T>(top: ts.Node): Array<T> => {
   const types: Array<T> = []
@@ -82,7 +82,7 @@ const handleTypeReference = (interfaceName: string) => (fieldName: string) => (t
   const typeName = ((fieldTypeNameReplacements[tmpName]) ? fieldTypeNameReplacements[tmpName] : tmpName)
   if(typeName === "React") return { name : "JSX", foreignData : [ "JSX" ] }
   if(typeName === "CSS") return { name : "CSS", foreignData : [ "CSS" ] }
-  if(typeName === "NativeSyntheticEvent") return { name : "NativeSyntheticEvent", foreignData : [ "NativeSyntheticEvent" ] }
+//  if(typeName === "NativeSyntheticEvent") return { name : "NativeSyntheticEvent", foreignData : [ "NativeSyntheticEvent" ] }
   if(typeName === "ListRenderItem") return { name : "ListRenderItem", foreignData : [ "ListRenderItem" ] }
   const name = (typeArgs.length > 0) ? `(${typeName} ${typeArgs.map(f => f.name).join(" ")})` : typeName
   const foreignData = flattenForeignData(typeArgs)
@@ -96,9 +96,9 @@ const handleFunctionType = (interfaceName: string) => (fieldName: string) => (fn
   
   if(isEffectUnit) return { name : "(Effect Unit)" }
 
-  const paramNames = fn.parameters.map((param) => getBindingName(param.name))
+ // const paramNames = fn.parameters.map((param) => getBindingName(param.name))
   
-  if(isUnit && paramNames.length == 1 && (paramNames[0] == "event" || paramNames[0] == "ev" || paramNames[0] == "e")) return { name: "EventHandler" }
+ // if(isUnit && paramNames.length == 1 && (paramNames[0] == "event" || paramNames[0] == "ev" || paramNames[0] == "e")) return { name: "EventHandler" }
   
   const parameters: FieldType[] = 
     (fn.parameters.map((param) => param.type)
@@ -165,13 +165,28 @@ const handleArrayType = (interfaceName: string) => (fieldName: string) => (a: ts
 }
 
 const handleUnionType = (interfaceName: string) => (fieldName: string) => (u: ts.UnionTypeNode): FieldType => {
-  const stringishTypes = u.types.filter((type) => ts.isStringLiteral(type) || type.kind === ts.SyntaxKind.BooleanKeyword || type.kind === ts.SyntaxKind.NumberKeyword || type.kind === ts.SyntaxKind.StringKeyword )
-  if(stringishTypes.length == u.types.length) return { name : "String" }
-  else {
-    const name = (interfaceName + capitalize(fieldName))
-    const fieldType = { name, foreignData : [ name ] }
-    return fieldType
-  }
+  
+  const isNumber = u.types.map(t => {
+    if(ts.isLiteralTypeNode(t)){
+      return ts.isNumericLiteral(t.literal)
+    }
+    return false
+  }).reduce((a, b) => a && b, true)
+
+  if(isNumber) return { name : "Number" }
+
+  const isString = u.types.map(t => {
+    if(ts.isLiteralTypeNode(t)){
+      return ts.isStringLiteral(t.literal) || ts.isNumericLiteral(t.literal)
+    }
+    return (t.kind === ts.SyntaxKind.StringLiteral || t.kind === ts.SyntaxKind.BooleanKeyword || t.kind === ts.SyntaxKind.NumberKeyword || t.kind === ts.SyntaxKind.StringKeyword )
+  }).reduce((a, b) => a && b, true)
+
+  if(isString) return { name : "String" }
+  
+  const name = (interfaceName + capitalize(fieldName))
+  const fieldType = { name, foreignData : [ name ] }
+  return fieldType
 }
 
 const handleTypes = (interfaceName: string) => (fieldName: string) =>  (type: ts.TypeNode): FieldType => {
@@ -210,6 +225,13 @@ export const handleInterface = (interfaceMap: InterfaceMap) => (int: ts.Interfac
     return array
   }
 
+  const typeParameters: string[] = []
+  if(int.typeParameters){
+    int.typeParameters. forEach((param) => {
+      typeParameters.push(lowerCaseFirstLetter(param.name.escapedText.toString()))
+    })
+  }
+
   const parents = getParents()
   const parentFields = ([] as Field[]).concat(...parents.map((p) => p.fields))
 
@@ -245,7 +267,7 @@ export const handleInterface = (interfaceMap: InterfaceMap) => (int: ts.Interfac
   const fields = uniqueFields(allFields).sort(fieldCompare)
 
 
-  return { name: interfaceName, fields }
+  return { name: interfaceName, fields, typeParameters }
 }
 
 export const getBaseInterfaces = (interfaceMap: InterfaceMap, root: ts.Node): ts.InterfaceDeclaration[] => {
@@ -265,3 +287,4 @@ export const getBaseInterfaces = (interfaceMap: InterfaceMap, root: ts.Node): ts
   })
   return names.filter((name, i) => names.indexOf(name) == i && interfaceMap[name]).map((name) => interfaceMap[name])
 }
+

@@ -33,6 +33,8 @@ foreign import data DatePickerIOSPropsMode :: Type
 foreign import data DocumentSelectionState :: Type
 foreign import data DrawerLayoutAndroidPropsDrawerLockMode :: Type
 foreign import data DrawerLayoutAndroidPropsKeyboardDismissMode :: Type
+foreign import data DrawerLayoutAndroidPropsOnDrawerStateChanged :: Type
+foreign import data DrawerSlideEvent :: Type
 foreign import data FlatListPropsData :: Type
 foreign import data FlatListPropsGetItemLayout :: Type
 foreign import data FlatListPropsItemSeparatorComponent :: Type
@@ -46,6 +48,9 @@ foreign import data FlatListPropsOnRefresh :: Type
 foreign import data FlatListPropsOnViewableItemsChanged :: Type
 foreign import data FlatListPropsRefreshing :: Type
 foreign import data GestureResponderEvent :: Type
+foreign import data ImageErrorEventData :: Type
+foreign import data ImageLoadEventData :: Type
+foreign import data ImageProgressEventDataIOS :: Type
 foreign import data ImagePropsBaseDefaultSource :: Type
 foreign import data ImagePropsBaseResizeMethod :: Type
 foreign import data ImageResizeMode :: Type
@@ -56,13 +61,18 @@ foreign import data Insets :: Type
 foreign import data ItemT :: Type
 foreign import data KeyboardAvoidingViewPropsBehavior :: Type
 foreign import data KeyboardTypeOptions :: Type
+foreign import data LayoutChangeEvent :: Type
 foreign import data ListRenderItem :: Type
 foreign import data ListViewDataSource :: Type
 foreign import data MapViewAnnotation :: Type
 foreign import data MapViewOverlay :: Type
 foreign import data MapViewPropsMapType :: Type
 foreign import data MapViewRegion :: Type
+foreign import data NativeScrollEvent :: Type
+foreign import data NativeSegmentedControlIOSChangeEvent :: Type
 foreign import data NativeSyntheticEvent :: Type
+foreign import data NativeTouchEvent :: Type
+foreign import data NavState :: Type
 foreign import data PickerPropsAndroidMode :: Type
 foreign import data PointPropType :: Type
 foreign import data ProgressBarAndroidPropsStyleAttr :: Type
@@ -84,20 +94,31 @@ foreign import data SwipeableListViewDataSource :: Type
 foreign import data TabBarIOSItemPropsSystemIcon :: Type
 foreign import data TabBarIOSPropsItemPositioning :: Type
 foreign import data TextInputAndroidPropsTextBreakStrategy :: Type
+foreign import data TextInputChangeEventData :: Type
+foreign import data TextInputContentSizeChangeEventData :: Type
+foreign import data TextInputEndEditingEventData :: Type
+foreign import data TextInputFocusEventData :: Type
 foreign import data TextInputIOSPropsClearButtonMode :: Type
 foreign import data TextInputIOSPropsDataDetectorTypes :: Type
 foreign import data TextInputIOSPropsKeyboardAppearance :: Type
 foreign import data TextInputIOSPropsTextContentType :: Type
+foreign import data TextInputKeyPressEventData :: Type
 foreign import data TextInputPropsAutoCapitalize :: Type
+foreign import data TextInputScrollEventData :: Type
+foreign import data TextInputSelectionChangeEventData :: Type
+foreign import data TextInputSubmitEditingEventData :: Type
 foreign import data TextPropsAndroidTextBreakStrategy :: Type
 foreign import data TextPropsEllipsizeMode :: Type
 foreign import data TextPropsLineBreakMode :: Type
 foreign import data ToolbarAndroidAction :: Type
+foreign import data ViewPagerAndroidOnPageScrollEventData :: Type
+foreign import data ViewPagerAndroidOnPageSelectedEventData :: Type
 foreign import data ViewPagerAndroidPropsKeyboardDismissMode :: Type
 foreign import data ViewPagerAndroidPropsOnPageScrollStateChanged :: Type
 foreign import data ViewPropsPointerEvents :: Type
 foreign import data ViewabilityConfigCallbackPairs :: Type
 foreign import data WebViewIOSLoadRequestEvent :: Type
+foreign import data WebViewMessageEventData :: Type
 foreign import data WebViewNativeConfig :: Type
 foreign import data WebViewPropsAndroidMixedContentMode :: Type
 foreign import data WebViewPropsIOSDataDetectorTypes :: Type
@@ -105,7 +126,7 @@ foreign import data WebViewPropsIOSDecelerationRate :: Type
 foreign import data WebViewPropsSource :: Type 
 
 
-type ARTClippingRectangleProps = 
+type ARTClippingRectangleProps  = 
   ( height :: Number
   , opacity :: Number
   , originX :: Number
@@ -133,7 +154,7 @@ aRTClippingRectangle_ :: Array JSX -> JSX
 aRTClippingRectangle_ children = aRTClippingRectangle { children }
 
 
-type ARTGroupProps = 
+type ARTGroupProps  = 
   ( height :: Number
   , opacity :: Number
   , originX :: Number
@@ -217,7 +238,7 @@ aRTSurface
 aRTSurface props = unsafeCreateNativeElement "ARTSurface" props
 
 
-type ARTTextProps = 
+type ARTTextProps  = 
   ( alignment :: String
   , fill :: String
   , font :: String
@@ -251,7 +272,7 @@ aRTText_ :: Array JSX -> JSX
 aRTText_ children = aRTText { children }
 
 
-type ActivityIndicatorIOSProps = 
+type ActivityIndicatorIOSProps  = 
   ( accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
@@ -274,25 +295,25 @@ type ActivityIndicatorIOSProps =
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
   , onAccessibilityTap :: (Effect Unit)
-  , onLayout :: EventHandler
+  , onLayout :: (EffectFn1 { nativeEvent :: { layout :: { x :: Number, y :: Number, width :: Number, height :: Number } } } Unit)
   , onMagicTap :: (Effect Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , pointerEvents :: ViewPropsPointerEvents
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
@@ -315,7 +336,7 @@ activityIndicatorIOS_ :: Array JSX -> JSX
 activityIndicatorIOS_ children = activityIndicatorIOS { children }
 
 
-type ActivityIndicatorProps = 
+type ActivityIndicatorProps  = 
   ( accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
@@ -338,25 +359,25 @@ type ActivityIndicatorProps =
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
   , onAccessibilityTap :: (Effect Unit)
-  , onLayout :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , pointerEvents :: ViewPropsPointerEvents
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
@@ -387,7 +408,7 @@ type ButtonProps_optional =
   )
 
 type ButtonProps_required optional = 
-  ( onPress :: EventHandler
+  ( onPress :: (EffectFn1 (NativeSyntheticEvent NativeTouchEvent) Unit)
   , title :: String
   | optional
   )
@@ -426,25 +447,25 @@ type DatePickerIOSProps_optional =
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
   , onAccessibilityTap :: (Effect Unit)
-  , onLayout :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , pointerEvents :: ViewPropsPointerEvents
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
@@ -497,27 +518,27 @@ type DrawerLayoutAndroidProps_optional =
   , onAccessibilityTap :: (Effect Unit)
   , onDrawerClose :: (Effect Unit)
   , onDrawerOpen :: (Effect Unit)
-  , onDrawerSlide :: EventHandler
-  , onDrawerStateChanged :: EventHandler
-  , onLayout :: EventHandler
+  , onDrawerSlide :: (EffectFn1 DrawerSlideEvent Unit)
+  , onDrawerStateChanged :: (EffectFn1 DrawerLayoutAndroidPropsOnDrawerStateChanged Unit)
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , pointerEvents :: ViewPropsPointerEvents
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
@@ -606,33 +627,33 @@ type FlatListProps_optional =
   , onContentSizeChange :: (EffectFn2 Number Number Unit)
   , onEndReached :: FlatListPropsOnEndReached
   , onEndReachedThreshold :: FlatListPropsOnEndReachedThreshold
-  , onLayout :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
-  , onMomentumScrollBegin :: EventHandler
-  , onMomentumScrollEnd :: EventHandler
+  , onMomentumScrollBegin :: (EffectFn1 (NativeSyntheticEvent NativeScrollEvent) Unit)
+  , onMomentumScrollEnd :: (EffectFn1 (NativeSyntheticEvent NativeScrollEvent) Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
   , onRefresh :: FlatListPropsOnRefresh
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
-  , onScroll :: EventHandler
+  , onScroll :: (EffectFn1 (NativeSyntheticEvent NativeScrollEvent) Unit)
   , onScrollAnimationEnd :: (Effect Unit)
-  , onScrollBeginDrag :: EventHandler
-  , onScrollEndDrag :: EventHandler
+  , onScrollBeginDrag :: (EffectFn1 (NativeSyntheticEvent NativeScrollEvent) Unit)
+  , onScrollEndDrag :: (EffectFn1 (NativeSyntheticEvent NativeScrollEvent) Unit)
   , onScrollToIndexFailed :: (EffectFn1 { index :: Number, highestMeasuredFrameIndex :: Number, averageItemLength :: Number } Unit)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , onViewableItemsChanged :: FlatListPropsOnViewableItemsChanged
   , overScrollMode :: ScrollViewPropsAndroidOverScrollMode
   , pagingEnabled :: Boolean
@@ -705,14 +726,14 @@ type ImageBackgroundProps_optional =
   , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
   , loadingIndicatorSource :: ImageURISource
   , onAccessibilityTap :: (Effect Unit)
-  , onError :: (EffectFn1 NativeSyntheticEvent Unit)
-  , onLayout :: EventHandler
-  , onLoad :: EventHandler
+  , onError :: (EffectFn1 (NativeSyntheticEvent ImageErrorEventData) Unit)
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
+  , onLoad :: (EffectFn1 (NativeSyntheticEvent ImageLoadEventData) Unit)
   , onLoadEnd :: (Effect Unit)
   , onLoadStart :: (Effect Unit)
   , onMagicTap :: (Effect Unit)
   , onPartialLoad :: (Effect Unit)
-  , onProgress :: EventHandler
+  , onProgress :: (EffectFn1 (NativeSyntheticEvent ImageProgressEventDataIOS) Unit)
   , progressiveRenderingEnabled :: Boolean
   , resizeMethod :: ImagePropsBaseResizeMethod
   , resizeMode :: ImageResizeMode
@@ -760,14 +781,14 @@ type ImageProps_optional =
   , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
   , loadingIndicatorSource :: ImageURISource
   , onAccessibilityTap :: (Effect Unit)
-  , onError :: (EffectFn1 NativeSyntheticEvent Unit)
-  , onLayout :: EventHandler
-  , onLoad :: EventHandler
+  , onError :: (EffectFn1 (NativeSyntheticEvent ImageErrorEventData) Unit)
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
+  , onLoad :: (EffectFn1 (NativeSyntheticEvent ImageLoadEventData) Unit)
   , onLoadEnd :: (Effect Unit)
   , onLoadStart :: (Effect Unit)
   , onMagicTap :: (Effect Unit)
   , onPartialLoad :: (Effect Unit)
-  , onProgress :: EventHandler
+  , onProgress :: (EffectFn1 (NativeSyntheticEvent ImageProgressEventDataIOS) Unit)
   , progressiveRenderingEnabled :: Boolean
   , resizeMethod :: ImagePropsBaseResizeMethod
   , resizeMode :: ImageResizeMode
@@ -791,7 +812,7 @@ image
 image props = unsafeCreateNativeElement "Image" props
 
 
-type InputAccessoryViewProps = 
+type InputAccessoryViewProps  = 
   ( backgroundColor :: String
   , nativeID :: String
   , style :: CSS
@@ -810,7 +831,7 @@ inputAccessoryView_ :: Array JSX -> JSX
 inputAccessoryView_ children = inputAccessoryView { children }
 
 
-type KeyboardAvoidingViewProps = 
+type KeyboardAvoidingViewProps  = 
   ( accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
@@ -834,25 +855,25 @@ type KeyboardAvoidingViewProps =
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
   , onAccessibilityTap :: (Effect Unit)
-  , onLayout :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , pointerEvents :: ViewPropsPointerEvents
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
@@ -922,31 +943,31 @@ type ListViewProps_optional =
   , onContentSizeChange :: (EffectFn2 Number Number Unit)
   , onEndReached :: (Effect Unit)
   , onEndReachedThreshold :: Number
-  , onLayout :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
-  , onMomentumScrollBegin :: EventHandler
-  , onMomentumScrollEnd :: EventHandler
+  , onMomentumScrollBegin :: (EffectFn1 (NativeSyntheticEvent NativeScrollEvent) Unit)
+  , onMomentumScrollEnd :: (EffectFn1 (NativeSyntheticEvent NativeScrollEvent) Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
-  , onScroll :: EventHandler
+  , onScroll :: (EffectFn1 (NativeSyntheticEvent NativeScrollEvent) Unit)
   , onScrollAnimationEnd :: (Effect Unit)
-  , onScrollBeginDrag :: EventHandler
-  , onScrollEndDrag :: EventHandler
+  , onScrollBeginDrag :: (EffectFn1 (NativeSyntheticEvent NativeScrollEvent) Unit)
+  , onScrollEndDrag :: (EffectFn1 (NativeSyntheticEvent NativeScrollEvent) Unit)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , overScrollMode :: ScrollViewPropsAndroidOverScrollMode
   , pageSize :: Number
   , pagingEnabled :: Boolean
@@ -994,7 +1015,7 @@ listView
 listView props = unsafeCreateNativeElement "ListView" props
 
 
-type MapViewProps = 
+type MapViewProps  = 
   ( accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
@@ -1021,27 +1042,27 @@ type MapViewProps =
   , onAccessibilityAction :: (Effect Unit)
   , onAccessibilityTap :: (Effect Unit)
   , onAnnotationPress :: (Effect Unit)
-  , onLayout :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
   , onRegionChange :: (EffectFn1 MapViewRegion Unit)
   , onRegionChangeComplete :: (EffectFn1 MapViewRegion Unit)
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , overlays :: (Array MapViewOverlay)
   , pitchEnabled :: Boolean
   , pointerEvents :: ViewPropsPointerEvents
@@ -1092,25 +1113,25 @@ type MaskedViewIOSProps_optional =
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
   , onAccessibilityTap :: (Effect Unit)
-  , onLayout :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , pointerEvents :: ViewPropsPointerEvents
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
@@ -1161,7 +1182,7 @@ navigatorIOS
 navigatorIOS props = unsafeCreateNativeElement "NavigatorIOS" props
 
 
-type PickerIOSItemProps = 
+type PickerIOSItemProps  = 
   ( label :: String
   , value :: String
   , children :: Array JSX
@@ -1179,7 +1200,7 @@ pickerIOSItem_ :: Array JSX -> JSX
 pickerIOSItem_ children = pickerIOSItem { children }
 
 
-type PickerIOSProps = 
+type PickerIOSProps  = 
   ( accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
@@ -1200,25 +1221,25 @@ type PickerIOSProps =
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
   , onAccessibilityTap :: (Effect Unit)
-  , onLayout :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , onValueChange :: (EffectFn1 String Unit)
   , pointerEvents :: ViewPropsPointerEvents
   , removeClippedSubviews :: Boolean
@@ -1263,7 +1284,7 @@ pickerItem
 pickerItem props = unsafeCreateNativeElement "PickerItem" props
 
 
-type PickerProps = 
+type PickerProps  = 
   ( accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
@@ -1286,25 +1307,25 @@ type PickerProps =
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
   , onAccessibilityTap :: (Effect Unit)
-  , onLayout :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , onValueChange :: (EffectFn2 Any Number Unit)
   , pointerEvents :: ViewPropsPointerEvents
   , prompt :: String
@@ -1330,7 +1351,7 @@ picker_ :: Array JSX -> JSX
 picker_ children = picker { children }
 
 
-type ProgressBarAndroidProps = 
+type ProgressBarAndroidProps  = 
   ( accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
@@ -1352,25 +1373,25 @@ type ProgressBarAndroidProps =
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
   , onAccessibilityTap :: (Effect Unit)
-  , onLayout :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , pointerEvents :: ViewPropsPointerEvents
   , progress :: Number
   , removeClippedSubviews :: Boolean
@@ -1394,7 +1415,7 @@ progressBarAndroid_ :: Array JSX -> JSX
 progressBarAndroid_ children = progressBarAndroid { children }
 
 
-type ProgressViewIOSProps = 
+type ProgressViewIOSProps  = 
   ( accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
@@ -1414,25 +1435,25 @@ type ProgressViewIOSProps =
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
   , onAccessibilityTap :: (Effect Unit)
-  , onLayout :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , pointerEvents :: ViewPropsPointerEvents
   , progress :: Number
   , progressImage :: ProgressViewIOSPropsProgressImage
@@ -1460,7 +1481,7 @@ progressViewIOS_ :: Array JSX -> JSX
 progressViewIOS_ children = progressViewIOS { children }
 
 
-type RecyclerViewBackedScrollViewProps = 
+type RecyclerViewBackedScrollViewProps  = 
   ( accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
@@ -1503,31 +1524,31 @@ type RecyclerViewBackedScrollViewProps =
   , onAccessibilityAction :: (Effect Unit)
   , onAccessibilityTap :: (Effect Unit)
   , onContentSizeChange :: (EffectFn2 Number Number Unit)
-  , onLayout :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
-  , onMomentumScrollBegin :: EventHandler
-  , onMomentumScrollEnd :: EventHandler
+  , onMomentumScrollBegin :: (EffectFn1 (NativeSyntheticEvent NativeScrollEvent) Unit)
+  , onMomentumScrollEnd :: (EffectFn1 (NativeSyntheticEvent NativeScrollEvent) Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
-  , onScroll :: EventHandler
+  , onScroll :: (EffectFn1 (NativeSyntheticEvent NativeScrollEvent) Unit)
   , onScrollAnimationEnd :: (Effect Unit)
-  , onScrollBeginDrag :: EventHandler
-  , onScrollEndDrag :: EventHandler
+  , onScrollBeginDrag :: (EffectFn1 (NativeSyntheticEvent NativeScrollEvent) Unit)
+  , onScrollEndDrag :: (EffectFn1 (NativeSyntheticEvent NativeScrollEvent) Unit)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , overScrollMode :: ScrollViewPropsAndroidOverScrollMode
   , pagingEnabled :: Boolean
   , pinchGestureEnabled :: Boolean
@@ -1586,26 +1607,26 @@ type RefreshControlProps_optional =
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
   , onAccessibilityTap :: (Effect Unit)
-  , onLayout :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
   , onRefresh :: (Effect Unit)
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , pointerEvents :: ViewPropsPointerEvents
   , progressBackgroundColor :: String
   , progressViewOffset :: Number
@@ -1635,7 +1656,7 @@ refreshControl
 refreshControl props = unsafeCreateNativeElement "RefreshControl" props
 
 
-type ScrollViewProps = 
+type ScrollViewProps  = 
   ( accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
@@ -1678,31 +1699,31 @@ type ScrollViewProps =
   , onAccessibilityAction :: (Effect Unit)
   , onAccessibilityTap :: (Effect Unit)
   , onContentSizeChange :: (EffectFn2 Number Number Unit)
-  , onLayout :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
-  , onMomentumScrollBegin :: EventHandler
-  , onMomentumScrollEnd :: EventHandler
+  , onMomentumScrollBegin :: (EffectFn1 (NativeSyntheticEvent NativeScrollEvent) Unit)
+  , onMomentumScrollEnd :: (EffectFn1 (NativeSyntheticEvent NativeScrollEvent) Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
-  , onScroll :: EventHandler
+  , onScroll :: (EffectFn1 (NativeSyntheticEvent NativeScrollEvent) Unit)
   , onScrollAnimationEnd :: (Effect Unit)
-  , onScrollBeginDrag :: EventHandler
-  , onScrollEndDrag :: EventHandler
+  , onScrollBeginDrag :: (EffectFn1 (NativeSyntheticEvent NativeScrollEvent) Unit)
+  , onScrollEndDrag :: (EffectFn1 (NativeSyntheticEvent NativeScrollEvent) Unit)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , overScrollMode :: ScrollViewPropsAndroidOverScrollMode
   , pagingEnabled :: Boolean
   , pinchGestureEnabled :: Boolean
@@ -1739,7 +1760,7 @@ scrollView_ :: Array JSX -> JSX
 scrollView_ children = scrollView { children }
 
 
-type SegmentedControlIOSProps = 
+type SegmentedControlIOSProps  = 
   ( accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
@@ -1761,26 +1782,26 @@ type SegmentedControlIOSProps =
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
   , onAccessibilityTap :: (Effect Unit)
-  , onChange :: EventHandler
-  , onLayout :: EventHandler
+  , onChange :: (EffectFn1 (NativeSyntheticEvent NativeSegmentedControlIOSChangeEvent) Unit)
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , onValueChange :: (EffectFn1 String Unit)
   , pointerEvents :: ViewPropsPointerEvents
   , removeClippedSubviews :: Boolean
@@ -1806,7 +1827,7 @@ segmentedControlIOS_ :: Array JSX -> JSX
 segmentedControlIOS_ children = segmentedControlIOS { children }
 
 
-type SliderProps = 
+type SliderProps  = 
   ( accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
@@ -1833,26 +1854,26 @@ type SliderProps =
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
   , onAccessibilityTap :: (Effect Unit)
-  , onLayout :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
   , onSlidingComplete :: (EffectFn1 Number Unit)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , onValueChange :: (EffectFn1 Number Unit)
   , pointerEvents :: ViewPropsPointerEvents
   , removeClippedSubviews :: Boolean
@@ -1900,25 +1921,25 @@ type SnapshotViewIOSProps_optional =
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
   , onAccessibilityTap :: (Effect Unit)
-  , onLayout :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , pointerEvents :: ViewPropsPointerEvents
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
@@ -1942,7 +1963,7 @@ snapshotViewIOS
 snapshotViewIOS props = unsafeCreateNativeElement "SnapshotViewIOS" props
 
 
-type StatusBarProps = 
+type StatusBarProps  = 
   ( animated :: Boolean
   , backgroundColor :: String
   , barStyle :: StatusBarStyle
@@ -1987,7 +2008,7 @@ swipeableListView
 swipeableListView props = unsafeCreateNativeElement "SwipeableListView" props
 
 
-type SwitchIOSProps = 
+type SwitchIOSProps  = 
   ( accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
@@ -2008,26 +2029,26 @@ type SwitchIOSProps =
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
   , onAccessibilityTap :: (Effect Unit)
-  , onLayout :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
   , onTintColor :: String
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , onValueChange :: (EffectFn1 Boolean Unit)
   , pointerEvents :: ViewPropsPointerEvents
   , removeClippedSubviews :: Boolean
@@ -2053,7 +2074,7 @@ switchIOS_ :: Array JSX -> JSX
 switchIOS_ children = switchIOS { children }
 
 
-type SwitchProps = 
+type SwitchProps  = 
   ( accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
@@ -2075,26 +2096,26 @@ type SwitchProps =
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
   , onAccessibilityTap :: (Effect Unit)
-  , onLayout :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
   , onTintColor :: String
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , onValueChange :: (EffectFn1 Boolean Unit)
   , pointerEvents :: ViewPropsPointerEvents
   , removeClippedSubviews :: Boolean
@@ -2122,7 +2143,7 @@ switch_ :: Array JSX -> JSX
 switch_ children = switch { children }
 
 
-type TabBarIOSItemProps = 
+type TabBarIOSItemProps  = 
   ( accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
@@ -2145,26 +2166,26 @@ type TabBarIOSItemProps =
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
   , onAccessibilityTap :: (Effect Unit)
-  , onLayout :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
   , onPress :: (Effect Unit)
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , pointerEvents :: ViewPropsPointerEvents
   , removeClippedSubviews :: Boolean
   , renderAsOriginal :: Boolean
@@ -2191,7 +2212,7 @@ tabBarIOSItem_ :: Array JSX -> JSX
 tabBarIOSItem_ children = tabBarIOSItem { children }
 
 
-type TabBarIOSProps = 
+type TabBarIOSProps  = 
   ( accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
@@ -2213,25 +2234,25 @@ type TabBarIOSProps =
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
   , onAccessibilityTap :: (Effect Unit)
-  , onLayout :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , pointerEvents :: ViewPropsPointerEvents
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
@@ -2257,7 +2278,7 @@ tabBarIOS_ :: Array JSX -> JSX
 tabBarIOS_ children = tabBarIOS { children }
 
 
-type TextInputProps = 
+type TextInputProps  = 
   ( accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
@@ -2299,35 +2320,35 @@ type TextInputProps =
   , numberOfLines :: Number
   , onAccessibilityAction :: (Effect Unit)
   , onAccessibilityTap :: (Effect Unit)
-  , onBlur :: EventHandler
-  , onChange :: EventHandler
+  , onBlur :: (EffectFn1 (NativeSyntheticEvent TextInputFocusEventData) Unit)
+  , onChange :: (EffectFn1 (NativeSyntheticEvent TextInputChangeEventData) Unit)
   , onChangeText :: (EffectFn1 String Unit)
-  , onContentSizeChange :: EventHandler
-  , onEndEditing :: EventHandler
-  , onFocus :: EventHandler
-  , onKeyPress :: EventHandler
-  , onLayout :: EventHandler
+  , onContentSizeChange :: (EffectFn1 (NativeSyntheticEvent TextInputContentSizeChangeEventData) Unit)
+  , onEndEditing :: (EffectFn1 (NativeSyntheticEvent TextInputEndEditingEventData) Unit)
+  , onFocus :: (EffectFn1 (NativeSyntheticEvent TextInputFocusEventData) Unit)
+  , onKeyPress :: (EffectFn1 (NativeSyntheticEvent TextInputKeyPressEventData) Unit)
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
-  , onScroll :: EventHandler
-  , onSelectionChange :: EventHandler
+  , onScroll :: (EffectFn1 (NativeSyntheticEvent TextInputScrollEventData) Unit)
+  , onSelectionChange :: (EffectFn1 (NativeSyntheticEvent TextInputSelectionChangeEventData) Unit)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onSubmitEditing :: EventHandler
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onSubmitEditing :: (EffectFn1 (NativeSyntheticEvent TextInputSubmitEditingEventData) Unit)
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , placeholder :: String
   , placeholderTextColor :: String
   , pointerEvents :: ViewPropsPointerEvents
@@ -2364,7 +2385,7 @@ textInput_ :: Array JSX -> JSX
 textInput_ children = textInput { children }
 
 
-type TextProps = 
+type TextProps  = 
   ( accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -2384,10 +2405,10 @@ type TextProps =
   , nativeID :: String
   , numberOfLines :: Number
   , onAccessibilityTap :: (Effect Unit)
-  , onLayout :: EventHandler
-  , onLongPress :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
+  , onLongPress :: (EffectFn1 GestureResponderEvent Unit)
   , onMagicTap :: (Effect Unit)
-  , onPress :: EventHandler
+  , onPress :: (EffectFn1 GestureResponderEvent Unit)
   , selectable :: Boolean
   , selectionColor :: String
   , style :: CSS
@@ -2409,7 +2430,7 @@ text_ :: Array JSX -> JSX
 text_ children = text { children }
 
 
-type ToolbarAndroidProps = 
+type ToolbarAndroidProps  = 
   ( accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
@@ -2436,25 +2457,25 @@ type ToolbarAndroidProps =
   , onAccessibilityTap :: (Effect Unit)
   , onActionSelected :: (EffectFn1 Number Unit)
   , onIconClicked :: (Effect Unit)
-  , onLayout :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , overflowIcon :: ImageURISource
   , pointerEvents :: ViewPropsPointerEvents
   , removeClippedSubviews :: Boolean
@@ -2482,7 +2503,7 @@ toolbarAndroid_ :: Array JSX -> JSX
 toolbarAndroid_ children = toolbarAndroid { children }
 
 
-type TouchableHighlightProps = 
+type TouchableHighlightProps  = 
   ( accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -2502,12 +2523,12 @@ type TouchableHighlightProps =
   , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
   , onAccessibilityTap :: (Effect Unit)
   , onHideUnderlay :: (Effect Unit)
-  , onLayout :: EventHandler
-  , onLongPress :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
+  , onLongPress :: (EffectFn1 GestureResponderEvent Unit)
   , onMagicTap :: (Effect Unit)
-  , onPress :: EventHandler
-  , onPressIn :: EventHandler
-  , onPressOut :: EventHandler
+  , onPress :: (EffectFn1 GestureResponderEvent Unit)
+  , onPressIn :: (EffectFn1 GestureResponderEvent Unit)
+  , onPressOut :: (EffectFn1 GestureResponderEvent Unit)
   , onShowUnderlay :: (Effect Unit)
   , pressRetentionOffset :: Insets
   , style :: CSS
@@ -2528,7 +2549,7 @@ touchableHighlight_ :: Array JSX -> JSX
 touchableHighlight_ children = touchableHighlight { children }
 
 
-type TouchableNativeFeedbackProps = 
+type TouchableNativeFeedbackProps  = 
   ( accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -2547,12 +2568,12 @@ type TouchableNativeFeedbackProps =
   , hitSlop :: Insets
   , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
   , onAccessibilityTap :: (Effect Unit)
-  , onLayout :: EventHandler
-  , onLongPress :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
+  , onLongPress :: (EffectFn1 GestureResponderEvent Unit)
   , onMagicTap :: (Effect Unit)
-  , onPress :: EventHandler
-  , onPressIn :: EventHandler
-  , onPressOut :: EventHandler
+  , onPress :: (EffectFn1 GestureResponderEvent Unit)
+  , onPressIn :: (EffectFn1 GestureResponderEvent Unit)
+  , onPressOut :: (EffectFn1 GestureResponderEvent Unit)
   , pressRetentionOffset :: Insets
   , style :: CSS
   , testID :: String
@@ -2572,7 +2593,7 @@ touchableNativeFeedback_ :: Array JSX -> JSX
 touchableNativeFeedback_ children = touchableNativeFeedback { children }
 
 
-type TouchableOpacityProps = 
+type TouchableOpacityProps  = 
   ( accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -2591,12 +2612,12 @@ type TouchableOpacityProps =
   , hitSlop :: Insets
   , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
   , onAccessibilityTap :: (Effect Unit)
-  , onLayout :: EventHandler
-  , onLongPress :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
+  , onLongPress :: (EffectFn1 GestureResponderEvent Unit)
   , onMagicTap :: (Effect Unit)
-  , onPress :: EventHandler
-  , onPressIn :: EventHandler
-  , onPressOut :: EventHandler
+  , onPress :: (EffectFn1 GestureResponderEvent Unit)
+  , onPressIn :: (EffectFn1 GestureResponderEvent Unit)
+  , onPressOut :: (EffectFn1 GestureResponderEvent Unit)
   , pressRetentionOffset :: Insets
   , style :: CSS
   , testID :: String
@@ -2615,7 +2636,7 @@ touchableOpacity_ :: Array JSX -> JSX
 touchableOpacity_ children = touchableOpacity { children }
 
 
-type TouchableWithoutFeedbackProps = 
+type TouchableWithoutFeedbackProps  = 
   ( accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -2633,12 +2654,12 @@ type TouchableWithoutFeedbackProps =
   , hitSlop :: Insets
   , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
   , onAccessibilityTap :: (Effect Unit)
-  , onLayout :: EventHandler
-  , onLongPress :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
+  , onLongPress :: (EffectFn1 GestureResponderEvent Unit)
   , onMagicTap :: (Effect Unit)
-  , onPress :: EventHandler
-  , onPressIn :: EventHandler
-  , onPressOut :: EventHandler
+  , onPress :: (EffectFn1 GestureResponderEvent Unit)
+  , onPressIn :: (EffectFn1 GestureResponderEvent Unit)
+  , onPressOut :: (EffectFn1 GestureResponderEvent Unit)
   , pressRetentionOffset :: Insets
   , style :: CSS
   , testID :: String
@@ -2657,7 +2678,7 @@ touchableWithoutFeedback_ :: Array JSX -> JSX
 touchableWithoutFeedback_ children = touchableWithoutFeedback { children }
 
 
-type ViewPagerAndroidProps = 
+type ViewPagerAndroidProps  = 
   ( accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
@@ -2679,28 +2700,28 @@ type ViewPagerAndroidProps =
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
   , onAccessibilityTap :: (Effect Unit)
-  , onLayout :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onPageScroll :: EventHandler
+  , onPageScroll :: (EffectFn1 (NativeSyntheticEvent ViewPagerAndroidOnPageScrollEventData) Unit)
   , onPageScrollStateChanged :: (EffectFn1 ViewPagerAndroidPropsOnPageScrollStateChanged Unit)
-  , onPageSelected :: EventHandler
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onPageSelected :: (EffectFn1 (NativeSyntheticEvent ViewPagerAndroidOnPageSelectedEventData) Unit)
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , pageMargin :: Number
   , pointerEvents :: ViewPropsPointerEvents
   , removeClippedSubviews :: Boolean
@@ -2724,7 +2745,7 @@ viewPagerAndroid_ :: Array JSX -> JSX
 viewPagerAndroid_ children = viewPagerAndroid { children }
 
 
-type ViewProps = 
+type ViewProps  = 
   ( accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
@@ -2744,25 +2765,25 @@ type ViewProps =
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
   , onAccessibilityTap :: (Effect Unit)
-  , onLayout :: EventHandler
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , pointerEvents :: ViewPropsPointerEvents
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
@@ -2784,7 +2805,7 @@ view_ :: Array JSX -> JSX
 view_ children = view { children }
 
 
-type WebViewProps = 
+type WebViewProps  = 
   ( accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
@@ -2818,32 +2839,32 @@ type WebViewProps =
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
   , onAccessibilityTap :: (Effect Unit)
-  , onError :: EventHandler
-  , onLayout :: EventHandler
-  , onLoad :: EventHandler
-  , onLoadEnd :: EventHandler
-  , onLoadStart :: EventHandler
+  , onError :: (EffectFn1 NavState Unit)
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
+  , onLoad :: (EffectFn1 NavState Unit)
+  , onLoadEnd :: (EffectFn1 NavState Unit)
+  , onLoadStart :: (EffectFn1 NavState Unit)
   , onMagicTap :: (Effect Unit)
-  , onMessage :: EventHandler
+  , onMessage :: (EffectFn1 (NativeSyntheticEvent WebViewMessageEventData) Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onNavigationStateChange :: EventHandler
-  , onResponderEnd :: EventHandler
-  , onResponderGrant :: EventHandler
-  , onResponderMove :: EventHandler
-  , onResponderReject :: EventHandler
-  , onResponderRelease :: EventHandler
-  , onResponderStart :: EventHandler
-  , onResponderTerminate :: EventHandler
+  , onNavigationStateChange :: (EffectFn1 NavState Unit)
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
   , onShouldStartLoadWithRequest :: (EffectFn1 WebViewIOSLoadRequestEvent Boolean)
   , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onTouchCancel :: EventHandler
-  , onTouchEnd :: EventHandler
-  , onTouchEndCapture :: EventHandler
-  , onTouchMove :: EventHandler
-  , onTouchStart :: EventHandler
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , originWhitelist :: (Array String)
   , pointerEvents :: ViewPropsPointerEvents
   , removeClippedSubviews :: Boolean
