@@ -4,7 +4,9 @@ import {
   createInterfaceMap,
   getBaseInterfaces,
   getInterfaces,
-  handleInterface
+  handleInterface,
+  getTypeAliases,
+  createTypeAliasMap
 } from "./parser"
 
 import { propsCompare, Field } from "./types" 
@@ -21,8 +23,9 @@ const sources =
 
 const interfaces: ts.InterfaceDeclaration[] = getInterfaces(sources[0])
 const interfaceMap = createInterfaceMap(interfaces)
+const typeAliasMap = createTypeAliasMap(getTypeAliases(sources[0]))
 const baseInterfaces = getBaseInterfaces(interfaceMap, sources[0])
-const props = baseInterfaces.map(handleInterface(interfaceMap)).sort(propsCompare)
+const props = baseInterfaces.map(handleInterface(typeAliasMap)(interfaceMap)).sort(propsCompare)
 export const writtenForeignData = writeForeignData(props).join("\n")
 export const writtenProps = props.map(writeProps(false))
 const foreignData: string[] = collectForeignData(([] as Field[]).concat(...props.map((prop) => prop.fields)))
@@ -30,7 +33,6 @@ const foo = foreignData.filter(d => interfaceMap[d] === undefined)
 console.log("foreignData", foreignData.length)
 console.log("foo", foo.length)
 console.log("foo", foo)
-console.log("figure out how to make ImageResizeMode a string and then figure out some of the other types you can turn into a string")
 top
 /*
 console.log(top)

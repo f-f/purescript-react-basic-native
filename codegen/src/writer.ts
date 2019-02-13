@@ -19,7 +19,7 @@ export const writeProps = (ignoreChildren: boolean) => (props: Props) : WrittenP
 
   const componentName = props.name.replace(/Props$/,"")
   const functionName = lowerCaseFirstLetter(componentName)
-  const optionalFields = props.fields.filter((field) => field.isOptional)
+  const optionalFields = props.fields.filter((field) => field.isOptional || field.fieldType.isOptional)
   const requiredFields = props.fields.filter((field) => !field.isOptional)
   const typeVariables = (props.typeParameters) ? props.typeParameters.join(" ") + " " : ""
 

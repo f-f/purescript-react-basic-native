@@ -1,10 +1,12 @@
 import * as ts from "typescript"
 
 export type InterfaceMap = { [key:string]:ts.InterfaceDeclaration; }
+export type TypeAliasMap = { [key:string]:ts.TypeAliasDeclaration; }
 
 export interface FieldType {
   name: string
   foreignData?: string[]
+  isOptional?: boolean
 }
 
 export interface Field {
