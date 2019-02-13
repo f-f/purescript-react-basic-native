@@ -8,7 +8,7 @@ import React.Basic (Component, JSX, createComponent, make)
 import React.Basic (fragment) as React
 import React.Basic.DOM.Events (capture, timeStamp)
 import React.Basic.Events (EventFn, SyntheticEvent, merge, unsafeEventFn)
-import React.Basic.Native (string, textInput, text_) as RN
+import React.Basic.Native (string, text, textInput) as RN
 import Unsafe.Coerce (unsafeCoerce)
 
 app :: JSX
@@ -28,6 +28,7 @@ controlledInput = make component
   , render: \self -> 
       React.fragment 
         [ RN.textInput {
+            key : "1",
             onChange: 
               capture (merge { getText, timeStamp }) 
                 \event ->
@@ -37,8 +38,8 @@ controlledInput = make component
                     } 
           , value: self.state.value
         }
-        , RN.text_ [ RN.string ("Current value = " <> show self.state.value) ]
-        , RN.text_ [ RN.string ("Changed at = " <> maybe "never" show self.state.timestamp) ]
+        , RN.text { key : "2", children : [ RN.string ("Current value = " <> show self.state.value) ] }
+        , RN.text { key : "3", children : [ RN.string ("Changed at = " <> maybe "never" show self.state.timestamp) ] }
         ] 
   }
 
