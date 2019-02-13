@@ -5,7 +5,9 @@ export const fieldTypeNameReplacements: {[key:string]:string;} =
     "ReactElement.React" : "React",
     "SectionT" : "sectionT",
     "StyleProp" : "CSS",
-    "ScrollViewProps" : "(Record ScrollViewProps)"
+    "ScrollViewProps" : "(Record ScrollViewProps)",
+    "(ComponentType.React Any)" : "JSX",
+    "ReadonlyArray" : "Array"
   }
 
 export const ignoreForeignDataList: string[] =

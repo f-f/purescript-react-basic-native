@@ -180,7 +180,9 @@ const handleUnionType = (typeAliasMap: TypeAliasMap) => (interfaceName: string) 
     return t.kind === ts.SyntaxKind.NullKeyword || t.kind === ts.SyntaxKind.UndefinedKeyword
   }).reduce((a, b) => a && b, false)
 
-  const isNumber = u.types.map(t => {
+  const types = u.types.filter(t => t.kind !== ts.SyntaxKind.NullKeyword && t.kind !== ts.SyntaxKind.UndefinedKeyword)
+
+  const isNumber = types.map(t => {
     if(ts.isLiteralTypeNode(t)){
       return ts.isNumericLiteral(t.literal)
     }
@@ -189,7 +191,7 @@ const handleUnionType = (typeAliasMap: TypeAliasMap) => (interfaceName: string) 
 
   if(isNumber) return { name : "Number", isOptional }
 
-  const isString = u.types.map(t => {
+  const isString = types.map(t => {
     if(ts.isLiteralTypeNode(t)){
       return ts.isStringLiteral(t.literal) || ts.isNumericLiteral(t.literal)
     }
@@ -198,10 +200,10 @@ const handleUnionType = (typeAliasMap: TypeAliasMap) => (interfaceName: string) 
 
   if(isString) return { name : "String", isOptional }
 
-  if(u.types.length == 2){
-    const first = handleTypes(typeAliasMap)(interfaceName)(fieldName)(u.types[0])
+  if(types.length === 2){
+    const first = handleTypes(typeAliasMap)(interfaceName)(fieldName)(types[0])
     first.isOptional = isOptional
-    const second = handleTypes(typeAliasMap)(interfaceName)(fieldName)(u.types[1])
+    const second = handleTypes(typeAliasMap)(interfaceName)(fieldName)(types[1])
     second.isOptional = isOptional
     if(first.name === wrapNameInArray(second.name)){
       return first
@@ -210,6 +212,32 @@ const handleUnionType = (typeAliasMap: TypeAliasMap) => (interfaceName: string) 
     }
   }
   
+  const remainingTypes = types.map(handleTypes(typeAliasMap)(interfaceName)(fieldName))
+  
+  const isJSX = remainingTypes.map(t => {
+    return t.name.indexOf("React") >= 0 || t.name.indexOf("JSX") >= 0
+  }).reduce((a, b) => a && b, true)
+
+  if(isJSX) return { name : "JSX", foreignData: [ "JSX" ], isOptional }
+  
+  if(remainingTypes.length === 1) return remainingTypes[0]
+
+  if(interfaceName === "TextInputProps" && fieldName === "keyboardType") return { name : "String" }
+  if(interfaceName === "TextInputProps" && fieldName === "returnKeyType") return { name : "String" }
+  if(interfaceName === "TouchableNativeFeedbackProps" && fieldName === "background") return { name : "BackgroundPropTyppe", foreignData : [ "BackgroundPropType" ] }
+  if(interfaceName === "ImagePropsBase" && fieldName === "source") return { name : "(Array ImageURISource)", foreignData : [ "ImageURISource" ] }
+  if(interfaceName === "ImagePropsBase" && fieldName === "defaultSource") return { name : "ImageURISource", foreignData : [ "ImageURISource" ] }
+
+  /*
+WebViewProps source [ { name: 'WebViewUriSource',
+    foreignData: [ 'WebViewUriSource' ] },
+  { name: 'WebViewHtmlSource',
+    foreignData: [ 'WebViewHtmlSource' ] },
+  { name: 'Number' } ]
+ */
+
+  console.log(remainingTypes)
+
   const name = (interfaceName + capitalize(fieldName))
   const fieldType = { name, foreignData : [ name ], isOptional }
   return fieldType
@@ -290,9 +318,7 @@ export const handleInterface = (typeAliasMap: TypeAliasMap) => (interfaceMap: In
     return uniques
   }
 
-   
   const fields = uniqueFields(allFields).sort(fieldCompare)
-
 
   return { name: interfaceName, fields, typeParameters }
 }
