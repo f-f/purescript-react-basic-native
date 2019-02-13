@@ -106,7 +106,8 @@ foreign import data WebViewPropsSource :: Type
 
 
 type ARTClippingRectangleProps = 
-  ( height :: Number
+  ( key :: String
+  , height :: Number
   , opacity :: Number
   , originX :: Number
   , originY :: Number
@@ -134,7 +135,8 @@ aRTClippingRectangle_ children = aRTClippingRectangle { children }
 
 
 type ARTGroupProps = 
-  ( height :: Number
+  ( key :: String
+  , height :: Number
   , opacity :: Number
   , originX :: Number
   , originY :: Number
@@ -162,7 +164,8 @@ aRTGroup_ children = aRTGroup { children }
 
 
 type ARTShapeProps_optional = 
-  ( fill :: String
+  ( key :: String
+  , fill :: String
   , height :: Number
   , opacity :: Number
   , originX :: Number
@@ -198,7 +201,8 @@ aRTShape props = unsafeCreateNativeElement "ARTShape" props
 
 
 type ARTSurfaceProps_optional = 
-  ( style :: CSS
+  ( key :: String
+  , style :: CSS
   , children :: Array JSX
   )
 
@@ -218,7 +222,8 @@ aRTSurface props = unsafeCreateNativeElement "ARTSurface" props
 
 
 type ARTTextProps = 
-  ( alignment :: String
+  ( key :: String
+  , alignment :: String
   , fill :: String
   , font :: String
   , opacity :: Number
@@ -252,7 +257,8 @@ aRTText_ children = aRTText { children }
 
 
 type ActivityIndicatorIOSProps = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -316,7 +322,8 @@ activityIndicatorIOS_ children = activityIndicatorIOS { children }
 
 
 type ActivityIndicatorProps = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -380,7 +387,8 @@ activityIndicator_ children = activityIndicator { children }
 
 
 type ButtonProps_optional = 
-  ( accessibilityLabel :: String
+  ( key :: String
+  , accessibilityLabel :: String
   , color :: String
   , disabled :: Boolean
   , testID :: String
@@ -402,7 +410,8 @@ button props = unsafeCreateNativeElement "Button" props
 
 
 type DatePickerIOSProps_optional = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -471,7 +480,8 @@ datePickerIOS props = unsafeCreateNativeElement "DatePickerIOS" props
 
 
 type DrawerLayoutAndroidProps_optional = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -543,7 +553,8 @@ drawerLayoutAndroid props = unsafeCreateNativeElement "DrawerLayoutAndroid" prop
 
 
 type FlatListProps_optional = 
-  ( "ItemSeparatorComponent" :: FlatListPropsItemSeparatorComponent
+  ( key :: String
+  , "ItemSeparatorComponent" :: FlatListPropsItemSeparatorComponent
   , "ListEmptyComponent" :: FlatListPropsListEmptyComponent
   , "ListFooterComponent" :: FlatListPropsListFooterComponent
   , "ListHeaderComponent" :: FlatListPropsListHeaderComponent
@@ -681,7 +692,8 @@ flatList props = unsafeCreateNativeElement "FlatList" props
 
 
 type ImageBackgroundProps_optional = 
-  ( accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  ( key :: String
+  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
@@ -737,7 +749,8 @@ imageBackground props = unsafeCreateNativeElement "ImageBackground" props
 
 
 type ImageProps_optional = 
-  ( accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  ( key :: String
+  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
@@ -792,7 +805,8 @@ image props = unsafeCreateNativeElement "Image" props
 
 
 type InputAccessoryViewProps = 
-  ( backgroundColor :: String
+  ( key :: String
+  , backgroundColor :: String
   , nativeID :: String
   , style :: CSS
   , children :: Array JSX
@@ -811,7 +825,8 @@ inputAccessoryView_ children = inputAccessoryView { children }
 
 
 type KeyboardAvoidingViewProps = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -875,7 +890,8 @@ keyboardAvoidingView_ children = keyboardAvoidingView { children }
 
 
 type ListViewProps_optional = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -995,7 +1011,8 @@ listView props = unsafeCreateNativeElement "ListView" props
 
 
 type MapViewProps = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -1073,7 +1090,8 @@ mapView_ children = mapView { children }
 
 
 type MaskedViewIOSProps_optional = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -1135,7 +1153,8 @@ maskedViewIOS props = unsafeCreateNativeElement "MaskedViewIOS" props
 
 
 type NavigatorIOSProps_optional = 
-  ( barTintColor :: String
+  ( key :: String
+  , barTintColor :: String
   , interactivePopGestureEnabled :: Boolean
   , itemWrapperStyle :: CSS
   , navigationBarHidden :: Boolean
@@ -1162,7 +1181,8 @@ navigatorIOS props = unsafeCreateNativeElement "NavigatorIOS" props
 
 
 type PickerIOSItemProps = 
-  ( label :: String
+  ( key :: String
+  , label :: String
   , value :: String
   , children :: Array JSX
   )
@@ -1180,7 +1200,8 @@ pickerIOSItem_ children = pickerIOSItem { children }
 
 
 type PickerIOSProps = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -1243,7 +1264,8 @@ pickerIOS_ children = pickerIOS { children }
 
 
 type PickerItemProps_optional = 
-  ( color :: String
+  ( key :: String
+  , color :: String
   , testID :: String
   , value :: Any
   , children :: Array JSX
@@ -1264,7 +1286,8 @@ pickerItem props = unsafeCreateNativeElement "PickerItem" props
 
 
 type PickerProps = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -1331,7 +1354,8 @@ picker_ children = picker { children }
 
 
 type ProgressBarAndroidProps = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -1395,7 +1419,8 @@ progressBarAndroid_ children = progressBarAndroid { children }
 
 
 type ProgressViewIOSProps = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -1461,7 +1486,8 @@ progressViewIOS_ children = progressViewIOS { children }
 
 
 type RecyclerViewBackedScrollViewProps = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -1565,7 +1591,8 @@ recyclerViewBackedScrollView_ children = recyclerViewBackedScrollView { children
 
 
 type RefreshControlProps_optional = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -1636,7 +1663,8 @@ refreshControl props = unsafeCreateNativeElement "RefreshControl" props
 
 
 type ScrollViewProps = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -1740,7 +1768,8 @@ scrollView_ children = scrollView { children }
 
 
 type SegmentedControlIOSProps = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -1807,7 +1836,8 @@ segmentedControlIOS_ children = segmentedControlIOS { children }
 
 
 type SliderProps = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -1881,7 +1911,8 @@ slider_ children = slider { children }
 
 
 type SnapshotViewIOSProps_optional = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -1943,7 +1974,8 @@ snapshotViewIOS props = unsafeCreateNativeElement "SnapshotViewIOS" props
 
 
 type StatusBarProps = 
-  ( animated :: Boolean
+  ( key :: String
+  , animated :: Boolean
   , backgroundColor :: String
   , barStyle :: StatusBarStyle
   , hidden :: Boolean
@@ -1966,8 +1998,8 @@ statusBar_ children = statusBar { children }
 
 
 type SwipeableListViewProps_optional = 
-  ( 
-    children :: Array JSX
+  ( key :: String
+  , children :: Array JSX
   )
 
 type SwipeableListViewProps_required optional = 
@@ -1988,7 +2020,8 @@ swipeableListView props = unsafeCreateNativeElement "SwipeableListView" props
 
 
 type SwitchIOSProps = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -2054,7 +2087,8 @@ switchIOS_ children = switchIOS { children }
 
 
 type SwitchProps = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -2123,7 +2157,8 @@ switch_ children = switch { children }
 
 
 type TabBarIOSItemProps = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -2192,7 +2227,8 @@ tabBarIOSItem_ children = tabBarIOSItem { children }
 
 
 type TabBarIOSProps = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -2258,7 +2294,8 @@ tabBarIOS_ children = tabBarIOS { children }
 
 
 type TextInputProps = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -2365,7 +2402,8 @@ textInput_ children = textInput { children }
 
 
 type TextProps = 
-  ( accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  ( key :: String
+  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
@@ -2410,7 +2448,8 @@ text_ children = text { children }
 
 
 type ToolbarAndroidProps = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -2483,7 +2522,8 @@ toolbarAndroid_ children = toolbarAndroid { children }
 
 
 type TouchableHighlightProps = 
-  ( accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  ( key :: String
+  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
@@ -2529,7 +2569,8 @@ touchableHighlight_ children = touchableHighlight { children }
 
 
 type TouchableNativeFeedbackProps = 
-  ( accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  ( key :: String
+  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
@@ -2573,7 +2614,8 @@ touchableNativeFeedback_ children = touchableNativeFeedback { children }
 
 
 type TouchableOpacityProps = 
-  ( accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  ( key :: String
+  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
@@ -2616,7 +2658,8 @@ touchableOpacity_ children = touchableOpacity { children }
 
 
 type TouchableWithoutFeedbackProps = 
-  ( accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  ( key :: String
+  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
@@ -2658,7 +2701,8 @@ touchableWithoutFeedback_ children = touchableWithoutFeedback { children }
 
 
 type ViewPagerAndroidProps = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -2725,7 +2769,8 @@ viewPagerAndroid_ children = viewPagerAndroid { children }
 
 
 type ViewProps = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
@@ -2785,7 +2830,8 @@ view_ children = view { children }
 
 
 type WebViewProps = 
-  ( accessibilityActions :: (Array String)
+  ( key :: String
+  , accessibilityActions :: (Array String)
   , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String

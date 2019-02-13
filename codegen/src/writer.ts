@@ -22,14 +22,15 @@ export const writeProps = (props: Props): WrittenProps => {
   const optionalFields = props.fields.filter((field) => field.isOptional)
   const requiredFields = props.fields.filter((field) => !field.isOptional)
 
-  const commaOrSpace = optionalFields.length ? "," : " "
   const children = (noChildren.indexOf(functionName) < 0)
-    ? "\n  " + commaOrSpace + " children :: Array JSX"
+    ? "\n  , children :: Array JSX"
     : ""
+
+  const key = "key :: String"
 
   const writeOptionalType = (fields: Field[]): string =>
   `type ${props.name}_optional = 
-  ( ${fields.map(writeField).join("\n  , ") + children}
+  ( ${[key].concat(fields.map(writeField)).join("\n  , ") + children}
   )`
 
   const writeRequiredType = (fields: Field[]): string =>
@@ -39,7 +40,7 @@ export const writeProps = (props: Props): WrittenProps => {
   )`
   const writeSingleType = (fields: Field[]): string =>
   `type ${props.name} = 
-  ( ${fields.map(writeField).join("\n  , ") + children}
+  ( ${[key].concat(fields.map(writeField)).join("\n  , ") + children}
   )`
 
   const writeRequiredFn = () => 
