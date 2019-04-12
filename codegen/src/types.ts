@@ -16,15 +16,24 @@ export interface Field {
 export interface Props {
   name: string
   fields: Field[]
+  classNames: string[]
 }
 
-export interface WrittenProps { 
+export interface WrittenProps {
   fns: string[]
   props: string[]
-  foreignData: string[] 
+  foreignData: string[]
 }
 
+export interface BaseInterface {
+  iface: ts.InterfaceDeclaration
+  classNames: string[]
+}
 
+export interface NamePair {
+  componentName: string
+  functionName: string
+}
 
 export const strCompare = (str1: string, str2: string) => {
   if(str1 == str2) return 0
@@ -32,9 +41,8 @@ export const strCompare = (str1: string, str2: string) => {
   return -1
 }
 
-export const fieldCompare = (field1: Field, field2: Field) => 
+export const fieldCompare = (field1: Field, field2: Field) =>
   strCompare(field1.name, field2.name)
-   
-export const propsCompare = (props1: Props, props2: Props) => 
-  strCompare(props1.name, props2.name)
 
+export const propsCompare = (props1: Props, props2: Props) =>
+  strCompare(props1.name, props2.name)

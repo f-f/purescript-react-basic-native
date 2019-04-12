@@ -123,15 +123,15 @@ type ARTClippingRectangleProps =
   )
 
 
-aRTClippingRectangle
+clippingRectangle
   :: ∀ attrs attrs_
   . Union attrs attrs_ ARTClippingRectangleProps
   => Record attrs
   -> JSX
-aRTClippingRectangle props = unsafeCreateNativeElement "ARTClippingRectangle" props
+clippingRectangle props = unsafeCreateNativeElement "ClippingRectangle" props
 
-aRTClippingRectangle_ :: Array JSX -> JSX
-aRTClippingRectangle_ children = aRTClippingRectangle { children }
+clippingRectangle_ :: Array JSX -> JSX
+clippingRectangle_ children = clippingRectangle { children }
 
 
 type ARTGroupProps = 
@@ -152,15 +152,15 @@ type ARTGroupProps =
   )
 
 
-aRTGroup
+group
   :: ∀ attrs attrs_
   . Union attrs attrs_ ARTGroupProps
   => Record attrs
   -> JSX
-aRTGroup props = unsafeCreateNativeElement "ARTGroup" props
+group props = unsafeCreateNativeElement "Group" props
 
-aRTGroup_ :: Array JSX -> JSX
-aRTGroup_ children = aRTGroup { children }
+group_ :: Array JSX -> JSX
+group_ children = group { children }
 
 
 type ARTShapeProps_optional = 
@@ -192,12 +192,12 @@ type ARTShapeProps_required optional =
   )
 
 
-aRTShape
+shape
   :: ∀ attrs attrs_
   . Union attrs attrs_ ARTShapeProps_optional
   => Record (ARTShapeProps_required attrs)
   -> JSX
-aRTShape props = unsafeCreateNativeElement "ARTShape" props
+shape props = unsafeCreateNativeElement "Shape" props
 
 
 type ARTSurfaceProps_optional = 
@@ -213,12 +213,12 @@ type ARTSurfaceProps_required optional =
   )
 
 
-aRTSurface
+surface
   :: ∀ attrs attrs_
   . Union attrs attrs_ ARTSurfaceProps_optional
   => Record (ARTSurfaceProps_required attrs)
   -> JSX
-aRTSurface props = unsafeCreateNativeElement "ARTSurface" props
+surface props = unsafeCreateNativeElement "Surface" props
 
 
 type ARTTextProps = 
@@ -1144,12 +1144,12 @@ type MaskedViewIOSProps_required optional =
   )
 
 
-maskedViewIOS
+maskedView
   :: ∀ attrs attrs_
   . Union attrs attrs_ MaskedViewIOSProps_optional
   => Record (MaskedViewIOSProps_required attrs)
   -> JSX
-maskedViewIOS props = unsafeCreateNativeElement "MaskedViewIOS" props
+maskedView props = unsafeCreateNativeElement "MaskedView" props
 
 
 type NavigatorIOSProps_optional = 
@@ -2827,6 +2827,16 @@ view props = unsafeCreateNativeElement "View" props
 
 view_ :: Array JSX -> JSX
 view_ children = view { children }
+
+safeAreaView
+  :: ∀ attrs attrs_
+  . Union attrs attrs_ ViewProps
+  => Record attrs
+  -> JSX
+safeAreaView props = unsafeCreateNativeElement "SafeAreaView" props
+
+safeAreaView_ :: Array JSX -> JSX
+safeAreaView_ children = safeAreaView { children }
 
 
 type WebViewProps = 

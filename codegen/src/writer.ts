@@ -1,5 +1,5 @@
 import { fieldTypeNameReplacements, ignoreForeignDataList, noChildren } from "./consts"
-import { Props, WrittenProps, Field } from "./types"
+import { Props, WrittenProps, Field, NamePair } from "./types"
 import { capitalize, lowerCaseFirstLetter } from "./utils"
 
 
@@ -15,14 +15,23 @@ const writeField = (field: Field): string => {
   return `${name} :: ${typeName}`
 }
 
-export const writeProps = (props: Props): WrittenProps => {
+const makeNamePair = (className: string): NamePair => {
+  const componentName = className.replace(/Component$/,"")
 
-  const componentName = props.name.replace(/Props$/,"")
-  const functionName = lowerCaseFirstLetter(componentName)
+  return {
+    componentName,
+    functionName: lowerCaseFirstLetter(componentName)
+  }
+}
+
+export const writeProps = (props: Props): WrittenProps => {
+  const names = props.classNames.map(makeNamePair)
+
   const optionalFields = props.fields.filter((field) => field.isOptional)
   const requiredFields = props.fields.filter((field) => !field.isOptional)
 
-  const children = (noChildren.indexOf(functionName) < 0)
+  const hasChildren = noChildren.indexOf(props.name) < 0
+  const children = hasChildren
     ? "\n  , children :: Array JSX"
     : ""
 
@@ -43,37 +52,39 @@ export const writeProps = (props: Props): WrittenProps => {
   ( ${[key].concat(fields.map(writeField)).join("\n  , ") + children}
   )`
 
-  const writeRequiredFn = () => 
-  `${functionName}
+  const writeRequiredFn = (n: NamePair) =>
+  `${n.functionName}
   :: ∀ attrs attrs_
   . Union attrs attrs_ ${props.name}_optional
   => Record (${props.name}_required attrs)
   -> JSX
-${functionName} props = unsafeCreateNativeElement "${componentName}" props`
+${n.functionName} props = unsafeCreateNativeElement "${n.componentName}" props`
 
-  const writeOptionalFn = () => 
-  `${functionName}
+  const writeOptionalFn = (n: NamePair) =>
+  `${n.functionName}
   :: ∀ attrs attrs_
   . Union attrs attrs_ ${props.name}
   => Record attrs
   -> JSX
-${functionName} props = unsafeCreateNativeElement "${componentName}" props`
+${n.functionName} props = unsafeCreateNativeElement "${n.componentName}" props`
 
-  const writeOptionalChildren = () =>  
-    `${functionName}_ :: Array JSX -> JSX
-${functionName}_ children = ${functionName} { children }`
+  const writeOptionalChildren = (n: NamePair) =>
+    `${n.functionName}_ :: Array JSX -> JSX
+${n.functionName}_ children = ${n.functionName} { children }`
 
 
   const propsStrs: string[] = []
   const fns: string[] = []
-  if(requiredFields.length){  
+  if(requiredFields.length){
     propsStrs.push(writeOptionalType(optionalFields))
     propsStrs.push(writeRequiredType(requiredFields))
-    fns.push(writeRequiredFn())
+    names.forEach(n => fns.push(writeRequiredFn(n)))
   } else {
     propsStrs.push(writeSingleType(props.fields))
-    fns.push(writeOptionalFn())
-    if(noChildren.indexOf(functionName) < 0) fns.push(writeOptionalChildren()) 
+    names.forEach(n => {
+      fns.push(writeOptionalFn(n))
+      if (hasChildren) fns.push(writeOptionalChildren(n))
+    })
   }
 
   return { fns, props: propsStrs, foreignData: collectForeignData(props.fields) }

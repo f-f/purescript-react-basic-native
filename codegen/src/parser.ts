@@ -1,7 +1,7 @@
 import * as ts from "typescript"
 
 import { fieldTypeNameReplacements } from "./consts"
-import { fieldCompare, FieldType, Field, InterfaceMap, Props } from "./types"
+import { fieldCompare, BaseInterface, FieldType, Field, InterfaceMap, Props } from "./types"
 import { capitalize } from "./utils"
 
 const filterTypes = (kind: ts.SyntaxKind) => <T>(top: ts.Node): Array<T> => {
@@ -194,8 +194,9 @@ const handleTypes = (interfaceName: string) => (fieldName: string) =>  (type: ts
   }
 }
 
-export const handleInterface = (interfaceMap: InterfaceMap) => (int: ts.InterfaceDeclaration): Props => {
- 
+export const handleInterface = (interfaceMap: InterfaceMap) => (bi: BaseInterface): Props => {
+  const int = bi.iface
+
   const getParents = (): Props[] => {
     const array: Props[] = []
     if(int.heritageClauses !== undefined){
@@ -203,7 +204,10 @@ export const handleInterface = (interfaceMap: InterfaceMap) => (int: ts.Interfac
         clause.types.forEach((type) => {
           const name = getExpressionName(type.expression)
           const maybeInterface = interfaceMap[name]
-          if(maybeInterface) array.push(handleInterface(interfaceMap)(maybeInterface))
+          if(maybeInterface) array.push(handleInterface(interfaceMap)({
+            iface: maybeInterface,
+            classNames: []
+          }))
         })
       })
     }
@@ -241,27 +245,35 @@ export const handleInterface = (interfaceMap: InterfaceMap) => (int: ts.Interfac
     return uniques
   }
 
-   
   const fields = uniqueFields(allFields).sort(fieldCompare)
+  const classNames = bi.classNames
 
-
-  return { name: interfaceName, fields }
+  return { name: interfaceName, fields, classNames }
 }
 
-export const getBaseInterfaces = (interfaceMap: InterfaceMap, root: ts.Node): ts.InterfaceDeclaration[] => {
-  const names: string[] = []
+export const getBaseInterfaces = (interfaceMap: InterfaceMap, root: ts.Node): BaseInterface[] => {
+  const entries: { [key: string]: BaseInterface } = {}
   const classes: ts.ClassDeclaration[] = filterTypes(ts.SyntaxKind.ClassDeclaration)(root)
   classes.forEach((c) => {
-    if(c.heritageClauses && c.heritageClauses[0]){
+    if(c.heritageClauses && c.heritageClauses[0] && c.name){
       const clause = c.heritageClauses[0]
       if(clause.types[0].typeArguments && clause.types[0].typeArguments && clause.types[0].typeArguments[0]){
         const type = clause.types[0].typeArguments[0]
         if(ts.isTypeReferenceNode(type) && ts.isIdentifier(type.typeName)){
+          const className = c.name.escapedText.toString()
           const interfaceName = type.typeName.escapedText.toString()
-          names.push(interfaceName) 
+
+          if (entries[interfaceName]) {
+            entries[interfaceName].classNames.push(className)
+          } else if (interfaceMap[interfaceName]) {
+            entries[interfaceName] = {
+              iface: interfaceMap[interfaceName],
+              classNames: [className]
+            }
+          }
         }
       }
     }
   })
-  return names.filter((name, i) => names.indexOf(name) == i && interfaceMap[name]).map((name) => interfaceMap[name])
+  return Object.keys(entries).map(key => entries[key])
 }
