@@ -7,11 +7,14 @@ export const fieldTypeNameReplacements: {[key:string]:string;} =
     "StyleProp" : "CSS",
     "ScrollViewProps" : "(Record ScrollViewProps)",
     "(ComponentType.React Any)" : "JSX",
-    "ReadonlyArray" : "Array"
+    "ReadonlyArray" : "Array",
+    "IndexSignature": "(Object Foreign)",
+    "Object": "(Object Foreign)",
+    "ObjectType": "(Object Foreign)"
   }
 
 export const ignoreForeignDataList: string[] =
-  [ "Array", "CSS", "Date", "Element.JSX", "JSDate", "JSX", "StyleProp", "(Record ScrollViewProps)", "ReactElement.React", "iTemT" ]
+  [ "Array", "CSS", "Date", "Element.JSX", "JSDate", "JSX", "StyleProp", "(Record ScrollViewProps)", "ReactElement.React", "iTemT", "itemT", "ComponentType.React", "Any", "(Object Foreign)" ]
 
 export const noChildren: string[] =
   [ "button" ]

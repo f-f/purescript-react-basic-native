@@ -27,7 +27,7 @@ const writeOptionalType = (props: Props) => (fields: Field[]): string =>
   )`
 
 const writeRequiredType = (props: Props) => (fields: Field[]): string => 
-  `type ${props.name}_required optional ${typeVariables(props)}= 
+  `type ${props.name}_required ${typeVariables(props)} optional = 
   ( ${fields.map(writeField).join("\n  , ")}
   | optional
   )`
@@ -41,10 +41,10 @@ const writeSingleType = (typeName: string) => (props: Props) => (fields: Field[]
 const writeRequiredFn = (returnType: string ) => (functionBody: string) => (props : Props): string => 
   `${functionName(props)}
   :: ∀ attrs attrs_ ${typeVariables(props)}
-  . Union attrs attrs_ ${props.name}_optional
+  . Union attrs attrs_ (${props.name}_optional ${typeVariables(props)})
   => Record ((${props.name}_required ${typeVariables(props)}) attrs)
   -> ${returnType}
-  ${functionBody}`
+${functionBody}`
 
 const writeOptionalFn = (recordName: string) => (returnType: string) => (functionBody: string) => (props: Props): string =>
   `${functionName(props)}
@@ -52,15 +52,14 @@ const writeOptionalFn = (recordName: string) => (returnType: string) => (functio
   . Union attrs attrs_ (${recordName} ${typeVariables(props)})
   => Record attrs
   -> ${returnType} 
-  ${functionBody}
+${functionBody}
  ` 
 
 const writeOptionalChildren = (props: Props): string =>
   `${functionName(props)}_ :: Array JSX -> JSX
 ${functionName(props)}_ children = ${functionName(props)} { children }`
 
-export const writeProps = (props: Props) : WrittenProps => {
-
+const writeComponentProps = (props: Props): WrittenProps => {
   const optionalFields = props.fields.filter((field) => field.isOptional || field.fieldType.isOptional)
   const requiredFields = props.fields.filter((field) => !field.isOptional)
 
@@ -83,6 +82,31 @@ export const writeProps = (props: Props) : WrittenProps => {
 
   return { fns, props: propsStrs, foreignData: collectForeignData(props.fields) }
 }
+
+export const writeOtherProps = (props: Props): WrittenProps => {
+
+  const optionalFields = props.fields.filter((field) => field.isOptional || field.fieldType.isOptional)
+  const requiredFields = props.fields.filter((field) => !field.isOptional)
+
+  const formatField = (str: string): string => {
+    const tokens = str.split("::")
+    return tokens[0] + " :: (Undefinable " + tokens.slice(1).join("::") + ")"
+  }
+
+  const record = props.name === "NativeTouchEvent"
+    ? `newtype NativeTouchEvent = NativeTouchEvent {
+    ${props.fields.map(field => field.isOptional ? formatField(writeField(field)) : writeField(field)).join("\n  , ")}
+}`
+    : `type ${props.name} ${typeVariables(props)}= {
+    ${props.fields.map(field => field.isOptional ? formatField(writeField(field)) : writeField(field)).join("\n  , ")}
+}`
+    
+  return {fns: [], props: [record], foreignData: collectForeignData(props.fields)}
+}
+
+export const writeProps = (props: Props) : WrittenProps =>
+  props.isComponentProps ? writeComponentProps(props) : writeOtherProps(props)
+
 
 export const writeForeignDataTypes = (props: Props): WrittenProps => {
 
@@ -125,12 +149,18 @@ module React.Basic.Native.Generated where
 import Prelude
 
 import Data.JSDate (JSDate)
+import Data.Undefinable (Undefinable)
 import Effect (Effect)
 import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4)
+import Foreign (Foreign)
+import Foreign.Object (Object)
 import Prim.Row (class Union)
 import React.Basic (JSX)
 import React.Basic.DOM.Internal (CSS)
 import React.Basic.Events (EventHandler)
 import React.Basic.Native.Internal (unsafeCreateNativeElement)
+import Unsafe.Coerce (unsafeCoerce)
+
+foreign import data Any :: Type
 
 `

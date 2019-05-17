@@ -15,7 +15,7 @@
   "repository": {},
   "license": "MIT",
   "dependencies": {
-    "@types/react-native": "^0.57.34"
+    "@types/react-native": "^0.57.57"
   },
   "devDependencies": {
     "@types/node": "7.0.4",
