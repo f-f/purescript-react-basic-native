@@ -236,7 +236,7 @@ WebViewProps source [ { name: 'WebViewUriSource',
   { name: 'Number' } ]
  */
 
-  console.log(remainingTypes)
+  //  console.log(remainingTypes)
 
   const name = (interfaceName + capitalize(fieldName))
   const fieldType = { name, foreignData : [ name ], isOptional }

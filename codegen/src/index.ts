@@ -30,11 +30,11 @@ export const writtenForeignData = writeForeignData(props).join("\n")
 export const writtenProps = props.map(writeProps(false))
 const foreignData: string[] = collectForeignData(([] as Field[]).concat(...props.map((prop) => prop.fields)))
 const foo = foreignData.filter(d => interfaceMap[d] === undefined)
-console.log("foreignData", foreignData.length)
-console.log("foo", foo.length)
-console.log("foo", foo)
-top
-/*
+//console.log("foreignData", foreignData.length)
+//console.log("foo", foo.length)
+//console.log("foo", foo)
+//top
+
 console.log(top)
 console.log(writtenForeignData, "\n\n")
 writtenProps.forEach((p) => {
@@ -43,7 +43,7 @@ writtenProps.forEach((p) => {
     console.log(p.fns.join("\n\n"))
     console.log("\n")
 })
-*/
+
 
 //const e = interfaceMap["FlatListProps"]
 //console.log(writeProps(true)(handleInterface(interfaceMap)(e)).props[0])

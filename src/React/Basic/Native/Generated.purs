@@ -16,114 +16,49 @@ import React.Basic.Events (EventHandler)
 import React.Basic.Native.Internal (unsafeCreateNativeElement)
 
 
-foreign import data ARTRenderableMixinStrokeCap :: Type
-foreign import data ARTRenderableMixinStrokeJoin :: Type
-foreign import data AccessibilityPropsAndroidAccessibilityComponentType :: Type
-foreign import data AccessibilityPropsAndroidAccessibilityLiveRegion :: Type
-foreign import data AccessibilityPropsAndroidImportantForAccessibility :: Type
-foreign import data AccessibilityPropsIOSAccessibilityTraits :: Type
-foreign import data AccessibilityRole :: Type
-foreign import data AccessibilityState :: Type
-foreign import data ActivityIndicatorIOSPropsSize :: Type
-foreign import data ActivityIndicatorPropsSize :: Type
 foreign import data Any :: Type
 foreign import data BackgroundPropType :: Type
-foreign import data DatePickerIOSPropsMinuteInterval :: Type
-foreign import data DatePickerIOSPropsMode :: Type
 foreign import data DocumentSelectionState :: Type
-foreign import data DrawerLayoutAndroidPropsDrawerLockMode :: Type
-foreign import data DrawerLayoutAndroidPropsKeyboardDismissMode :: Type
-foreign import data DrawerLayoutAndroidPropsOnDrawerStateChanged :: Type
 foreign import data DrawerSlideEvent :: Type
-foreign import data FlatListPropsData :: Type
-foreign import data FlatListPropsGetItemLayout :: Type
-foreign import data FlatListPropsItemSeparatorComponent :: Type
-foreign import data FlatListPropsKeyboardShouldPersistTaps :: Type
-foreign import data FlatListPropsListEmptyComponent :: Type
-foreign import data FlatListPropsListFooterComponent :: Type
-foreign import data FlatListPropsListHeaderComponent :: Type
-foreign import data FlatListPropsOnEndReached :: Type
-foreign import data FlatListPropsOnEndReachedThreshold :: Type
-foreign import data FlatListPropsOnRefresh :: Type
-foreign import data FlatListPropsOnViewableItemsChanged :: Type
-foreign import data FlatListPropsRefreshing :: Type
 foreign import data GestureResponderEvent :: Type
 foreign import data ImageErrorEventData :: Type
 foreign import data ImageLoadEventData :: Type
 foreign import data ImageProgressEventDataIOS :: Type
-foreign import data ImagePropsBaseDefaultSource :: Type
-foreign import data ImagePropsBaseResizeMethod :: Type
-foreign import data ImageResizeMode :: Type
-foreign import data ImageSourcePropType :: Type
 foreign import data ImageURISource :: Type
 foreign import data IndexSignature :: Type
 foreign import data Insets :: Type
-foreign import data ItemT :: Type
-foreign import data KeyboardAvoidingViewPropsBehavior :: Type
-foreign import data KeyboardTypeOptions :: Type
 foreign import data LayoutChangeEvent :: Type
-foreign import data ListRenderItem :: Type
+foreign import data ListRenderItemInfo :: Type
 foreign import data ListViewDataSource :: Type
 foreign import data MapViewAnnotation :: Type
 foreign import data MapViewOverlay :: Type
-foreign import data MapViewPropsMapType :: Type
 foreign import data MapViewRegion :: Type
 foreign import data NativeScrollEvent :: Type
 foreign import data NativeSegmentedControlIOSChangeEvent :: Type
 foreign import data NativeSyntheticEvent :: Type
 foreign import data NativeTouchEvent :: Type
 foreign import data NavState :: Type
-foreign import data PickerPropsAndroidMode :: Type
 foreign import data PointPropType :: Type
-foreign import data ProgressBarAndroidPropsStyleAttr :: Type
-foreign import data ProgressViewIOSPropsProgressImage :: Type
-foreign import data ProgressViewIOSPropsProgressViewStyle :: Type
-foreign import data ProgressViewIOSPropsTrackImage :: Type
-foreign import data ReturnKeyTypeOptions :: Type
 foreign import data Route :: Type
-foreign import data ScrollViewPropsAndroidOverScrollMode :: Type
-foreign import data ScrollViewPropsIOSContentInsetAdjustmentBehavior :: Type
-foreign import data ScrollViewPropsIOSDecelerationRate :: Type
-foreign import data ScrollViewPropsIOSIndicatorStyle :: Type
-foreign import data ScrollViewPropsIOSSnapToAlignment :: Type
-foreign import data ScrollViewPropsKeyboardDismissMode :: Type
-foreign import data ScrollViewPropsKeyboardShouldPersistTaps :: Type
-foreign import data StatusBarPropsIOSShowHideTransition :: Type
-foreign import data StatusBarStyle :: Type
 foreign import data SwipeableListViewDataSource :: Type
-foreign import data TabBarIOSItemPropsSystemIcon :: Type
-foreign import data TabBarIOSPropsItemPositioning :: Type
-foreign import data TextInputAndroidPropsTextBreakStrategy :: Type
+foreign import data TargetedEvent :: Type
 foreign import data TextInputChangeEventData :: Type
 foreign import data TextInputContentSizeChangeEventData :: Type
 foreign import data TextInputEndEditingEventData :: Type
 foreign import data TextInputFocusEventData :: Type
-foreign import data TextInputIOSPropsClearButtonMode :: Type
-foreign import data TextInputIOSPropsDataDetectorTypes :: Type
-foreign import data TextInputIOSPropsKeyboardAppearance :: Type
-foreign import data TextInputIOSPropsTextContentType :: Type
 foreign import data TextInputKeyPressEventData :: Type
-foreign import data TextInputPropsAutoCapitalize :: Type
 foreign import data TextInputScrollEventData :: Type
 foreign import data TextInputSelectionChangeEventData :: Type
 foreign import data TextInputSubmitEditingEventData :: Type
-foreign import data TextPropsAndroidTextBreakStrategy :: Type
-foreign import data TextPropsEllipsizeMode :: Type
-foreign import data TextPropsLineBreakMode :: Type
-foreign import data ToolbarAndroidAction :: Type
 foreign import data ViewPagerAndroidOnPageScrollEventData :: Type
 foreign import data ViewPagerAndroidOnPageSelectedEventData :: Type
-foreign import data ViewPagerAndroidPropsKeyboardDismissMode :: Type
-foreign import data ViewPagerAndroidPropsOnPageScrollStateChanged :: Type
-foreign import data ViewPropsPointerEvents :: Type
-foreign import data ViewabilityConfigCallbackPairs :: Type
+foreign import data ViewToken :: Type
+foreign import data ViewabilityConfigCallbackPair :: Type
 foreign import data WebViewIOSLoadRequestEvent :: Type
 foreign import data WebViewMessageEventData :: Type
 foreign import data WebViewNativeConfig :: Type
-foreign import data WebViewPropsAndroidMixedContentMode :: Type
-foreign import data WebViewPropsIOSDataDetectorTypes :: Type
-foreign import data WebViewPropsIOSDecelerationRate :: Type
-foreign import data WebViewPropsSource :: Type 
+foreign import data WebViewPropsSource :: Type
+foreign import data itemT :: Type 
 
 
 type ARTClippingRectangleProps  = 
@@ -182,7 +117,7 @@ aRTGroup_ :: Array JSX -> JSX
 aRTGroup_ children = aRTGroup { children }
 
 
-type ARTShapeProps_optional = 
+type ARTShapeProps_optional  = 
   ( fill :: String
   , height :: Number
   , opacity :: Number
@@ -192,9 +127,9 @@ type ARTShapeProps_optional =
   , scaleX :: Number
   , scaleY :: Number
   , stroke :: String
-  , strokeCap :: ARTRenderableMixinStrokeCap
+  , strokeCap :: String
   , strokeDash :: (Array Number)
-  , strokeJoin :: ARTRenderableMixinStrokeJoin
+  , strokeJoin :: String
   , strokeWidth :: Number
   , title :: String
   , visible :: Boolean
@@ -204,7 +139,7 @@ type ARTShapeProps_optional =
   , children :: Array JSX
   )
 
-type ARTShapeProps_required optional = 
+type ARTShapeProps_required optional  = 
   ( d :: String
   | optional
   )
@@ -218,12 +153,12 @@ aRTShape
 aRTShape props = unsafeCreateNativeElement "ARTShape" props
 
 
-type ARTSurfaceProps_optional = 
+type ARTSurfaceProps_optional  = 
   ( style :: CSS
   , children :: Array JSX
   )
 
-type ARTSurfaceProps_required optional = 
+type ARTSurfaceProps_required optional  = 
   ( height :: Number
   , width :: Number
   | optional
@@ -249,9 +184,9 @@ type ARTTextProps  =
   , scaleX :: Number
   , scaleY :: Number
   , stroke :: String
-  , strokeCap :: ARTRenderableMixinStrokeCap
+  , strokeCap :: String
   , strokeDash :: (Array Number)
-  , strokeJoin :: ARTRenderableMixinStrokeJoin
+  , strokeJoin :: String
   , strokeWidth :: Number
   , title :: String
   , visible :: Boolean
@@ -274,23 +209,25 @@ aRTText_ children = aRTText { children }
 
 type ActivityIndicatorIOSProps  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , animating :: Boolean
   , collapsable :: Boolean
   , color :: String
+  , hasTVPreferredFocus :: Boolean
   , hidesWhenStopped :: Boolean
   , hitSlop :: Insets
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
+  , isTVSelectable :: Boolean
   , nativeID :: String
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
@@ -314,13 +251,18 @@ type ActivityIndicatorIOSProps  =
   , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
   , shouldRasterizeIOS :: Boolean
-  , size :: ActivityIndicatorIOSPropsSize
+  , size :: String
   , style :: CSS
   , testID :: String
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , children :: Array JSX
   )
 
@@ -338,23 +280,25 @@ activityIndicatorIOS_ children = activityIndicatorIOS { children }
 
 type ActivityIndicatorProps  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , animating :: Boolean
   , collapsable :: Boolean
   , color :: String
+  , hasTVPreferredFocus :: Boolean
   , hidesWhenStopped :: Boolean
   , hitSlop :: Insets
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
+  , isTVSelectable :: Boolean
   , nativeID :: String
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
@@ -378,13 +322,18 @@ type ActivityIndicatorProps  =
   , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
   , shouldRasterizeIOS :: Boolean
-  , size :: ActivityIndicatorPropsSize
+  , size :: String
   , style :: CSS
   , testID :: String
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , children :: Array JSX
   )
 
@@ -400,14 +349,14 @@ activityIndicator_ :: Array JSX -> JSX
 activityIndicator_ children = activityIndicator { children }
 
 
-type ButtonProps_optional = 
+type ButtonProps_optional  = 
   ( accessibilityLabel :: String
   , color :: String
   , disabled :: Boolean
   , testID :: String
   )
 
-type ButtonProps_required optional = 
+type ButtonProps_required optional  = 
   ( onPress :: (EffectFn1 (NativeSyntheticEvent NativeTouchEvent) Unit)
   , title :: String
   | optional
@@ -422,27 +371,100 @@ button
 button props = unsafeCreateNativeElement "Button" props
 
 
-type DatePickerIOSProps_optional = 
+type CheckBoxProps  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
+  , disabled :: Boolean
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
+  , isTVSelectable :: Boolean
+  , nativeID :: String
+  , needsOffscreenAlphaCompositing :: Boolean
+  , onAccessibilityAction :: (Effect Unit)
+  , onAccessibilityTap :: (Effect Unit)
+  , onChange :: (EffectFn1 Boolean Unit)
+  , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
+  , onMagicTap :: (Effect Unit)
+  , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
+  , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
+  , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
+  , onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
+  , onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
+  , onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
+  , onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
+  , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
+  , onValueChange :: (EffectFn1 Boolean Unit)
+  , pointerEvents :: String
+  , removeClippedSubviews :: Boolean
+  , renderToHardwareTextureAndroid :: Boolean
+  , shouldRasterizeIOS :: Boolean
+  , style :: CSS
+  , testID :: String
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
+  , value :: Boolean
+  , children :: Array JSX
+  )
+
+
+checkBox
+  :: ∀ attrs attrs_
+  . Union attrs attrs_ CheckBoxProps
+  => Record attrs
+  -> JSX
+checkBox props = unsafeCreateNativeElement "CheckBox" props
+
+checkBox_ :: Array JSX -> JSX
+checkBox_ children = checkBox { children }
+
+
+type DatePickerIOSProps_optional  = 
+  ( accessibilityActions :: (Array String)
+  , accessibilityComponentType :: String
+  , accessibilityElementsHidden :: Boolean
+  , accessibilityHint :: String
+  , accessibilityIgnoresInvertColors :: Boolean
+  , accessibilityLabel :: String
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
+  , accessibilityViewIsModal :: Boolean
+  , accessible :: Boolean
+  , collapsable :: Boolean
+  , hasTVPreferredFocus :: Boolean
+  , hitSlop :: Insets
+  , importantForAccessibility :: String
+  , isTVSelectable :: Boolean
   , locale :: String
   , maximumDate :: JSDate
   , minimumDate :: JSDate
-  , minuteInterval :: DatePickerIOSPropsMinuteInterval
-  , mode :: DatePickerIOSPropsMode
+  , minuteInterval :: Number
+  , mode :: String
   , nativeID :: String
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
@@ -466,17 +488,22 @@ type DatePickerIOSProps_optional =
   , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
   , shouldRasterizeIOS :: Boolean
   , style :: CSS
   , testID :: String
   , timeZoneOffsetInMinutes :: Number
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , children :: Array JSX
   )
 
-type DatePickerIOSProps_required optional = 
+type DatePickerIOSProps_required optional  = 
   ( date :: JSDate
   , onDateChange :: (EffectFn1 JSDate Unit)
   | optional
@@ -491,27 +518,29 @@ datePickerIOS
 datePickerIOS props = unsafeCreateNativeElement "DatePickerIOS" props
 
 
-type DrawerLayoutAndroidProps_optional = 
+type DrawerLayoutAndroidProps_optional  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
   , drawerBackgroundColor :: String
-  , drawerLockMode :: DrawerLayoutAndroidPropsDrawerLockMode
+  , drawerLockMode :: String
   , drawerPosition :: Number
   , drawerWidth :: Number
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
-  , keyboardDismissMode :: DrawerLayoutAndroidPropsKeyboardDismissMode
+  , importantForAccessibility :: String
+  , isTVSelectable :: Boolean
+  , keyboardDismissMode :: String
   , nativeID :: String
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
@@ -519,7 +548,7 @@ type DrawerLayoutAndroidProps_optional =
   , onDrawerClose :: (Effect Unit)
   , onDrawerOpen :: (Effect Unit)
   , onDrawerSlide :: (EffectFn1 DrawerSlideEvent Unit)
-  , onDrawerStateChanged :: (EffectFn1 DrawerLayoutAndroidPropsOnDrawerStateChanged Unit)
+  , onDrawerStateChanged :: (EffectFn1 String Unit)
   , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
@@ -539,17 +568,22 @@ type DrawerLayoutAndroidProps_optional =
   , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
   , shouldRasterizeIOS :: Boolean
   , statusBarBackgroundColor :: String
   , style :: CSS
   , testID :: String
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , children :: Array JSX
   )
 
-type DrawerLayoutAndroidProps_required optional = 
+type DrawerLayoutAndroidProps_required optional  = 
   ( renderNavigationView :: (Effect JSX)
   | optional
   )
@@ -563,21 +597,21 @@ drawerLayoutAndroid
 drawerLayoutAndroid props = unsafeCreateNativeElement "DrawerLayoutAndroid" props
 
 
-type FlatListProps_optional = 
-  ( "ItemSeparatorComponent" :: FlatListPropsItemSeparatorComponent
-  , "ListEmptyComponent" :: FlatListPropsListEmptyComponent
-  , "ListFooterComponent" :: FlatListPropsListFooterComponent
-  , "ListHeaderComponent" :: FlatListPropsListHeaderComponent
+type FlatListProps_optional itemT = 
+  ( "ItemSeparatorComponent" :: JSX
+  , "ListEmptyComponent" :: JSX
+  , "ListFooterComponent" :: JSX
+  , "ListHeaderComponent" :: JSX
   , accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , alwaysBounceHorizontal :: Boolean
@@ -591,28 +625,30 @@ type FlatListProps_optional =
   , columnWrapperStyle :: CSS
   , contentContainerStyle :: CSS
   , contentInset :: Insets
-  , contentInsetAdjustmentBehavior :: ScrollViewPropsIOSContentInsetAdjustmentBehavior
+  , contentInsetAdjustmentBehavior :: String
   , contentOffset :: PointPropType
   , debug :: Boolean
-  , decelerationRate :: ScrollViewPropsIOSDecelerationRate
+  , decelerationRate :: String
   , directionalLockEnabled :: Boolean
   , disableVirtualization :: Boolean
   , endFillColor :: String
   , extraData :: Any
-  , getItem :: (EffectFn2 Any Number ItemT)
+  , getItem :: (EffectFn2 Any Number itemT)
   , getItemCount :: (EffectFn1 Any Number)
-  , getItemLayout :: (EffectFn2 FlatListPropsGetItemLayout Number { length :: Number, offset :: Number, index :: Number })
+  , getItemLayout :: (EffectFn2 (Array itemT) Number { length :: Number, offset :: Number, index :: Number })
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
   , horizontal :: Boolean
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
-  , indicatorStyle :: ScrollViewPropsIOSIndicatorStyle
+  , importantForAccessibility :: String
+  , indicatorStyle :: String
   , initialNumToRender :: Number
   , initialScrollIndex :: Number
   , invertStickyHeaders :: Boolean
   , inverted :: Boolean
-  , keyExtractor :: (EffectFn2 ItemT Number String)
-  , keyboardDismissMode :: ScrollViewPropsKeyboardDismissMode
-  , keyboardShouldPersistTaps :: FlatListPropsKeyboardShouldPersistTaps
+  , isTVSelectable :: Boolean
+  , keyExtractor :: (EffectFn2 itemT Number String)
+  , keyboardDismissMode :: String
+  , keyboardShouldPersistTaps :: String
   , legacyImplementation :: Boolean
   , listKey :: String
   , maxToRenderPerBatch :: Number
@@ -625,15 +661,15 @@ type FlatListProps_optional =
   , onAccessibilityAction :: (Effect Unit)
   , onAccessibilityTap :: (Effect Unit)
   , onContentSizeChange :: (EffectFn2 Number Number Unit)
-  , onEndReached :: FlatListPropsOnEndReached
-  , onEndReachedThreshold :: FlatListPropsOnEndReachedThreshold
+  , onEndReached :: ((EffectFn1 { distanceFromEnd :: Number } Unit))
+  , onEndReachedThreshold :: String
   , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onMagicTap :: (Effect Unit)
   , onMomentumScrollBegin :: (EffectFn1 (NativeSyntheticEvent NativeScrollEvent) Unit)
   , onMomentumScrollEnd :: (EffectFn1 (NativeSyntheticEvent NativeScrollEvent) Unit)
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  , onRefresh :: FlatListPropsOnRefresh
+  , onRefresh :: ((Effect Unit))
   , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
@@ -654,14 +690,14 @@ type FlatListProps_optional =
   , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
-  , onViewableItemsChanged :: FlatListPropsOnViewableItemsChanged
-  , overScrollMode :: ScrollViewPropsAndroidOverScrollMode
+  , onViewableItemsChanged :: ((EffectFn1 { viewableItems :: (Array ViewToken), changed :: (Array ViewToken) } Unit))
+  , overScrollMode :: String
   , pagingEnabled :: Boolean
   , pinchGestureEnabled :: Boolean
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , progressViewOffset :: Number
   , refreshControl :: JSX
-  , refreshing :: FlatListPropsRefreshing
+  , refreshing :: String
   , removeClippedSubviews :: Boolean
   , renderScrollComponent :: (EffectFn1 (Record ScrollViewProps) JSX)
   , renderToHardwareTextureAndroid :: Boolean
@@ -673,22 +709,30 @@ type FlatListProps_optional =
   , shouldRasterizeIOS :: Boolean
   , showsHorizontalScrollIndicator :: Boolean
   , showsVerticalScrollIndicator :: Boolean
-  , snapToAlignment :: ScrollViewPropsIOSSnapToAlignment
+  , snapToAlignment :: String
+  , snapToEnd :: Boolean
   , snapToInterval :: Number
+  , snapToOffsets :: (Array Number)
+  , snapToStart :: Boolean
   , stickyHeaderIndices :: (Array Number)
   , style :: CSS
   , testID :: String
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , updateCellsBatchingPeriod :: Number
   , viewabilityConfig :: Any
-  , viewabilityConfigCallbackPairs :: ViewabilityConfigCallbackPairs
+  , viewabilityConfigCallbackPairs :: (Array ViewabilityConfigCallbackPair)
   , windowSize :: Number
   , zoomScale :: Number
   , children :: Array JSX
   )
 
-type FlatListProps_required optional = 
-  ( data :: FlatListPropsData
-  , renderItem :: ListRenderItem
+type FlatListProps_required optional itemT = 
+  ( data :: (Array itemT)
+  , renderItem :: (EffectFn1 (ListRenderItemInfo itemT) JSX)
   | optional
   )
 
@@ -701,16 +745,16 @@ flatList
 flatList props = unsafeCreateNativeElement "FlatList" props
 
 
-type ImageBackgroundProps_optional = 
-  ( accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+type ImageBackgroundProps_optional  = 
+  ( accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessible :: Boolean
   , blurRadius :: Number
   , borderBottomLeftRadius :: Number
@@ -719,11 +763,11 @@ type ImageBackgroundProps_optional =
   , borderTopLeftRadius :: Number
   , borderTopRightRadius :: Number
   , capInsets :: Insets
-  , defaultSource :: ImagePropsBaseDefaultSource
+  , defaultSource :: ImageURISource
   , fadeDuration :: Number
   , height :: Number
   , imageStyle :: CSS
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
   , loadingIndicatorSource :: ImageURISource
   , onAccessibilityTap :: (Effect Unit)
   , onError :: (EffectFn1 (NativeSyntheticEvent ImageErrorEventData) Unit)
@@ -735,16 +779,16 @@ type ImageBackgroundProps_optional =
   , onPartialLoad :: (Effect Unit)
   , onProgress :: (EffectFn1 (NativeSyntheticEvent ImageProgressEventDataIOS) Unit)
   , progressiveRenderingEnabled :: Boolean
-  , resizeMethod :: ImagePropsBaseResizeMethod
-  , resizeMode :: ImageResizeMode
+  , resizeMethod :: String
+  , resizeMode :: String
   , style :: CSS
   , testID :: String
   , width :: Number
   , children :: Array JSX
   )
 
-type ImageBackgroundProps_required optional = 
-  ( source :: ImageSourcePropType
+type ImageBackgroundProps_required optional  = 
+  ( source :: (Array ImageURISource)
   | optional
   )
 
@@ -757,16 +801,16 @@ imageBackground
 imageBackground props = unsafeCreateNativeElement "ImageBackground" props
 
 
-type ImageProps_optional = 
-  ( accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+type ImageProps_optional  = 
+  ( accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessible :: Boolean
   , blurRadius :: Number
   , borderBottomLeftRadius :: Number
@@ -775,10 +819,10 @@ type ImageProps_optional =
   , borderTopLeftRadius :: Number
   , borderTopRightRadius :: Number
   , capInsets :: Insets
-  , defaultSource :: ImagePropsBaseDefaultSource
+  , defaultSource :: ImageURISource
   , fadeDuration :: Number
   , height :: Number
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
   , loadingIndicatorSource :: ImageURISource
   , onAccessibilityTap :: (Effect Unit)
   , onError :: (EffectFn1 (NativeSyntheticEvent ImageErrorEventData) Unit)
@@ -790,16 +834,16 @@ type ImageProps_optional =
   , onPartialLoad :: (Effect Unit)
   , onProgress :: (EffectFn1 (NativeSyntheticEvent ImageProgressEventDataIOS) Unit)
   , progressiveRenderingEnabled :: Boolean
-  , resizeMethod :: ImagePropsBaseResizeMethod
-  , resizeMode :: ImageResizeMode
+  , resizeMethod :: String
+  , resizeMode :: String
   , style :: CSS
   , testID :: String
   , width :: Number
   , children :: Array JSX
   )
 
-type ImageProps_required optional = 
-  ( source :: ImageSourcePropType
+type ImageProps_required optional  = 
+  ( source :: (Array ImageURISource)
   | optional
   )
 
@@ -833,23 +877,25 @@ inputAccessoryView_ children = inputAccessoryView { children }
 
 type KeyboardAvoidingViewProps  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
-  , behavior :: KeyboardAvoidingViewPropsBehavior
+  , behavior :: String
   , collapsable :: Boolean
   , contentContainerStyle :: CSS
   , enabled :: Boolean
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
+  , isTVSelectable :: Boolean
   , keyboardVerticalOffset :: Number
   , nativeID :: String
   , needsOffscreenAlphaCompositing :: Boolean
@@ -874,12 +920,17 @@ type KeyboardAvoidingViewProps  =
   , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
   , shouldRasterizeIOS :: Boolean
   , style :: CSS
   , testID :: String
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , children :: Array JSX
   )
 
@@ -895,17 +946,17 @@ keyboardAvoidingView_ :: Array JSX -> JSX
 keyboardAvoidingView_ children = keyboardAvoidingView { children }
 
 
-type ListViewProps_optional = 
+type ListViewProps_optional  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , alwaysBounceHorizontal :: Boolean
@@ -918,20 +969,22 @@ type ListViewProps_optional =
   , collapsable :: Boolean
   , contentContainerStyle :: CSS
   , contentInset :: Insets
-  , contentInsetAdjustmentBehavior :: ScrollViewPropsIOSContentInsetAdjustmentBehavior
+  , contentInsetAdjustmentBehavior :: String
   , contentOffset :: PointPropType
-  , decelerationRate :: ScrollViewPropsIOSDecelerationRate
+  , decelerationRate :: String
   , directionalLockEnabled :: Boolean
   , enableEmptySections :: Boolean
   , endFillColor :: String
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
   , horizontal :: Boolean
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
-  , indicatorStyle :: ScrollViewPropsIOSIndicatorStyle
+  , importantForAccessibility :: String
+  , indicatorStyle :: String
   , initialListSize :: Number
   , invertStickyHeaders :: Boolean
-  , keyboardDismissMode :: ScrollViewPropsKeyboardDismissMode
-  , keyboardShouldPersistTaps :: ScrollViewPropsKeyboardShouldPersistTaps
+  , isTVSelectable :: Boolean
+  , keyboardDismissMode :: String
+  , keyboardShouldPersistTaps :: String
   , maximumZoomScale :: Number
   , minimumZoomScale :: Number
   , nativeID :: String
@@ -968,11 +1021,11 @@ type ListViewProps_optional =
   , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
-  , overScrollMode :: ScrollViewPropsAndroidOverScrollMode
+  , overScrollMode :: String
   , pageSize :: Number
   , pagingEnabled :: Boolean
   , pinchGestureEnabled :: Boolean
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , refreshControl :: JSX
   , removeClippedSubviews :: Boolean
   , renderFooter :: (Effect JSX)
@@ -990,17 +1043,25 @@ type ListViewProps_optional =
   , shouldRasterizeIOS :: Boolean
   , showsHorizontalScrollIndicator :: Boolean
   , showsVerticalScrollIndicator :: Boolean
-  , snapToAlignment :: ScrollViewPropsIOSSnapToAlignment
+  , snapToAlignment :: String
+  , snapToEnd :: Boolean
   , snapToInterval :: Number
+  , snapToOffsets :: (Array Number)
+  , snapToStart :: Boolean
   , stickyHeaderIndices :: (Array Number)
   , stickySectionHeadersEnabled :: Boolean
   , style :: CSS
   , testID :: String
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , zoomScale :: Number
   , children :: Array JSX
   )
 
-type ListViewProps_required optional = 
+type ListViewProps_required optional  = 
   ( dataSource :: ListViewDataSource
   , renderRow :: (EffectFn4 Any String String Boolean JSX)
   | optional
@@ -1017,24 +1078,26 @@ listView props = unsafeCreateNativeElement "ListView" props
 
 type MapViewProps  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , annotations :: (Array MapViewAnnotation)
   , collapsable :: Boolean
   , followUserLocation :: Boolean
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
+  , isTVSelectable :: Boolean
   , legalLabelInsets :: Insets
-  , mapType :: MapViewPropsMapType
+  , mapType :: String
   , maxDelta :: Number
   , minDelta :: Number
   , nativeID :: String
@@ -1065,7 +1128,7 @@ type MapViewProps  =
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , overlays :: (Array MapViewOverlay)
   , pitchEnabled :: Boolean
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , region :: MapViewRegion
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
@@ -1077,6 +1140,11 @@ type MapViewProps  =
   , showsUserLocation :: Boolean
   , style :: CSS
   , testID :: String
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , zoomEnabled :: Boolean
   , children :: Array JSX
   )
@@ -1093,22 +1161,24 @@ mapView_ :: Array JSX -> JSX
 mapView_ children = mapView { children }
 
 
-type MaskedViewIOSProps_optional = 
+type MaskedViewIOSProps_optional  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
+  , isTVSelectable :: Boolean
   , nativeID :: String
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
@@ -1132,16 +1202,21 @@ type MaskedViewIOSProps_optional =
   , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
   , shouldRasterizeIOS :: Boolean
   , style :: CSS
   , testID :: String
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , children :: Array JSX
   )
 
-type MaskedViewIOSProps_required optional = 
+type MaskedViewIOSProps_required optional  = 
   ( maskElement :: JSX
   | optional
   )
@@ -1155,7 +1230,7 @@ maskedViewIOS
 maskedViewIOS props = unsafeCreateNativeElement "MaskedViewIOS" props
 
 
-type NavigatorIOSProps_optional = 
+type NavigatorIOSProps_optional  = 
   ( barTintColor :: String
   , interactivePopGestureEnabled :: Boolean
   , itemWrapperStyle :: CSS
@@ -1168,7 +1243,7 @@ type NavigatorIOSProps_optional =
   , children :: Array JSX
   )
 
-type NavigatorIOSProps_required optional = 
+type NavigatorIOSProps_required optional  = 
   ( initialRoute :: Route
   | optional
   )
@@ -1202,20 +1277,22 @@ pickerIOSItem_ children = pickerIOSItem { children }
 
 type PickerIOSProps  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
+  , isTVSelectable :: Boolean
   , itemStyle :: CSS
   , nativeID :: String
   , needsOffscreenAlphaCompositing :: Boolean
@@ -1241,13 +1318,18 @@ type PickerIOSProps  =
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , onValueChange :: (EffectFn1 String Unit)
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
   , selectedValue :: String
   , shouldRasterizeIOS :: Boolean
   , style :: CSS
   , testID :: String
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , children :: Array JSX
   )
 
@@ -1263,14 +1345,14 @@ pickerIOS_ :: Array JSX -> JSX
 pickerIOS_ children = pickerIOS { children }
 
 
-type PickerItemProps_optional = 
+type PickerItemProps_optional  = 
   ( color :: String
   , testID :: String
   , value :: Any
   , children :: Array JSX
   )
 
-type PickerItemProps_required optional = 
+type PickerItemProps_required optional  = 
   ( label :: String
   | optional
   )
@@ -1286,23 +1368,25 @@ pickerItem props = unsafeCreateNativeElement "PickerItem" props
 
 type PickerProps  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
   , enabled :: Boolean
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
+  , isTVSelectable :: Boolean
   , itemStyle :: CSS
-  , mode :: PickerPropsAndroidMode
+  , mode :: String
   , nativeID :: String
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
@@ -1327,7 +1411,7 @@ type PickerProps  =
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , onValueChange :: (EffectFn2 Any Number Unit)
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , prompt :: String
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
@@ -1336,6 +1420,11 @@ type PickerProps  =
   , style :: CSS
   , testID :: String
   , testId :: String
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , children :: Array JSX
   )
 
@@ -1353,22 +1442,24 @@ picker_ children = picker { children }
 
 type ProgressBarAndroidProps  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
   , color :: String
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
   , indeterminate :: Boolean
+  , isTVSelectable :: Boolean
   , nativeID :: String
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
@@ -1392,14 +1483,19 @@ type ProgressBarAndroidProps  =
   , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , progress :: Number
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
   , shouldRasterizeIOS :: Boolean
   , style :: CSS
-  , styleAttr :: ProgressBarAndroidPropsStyleAttr
+  , styleAttr :: String
   , testID :: String
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , children :: Array JSX
   )
 
@@ -1417,20 +1513,22 @@ progressBarAndroid_ children = progressBarAndroid { children }
 
 type ProgressViewIOSProps  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
+  , isTVSelectable :: Boolean
   , nativeID :: String
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
@@ -1454,18 +1552,23 @@ type ProgressViewIOSProps  =
   , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , progress :: Number
-  , progressImage :: ProgressViewIOSPropsProgressImage
+  , progressImage :: (Array ImageURISource)
   , progressTintColor :: String
-  , progressViewStyle :: ProgressViewIOSPropsProgressViewStyle
+  , progressViewStyle :: String
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
   , shouldRasterizeIOS :: Boolean
   , style :: CSS
   , testID :: String
-  , trackImage :: ProgressViewIOSPropsTrackImage
+  , trackImage :: (Array ImageURISource)
   , trackTintColor :: String
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , children :: Array JSX
   )
 
@@ -1483,15 +1586,15 @@ progressViewIOS_ children = progressViewIOS { children }
 
 type RecyclerViewBackedScrollViewProps  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , alwaysBounceHorizontal :: Boolean
@@ -1504,18 +1607,20 @@ type RecyclerViewBackedScrollViewProps  =
   , collapsable :: Boolean
   , contentContainerStyle :: CSS
   , contentInset :: Insets
-  , contentInsetAdjustmentBehavior :: ScrollViewPropsIOSContentInsetAdjustmentBehavior
+  , contentInsetAdjustmentBehavior :: String
   , contentOffset :: PointPropType
-  , decelerationRate :: ScrollViewPropsIOSDecelerationRate
+  , decelerationRate :: String
   , directionalLockEnabled :: Boolean
   , endFillColor :: String
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
   , horizontal :: Boolean
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
-  , indicatorStyle :: ScrollViewPropsIOSIndicatorStyle
+  , importantForAccessibility :: String
+  , indicatorStyle :: String
   , invertStickyHeaders :: Boolean
-  , keyboardDismissMode :: ScrollViewPropsKeyboardDismissMode
-  , keyboardShouldPersistTaps :: ScrollViewPropsKeyboardShouldPersistTaps
+  , isTVSelectable :: Boolean
+  , keyboardDismissMode :: String
+  , keyboardShouldPersistTaps :: String
   , maximumZoomScale :: Number
   , minimumZoomScale :: Number
   , nativeID :: String
@@ -1549,10 +1654,10 @@ type RecyclerViewBackedScrollViewProps  =
   , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
-  , overScrollMode :: ScrollViewPropsAndroidOverScrollMode
+  , overScrollMode :: String
   , pagingEnabled :: Boolean
   , pinchGestureEnabled :: Boolean
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , refreshControl :: JSX
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
@@ -1564,11 +1669,19 @@ type RecyclerViewBackedScrollViewProps  =
   , shouldRasterizeIOS :: Boolean
   , showsHorizontalScrollIndicator :: Boolean
   , showsVerticalScrollIndicator :: Boolean
-  , snapToAlignment :: ScrollViewPropsIOSSnapToAlignment
+  , snapToAlignment :: String
+  , snapToEnd :: Boolean
   , snapToInterval :: Number
+  , snapToOffsets :: (Array Number)
+  , snapToStart :: Boolean
   , stickyHeaderIndices :: (Array Number)
   , style :: CSS
   , testID :: String
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , zoomScale :: Number
   , children :: Array JSX
   )
@@ -1585,24 +1698,26 @@ recyclerViewBackedScrollView_ :: Array JSX -> JSX
 recyclerViewBackedScrollView_ children = recyclerViewBackedScrollView { children }
 
 
-type RefreshControlProps_optional = 
+type RefreshControlProps_optional  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
   , colors :: (Array String)
   , enabled :: Boolean
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
+  , isTVSelectable :: Boolean
   , nativeID :: String
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
@@ -1627,7 +1742,7 @@ type RefreshControlProps_optional =
   , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , progressBackgroundColor :: String
   , progressViewOffset :: Number
   , removeClippedSubviews :: Boolean
@@ -1639,10 +1754,15 @@ type RefreshControlProps_optional =
   , tintColor :: String
   , title :: String
   , titleColor :: String
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , children :: Array JSX
   )
 
-type RefreshControlProps_required optional = 
+type RefreshControlProps_required optional  = 
   ( refreshing :: Boolean
   | optional
   )
@@ -1658,15 +1778,15 @@ refreshControl props = unsafeCreateNativeElement "RefreshControl" props
 
 type ScrollViewProps  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , alwaysBounceHorizontal :: Boolean
@@ -1679,18 +1799,20 @@ type ScrollViewProps  =
   , collapsable :: Boolean
   , contentContainerStyle :: CSS
   , contentInset :: Insets
-  , contentInsetAdjustmentBehavior :: ScrollViewPropsIOSContentInsetAdjustmentBehavior
+  , contentInsetAdjustmentBehavior :: String
   , contentOffset :: PointPropType
-  , decelerationRate :: ScrollViewPropsIOSDecelerationRate
+  , decelerationRate :: String
   , directionalLockEnabled :: Boolean
   , endFillColor :: String
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
   , horizontal :: Boolean
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
-  , indicatorStyle :: ScrollViewPropsIOSIndicatorStyle
+  , importantForAccessibility :: String
+  , indicatorStyle :: String
   , invertStickyHeaders :: Boolean
-  , keyboardDismissMode :: ScrollViewPropsKeyboardDismissMode
-  , keyboardShouldPersistTaps :: ScrollViewPropsKeyboardShouldPersistTaps
+  , isTVSelectable :: Boolean
+  , keyboardDismissMode :: String
+  , keyboardShouldPersistTaps :: String
   , maximumZoomScale :: Number
   , minimumZoomScale :: Number
   , nativeID :: String
@@ -1724,10 +1846,10 @@ type ScrollViewProps  =
   , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
-  , overScrollMode :: ScrollViewPropsAndroidOverScrollMode
+  , overScrollMode :: String
   , pagingEnabled :: Boolean
   , pinchGestureEnabled :: Boolean
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , refreshControl :: JSX
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
@@ -1739,11 +1861,19 @@ type ScrollViewProps  =
   , shouldRasterizeIOS :: Boolean
   , showsHorizontalScrollIndicator :: Boolean
   , showsVerticalScrollIndicator :: Boolean
-  , snapToAlignment :: ScrollViewPropsIOSSnapToAlignment
+  , snapToAlignment :: String
+  , snapToEnd :: Boolean
   , snapToInterval :: Number
+  , snapToOffsets :: (Array Number)
+  , snapToStart :: Boolean
   , stickyHeaderIndices :: (Array Number)
   , style :: CSS
   , testID :: String
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , zoomScale :: Number
   , children :: Array JSX
   )
@@ -1762,21 +1892,23 @@ scrollView_ children = scrollView { children }
 
 type SegmentedControlIOSProps  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
   , enabled :: Boolean
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
+  , isTVSelectable :: Boolean
   , momentary :: Boolean
   , nativeID :: String
   , needsOffscreenAlphaCompositing :: Boolean
@@ -1803,7 +1935,7 @@ type SegmentedControlIOSProps  =
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , onValueChange :: (EffectFn1 String Unit)
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
   , selectedIndex :: Number
@@ -1811,6 +1943,11 @@ type SegmentedControlIOSProps  =
   , style :: CSS
   , testID :: String
   , tintColor :: String
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , values :: (Array String)
   , children :: Array JSX
   )
@@ -1829,21 +1966,23 @@ segmentedControlIOS_ children = segmentedControlIOS { children }
 
 type SliderProps  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
   , disabled :: Boolean
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
+  , isTVSelectable :: Boolean
   , maximumTrackImage :: ImageURISource
   , maximumTrackTintColor :: String
   , maximumValue :: Number
@@ -1875,7 +2014,7 @@ type SliderProps  =
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , onValueChange :: (EffectFn1 Number Unit)
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
   , shouldRasterizeIOS :: Boolean
@@ -1885,6 +2024,11 @@ type SliderProps  =
   , thumbImage :: ImageURISource
   , thumbTintColor :: String
   , trackImage :: ImageURISource
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , value :: Number
   , children :: Array JSX
   )
@@ -1901,22 +2045,24 @@ slider_ :: Array JSX -> JSX
 slider_ children = slider { children }
 
 
-type SnapshotViewIOSProps_optional = 
+type SnapshotViewIOSProps_optional  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
+  , isTVSelectable :: Boolean
   , nativeID :: String
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
@@ -1940,16 +2086,21 @@ type SnapshotViewIOSProps_optional =
   , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
   , shouldRasterizeIOS :: Boolean
   , style :: CSS
   , testID :: String
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , children :: Array JSX
   )
 
-type SnapshotViewIOSProps_required optional = 
+type SnapshotViewIOSProps_required optional  = 
   ( testIdentifier :: String
   | optional
   )
@@ -1966,10 +2117,10 @@ snapshotViewIOS props = unsafeCreateNativeElement "SnapshotViewIOS" props
 type StatusBarProps  = 
   ( animated :: Boolean
   , backgroundColor :: String
-  , barStyle :: StatusBarStyle
+  , barStyle :: String
   , hidden :: Boolean
   , networkActivityIndicatorVisible :: Boolean
-  , showHideTransition :: StatusBarPropsIOSShowHideTransition
+  , showHideTransition :: String
   , translucent :: Boolean
   , children :: Array JSX
   )
@@ -1986,12 +2137,12 @@ statusBar_ :: Array JSX -> JSX
 statusBar_ children = statusBar { children }
 
 
-type SwipeableListViewProps_optional = 
+type SwipeableListViewProps_optional  = 
   ( 
     children :: Array JSX
   )
 
-type SwipeableListViewProps_required optional = 
+type SwipeableListViewProps_required optional  = 
   ( bounceFirstRowOnMount :: Boolean
   , dataSource :: SwipeableListViewDataSource
   , maxSwipeDistance :: Number
@@ -2010,21 +2161,23 @@ swipeableListView props = unsafeCreateNativeElement "SwipeableListView" props
 
 type SwitchIOSProps  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
   , disabled :: Boolean
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
+  , isTVSelectable :: Boolean
   , nativeID :: String
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
@@ -2050,7 +2203,7 @@ type SwitchIOSProps  =
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , onValueChange :: (EffectFn1 Boolean Unit)
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
   , shouldRasterizeIOS :: Boolean
@@ -2058,6 +2211,11 @@ type SwitchIOSProps  =
   , testID :: String
   , thumbTintColor :: String
   , tintColor :: String
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , value :: Boolean
   , children :: Array JSX
   )
@@ -2076,22 +2234,24 @@ switchIOS_ children = switchIOS { children }
 
 type SwitchProps  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
   , disabled :: Boolean
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
   , ios_backgroundColor :: String
+  , isTVSelectable :: Boolean
   , nativeID :: String
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
@@ -2117,7 +2277,7 @@ type SwitchProps  =
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , onValueChange :: (EffectFn1 Boolean Unit)
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
   , shouldRasterizeIOS :: Boolean
@@ -2127,6 +2287,11 @@ type SwitchProps  =
   , thumbTintColor :: String
   , tintColor :: String
   , trackColor :: { false :: String, true :: String }
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , value :: Boolean
   , children :: Array JSX
   )
@@ -2145,23 +2310,25 @@ switch_ children = switch { children }
 
 type TabBarIOSItemProps  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , badge :: String
   , badgeColor :: String
   , collapsable :: Boolean
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
   , icon :: ImageURISource
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
+  , isTVSelectable :: Boolean
   , nativeID :: String
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
@@ -2186,7 +2353,7 @@ type TabBarIOSItemProps  =
   , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , removeClippedSubviews :: Boolean
   , renderAsOriginal :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
@@ -2194,9 +2361,14 @@ type TabBarIOSItemProps  =
   , selectedIcon :: ImageURISource
   , shouldRasterizeIOS :: Boolean
   , style :: CSS
-  , systemIcon :: TabBarIOSItemPropsSystemIcon
+  , systemIcon :: String
   , testID :: String
   , title :: String
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , children :: Array JSX
   )
 
@@ -2214,22 +2386,24 @@ tabBarIOSItem_ children = tabBarIOSItem { children }
 
 type TabBarIOSProps  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , barTintColor :: String
   , collapsable :: Boolean
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
-  , itemPositioning :: TabBarIOSPropsItemPositioning
+  , importantForAccessibility :: String
+  , isTVSelectable :: Boolean
+  , itemPositioning :: String
   , nativeID :: String
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
@@ -2253,7 +2427,7 @@ type TabBarIOSProps  =
   , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
   , shouldRasterizeIOS :: Boolean
@@ -2261,6 +2435,11 @@ type TabBarIOSProps  =
   , testID :: String
   , tintColor :: String
   , translucent :: Boolean
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , unselectedItemTintColor :: String
   , unselectedTintColor :: String
   , children :: Array JSX
@@ -2280,39 +2459,43 @@ tabBarIOS_ children = tabBarIOS { children }
 
 type TextInputProps  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , allowFontScaling :: Boolean
-  , autoCapitalize :: TextInputPropsAutoCapitalize
+  , autoCapitalize :: String
+  , autoCompleteType :: String
   , autoCorrect :: Boolean
   , autoFocus :: Boolean
   , blurOnSubmit :: Boolean
   , caretHidden :: Boolean
-  , clearButtonMode :: TextInputIOSPropsClearButtonMode
+  , clearButtonMode :: String
   , clearTextOnFocus :: Boolean
   , collapsable :: Boolean
   , contextMenuHidden :: Boolean
-  , dataDetectorTypes :: TextInputIOSPropsDataDetectorTypes
+  , dataDetectorTypes :: (Array String)
   , defaultValue :: String
   , disableFullscreenUI :: Boolean
   , editable :: Boolean
   , enablesReturnKeyAutomatically :: Boolean
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
   , inlineImageLeft :: String
   , inlineImagePadding :: Number
   , inputAccessoryViewID :: String
-  , keyboardAppearance :: TextInputIOSPropsKeyboardAppearance
-  , keyboardType :: KeyboardTypeOptions
+  , isTVSelectable :: Boolean
+  , keyboardAppearance :: String
+  , keyboardType :: String
+  , maxFontSizeMultiplier :: String
   , maxLength :: Number
   , multiline :: Boolean
   , nativeID :: String
@@ -2351,11 +2534,11 @@ type TextInputProps  =
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , placeholder :: String
   , placeholderTextColor :: String
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
   , returnKeyLabel :: String
-  , returnKeyType :: ReturnKeyTypeOptions
+  , returnKeyType :: String
   , scrollEnabled :: Boolean
   , secureTextEntry :: Boolean
   , selectTextOnFocus :: Boolean
@@ -2366,8 +2549,14 @@ type TextInputProps  =
   , spellCheck :: Boolean
   , style :: CSS
   , testID :: String
-  , textBreakStrategy :: TextInputAndroidPropsTextBreakStrategy
-  , textContentType :: TextInputIOSPropsTextContentType
+  , textAlignVertical :: String
+  , textBreakStrategy :: String
+  , textContentType :: String
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , underlineColorAndroid :: String
   , value :: String
   , children :: Array JSX
@@ -2386,21 +2575,22 @@ textInput_ children = textInput { children }
 
 
 type TextProps  = 
-  ( accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  ( accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessible :: Boolean
   , adjustsFontSizeToFit :: Boolean
   , allowFontScaling :: Boolean
-  , ellipsizeMode :: TextPropsEllipsizeMode
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
-  , lineBreakMode :: TextPropsLineBreakMode
+  , ellipsizeMode :: String
+  , importantForAccessibility :: String
+  , lineBreakMode :: String
+  , maxFontSizeMultiplier :: String
   , minimumFontScale :: Number
   , nativeID :: String
   , numberOfLines :: Number
@@ -2414,7 +2604,7 @@ type TextProps  =
   , style :: CSS
   , suppressHighlighting :: Boolean
   , testID :: String
-  , textBreakStrategy :: TextPropsAndroidTextBreakStrategy
+  , textBreakStrategy :: String
   , children :: Array JSX
   )
 
@@ -2432,23 +2622,25 @@ text_ children = text { children }
 
 type ToolbarAndroidProps  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
-  , actions :: (Array ToolbarAndroidAction)
+  , actions :: (Array { title :: String, icon :: ImageURISource, show :: String, showWithText :: Boolean })
   , collapsable :: Boolean
   , contentInsetEnd :: Number
   , contentInsetStart :: Number
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
+  , isTVSelectable :: Boolean
   , logo :: ImageURISource
   , nativeID :: String
   , navIcon :: ImageURISource
@@ -2477,7 +2669,7 @@ type ToolbarAndroidProps  =
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , overflowIcon :: ImageURISource
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
   , rtl :: Boolean
@@ -2488,6 +2680,11 @@ type ToolbarAndroidProps  =
   , testID :: String
   , title :: String
   , titleColor :: String
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , children :: Array JSX
   )
 
@@ -2504,24 +2701,27 @@ toolbarAndroid_ children = toolbarAndroid { children }
 
 
 type TouchableHighlightProps  = 
-  ( accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  ( accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessible :: Boolean
   , activeOpacity :: Number
   , delayLongPress :: Number
   , delayPressIn :: Number
   , delayPressOut :: Number
   , disabled :: Boolean
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
   , onAccessibilityTap :: (Effect Unit)
+  , onBlur :: (EffectFn1 (NativeSyntheticEvent TargetedEvent) Unit)
+  , onFocus :: (EffectFn1 (NativeSyntheticEvent TargetedEvent) Unit)
   , onHideUnderlay :: (Effect Unit)
   , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onLongPress :: (EffectFn1 GestureResponderEvent Unit)
@@ -2533,6 +2733,7 @@ type TouchableHighlightProps  =
   , pressRetentionOffset :: Insets
   , style :: CSS
   , testID :: String
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
   , underlayColor :: String
   , children :: Array JSX
   )
@@ -2550,24 +2751,27 @@ touchableHighlight_ children = touchableHighlight { children }
 
 
 type TouchableNativeFeedbackProps  = 
-  ( accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  ( accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessible :: Boolean
-  , background :: BackgroundPropType
+  , background :: BackgroundPropTyppe
   , delayLongPress :: Number
   , delayPressIn :: Number
   , delayPressOut :: Number
   , disabled :: Boolean
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
   , onAccessibilityTap :: (Effect Unit)
+  , onBlur :: (EffectFn1 (NativeSyntheticEvent TargetedEvent) Unit)
+  , onFocus :: (EffectFn1 (NativeSyntheticEvent TargetedEvent) Unit)
   , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onLongPress :: (EffectFn1 GestureResponderEvent Unit)
   , onMagicTap :: (Effect Unit)
@@ -2577,6 +2781,7 @@ type TouchableNativeFeedbackProps  =
   , pressRetentionOffset :: Insets
   , style :: CSS
   , testID :: String
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
   , useForeground :: Boolean
   , children :: Array JSX
   )
@@ -2594,24 +2799,27 @@ touchableNativeFeedback_ children = touchableNativeFeedback { children }
 
 
 type TouchableOpacityProps  = 
-  ( accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  ( accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessible :: Boolean
   , activeOpacity :: Number
   , delayLongPress :: Number
   , delayPressIn :: Number
   , delayPressOut :: Number
   , disabled :: Boolean
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
   , onAccessibilityTap :: (Effect Unit)
+  , onBlur :: (EffectFn1 (NativeSyntheticEvent TargetedEvent) Unit)
+  , onFocus :: (EffectFn1 (NativeSyntheticEvent TargetedEvent) Unit)
   , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onLongPress :: (EffectFn1 GestureResponderEvent Unit)
   , onMagicTap :: (Effect Unit)
@@ -2621,6 +2829,7 @@ type TouchableOpacityProps  =
   , pressRetentionOffset :: Insets
   , style :: CSS
   , testID :: String
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
   , children :: Array JSX
   )
 
@@ -2637,23 +2846,26 @@ touchableOpacity_ children = touchableOpacity { children }
 
 
 type TouchableWithoutFeedbackProps  = 
-  ( accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  ( accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessible :: Boolean
   , delayLongPress :: Number
   , delayPressIn :: Number
   , delayPressOut :: Number
   , disabled :: Boolean
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
   , onAccessibilityTap :: (Effect Unit)
+  , onBlur :: (EffectFn1 (NativeSyntheticEvent TargetedEvent) Unit)
+  , onFocus :: (EffectFn1 (NativeSyntheticEvent TargetedEvent) Unit)
   , onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   , onLongPress :: (EffectFn1 GestureResponderEvent Unit)
   , onMagicTap :: (Effect Unit)
@@ -2663,6 +2875,7 @@ type TouchableWithoutFeedbackProps  =
   , pressRetentionOffset :: Insets
   , style :: CSS
   , testID :: String
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
   , children :: Array JSX
   )
 
@@ -2680,22 +2893,24 @@ touchableWithoutFeedback_ children = touchableWithoutFeedback { children }
 
 type ViewPagerAndroidProps  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
   , initialPage :: Number
-  , keyboardDismissMode :: ViewPagerAndroidPropsKeyboardDismissMode
+  , isTVSelectable :: Boolean
+  , keyboardDismissMode :: String
   , nativeID :: String
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
@@ -2705,7 +2920,7 @@ type ViewPagerAndroidProps  =
   , onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
   , onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
   , onPageScroll :: (EffectFn1 (NativeSyntheticEvent ViewPagerAndroidOnPageScrollEventData) Unit)
-  , onPageScrollStateChanged :: (EffectFn1 ViewPagerAndroidPropsOnPageScrollStateChanged Unit)
+  , onPageScrollStateChanged :: (EffectFn1 String Unit)
   , onPageSelected :: (EffectFn1 (NativeSyntheticEvent ViewPagerAndroidOnPageSelectedEventData) Unit)
   , onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
   , onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
@@ -2723,13 +2938,18 @@ type ViewPagerAndroidProps  =
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , pageMargin :: Number
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
   , scrollEnabled :: Boolean
   , shouldRasterizeIOS :: Boolean
   , style :: CSS
   , testID :: String
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , children :: Array JSX
   )
 
@@ -2747,20 +2967,22 @@ viewPagerAndroid_ children = viewPagerAndroid { children }
 
 type ViewProps  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , collapsable :: Boolean
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
+  , isTVSelectable :: Boolean
   , nativeID :: String
   , needsOffscreenAlphaCompositing :: Boolean
   , onAccessibilityAction :: (Effect Unit)
@@ -2784,12 +3006,17 @@ type ViewProps  =
   , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
   , shouldRasterizeIOS :: Boolean
   , style :: CSS
   , testID :: String
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , children :: Array JSX
   )
 
@@ -2807,15 +3034,15 @@ view_ children = view { children }
 
 type WebViewProps  = 
   ( accessibilityActions :: (Array String)
-  , accessibilityComponentType :: AccessibilityPropsAndroidAccessibilityComponentType
+  , accessibilityComponentType :: String
   , accessibilityElementsHidden :: Boolean
   , accessibilityHint :: String
   , accessibilityIgnoresInvertColors :: Boolean
   , accessibilityLabel :: String
-  , accessibilityLiveRegion :: AccessibilityPropsAndroidAccessibilityLiveRegion
-  , accessibilityRole :: AccessibilityRole
-  , accessibilityStates :: (Array AccessibilityState)
-  , accessibilityTraits :: AccessibilityPropsIOSAccessibilityTraits
+  , accessibilityLiveRegion :: String
+  , accessibilityRole :: String
+  , accessibilityStates :: (Array String)
+  , accessibilityTraits :: (Array String)
   , accessibilityViewIsModal :: Boolean
   , accessible :: Boolean
   , allowFileAccess :: Boolean
@@ -2824,16 +3051,18 @@ type WebViewProps  =
   , bounces :: Boolean
   , collapsable :: Boolean
   , contentInset :: Insets
-  , dataDetectorTypes :: WebViewPropsIOSDataDetectorTypes
-  , decelerationRate :: WebViewPropsIOSDecelerationRate
+  , dataDetectorTypes :: (Array String)
+  , decelerationRate :: String
   , domStorageEnabled :: Boolean
+  , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
   , html :: String
-  , importantForAccessibility :: AccessibilityPropsAndroidImportantForAccessibility
+  , importantForAccessibility :: String
   , injectedJavaScript :: String
+  , isTVSelectable :: Boolean
   , javaScriptEnabled :: Boolean
   , mediaPlaybackRequiresUserAction :: Boolean
-  , mixedContentMode :: WebViewPropsAndroidMixedContentMode
+  , mixedContentMode :: String
   , nativeConfig :: WebViewNativeConfig
   , nativeID :: String
   , needsOffscreenAlphaCompositing :: Boolean
@@ -2866,7 +3095,7 @@ type WebViewProps  =
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
   , originWhitelist :: (Array String)
-  , pointerEvents :: ViewPropsPointerEvents
+  , pointerEvents :: String
   , removeClippedSubviews :: Boolean
   , renderError :: (Effect JSX)
   , renderLoading :: (Effect JSX)
@@ -2879,6 +3108,11 @@ type WebViewProps  =
   , startInLoadingState :: Boolean
   , style :: CSS
   , testID :: String
+  , tvParallaxMagnification :: Number
+  , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , tvParallaxShiftDistanceX :: Number
+  , tvParallaxShiftDistanceY :: Number
+  , tvParallaxTiltAngle :: Number
   , url :: String
   , useWebKit :: Boolean
   , userAgent :: String
