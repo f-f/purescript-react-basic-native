@@ -15,7 +15,26 @@ import Foreign.Object (Object)
 import Prim.Row (class Union)
 import React.Basic (JSX)
 import React.Basic.DOM.Internal (CSS)
+
 import React.Basic.Native.Internal (unsafeCreateNativeElement)
+
+type NativeSynteticEvent e = {
+  nativeEvent :: e 
+, currentTarget :: Number 
+, target :: Number 
+, bubbles :: Boolean
+, cancelable :: Boolean
+, defaultPrevented :: Boolean
+, eventPhase :: Number
+, isTrusted :: Boolean
+, preventDefault :: Effect Unit
+, isDefaultPrevented :: Effect Boolean
+, stopPropagation :: Effect Unit
+, isPropagationStopped :: Effect Boolean
+, persist :: Effect Unit
+, timeStamp :: Number
+, type :: String
+}
 
 
 type ARTClippingRectangleProps  = 

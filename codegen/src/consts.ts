@@ -11,11 +11,11 @@ export const fieldTypeNameReplacements: {[key:string]:string;} =
     "IndexSignature": "(Object Foreign)",
     "Object": "(Object Foreign)",
     "ObjectType": "(Object Foreign)",
-    "Any": "(Object Foreign)"
+    "Any": "Foreign"
   }
 
 export const ignoreForeignDataList: string[] =
-  [ "Array", "CSS", "Date", "Element.JSX", "JSDate", "JSX", "StyleProp", "(Record ScrollViewProps)", "ReactElement.React", "iTemT", "itemT", "ComponentType.React", "Any", "(Object Foreign)" ]
+  [ "Array", "CSS", "Date", "Element.JSX", "JSDate", "JSX", "StyleProp", "(Record ScrollViewProps)", "ReactElement.React", "iTemT", "itemT", "ComponentType.React", "Any", "(Object Foreign)", "NativeSynteticEvent" ]
 
 export const noChildren: string[] =
   [ "button" ]
