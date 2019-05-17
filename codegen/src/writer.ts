@@ -40,7 +40,7 @@ const writeSingleType = (typeName: string) => (props: Props) => (fields: Field[]
 
 const writeRequiredFn = (returnType: string ) => (functionBody: string) => (props : Props): string => 
   `${functionName(props)}
-  :: ∀ attrs attrs_ ${typeVariables(props)}
+  :: forall attrs attrs_ ${typeVariables(props)}
   . Union attrs attrs_ (${props.name}_optional ${typeVariables(props)})
   => Record ((${props.name}_required ${typeVariables(props)}) attrs)
   -> ${returnType}
@@ -48,7 +48,7 @@ ${functionBody}`
 
 const writeOptionalFn = (recordName: string) => (returnType: string) => (functionBody: string) => (props: Props): string =>
   `${functionName(props)}
-  :: ∀ attrs attrs_ ${typeVariables(props)}
+  :: forall attrs attrs_ ${typeVariables(props)}
   . Union attrs attrs_ (${recordName} ${typeVariables(props)})
   => Record attrs
   -> ${returnType} 

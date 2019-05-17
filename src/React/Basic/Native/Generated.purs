@@ -56,7 +56,7 @@ type ARTClippingRectangleProps  =
 
 
 aRTClippingRectangle
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (ARTClippingRectangleProps  )
   => Record attrs
   -> JSX 
@@ -86,7 +86,7 @@ type ARTGroupProps  =
 
 
 aRTGroup
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (ARTGroupProps  )
   => Record attrs
   -> JSX 
@@ -127,7 +127,7 @@ type ARTShapeProps_required   optional =
 
 
 aRTShape
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (ARTShapeProps_optional  )
   => Record ((ARTShapeProps_required  ) attrs)
   -> JSX
@@ -148,7 +148,7 @@ type ARTSurfaceProps_required   optional =
 
 
 aRTSurface
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (ARTSurfaceProps_optional  )
   => Record ((ARTSurfaceProps_required  ) attrs)
   -> JSX
@@ -180,7 +180,7 @@ type ARTTextProps  =
 
 
 aRTText
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (ARTTextProps  )
   => Record attrs
   -> JSX 
@@ -253,7 +253,7 @@ type ActivityIndicatorIOSProps  =
 
 
 activityIndicatorIOS
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (ActivityIndicatorIOSProps  )
   => Record attrs
   -> JSX 
@@ -326,7 +326,7 @@ type ActivityIndicatorProps  =
 
 
 activityIndicator
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (ActivityIndicatorProps  )
   => Record attrs
   -> JSX 
@@ -353,7 +353,7 @@ type ButtonProps_required   optional =
 
 
 button
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (ButtonProps_optional  )
   => Record ((ButtonProps_required  ) attrs)
   -> JSX
@@ -422,7 +422,7 @@ type CheckBoxProps  =
 
 
 checkBox
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (CheckBoxProps  )
   => Record attrs
   -> JSX 
@@ -503,7 +503,7 @@ type DatePickerIOSProps_required   optional =
 
 
 datePickerIOS
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (DatePickerIOSProps_optional  )
   => Record ((DatePickerIOSProps_required  ) attrs)
   -> JSX
@@ -588,7 +588,7 @@ type DrawerLayoutAndroidProps_required   optional =
 
 
 drawerLayoutAndroid
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (DrawerLayoutAndroidProps_optional  )
   => Record ((DrawerLayoutAndroidProps_required  ) attrs)
   -> JSX
@@ -742,7 +742,7 @@ type FlatListProps_required itemT  optional =
 
 
 flatList
-  :: ∀ attrs attrs_ itemT 
+  :: forall attrs attrs_ itemT 
   . Union attrs attrs_ (FlatListProps_optional itemT )
   => Record ((FlatListProps_required itemT ) attrs)
   -> JSX
@@ -804,7 +804,7 @@ type ImageBackgroundProps_required   optional =
 
 
 imageBackground
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (ImageBackgroundProps_optional  )
   => Record ((ImageBackgroundProps_required  ) attrs)
   -> JSX
@@ -877,7 +877,7 @@ type ImageProps_required   optional =
 
 
 image
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (ImageProps_optional  )
   => Record ((ImageProps_required  ) attrs)
   -> JSX
@@ -907,7 +907,7 @@ type InputAccessoryViewProps  =
 
 
 inputAccessoryView
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (InputAccessoryViewProps  )
   => Record attrs
   -> JSX 
@@ -988,7 +988,7 @@ type KeyboardAvoidingViewProps  =
 
 
 keyboardAvoidingView
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (KeyboardAvoidingViewProps  )
   => Record attrs
   -> JSX 
@@ -1148,7 +1148,7 @@ type ListViewProps_required   optional =
 
 
 listView
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (ListViewProps_optional  )
   => Record ((ListViewProps_required  ) attrs)
   -> JSX
@@ -1264,7 +1264,7 @@ type MapViewProps  =
 
 
 mapView
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (MapViewProps  )
   => Record attrs
   -> JSX 
@@ -1346,7 +1346,7 @@ type MaskedViewIOSProps_required   optional =
 
 
 maskedViewIOS
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (MaskedViewIOSProps_optional  )
   => Record ((MaskedViewIOSProps_required  ) attrs)
   -> JSX
@@ -1444,7 +1444,7 @@ type NavigatorIOSProps_required   optional =
 
 
 navigatorIOS
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (NavigatorIOSProps_optional  )
   => Record ((NavigatorIOSProps_required  ) attrs)
   -> JSX
@@ -1460,7 +1460,7 @@ type PickerIOSItemProps  =
 
 
 pickerIOSItem
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (PickerIOSItemProps  )
   => Record attrs
   -> JSX 
@@ -1532,7 +1532,7 @@ type PickerIOSProps  =
 
 
 pickerIOS
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (PickerIOSProps  )
   => Record attrs
   -> JSX 
@@ -1558,7 +1558,7 @@ type PickerItemProps_required   optional =
 
 
 pickerItem
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (PickerItemProps_optional  )
   => Record ((PickerItemProps_required  ) attrs)
   -> JSX
@@ -1630,7 +1630,7 @@ type PickerProps  =
 
 
 picker
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (PickerProps  )
   => Record attrs
   -> JSX 
@@ -1709,7 +1709,7 @@ type ProgressBarAndroidProps  =
 
 
 progressBarAndroid
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (ProgressBarAndroidProps  )
   => Record attrs
   -> JSX 
@@ -1784,7 +1784,7 @@ type ProgressViewIOSProps  =
 
 
 progressViewIOS
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (ProgressViewIOSProps  )
   => Record attrs
   -> JSX 
@@ -1900,7 +1900,7 @@ type RecyclerViewBackedScrollViewProps  =
 
 
 recyclerViewBackedScrollView
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (RecyclerViewBackedScrollViewProps  )
   => Record attrs
   -> JSX 
@@ -1983,7 +1983,7 @@ type RefreshControlProps_required   optional =
 
 
 refreshControl
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (RefreshControlProps_optional  )
   => Record ((RefreshControlProps_required  ) attrs)
   -> JSX
@@ -2110,7 +2110,7 @@ type ScrollViewProps  =
 
 
 scrollView
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (ScrollViewProps  )
   => Record attrs
   -> JSX 
@@ -2186,7 +2186,7 @@ type SegmentedControlIOSProps  =
 
 
 segmentedControlIOS
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (SegmentedControlIOSProps  )
   => Record attrs
   -> JSX 
@@ -2269,7 +2269,7 @@ type SliderProps  =
 
 
 slider
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (SliderProps  )
   => Record attrs
   -> JSX 
@@ -2343,7 +2343,7 @@ type SnapshotViewIOSProps_required   optional =
 
 
 snapshotViewIOS
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (SnapshotViewIOSProps_optional  )
   => Record ((SnapshotViewIOSProps_required  ) attrs)
   -> JSX
@@ -2364,7 +2364,7 @@ type StatusBarProps  =
 
 
 statusBar
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (StatusBarProps  )
   => Record attrs
   -> JSX 
@@ -2395,7 +2395,7 @@ type SwipeableListViewProps_required   optional =
 
 
 swipeableListView
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (SwipeableListViewProps_optional  )
   => Record ((SwipeableListViewProps_required  ) attrs)
   -> JSX
@@ -2466,7 +2466,7 @@ type SwitchIOSProps  =
 
 
 switchIOS
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (SwitchIOSProps  )
   => Record attrs
   -> JSX 
@@ -2544,7 +2544,7 @@ type SwitchProps  =
 
 
 switch
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (SwitchProps  )
   => Record attrs
   -> JSX 
@@ -2622,7 +2622,7 @@ type TabBarIOSItemProps  =
 
 
 tabBarIOSItem
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (TabBarIOSItemProps  )
   => Record attrs
   -> JSX 
@@ -2697,7 +2697,7 @@ type TabBarIOSProps  =
 
 
 tabBarIOS
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (TabBarIOSProps  )
   => Record attrs
   -> JSX 
@@ -2850,7 +2850,7 @@ type TextInputProps  =
 
 
 textInput
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (TextInputProps  )
   => Record attrs
   -> JSX 
@@ -2914,7 +2914,7 @@ type TextProps  =
 
 
 text
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (TextProps  )
   => Record attrs
   -> JSX 
@@ -2996,7 +2996,7 @@ type ToolbarAndroidProps  =
 
 
 toolbarAndroid
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (ToolbarAndroidProps  )
   => Record attrs
   -> JSX 
@@ -3048,7 +3048,7 @@ type TouchableHighlightProps  =
 
 
 touchableHighlight
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (TouchableHighlightProps  )
   => Record attrs
   -> JSX 
@@ -3098,7 +3098,7 @@ type TouchableNativeFeedbackProps  =
 
 
 touchableNativeFeedback
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (TouchableNativeFeedbackProps  )
   => Record attrs
   -> JSX 
@@ -3147,7 +3147,7 @@ type TouchableOpacityProps  =
 
 
 touchableOpacity
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (TouchableOpacityProps  )
   => Record attrs
   -> JSX 
@@ -3195,7 +3195,7 @@ type TouchableWithoutFeedbackProps  =
 
 
 touchableWithoutFeedback
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (TouchableWithoutFeedbackProps  )
   => Record attrs
   -> JSX 
@@ -3282,7 +3282,7 @@ type ViewPagerAndroidProps  =
 
 
 viewPagerAndroid
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (ViewPagerAndroidProps  )
   => Record attrs
   -> JSX 
@@ -3351,7 +3351,7 @@ type ViewProps  =
 
 
 view
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (ViewProps  )
   => Record attrs
   -> JSX 
@@ -3499,7 +3499,7 @@ type WebViewProps  =
 
 
 webView
-  :: ∀ attrs attrs_  
+  :: forall attrs attrs_  
   . Union attrs attrs_ (WebViewProps  )
   => Record attrs
   -> JSX 
