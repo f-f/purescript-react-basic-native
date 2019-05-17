@@ -3,7 +3,8 @@ const RN = require("react-native")
 
 exports.unsafeCreateNativeElement = function(name){
   return function(props){
-    const children = (props.children) ? props.children : null;
+    var children = (props.children) ? props.children : null;
+    if(children && children.length === 1){children = children[0]}
     return React.createElement(RN[name], props, children)
   }
 };

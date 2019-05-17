@@ -176,9 +176,9 @@ const wrapNameInArray = (name: string): string => "(Array " + name + ")"
 
 const handleUnionType = (typeAliasMap: TypeAliasMap) => (interfaceName: string) => (fieldName: string) => (u: ts.UnionTypeNode): FieldType => {
   
-  const isOptional = u.types.map(t => {
-    return t.kind === ts.SyntaxKind.NullKeyword || t.kind === ts.SyntaxKind.UndefinedKeyword
-  }).reduce((a, b) => a && b, false)
+  const isOptional = u.types.map(t => 
+    t.kind === ts.SyntaxKind.NullKeyword || t.kind === ts.SyntaxKind.UndefinedKeyword
+  ).reduce((a, b) => a && b, false)
 
   const types = u.types.filter(t => t.kind !== ts.SyntaxKind.NullKeyword && t.kind !== ts.SyntaxKind.UndefinedKeyword)
 
@@ -227,16 +227,6 @@ const handleUnionType = (typeAliasMap: TypeAliasMap) => (interfaceName: string) 
   if(interfaceName === "TouchableNativeFeedbackProps" && fieldName === "background") return { name : "BackgroundPropTyppe", foreignData : [ "BackgroundPropType" ] }
   if(interfaceName === "ImagePropsBase" && fieldName === "source") return { name : "(Array ImageURISource)", foreignData : [ "ImageURISource" ] }
   if(interfaceName === "ImagePropsBase" && fieldName === "defaultSource") return { name : "ImageURISource", foreignData : [ "ImageURISource" ] }
-
-  /*
-WebViewProps source [ { name: 'WebViewUriSource',
-    foreignData: [ 'WebViewUriSource' ] },
-  { name: 'WebViewHtmlSource',
-    foreignData: [ 'WebViewHtmlSource' ] },
-  { name: 'Number' } ]
- */
-
-  console.log(remainingTypes)
 
   const name = (interfaceName + capitalize(fieldName))
   const fieldType = { name, foreignData : [ name ], isOptional }

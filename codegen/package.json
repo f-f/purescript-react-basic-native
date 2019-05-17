@@ -9,7 +9,7 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "clean": "rm -rf lib/*",
-    "build": "npm run clean && tsc",
+    "build": "npx tsc",
     "codegen": "node lib/index.js > ../src/React/Basic/Native/Generated.purs"
   },
   "repository": {},
@@ -19,6 +19,6 @@
   },
   "devDependencies": {
     "@types/node": "7.0.4",
-    "typescript": "^3.2.2"
+    "typescript": "^3.4.5"
   }
 }
