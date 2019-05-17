@@ -19,6 +19,7 @@ export interface Props {
   name: string
   fields: Field[]
   typeParameters: string[]
+  isComponentProps: boolean
 }
 
 export interface WrittenProps { 

@@ -149,19 +149,20 @@ const handleTypeLiteral = (typeAliasMap: TypeAliasMap) => (interfaceName: string
   const properties = tl.members.filter((m) => ts.isPropertySignature(m)) as ts.PropertySignature[]
   const propertyNames = properties.map((prop) => getPropertyName(prop.name))
   const fieldTypes = (properties.map((prop) => prop.type).filter((type) => type !== undefined) as ts.TypeNode[]).map((type, i) => handleTypes(typeAliasMap)(interfaceName)(propertyNames[i])(type))
-
-  if(propertyNames.length == 0) return { name : "IndexSignature", foreignData : [ "IndexSignature" ] }
+  
+  if(propertyNames.length == 0) return { name : "(Object Foreign)", foreignData : [] }
   else {
     const name = "{ " + propertyNames.map((name, i) => name + " :: " + fieldTypes[i].name).join(", ") + " }"
     const foreignData = flattenForeignData(fieldTypes)
     const fieldType = { name, foreignData }
     return fieldType
   }
+  
 }
 
 const handleParenthesizedType = (typeAliasMap: TypeAliasMap) => (interfaceName: string) => (fieldName: string) => (a: ts.ParenthesizedTypeNode): FieldType => {
   const fieldType = handleTypes(typeAliasMap)(interfaceName)(fieldName)(a.type)
-  const name = "(" + fieldType.name + ")"
+  const name = "(" + (fieldTypeNameReplacements[fieldType.name] || fieldType.name) + ")"
   return { name, foreignData: fieldType.foreignData }
 }
 
@@ -172,13 +173,13 @@ const handleArrayType = (typeAliasMap: TypeAliasMap) => (interfaceName: string) 
   return { name, foreignData: fieldType.foreignData }
 }
 
-const wrapNameInArray = (name: string): string => "(Array " + name + ")"
+const wrapNameInArray = (name: string): string => "(Array " + (fieldTypeNameReplacements[name] || name) + ")"
 
 const handleUnionType = (typeAliasMap: TypeAliasMap) => (interfaceName: string) => (fieldName: string) => (u: ts.UnionTypeNode): FieldType => {
   
-  const isOptional = u.types.map(t => {
-    return t.kind === ts.SyntaxKind.NullKeyword || t.kind === ts.SyntaxKind.UndefinedKeyword
-  }).reduce((a, b) => a && b, false)
+  const isOptional = u.types.map(t => 
+    t.kind === ts.SyntaxKind.NullKeyword || t.kind === ts.SyntaxKind.UndefinedKeyword
+  ).reduce((a, b) => a && b, false)
 
   const types = u.types.filter(t => t.kind !== ts.SyntaxKind.NullKeyword && t.kind !== ts.SyntaxKind.UndefinedKeyword)
 
@@ -224,19 +225,10 @@ const handleUnionType = (typeAliasMap: TypeAliasMap) => (interfaceName: string) 
 
   if(interfaceName === "TextInputProps" && fieldName === "keyboardType") return { name : "String" }
   if(interfaceName === "TextInputProps" && fieldName === "returnKeyType") return { name : "String" }
-  if(interfaceName === "TouchableNativeFeedbackProps" && fieldName === "background") return { name : "BackgroundPropTyppe", foreignData : [ "BackgroundPropType" ] }
+  if(interfaceName === "TouchableNativeFeedbackProps" && fieldName === "background") return { name : "(Object Foreign)", foreignData : [] }
   if(interfaceName === "ImagePropsBase" && fieldName === "source") return { name : "(Array ImageURISource)", foreignData : [ "ImageURISource" ] }
   if(interfaceName === "ImagePropsBase" && fieldName === "defaultSource") return { name : "ImageURISource", foreignData : [ "ImageURISource" ] }
-
-  /*
-WebViewProps source [ { name: 'WebViewUriSource',
-    foreignData: [ 'WebViewUriSource' ] },
-  { name: 'WebViewHtmlSource',
-    foreignData: [ 'WebViewHtmlSource' ] },
-  { name: 'Number' } ]
- */
-
-  //  console.log(remainingTypes)
+  if(interfaceName === "WebViewProps" && fieldName === "source") return { name : "(Object Foreign)", foreignData : [] }
 
   const name = (interfaceName + capitalize(fieldName))
   const fieldType = { name, foreignData : [ name ], isOptional }
@@ -251,7 +243,7 @@ const handleTypes = (typeAliasMap: TypeAliasMap) => (interfaceName: string) => (
     case ts.SyntaxKind.BooleanKeyword:      return { name : "Boolean" }
     case ts.SyntaxKind.NumberKeyword:       return { name : "Number" }
     case ts.SyntaxKind.StringKeyword:       return { name : "String" }
-    case ts.SyntaxKind.ObjectKeyword:       return { name : "ObjectType", foreignData: [ "ObjectType" ] }
+    case ts.SyntaxKind.ObjectKeyword:       return { name : "ObjectType", foreignData: [ "(Object Foreign)" ] }
     case ts.SyntaxKind.ParenthesizedType:   return handleParenthesizedType(typeAliasMap)(interfaceName)(fieldName)(type as unknown as ts.ParenthesizedTypeNode) 
     case ts.SyntaxKind.LiteralType:         return handleLiteralType(interfaceName)(fieldName)(type as unknown as ts.LiteralTypeNode)
     case ts.SyntaxKind.TypeReference:       return handleTypeReference(typeAliasMap)(interfaceName)(fieldName)(type as unknown as ts.TypeReferenceNode) 
@@ -264,7 +256,7 @@ const handleTypes = (typeAliasMap: TypeAliasMap) => (interfaceName: string) => (
   }
 }
 
-export const handleInterface = (typeAliasMap: TypeAliasMap) => (interfaceMap: InterfaceMap) => (int: ts.InterfaceDeclaration): Props => {
+export const handleInterface = (isComponentProps: boolean) => (typeAliasMap: TypeAliasMap) => (interfaceMap: InterfaceMap) => (int: ts.InterfaceDeclaration): Props => {
  
   const getParents = (): Props[] => {
     const array: Props[] = []
@@ -273,7 +265,7 @@ export const handleInterface = (typeAliasMap: TypeAliasMap) => (interfaceMap: In
         clause.types.forEach((type) => {
           const name = getExpressionName(type.expression)
           const maybeInterface = interfaceMap[name]
-          if(maybeInterface) array.push(handleInterface(typeAliasMap)(interfaceMap)(maybeInterface))
+          if(maybeInterface) array.push(handleInterface(isComponentProps)(typeAliasMap)(interfaceMap)(maybeInterface))
         })
       })
     }
@@ -320,7 +312,7 @@ export const handleInterface = (typeAliasMap: TypeAliasMap) => (interfaceMap: In
 
   const fields = uniqueFields(allFields).sort(fieldCompare)
 
-  return { name: interfaceName, fields, typeParameters }
+  return { name: interfaceName, fields, typeParameters, isComponentProps }
 }
 
 export const getBaseInterfaces = (interfaceMap: InterfaceMap, root: ts.Node): ts.InterfaceDeclaration[] => {
@@ -340,4 +332,5 @@ export const getBaseInterfaces = (interfaceMap: InterfaceMap, root: ts.Node): ts
   })
   return names.filter((name, i) => names.indexOf(name) == i && interfaceMap[name]).map((name) => interfaceMap[name])
 }
+
 

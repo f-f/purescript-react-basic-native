@@ -7,58 +7,17 @@ module React.Basic.Native.Generated where
 import Prelude
 
 import Data.JSDate (JSDate)
+import Data.Undefinable (Undefinable)
 import Effect (Effect)
 import Effect.Uncurried (EffectFn1, EffectFn2, EffectFn3, EffectFn4)
+import Foreign (Foreign)
+import Foreign.Object (Object)
 import Prim.Row (class Union)
 import React.Basic (JSX)
 import React.Basic.DOM.Internal (CSS)
-import React.Basic.Events (EventHandler)
 import React.Basic.Native.Internal (unsafeCreateNativeElement)
 
-
 foreign import data Any :: Type
-foreign import data BackgroundPropType :: Type
-foreign import data DocumentSelectionState :: Type
-foreign import data DrawerSlideEvent :: Type
-foreign import data GestureResponderEvent :: Type
-foreign import data ImageErrorEventData :: Type
-foreign import data ImageLoadEventData :: Type
-foreign import data ImageProgressEventDataIOS :: Type
-foreign import data ImageURISource :: Type
-foreign import data IndexSignature :: Type
-foreign import data Insets :: Type
-foreign import data LayoutChangeEvent :: Type
-foreign import data ListRenderItemInfo :: Type
-foreign import data ListViewDataSource :: Type
-foreign import data MapViewAnnotation :: Type
-foreign import data MapViewOverlay :: Type
-foreign import data MapViewRegion :: Type
-foreign import data NativeScrollEvent :: Type
-foreign import data NativeSegmentedControlIOSChangeEvent :: Type
-foreign import data NativeSyntheticEvent :: Type
-foreign import data NativeTouchEvent :: Type
-foreign import data NavState :: Type
-foreign import data PointPropType :: Type
-foreign import data Route :: Type
-foreign import data SwipeableListViewDataSource :: Type
-foreign import data TargetedEvent :: Type
-foreign import data TextInputChangeEventData :: Type
-foreign import data TextInputContentSizeChangeEventData :: Type
-foreign import data TextInputEndEditingEventData :: Type
-foreign import data TextInputFocusEventData :: Type
-foreign import data TextInputKeyPressEventData :: Type
-foreign import data TextInputScrollEventData :: Type
-foreign import data TextInputSelectionChangeEventData :: Type
-foreign import data TextInputSubmitEditingEventData :: Type
-foreign import data ViewPagerAndroidOnPageScrollEventData :: Type
-foreign import data ViewPagerAndroidOnPageSelectedEventData :: Type
-foreign import data ViewToken :: Type
-foreign import data ViewabilityConfigCallbackPair :: Type
-foreign import data WebViewIOSLoadRequestEvent :: Type
-foreign import data WebViewMessageEventData :: Type
-foreign import data WebViewNativeConfig :: Type
-foreign import data WebViewPropsSource :: Type
-foreign import data itemT :: Type 
 
 
 type ARTClippingRectangleProps  = 
@@ -74,16 +33,18 @@ type ARTClippingRectangleProps  =
   , width :: Number
   , x :: Number
   , y :: Number
+  , key :: String
   , children :: Array JSX
   )
 
 
 aRTClippingRectangle
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ ARTClippingRectangleProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (ARTClippingRectangleProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 aRTClippingRectangle props = unsafeCreateNativeElement "ARTClippingRectangle" props
+ 
 
 aRTClippingRectangle_ :: Array JSX -> JSX
 aRTClippingRectangle_ children = aRTClippingRectangle { children }
@@ -102,16 +63,18 @@ type ARTGroupProps  =
   , width :: Number
   , x :: Number
   , y :: Number
+  , key :: String
   , children :: Array JSX
   )
 
 
 aRTGroup
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ ARTGroupProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (ARTGroupProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 aRTGroup props = unsafeCreateNativeElement "ARTGroup" props
+ 
 
 aRTGroup_ :: Array JSX -> JSX
 aRTGroup_ children = aRTGroup { children }
@@ -136,29 +99,31 @@ type ARTShapeProps_optional  =
   , width :: Number
   , x :: Number
   , y :: Number
+  , key :: String
   , children :: Array JSX
   )
 
-type ARTShapeProps_required optional  = 
+type ARTShapeProps_required   optional = 
   ( d :: String
   | optional
   )
 
 
 aRTShape
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ ARTShapeProps_optional
-  => Record (ARTShapeProps_required attrs)
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (ARTShapeProps_optional  )
+  => Record ((ARTShapeProps_required  ) attrs)
   -> JSX
 aRTShape props = unsafeCreateNativeElement "ARTShape" props
 
 
 type ARTSurfaceProps_optional  = 
   ( style :: CSS
+  , key :: String
   , children :: Array JSX
   )
 
-type ARTSurfaceProps_required optional  = 
+type ARTSurfaceProps_required   optional = 
   ( height :: Number
   , width :: Number
   | optional
@@ -166,9 +131,9 @@ type ARTSurfaceProps_required optional  =
 
 
 aRTSurface
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ ARTSurfaceProps_optional
-  => Record (ARTSurfaceProps_required attrs)
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (ARTSurfaceProps_optional  )
+  => Record ((ARTSurfaceProps_required  ) attrs)
   -> JSX
 aRTSurface props = unsafeCreateNativeElement "ARTSurface" props
 
@@ -192,16 +157,18 @@ type ARTTextProps  =
   , visible :: Boolean
   , x :: Number
   , y :: Number
+  , key :: String
   , children :: Array JSX
   )
 
 
 aRTText
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ ARTTextProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (ARTTextProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 aRTText props = unsafeCreateNativeElement "ARTText" props
+ 
 
 aRTText_ :: Array JSX -> JSX
 aRTText_ children = aRTText { children }
@@ -263,16 +230,18 @@ type ActivityIndicatorIOSProps  =
   , tvParallaxShiftDistanceX :: Number
   , tvParallaxShiftDistanceY :: Number
   , tvParallaxTiltAngle :: Number
+  , key :: String
   , children :: Array JSX
   )
 
 
 activityIndicatorIOS
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ ActivityIndicatorIOSProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (ActivityIndicatorIOSProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 activityIndicatorIOS props = unsafeCreateNativeElement "ActivityIndicatorIOS" props
+ 
 
 activityIndicatorIOS_ :: Array JSX -> JSX
 activityIndicatorIOS_ children = activityIndicatorIOS { children }
@@ -334,16 +303,18 @@ type ActivityIndicatorProps  =
   , tvParallaxShiftDistanceX :: Number
   , tvParallaxShiftDistanceY :: Number
   , tvParallaxTiltAngle :: Number
+  , key :: String
   , children :: Array JSX
   )
 
 
 activityIndicator
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ ActivityIndicatorProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (ActivityIndicatorProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 activityIndicator props = unsafeCreateNativeElement "ActivityIndicator" props
+ 
 
 activityIndicator_ :: Array JSX -> JSX
 activityIndicator_ children = activityIndicator { children }
@@ -354,9 +325,10 @@ type ButtonProps_optional  =
   , color :: String
   , disabled :: Boolean
   , testID :: String
+  , key :: String
   )
 
-type ButtonProps_required optional  = 
+type ButtonProps_required   optional = 
   ( onPress :: (EffectFn1 (NativeSyntheticEvent NativeTouchEvent) Unit)
   , title :: String
   | optional
@@ -364,9 +336,9 @@ type ButtonProps_required optional  =
 
 
 button
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ ButtonProps_optional
-  => Record (ButtonProps_required attrs)
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (ButtonProps_optional  )
+  => Record ((ButtonProps_required  ) attrs)
   -> JSX
 button props = unsafeCreateNativeElement "Button" props
 
@@ -427,16 +399,18 @@ type CheckBoxProps  =
   , tvParallaxShiftDistanceY :: Number
   , tvParallaxTiltAngle :: Number
   , value :: Boolean
+  , key :: String
   , children :: Array JSX
   )
 
 
 checkBox
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ CheckBoxProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (CheckBoxProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 checkBox props = unsafeCreateNativeElement "CheckBox" props
+ 
 
 checkBox_ :: Array JSX -> JSX
 checkBox_ children = checkBox { children }
@@ -500,10 +474,11 @@ type DatePickerIOSProps_optional  =
   , tvParallaxShiftDistanceX :: Number
   , tvParallaxShiftDistanceY :: Number
   , tvParallaxTiltAngle :: Number
+  , key :: String
   , children :: Array JSX
   )
 
-type DatePickerIOSProps_required optional  = 
+type DatePickerIOSProps_required   optional = 
   ( date :: JSDate
   , onDateChange :: (EffectFn1 JSDate Unit)
   | optional
@@ -511,11 +486,16 @@ type DatePickerIOSProps_required optional  =
 
 
 datePickerIOS
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ DatePickerIOSProps_optional
-  => Record (DatePickerIOSProps_required attrs)
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (DatePickerIOSProps_optional  )
+  => Record ((DatePickerIOSProps_required  ) attrs)
   -> JSX
 datePickerIOS props = unsafeCreateNativeElement "DatePickerIOS" props
+
+
+type DocumentSelectionState  = {
+    
+}
 
 
 type DrawerLayoutAndroidProps_optional  = 
@@ -580,21 +560,27 @@ type DrawerLayoutAndroidProps_optional  =
   , tvParallaxShiftDistanceX :: Number
   , tvParallaxShiftDistanceY :: Number
   , tvParallaxTiltAngle :: Number
+  , key :: String
   , children :: Array JSX
   )
 
-type DrawerLayoutAndroidProps_required optional  = 
+type DrawerLayoutAndroidProps_required   optional = 
   ( renderNavigationView :: (Effect JSX)
   | optional
   )
 
 
 drawerLayoutAndroid
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ DrawerLayoutAndroidProps_optional
-  => Record (DrawerLayoutAndroidProps_required attrs)
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (DrawerLayoutAndroidProps_optional  )
+  => Record ((DrawerLayoutAndroidProps_required  ) attrs)
   -> JSX
 drawerLayoutAndroid props = unsafeCreateNativeElement "DrawerLayoutAndroid" props
+
+
+type DrawerSlideEvent  = {
+    
+}
 
 
 type FlatListProps_optional itemT = 
@@ -727,10 +713,11 @@ type FlatListProps_optional itemT =
   , viewabilityConfigCallbackPairs :: (Array ViewabilityConfigCallbackPair)
   , windowSize :: Number
   , zoomScale :: Number
+  , key :: String
   , children :: Array JSX
   )
 
-type FlatListProps_required optional itemT = 
+type FlatListProps_required itemT  optional = 
   ( data :: (Array itemT)
   , renderItem :: (EffectFn1 (ListRenderItemInfo itemT) JSX)
   | optional
@@ -738,11 +725,16 @@ type FlatListProps_required optional itemT =
 
 
 flatList
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ FlatListProps_optional
-  => Record (FlatListProps_required attrs)
+  :: ∀ attrs attrs_ itemT 
+  . Union attrs attrs_ (FlatListProps_optional itemT )
+  => Record ((FlatListProps_required itemT ) attrs)
   -> JSX
 flatList props = unsafeCreateNativeElement "FlatList" props
+
+
+type GestureResponderEvent  = {
+    
+}
 
 
 type ImageBackgroundProps_optional  = 
@@ -784,21 +776,39 @@ type ImageBackgroundProps_optional  =
   , style :: CSS
   , testID :: String
   , width :: Number
+  , key :: String
   , children :: Array JSX
   )
 
-type ImageBackgroundProps_required optional  = 
+type ImageBackgroundProps_required   optional = 
   ( source :: (Array ImageURISource)
   | optional
   )
 
 
 imageBackground
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ ImageBackgroundProps_optional
-  => Record (ImageBackgroundProps_required attrs)
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (ImageBackgroundProps_optional  )
+  => Record ((ImageBackgroundProps_required  ) attrs)
   -> JSX
 imageBackground props = unsafeCreateNativeElement "ImageBackground" props
+
+
+type ImageErrorEventData  = {
+    error :: Any
+}
+
+
+type ImageLoadEventData  = {
+    source :: { height :: Number, width :: Number, url :: String }
+  , uri  :: (Undefinable  String)
+}
+
+
+type ImageProgressEventDataIOS  = {
+    loaded :: Number
+  , total :: Number
+}
 
 
 type ImageProps_optional  = 
@@ -839,40 +849,64 @@ type ImageProps_optional  =
   , style :: CSS
   , testID :: String
   , width :: Number
+  , key :: String
   , children :: Array JSX
   )
 
-type ImageProps_required optional  = 
+type ImageProps_required   optional = 
   ( source :: (Array ImageURISource)
   | optional
   )
 
 
 image
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ ImageProps_optional
-  => Record (ImageProps_required attrs)
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (ImageProps_optional  )
+  => Record ((ImageProps_required  ) attrs)
   -> JSX
 image props = unsafeCreateNativeElement "Image" props
+
+
+type ImageURISource  = {
+    body  :: (Undefinable  String)
+  , bundle  :: (Undefinable  String)
+  , cache  :: (Undefinable  String)
+  , headers  :: (Undefinable  (Object Foreign))
+  , height  :: (Undefinable  Number)
+  , method  :: (Undefinable  String)
+  , scale  :: (Undefinable  Number)
+  , uri  :: (Undefinable  String)
+  , width  :: (Undefinable  Number)
+}
 
 
 type InputAccessoryViewProps  = 
   ( backgroundColor :: String
   , nativeID :: String
   , style :: CSS
+  , key :: String
   , children :: Array JSX
   )
 
 
 inputAccessoryView
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ InputAccessoryViewProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (InputAccessoryViewProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 inputAccessoryView props = unsafeCreateNativeElement "InputAccessoryView" props
+ 
 
 inputAccessoryView_ :: Array JSX -> JSX
 inputAccessoryView_ children = inputAccessoryView { children }
+
+
+type Insets  = {
+    bottom  :: (Undefinable  Number)
+  , left  :: (Undefinable  Number)
+  , right  :: (Undefinable  Number)
+  , top  :: (Undefinable  Number)
+}
 
 
 type KeyboardAvoidingViewProps  = 
@@ -931,19 +965,46 @@ type KeyboardAvoidingViewProps  =
   , tvParallaxShiftDistanceX :: Number
   , tvParallaxShiftDistanceY :: Number
   , tvParallaxTiltAngle :: Number
+  , key :: String
   , children :: Array JSX
   )
 
 
 keyboardAvoidingView
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ KeyboardAvoidingViewProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (KeyboardAvoidingViewProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 keyboardAvoidingView props = unsafeCreateNativeElement "KeyboardAvoidingView" props
+ 
 
 keyboardAvoidingView_ :: Array JSX -> JSX
 keyboardAvoidingView_ children = keyboardAvoidingView { children }
+
+
+type LayoutChangeEvent  = {
+    nativeEvent :: { layout :: LayoutRectangle }
+}
+
+
+type LayoutRectangle  = {
+    height :: Number
+  , width :: Number
+  , x :: Number
+  , y :: Number
+}
+
+
+type ListRenderItemInfo itemT = {
+    index :: Number
+  , item :: itemT
+  , separators :: { highlight :: (Effect Unit), unhighlight :: (Effect Unit), updateProps :: (EffectFn2 String Any Unit) }
+}
+
+
+type ListViewDataSource  = {
+    
+}
 
 
 type ListViewProps_optional  = 
@@ -992,7 +1053,7 @@ type ListViewProps_optional  =
   , nestedScrollEnabled :: Boolean
   , onAccessibilityAction :: (Effect Unit)
   , onAccessibilityTap :: (Effect Unit)
-  , onChangeVisibleRows :: (EffectFn2 (Array IndexSignature) (Array IndexSignature) Unit)
+  , onChangeVisibleRows :: (EffectFn2 (Array (Object Foreign)) (Array (Object Foreign)) Unit)
   , onContentSizeChange :: (EffectFn2 Number Number Unit)
   , onEndReached :: (Effect Unit)
   , onEndReachedThreshold :: Number
@@ -1058,10 +1119,11 @@ type ListViewProps_optional  =
   , tvParallaxShiftDistanceY :: Number
   , tvParallaxTiltAngle :: Number
   , zoomScale :: Number
+  , key :: String
   , children :: Array JSX
   )
 
-type ListViewProps_required optional  = 
+type ListViewProps_required   optional = 
   ( dataSource :: ListViewDataSource
   , renderRow :: (EffectFn4 Any String String Boolean JSX)
   | optional
@@ -1069,11 +1131,44 @@ type ListViewProps_required optional  =
 
 
 listView
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ ListViewProps_optional
-  => Record (ListViewProps_required attrs)
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (ListViewProps_optional  )
+  => Record ((ListViewProps_required  ) attrs)
   -> JSX
 listView props = unsafeCreateNativeElement "ListView" props
+
+
+type MapViewAnnotation  = {
+    animateDrop  :: (Undefinable  Boolean)
+  , detailCalloutView  :: (Undefinable  JSX)
+  , draggable  :: (Undefinable  Boolean)
+  , hasLeftCallout  :: (Undefinable  Boolean)
+  , hasRightCallout  :: (Undefinable  Boolean)
+  , id  :: (Undefinable  String)
+  , image  :: (Undefinable  ImageURISource)
+  , latitude :: Number
+  , leftCalloutView  :: (Undefinable  JSX)
+  , longitude :: Number
+  , onBlur  :: (Undefinable  (Effect Any))
+  , onDragStateChange  :: (Undefinable  (Effect Any))
+  , onFocus  :: (Undefinable  (Effect Any))
+  , onLeftCalloutPress  :: (Undefinable  (Effect Unit))
+  , onRightCalloutPress  :: (Undefinable  (Effect Unit))
+  , rightCalloutView  :: (Undefinable  JSX)
+  , subtitle  :: (Undefinable  String)
+  , tintColor  :: (Undefinable  String)
+  , title  :: (Undefinable  String)
+  , view  :: (Undefinable  JSX)
+}
+
+
+type MapViewOverlay  = {
+    coordinates :: (Array ({ latitude :: Number, longitude :: Number }))
+  , fillColor  :: (Undefinable  String)
+  , id  :: (Undefinable  String)
+  , lineWidth  :: (Undefinable  Number)
+  , strokeColor  :: (Undefinable  String)
+}
 
 
 type MapViewProps  = 
@@ -1146,19 +1241,29 @@ type MapViewProps  =
   , tvParallaxShiftDistanceY :: Number
   , tvParallaxTiltAngle :: Number
   , zoomEnabled :: Boolean
+  , key :: String
   , children :: Array JSX
   )
 
 
 mapView
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ MapViewProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (MapViewProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 mapView props = unsafeCreateNativeElement "MapView" props
+ 
 
 mapView_ :: Array JSX -> JSX
 mapView_ children = mapView { children }
+
+
+type MapViewRegion  = {
+    latitude :: Number
+  , latitudeDelta  :: (Undefinable  Number)
+  , longitude :: Number
+  , longitudeDelta  :: (Undefinable  Number)
+}
 
 
 type MaskedViewIOSProps_optional  = 
@@ -1213,21 +1318,92 @@ type MaskedViewIOSProps_optional  =
   , tvParallaxShiftDistanceX :: Number
   , tvParallaxShiftDistanceY :: Number
   , tvParallaxTiltAngle :: Number
+  , key :: String
   , children :: Array JSX
   )
 
-type MaskedViewIOSProps_required optional  = 
+type MaskedViewIOSProps_required   optional = 
   ( maskElement :: JSX
   | optional
   )
 
 
 maskedViewIOS
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ MaskedViewIOSProps_optional
-  => Record (MaskedViewIOSProps_required attrs)
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (MaskedViewIOSProps_optional  )
+  => Record ((MaskedViewIOSProps_required  ) attrs)
   -> JSX
 maskedViewIOS props = unsafeCreateNativeElement "MaskedViewIOS" props
+
+
+type NativeScrollEvent  = {
+    contentInset :: NativeScrollRectangle
+  , contentOffset :: NativeScrollPoint
+  , contentSize :: NativeScrollSize
+  , layoutMeasurement :: NativeScrollSize
+  , velocity  :: (Undefinable  NativeScrollVelocity)
+  , zoomScale :: Number
+}
+
+
+type NativeScrollPoint  = {
+    x :: Number
+  , y :: Number
+}
+
+
+type NativeScrollRectangle  = {
+    bottom :: Number
+  , left :: Number
+  , right :: Number
+  , top :: Number
+}
+
+
+type NativeScrollSize  = {
+    height :: Number
+  , width :: Number
+}
+
+
+type NativeScrollVelocity  = {
+    x :: Number
+  , y :: Number
+}
+
+
+type NativeSegmentedControlIOSChangeEvent  = {
+    selectedSegmentIndex :: Number
+  , target :: Number
+  , value :: String
+}
+
+
+type NativeSyntheticEvent t = {
+    
+}
+
+
+newtype NativeTouchEvent = NativeTouchEvent {
+    changedTouches :: (Array NativeTouchEvent)
+  , identifier :: String
+  , locationX :: Number
+  , locationY :: Number
+  , pageX :: Number
+  , pageY :: Number
+  , target :: String
+  , timestamp :: Number
+  , touches :: (Array NativeTouchEvent)
+}
+
+
+type NavState  = {
+    canGoBack  :: (Undefinable  Boolean)
+  , canGoForward  :: (Undefinable  Boolean)
+  , loading  :: (Undefinable  Boolean)
+  , title  :: (Undefinable  String)
+  , url  :: (Undefinable  String)
+}
 
 
 type NavigatorIOSProps_optional  = 
@@ -1240,19 +1416,20 @@ type NavigatorIOSProps_optional  =
   , tintColor :: String
   , titleTextColor :: String
   , translucent :: Boolean
+  , key :: String
   , children :: Array JSX
   )
 
-type NavigatorIOSProps_required optional  = 
+type NavigatorIOSProps_required   optional = 
   ( initialRoute :: Route
   | optional
   )
 
 
 navigatorIOS
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ NavigatorIOSProps_optional
-  => Record (NavigatorIOSProps_required attrs)
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (NavigatorIOSProps_optional  )
+  => Record ((NavigatorIOSProps_required  ) attrs)
   -> JSX
 navigatorIOS props = unsafeCreateNativeElement "NavigatorIOS" props
 
@@ -1260,16 +1437,18 @@ navigatorIOS props = unsafeCreateNativeElement "NavigatorIOS" props
 type PickerIOSItemProps  = 
   ( label :: String
   , value :: String
+  , key :: String
   , children :: Array JSX
   )
 
 
 pickerIOSItem
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ PickerIOSItemProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (PickerIOSItemProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 pickerIOSItem props = unsafeCreateNativeElement "PickerIOSItem" props
+ 
 
 pickerIOSItem_ :: Array JSX -> JSX
 pickerIOSItem_ children = pickerIOSItem { children }
@@ -1330,16 +1509,18 @@ type PickerIOSProps  =
   , tvParallaxShiftDistanceX :: Number
   , tvParallaxShiftDistanceY :: Number
   , tvParallaxTiltAngle :: Number
+  , key :: String
   , children :: Array JSX
   )
 
 
 pickerIOS
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ PickerIOSProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (PickerIOSProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 pickerIOS props = unsafeCreateNativeElement "PickerIOS" props
+ 
 
 pickerIOS_ :: Array JSX -> JSX
 pickerIOS_ children = pickerIOS { children }
@@ -1349,19 +1530,20 @@ type PickerItemProps_optional  =
   ( color :: String
   , testID :: String
   , value :: Any
+  , key :: String
   , children :: Array JSX
   )
 
-type PickerItemProps_required optional  = 
+type PickerItemProps_required   optional = 
   ( label :: String
   | optional
   )
 
 
 pickerItem
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ PickerItemProps_optional
-  => Record (PickerItemProps_required attrs)
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (PickerItemProps_optional  )
+  => Record ((PickerItemProps_required  ) attrs)
   -> JSX
 pickerItem props = unsafeCreateNativeElement "PickerItem" props
 
@@ -1425,19 +1607,27 @@ type PickerProps  =
   , tvParallaxShiftDistanceX :: Number
   , tvParallaxShiftDistanceY :: Number
   , tvParallaxTiltAngle :: Number
+  , key :: String
   , children :: Array JSX
   )
 
 
 picker
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ PickerProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (PickerProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 picker props = unsafeCreateNativeElement "Picker" props
+ 
 
 picker_ :: Array JSX -> JSX
 picker_ children = picker { children }
+
+
+type PointPropType  = {
+    x :: Number
+  , y :: Number
+}
 
 
 type ProgressBarAndroidProps  = 
@@ -1496,16 +1686,18 @@ type ProgressBarAndroidProps  =
   , tvParallaxShiftDistanceX :: Number
   , tvParallaxShiftDistanceY :: Number
   , tvParallaxTiltAngle :: Number
+  , key :: String
   , children :: Array JSX
   )
 
 
 progressBarAndroid
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ ProgressBarAndroidProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (ProgressBarAndroidProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 progressBarAndroid props = unsafeCreateNativeElement "ProgressBarAndroid" props
+ 
 
 progressBarAndroid_ :: Array JSX -> JSX
 progressBarAndroid_ children = progressBarAndroid { children }
@@ -1569,16 +1761,18 @@ type ProgressViewIOSProps  =
   , tvParallaxShiftDistanceX :: Number
   , tvParallaxShiftDistanceY :: Number
   , tvParallaxTiltAngle :: Number
+  , key :: String
   , children :: Array JSX
   )
 
 
 progressViewIOS
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ ProgressViewIOSProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (ProgressViewIOSProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 progressViewIOS props = unsafeCreateNativeElement "ProgressViewIOS" props
+ 
 
 progressViewIOS_ :: Array JSX -> JSX
 progressViewIOS_ children = progressViewIOS { children }
@@ -1683,16 +1877,18 @@ type RecyclerViewBackedScrollViewProps  =
   , tvParallaxShiftDistanceY :: Number
   , tvParallaxTiltAngle :: Number
   , zoomScale :: Number
+  , key :: String
   , children :: Array JSX
   )
 
 
 recyclerViewBackedScrollView
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ RecyclerViewBackedScrollViewProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (RecyclerViewBackedScrollViewProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 recyclerViewBackedScrollView props = unsafeCreateNativeElement "RecyclerViewBackedScrollView" props
+ 
 
 recyclerViewBackedScrollView_ :: Array JSX -> JSX
 recyclerViewBackedScrollView_ children = recyclerViewBackedScrollView { children }
@@ -1759,21 +1955,37 @@ type RefreshControlProps_optional  =
   , tvParallaxShiftDistanceX :: Number
   , tvParallaxShiftDistanceY :: Number
   , tvParallaxTiltAngle :: Number
+  , key :: String
   , children :: Array JSX
   )
 
-type RefreshControlProps_required optional  = 
+type RefreshControlProps_required   optional = 
   ( refreshing :: Boolean
   | optional
   )
 
 
 refreshControl
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ RefreshControlProps_optional
-  => Record (RefreshControlProps_required attrs)
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (RefreshControlProps_optional  )
+  => Record ((RefreshControlProps_required  ) attrs)
   -> JSX
 refreshControl props = unsafeCreateNativeElement "RefreshControl" props
+
+
+type Route  = {
+    backButtonTitle  :: (Undefinable  String)
+  , component  :: (Undefinable  JSX)
+  , content  :: (Undefinable  String)
+  , id  :: (Undefinable  String)
+  , index  :: (Undefinable  Number)
+  , message  :: (Undefinable  String)
+  , onRightButtonPress  :: (Undefinable  (Effect Unit))
+  , passProps  :: (Undefinable  (Object Foreign))
+  , rightButtonTitle  :: (Undefinable  String)
+  , title  :: (Undefinable  String)
+  , wrapperStyle  :: (Undefinable  Any)
+}
 
 
 type ScrollViewProps  = 
@@ -1875,16 +2087,18 @@ type ScrollViewProps  =
   , tvParallaxShiftDistanceY :: Number
   , tvParallaxTiltAngle :: Number
   , zoomScale :: Number
+  , key :: String
   , children :: Array JSX
   )
 
 
 scrollView
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ ScrollViewProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (ScrollViewProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 scrollView props = unsafeCreateNativeElement "ScrollView" props
+ 
 
 scrollView_ :: Array JSX -> JSX
 scrollView_ children = scrollView { children }
@@ -1949,16 +2163,18 @@ type SegmentedControlIOSProps  =
   , tvParallaxShiftDistanceY :: Number
   , tvParallaxTiltAngle :: Number
   , values :: (Array String)
+  , key :: String
   , children :: Array JSX
   )
 
 
 segmentedControlIOS
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ SegmentedControlIOSProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (SegmentedControlIOSProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 segmentedControlIOS props = unsafeCreateNativeElement "SegmentedControlIOS" props
+ 
 
 segmentedControlIOS_ :: Array JSX -> JSX
 segmentedControlIOS_ children = segmentedControlIOS { children }
@@ -2030,16 +2246,18 @@ type SliderProps  =
   , tvParallaxShiftDistanceY :: Number
   , tvParallaxTiltAngle :: Number
   , value :: Number
+  , key :: String
   , children :: Array JSX
   )
 
 
 slider
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ SliderProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (SliderProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 slider props = unsafeCreateNativeElement "Slider" props
+ 
 
 slider_ :: Array JSX -> JSX
 slider_ children = slider { children }
@@ -2097,19 +2315,20 @@ type SnapshotViewIOSProps_optional  =
   , tvParallaxShiftDistanceX :: Number
   , tvParallaxShiftDistanceY :: Number
   , tvParallaxTiltAngle :: Number
+  , key :: String
   , children :: Array JSX
   )
 
-type SnapshotViewIOSProps_required optional  = 
+type SnapshotViewIOSProps_required   optional = 
   ( testIdentifier :: String
   | optional
   )
 
 
 snapshotViewIOS
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ SnapshotViewIOSProps_optional
-  => Record (SnapshotViewIOSProps_required attrs)
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (SnapshotViewIOSProps_optional  )
+  => Record ((SnapshotViewIOSProps_required  ) attrs)
   -> JSX
 snapshotViewIOS props = unsafeCreateNativeElement "SnapshotViewIOS" props
 
@@ -2122,27 +2341,34 @@ type StatusBarProps  =
   , networkActivityIndicatorVisible :: Boolean
   , showHideTransition :: String
   , translucent :: Boolean
+  , key :: String
   , children :: Array JSX
   )
 
 
 statusBar
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ StatusBarProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (StatusBarProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 statusBar props = unsafeCreateNativeElement "StatusBar" props
+ 
 
 statusBar_ :: Array JSX -> JSX
 statusBar_ children = statusBar { children }
 
 
+type SwipeableListViewDataSource  = {
+    
+}
+
+
 type SwipeableListViewProps_optional  = 
-  ( 
-    children :: Array JSX
+  ( key :: String
+  , children :: Array JSX
   )
 
-type SwipeableListViewProps_required optional  = 
+type SwipeableListViewProps_required   optional = 
   ( bounceFirstRowOnMount :: Boolean
   , dataSource :: SwipeableListViewDataSource
   , maxSwipeDistance :: Number
@@ -2152,9 +2378,9 @@ type SwipeableListViewProps_required optional  =
 
 
 swipeableListView
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ SwipeableListViewProps_optional
-  => Record (SwipeableListViewProps_required attrs)
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (SwipeableListViewProps_optional  )
+  => Record ((SwipeableListViewProps_required  ) attrs)
   -> JSX
 swipeableListView props = unsafeCreateNativeElement "SwipeableListView" props
 
@@ -2217,16 +2443,18 @@ type SwitchIOSProps  =
   , tvParallaxShiftDistanceY :: Number
   , tvParallaxTiltAngle :: Number
   , value :: Boolean
+  , key :: String
   , children :: Array JSX
   )
 
 
 switchIOS
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ SwitchIOSProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (SwitchIOSProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 switchIOS props = unsafeCreateNativeElement "SwitchIOS" props
+ 
 
 switchIOS_ :: Array JSX -> JSX
 switchIOS_ children = switchIOS { children }
@@ -2293,16 +2521,18 @@ type SwitchProps  =
   , tvParallaxShiftDistanceY :: Number
   , tvParallaxTiltAngle :: Number
   , value :: Boolean
+  , key :: String
   , children :: Array JSX
   )
 
 
 switch
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ SwitchProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (SwitchProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 switch props = unsafeCreateNativeElement "Switch" props
+ 
 
 switch_ :: Array JSX -> JSX
 switch_ children = switch { children }
@@ -2369,16 +2599,18 @@ type TabBarIOSItemProps  =
   , tvParallaxShiftDistanceX :: Number
   , tvParallaxShiftDistanceY :: Number
   , tvParallaxTiltAngle :: Number
+  , key :: String
   , children :: Array JSX
   )
 
 
 tabBarIOSItem
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ TabBarIOSItemProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (TabBarIOSItemProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 tabBarIOSItem props = unsafeCreateNativeElement "TabBarIOSItem" props
+ 
 
 tabBarIOSItem_ :: Array JSX -> JSX
 tabBarIOSItem_ children = tabBarIOSItem { children }
@@ -2442,19 +2674,55 @@ type TabBarIOSProps  =
   , tvParallaxTiltAngle :: Number
   , unselectedItemTintColor :: String
   , unselectedTintColor :: String
+  , key :: String
   , children :: Array JSX
   )
 
 
 tabBarIOS
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ TabBarIOSProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (TabBarIOSProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 tabBarIOS props = unsafeCreateNativeElement "TabBarIOS" props
+ 
 
 tabBarIOS_ :: Array JSX -> JSX
 tabBarIOS_ children = tabBarIOS { children }
+
+
+type TargetedEvent  = {
+    target :: Number
+}
+
+
+type TextInputChangeEventData  = {
+    eventCount :: Number
+  , target :: Number
+  , text :: String
+}
+
+
+type TextInputContentSizeChangeEventData  = {
+    contentSize :: { width :: Number, height :: Number }
+}
+
+
+type TextInputEndEditingEventData  = {
+    text :: String
+}
+
+
+type TextInputFocusEventData  = {
+    eventCount :: Number
+  , target :: Number
+  , text :: String
+}
+
+
+type TextInputKeyPressEventData  = {
+    key :: String
+}
 
 
 type TextInputProps  = 
@@ -2559,19 +2827,37 @@ type TextInputProps  =
   , tvParallaxTiltAngle :: Number
   , underlineColorAndroid :: String
   , value :: String
+  , key :: String
   , children :: Array JSX
   )
 
 
 textInput
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ TextInputProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (TextInputProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 textInput props = unsafeCreateNativeElement "TextInput" props
+ 
 
 textInput_ :: Array JSX -> JSX
 textInput_ children = textInput { children }
+
+
+type TextInputScrollEventData  = {
+    contentOffset :: { x :: Number, y :: Number }
+}
+
+
+type TextInputSelectionChangeEventData  = {
+    selection :: { start :: Number, end :: Number }
+  , target :: Number
+}
+
+
+type TextInputSubmitEditingEventData  = {
+    text :: String
+}
 
 
 type TextProps  = 
@@ -2605,16 +2891,18 @@ type TextProps  =
   , suppressHighlighting :: Boolean
   , testID :: String
   , textBreakStrategy :: String
+  , key :: String
   , children :: Array JSX
   )
 
 
 text
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ TextProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (TextProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 text props = unsafeCreateNativeElement "Text" props
+ 
 
 text_ :: Array JSX -> JSX
 text_ children = text { children }
@@ -2685,16 +2973,18 @@ type ToolbarAndroidProps  =
   , tvParallaxShiftDistanceX :: Number
   , tvParallaxShiftDistanceY :: Number
   , tvParallaxTiltAngle :: Number
+  , key :: String
   , children :: Array JSX
   )
 
 
 toolbarAndroid
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ ToolbarAndroidProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (ToolbarAndroidProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 toolbarAndroid props = unsafeCreateNativeElement "ToolbarAndroid" props
+ 
 
 toolbarAndroid_ :: Array JSX -> JSX
 toolbarAndroid_ children = toolbarAndroid { children }
@@ -2735,16 +3025,18 @@ type TouchableHighlightProps  =
   , testID :: String
   , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
   , underlayColor :: String
+  , key :: String
   , children :: Array JSX
   )
 
 
 touchableHighlight
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ TouchableHighlightProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (TouchableHighlightProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 touchableHighlight props = unsafeCreateNativeElement "TouchableHighlight" props
+ 
 
 touchableHighlight_ :: Array JSX -> JSX
 touchableHighlight_ children = touchableHighlight { children }
@@ -2761,7 +3053,7 @@ type TouchableNativeFeedbackProps  =
   , accessibilityStates :: (Array String)
   , accessibilityTraits :: (Array String)
   , accessible :: Boolean
-  , background :: BackgroundPropTyppe
+  , background :: (Object Foreign)
   , delayLongPress :: Number
   , delayPressIn :: Number
   , delayPressOut :: Number
@@ -2783,16 +3075,18 @@ type TouchableNativeFeedbackProps  =
   , testID :: String
   , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
   , useForeground :: Boolean
+  , key :: String
   , children :: Array JSX
   )
 
 
 touchableNativeFeedback
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ TouchableNativeFeedbackProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (TouchableNativeFeedbackProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 touchableNativeFeedback props = unsafeCreateNativeElement "TouchableNativeFeedback" props
+ 
 
 touchableNativeFeedback_ :: Array JSX -> JSX
 touchableNativeFeedback_ children = touchableNativeFeedback { children }
@@ -2830,16 +3124,18 @@ type TouchableOpacityProps  =
   , style :: CSS
   , testID :: String
   , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , key :: String
   , children :: Array JSX
   )
 
 
 touchableOpacity
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ TouchableOpacityProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (TouchableOpacityProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 touchableOpacity props = unsafeCreateNativeElement "TouchableOpacity" props
+ 
 
 touchableOpacity_ :: Array JSX -> JSX
 touchableOpacity_ children = touchableOpacity { children }
@@ -2876,19 +3172,32 @@ type TouchableWithoutFeedbackProps  =
   , style :: CSS
   , testID :: String
   , tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
+  , key :: String
   , children :: Array JSX
   )
 
 
 touchableWithoutFeedback
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ TouchableWithoutFeedbackProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (TouchableWithoutFeedbackProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 touchableWithoutFeedback props = unsafeCreateNativeElement "TouchableWithoutFeedback" props
+ 
 
 touchableWithoutFeedback_ :: Array JSX -> JSX
 touchableWithoutFeedback_ children = touchableWithoutFeedback { children }
+
+
+type ViewPagerAndroidOnPageScrollEventData  = {
+    offset :: Number
+  , position :: Number
+}
+
+
+type ViewPagerAndroidOnPageSelectedEventData  = {
+    position :: Number
+}
 
 
 type ViewPagerAndroidProps  = 
@@ -2950,16 +3259,18 @@ type ViewPagerAndroidProps  =
   , tvParallaxShiftDistanceX :: Number
   , tvParallaxShiftDistanceY :: Number
   , tvParallaxTiltAngle :: Number
+  , key :: String
   , children :: Array JSX
   )
 
 
 viewPagerAndroid
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ ViewPagerAndroidProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (ViewPagerAndroidProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 viewPagerAndroid props = unsafeCreateNativeElement "ViewPagerAndroid" props
+ 
 
 viewPagerAndroid_ :: Array JSX -> JSX
 viewPagerAndroid_ children = viewPagerAndroid { children }
@@ -3017,19 +3328,68 @@ type ViewProps  =
   , tvParallaxShiftDistanceX :: Number
   , tvParallaxShiftDistanceY :: Number
   , tvParallaxTiltAngle :: Number
+  , key :: String
   , children :: Array JSX
   )
 
 
 view
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ ViewProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (ViewProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 view props = unsafeCreateNativeElement "View" props
+ 
 
 view_ :: Array JSX -> JSX
 view_ children = view { children }
+
+
+type ViewToken  = {
+    index :: String
+  , isViewable :: Boolean
+  , item :: Any
+  , key :: String
+  , section  :: (Undefinable  Any)
+}
+
+
+type ViewabilityConfig  = {
+    itemVisiblePercentThreshold  :: (Undefinable  Number)
+  , minimumViewTime  :: (Undefinable  Number)
+  , viewAreaCoveragePercentThreshold  :: (Undefinable  Number)
+  , waitForInteraction  :: (Undefinable  Boolean)
+}
+
+
+type ViewabilityConfigCallbackPair  = {
+    onViewableItemsChanged :: ((EffectFn1 { viewableItems :: (Array ViewToken), changed :: (Array ViewToken) } Unit))
+  , viewabilityConfig :: ViewabilityConfig
+}
+
+
+type WebViewIOSLoadRequestEvent  = {
+    canGoBack :: Boolean
+  , canGoForward :: Boolean
+  , loading :: Boolean
+  , lockIdentifier :: Number
+  , navigationType :: String
+  , target :: Number
+  , title :: String
+  , url :: String
+}
+
+
+type WebViewMessageEventData  = {
+    data :: String
+}
+
+
+type WebViewNativeConfig  = {
+    component  :: (Undefinable  Any)
+  , props  :: (Undefinable  (Object Foreign))
+  , viewManager  :: (Undefinable  (Object Foreign))
+}
 
 
 type WebViewProps  = 
@@ -3104,7 +3464,7 @@ type WebViewProps  =
   , scalesPageToFit :: Boolean
   , scrollEnabled :: Boolean
   , shouldRasterizeIOS :: Boolean
-  , source :: WebViewPropsSource
+  , source :: (Object Foreign)
   , startInLoadingState :: Boolean
   , style :: CSS
   , testID :: String
@@ -3116,16 +3476,18 @@ type WebViewProps  =
   , url :: String
   , useWebKit :: Boolean
   , userAgent :: String
+  , key :: String
   , children :: Array JSX
   )
 
 
 webView
-  :: ∀ attrs attrs_
-  . Union attrs attrs_ WebViewProps
+  :: ∀ attrs attrs_  
+  . Union attrs attrs_ (WebViewProps  )
   => Record attrs
-  -> JSX
+  -> JSX 
 webView props = unsafeCreateNativeElement "WebView" props
+ 
 
 webView_ :: Array JSX -> JSX
 webView_ children = webView { children }

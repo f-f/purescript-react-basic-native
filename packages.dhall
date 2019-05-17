@@ -116,6 +116,13 @@ let upstream =
 
 let overrides = {=}
 
-let additions = {=}
+let additions = 
+  { undefinable =
+      mkPackage
+        [ "functions", "maybe" ]
+        "https://github.com/ethul/purescript-undefinable.git"
+        "v4.0.0"
+  
+  }
 
 in  upstream ⫽ overrides ⫽ additions
