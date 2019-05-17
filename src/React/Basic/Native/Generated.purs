@@ -17,8 +17,6 @@ import React.Basic (JSX)
 import React.Basic.DOM.Internal (CSS)
 import React.Basic.Native.Internal (unsafeCreateNativeElement)
 
-foreign import data Any :: Type
-
 
 type ARTClippingRectangleProps  = 
   ( height :: Number
@@ -618,9 +616,9 @@ type FlatListProps_optional itemT =
   , directionalLockEnabled :: Boolean
   , disableVirtualization :: Boolean
   , endFillColor :: String
-  , extraData :: Any
-  , getItem :: (EffectFn2 Any Number itemT)
-  , getItemCount :: (EffectFn1 Any Number)
+  , extraData :: Foreign
+  , getItem :: (EffectFn2 Foreign Number itemT)
+  , getItemCount :: (EffectFn1 Foreign Number)
   , getItemLayout :: (EffectFn2 (Array itemT) Number { length :: Number, offset :: Number, index :: Number })
   , hasTVPreferredFocus :: Boolean
   , hitSlop :: Insets
@@ -709,7 +707,7 @@ type FlatListProps_optional itemT =
   , tvParallaxShiftDistanceY :: Number
   , tvParallaxTiltAngle :: Number
   , updateCellsBatchingPeriod :: Number
-  , viewabilityConfig :: Any
+  , viewabilityConfig :: Foreign
   , viewabilityConfigCallbackPairs :: (Array ViewabilityConfigCallbackPair)
   , windowSize :: Number
   , zoomScale :: Number
@@ -795,7 +793,7 @@ imageBackground props = unsafeCreateNativeElement "ImageBackground" props
 
 
 type ImageErrorEventData  = {
-    error :: Any
+    error :: Foreign
 }
 
 
@@ -998,7 +996,7 @@ type LayoutRectangle  = {
 type ListRenderItemInfo itemT = {
     index :: Number
   , item :: itemT
-  , separators :: { highlight :: (Effect Unit), unhighlight :: (Effect Unit), updateProps :: (EffectFn2 String Any Unit) }
+  , separators :: { highlight :: (Effect Unit), unhighlight :: (Effect Unit), updateProps :: (EffectFn2 String Foreign Unit) }
 }
 
 
@@ -1092,7 +1090,7 @@ type ListViewProps_optional  =
   , renderFooter :: (Effect JSX)
   , renderHeader :: (Effect JSX)
   , renderScrollComponent :: (EffectFn1 (Record ScrollViewProps) JSX)
-  , renderSectionHeader :: (EffectFn2 Any String JSX)
+  , renderSectionHeader :: (EffectFn2 Foreign String JSX)
   , renderSeparator :: (EffectFn3 String String Boolean JSX)
   , renderToHardwareTextureAndroid :: Boolean
   , scrollEnabled :: Boolean
@@ -1125,7 +1123,7 @@ type ListViewProps_optional  =
 
 type ListViewProps_required   optional = 
   ( dataSource :: ListViewDataSource
-  , renderRow :: (EffectFn4 Any String String Boolean JSX)
+  , renderRow :: (EffectFn4 Foreign String String Boolean JSX)
   | optional
   )
 
@@ -1149,9 +1147,9 @@ type MapViewAnnotation  = {
   , latitude :: Number
   , leftCalloutView  :: (Undefinable  JSX)
   , longitude :: Number
-  , onBlur  :: (Undefinable  (Effect Any))
-  , onDragStateChange  :: (Undefinable  (Effect Any))
-  , onFocus  :: (Undefinable  (Effect Any))
+  , onBlur  :: (Undefinable  (Effect Foreign))
+  , onDragStateChange  :: (Undefinable  (Effect Foreign))
+  , onFocus  :: (Undefinable  (Effect Foreign))
   , onLeftCalloutPress  :: (Undefinable  (Effect Unit))
   , onRightCalloutPress  :: (Undefinable  (Effect Unit))
   , rightCalloutView  :: (Undefinable  JSX)
@@ -1529,7 +1527,7 @@ pickerIOS_ children = pickerIOS { children }
 type PickerItemProps_optional  = 
   ( color :: String
   , testID :: String
-  , value :: Any
+  , value :: Foreign
   , key :: String
   , children :: Array JSX
   )
@@ -1592,12 +1590,12 @@ type PickerProps  =
   , onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
   , onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
-  , onValueChange :: (EffectFn2 Any Number Unit)
+  , onValueChange :: (EffectFn2 Foreign Number Unit)
   , pointerEvents :: String
   , prompt :: String
   , removeClippedSubviews :: Boolean
   , renderToHardwareTextureAndroid :: Boolean
-  , selectedValue :: Any
+  , selectedValue :: Foreign
   , shouldRasterizeIOS :: Boolean
   , style :: CSS
   , testID :: String
@@ -1984,7 +1982,7 @@ type Route  = {
   , passProps  :: (Undefinable  (Object Foreign))
   , rightButtonTitle  :: (Undefinable  String)
   , title  :: (Undefinable  String)
-  , wrapperStyle  :: (Undefinable  Any)
+  , wrapperStyle  :: (Undefinable  Foreign)
 }
 
 
@@ -2372,7 +2370,7 @@ type SwipeableListViewProps_required   optional =
   ( bounceFirstRowOnMount :: Boolean
   , dataSource :: SwipeableListViewDataSource
   , maxSwipeDistance :: Number
-  , renderRow :: (EffectFn4 Any String String Boolean JSX)
+  , renderRow :: (EffectFn4 Foreign String String Boolean JSX)
   | optional
   )
 
@@ -3348,9 +3346,9 @@ view_ children = view { children }
 type ViewToken  = {
     index :: String
   , isViewable :: Boolean
-  , item :: Any
+  , item :: Foreign
   , key :: String
-  , section  :: (Undefinable  Any)
+  , section  :: (Undefinable  Foreign)
 }
 
 
@@ -3386,7 +3384,7 @@ type WebViewMessageEventData  = {
 
 
 type WebViewNativeConfig  = {
-    component  :: (Undefinable  Any)
+    component  :: (Undefinable  Foreign)
   , props  :: (Undefinable  (Object Foreign))
   , viewManager  :: (Undefinable  (Object Foreign))
 }

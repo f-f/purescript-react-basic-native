@@ -237,7 +237,7 @@ const handleUnionType = (typeAliasMap: TypeAliasMap) => (interfaceName: string) 
 
 const handleTypes = (typeAliasMap: TypeAliasMap) => (interfaceName: string) => (fieldName: string) =>  (type: ts.TypeNode): FieldType => {
   switch (type.kind) {
-    case ts.SyntaxKind.AnyKeyword:          return { name : "Any", foreignData: [ "Any" ] }
+    case ts.SyntaxKind.AnyKeyword:          return { name : "Foreign", foreignData: [] }
     case ts.SyntaxKind.NullKeyword:         return { name : "Null", foreignData: [ "Null" ] }
     case ts.SyntaxKind.VoidKeyword:         return { name : "Unit" }
     case ts.SyntaxKind.BooleanKeyword:      return { name : "Boolean" }

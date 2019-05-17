@@ -159,6 +159,4 @@ import React.Basic (JSX)
 import React.Basic.DOM.Internal (CSS)
 import React.Basic.Native.Internal (unsafeCreateNativeElement)
 
-foreign import data Any :: Type
-
 `
