@@ -10,7 +10,7 @@ import {
 } from "./parser"
 
 import { propsCompare, Field, WrittenProps, Props } from "./types" 
-import { collectForeignData, top, writeForeignData, writeProps, writeForeignDataTypes } from "./writer"
+import { collectForeignData, top, writeForeignData, writeProps } from "./writer"
 import { ignoreForeignDataList } from "./consts";
 
 const printWrittenProps = (writtenProps: WrittenProps[]): void =>
@@ -37,7 +37,7 @@ const interfaces: ts.InterfaceDeclaration[] = getInterfaces(sources[0])
 const interfaceMap = createInterfaceMap(interfaces)
 const typeAliasMap = createTypeAliasMap(getTypeAliases(sources[0]))
 const baseInterfaces = getBaseInterfaces(interfaceMap, sources[0])
-const props = baseInterfaces.map(handleInterface(true)(typeAliasMap)(interfaceMap)) 
+const props = baseInterfaces.map(handleInterface(true)(typeAliasMap)(interfaceMap))
 const remainingTypeNames: string[] = collectForeignData(([] as Field[]).concat(...props.map((prop) => prop.fields)))
 
 const buildAdditionalProps = (names: string[], existingNames: string[], count: number): Props[] => {
@@ -48,8 +48,8 @@ const buildAdditionalProps = (names: string[], existingNames: string[], count: n
   const additionalProps = 
     names 
     .filter(name => existingNames.indexOf(name) < 0)
-    .filter(d => interfaceMap[d] !== undefined)
-    .map(d => handleInterface(false)(typeAliasMap)(interfaceMap)(interfaceMap[d]))
+    .filter(name => interfaceMap[name] !== undefined)
+    .map(name => handleInterface(false)(typeAliasMap)(interfaceMap)({ iface: interfaceMap[name], classNames: []}))
 
     
   const additionalTypeNames = 

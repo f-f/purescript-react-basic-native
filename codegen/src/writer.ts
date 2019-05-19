@@ -18,8 +18,8 @@ const writeField = (field: Field): string => {
 const typeVariables = (props: Props): string => 
   (props.typeParameters) ? props.typeParameters.join(" ") + " " : ""
 
-const componentName = (props: Props): string => props.name.replace(/Props$/,"")
-const functionName = (props: Props): string => lowerCaseFirstLetter(componentName(props))
+const componentName = (name: string): string => name.replace(/Component/,"")
+const functionName = (name: string): string => lowerCaseFirstLetter(componentName(name))
  
 const writeOptionalType = (props: Props) => (fields: Field[]): string => 
   `type ${props.name}_optional ${typeVariables(props)}= 
@@ -38,46 +38,48 @@ const writeSingleType = (typeName: string) => (props: Props) => (fields: Field[]
   )`
 
 
-const writeRequiredFn = (returnType: string ) => (functionBody: string) => (props : Props): string => 
-  `${functionName(props)}
+const writeRequiredFn = (name: string ) => (functionBody: string) => (props : Props): string => 
+  `${functionName(name)}
   :: forall attrs attrs_ ${typeVariables(props)}
   . Union attrs attrs_ (${props.name}_optional ${typeVariables(props)})
   => Record ((${props.name}_required ${typeVariables(props)}) attrs)
-  -> ${returnType}
+  -> JSX
 ${functionBody}`
 
-const writeOptionalFn = (recordName: string) => (returnType: string) => (functionBody: string) => (props: Props): string =>
-  `${functionName(props)}
+const writeOptionalFn = (recordName: string) => (name: string) => (functionBody: string) => (props: Props): string =>
+  `${functionName(name)}
   :: forall attrs attrs_ ${typeVariables(props)}
   . Union attrs attrs_ (${recordName} ${typeVariables(props)})
   => Record attrs
-  -> ${returnType} 
+  -> JSX
 ${functionBody}
  ` 
 
-const writeOptionalChildren = (props: Props): string =>
-  `${functionName(props)}_ :: Array JSX -> JSX
-${functionName(props)}_ children = ${functionName(props)} { children }`
+const writeOptionalChildren = (name: string): string =>
+  `${functionName(name)}_ :: Array JSX -> JSX
+${functionName(name)}_ children = ${functionName(name)} { children }`
 
 const writeComponentProps = (props: Props): WrittenProps => {
   const optionalFields = props.fields.filter((field) => field.isOptional || field.fieldType.isOptional)
   const requiredFields = props.fields.filter((field) => !field.isOptional)
 
-  const functionBody = `${functionName(props)} props = unsafeCreateNativeElement "${componentName(props)}" props`
+  const functionBody = (name: string) =>  `${functionName(name)} props = unsafeCreateNativeElement "${componentName(name)}" props`
 
   optionalFields.push({ name : "key", fieldType : { name : "String" }, isOptional : true })
-  if(noChildren.indexOf(functionName(props)) < 0) optionalFields.push({ name : "children", fieldType : { name : "Array JSX"}, isOptional : true })
+  if(noChildren.indexOf(functionName(props.name)) < 0) optionalFields.push({ name : "children", fieldType : { name : "Array JSX"}, isOptional : true })
 
   const propsStrs: string[] = []
   const fns: string[] = []
   if(requiredFields.length){  
     propsStrs.push(writeOptionalType(props)(optionalFields))
     propsStrs.push(writeRequiredType(props)(requiredFields))
-    fns.push(writeRequiredFn("JSX")(functionBody)(props))
+    props.classNames.forEach(name => fns.push(writeRequiredFn(name)(functionBody(name))(props)))
   } else {
     propsStrs.push(writeSingleType(props.name)(props)(optionalFields))
-    fns.push(writeOptionalFn(props.name)("JSX")(functionBody)(props))
-    if(noChildren.indexOf(functionName(props)) < 0) fns.push(writeOptionalChildren(props)) 
+    props.classNames.forEach(name => {
+      fns.push(writeOptionalFn(props.name)(name)(functionBody(name))(props))
+      if(noChildren.indexOf(functionName(name)) < 0) fns.push(writeOptionalChildren(name)) 
+    })
   }
 
   return { fns, props: propsStrs, foreignData: collectForeignData(props.fields) }
@@ -107,7 +109,7 @@ export const writeOtherProps = (props: Props): WrittenProps => {
 export const writeProps = (props: Props) : WrittenProps =>
   props.isComponentProps ? writeComponentProps(props) : writeOtherProps(props)
 
-
+/*
 export const writeForeignDataTypes = (props: Props): WrittenProps => {
 
   const optionalFields = props.fields.filter((field) => field.isOptional || field.fieldType.isOptional)
@@ -130,6 +132,7 @@ export const writeForeignDataTypes = (props: Props): WrittenProps => {
 
   return { fns, props: propsStrs, foreignData: collectForeignData(props.fields) }
 }
+ */
 
 const filterForeignData = (props: Props[], foreignData: string[]): string[] => 
   foreignData.filter(d => ignoreForeignDataList.indexOf(d) < 0 && props.map(p => p.name).indexOf(d) < 0)

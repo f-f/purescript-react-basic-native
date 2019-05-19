@@ -19,7 +19,8 @@ export interface Props {
   name: string
   fields: Field[]
   typeParameters: string[]
-  isComponentProps: boolean
+  isComponentProps: boolean,
+  classNames: string[]
 }
 
 export interface WrittenProps { 
@@ -28,10 +29,15 @@ export interface WrittenProps {
   foreignData: string[] 
 }
 
+export interface BaseInterface {
+  iface: ts.InterfaceDeclaration
+  classNames: string[]
+}
+
 
 
 export const strCompare = (str1: string, str2: string) => {
-  if(str1 == str2) return 0
+  if(str1 === str2) return 0
   if(str1 > str2) return 1
   return -1
 }

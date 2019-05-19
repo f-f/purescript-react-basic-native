@@ -55,16 +55,16 @@ type ARTClippingRectangleProps  =
   )
 
 
-aRTClippingRectangle
+clippingRectangle
   :: forall attrs attrs_  
   . Union attrs attrs_ (ARTClippingRectangleProps  )
   => Record attrs
-  -> JSX 
-aRTClippingRectangle props = unsafeCreateNativeElement "ARTClippingRectangle" props
+  -> JSX
+clippingRectangle props = unsafeCreateNativeElement "ClippingRectangle" props
  
 
-aRTClippingRectangle_ :: Array JSX -> JSX
-aRTClippingRectangle_ children = aRTClippingRectangle { children }
+clippingRectangle_ :: Array JSX -> JSX
+clippingRectangle_ children = clippingRectangle { children }
 
 
 type ARTGroupProps  = 
@@ -85,16 +85,16 @@ type ARTGroupProps  =
   )
 
 
-aRTGroup
+group
   :: forall attrs attrs_  
   . Union attrs attrs_ (ARTGroupProps  )
   => Record attrs
-  -> JSX 
-aRTGroup props = unsafeCreateNativeElement "ARTGroup" props
+  -> JSX
+group props = unsafeCreateNativeElement "Group" props
  
 
-aRTGroup_ :: Array JSX -> JSX
-aRTGroup_ children = aRTGroup { children }
+group_ :: Array JSX -> JSX
+group_ children = group { children }
 
 
 type ARTShapeProps_optional  = 
@@ -126,12 +126,12 @@ type ARTShapeProps_required   optional =
   )
 
 
-aRTShape
+shape
   :: forall attrs attrs_  
   . Union attrs attrs_ (ARTShapeProps_optional  )
   => Record ((ARTShapeProps_required  ) attrs)
   -> JSX
-aRTShape props = unsafeCreateNativeElement "ARTShape" props
+shape props = unsafeCreateNativeElement "Shape" props
 
 
 type ARTSurfaceProps_optional  = 
@@ -147,12 +147,12 @@ type ARTSurfaceProps_required   optional =
   )
 
 
-aRTSurface
+surface
   :: forall attrs attrs_  
   . Union attrs attrs_ (ARTSurfaceProps_optional  )
   => Record ((ARTSurfaceProps_required  ) attrs)
   -> JSX
-aRTSurface props = unsafeCreateNativeElement "ARTSurface" props
+surface props = unsafeCreateNativeElement "Surface" props
 
 
 type ARTTextProps  = 
@@ -183,7 +183,7 @@ aRTText
   :: forall attrs attrs_  
   . Union attrs attrs_ (ARTTextProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 aRTText props = unsafeCreateNativeElement "ARTText" props
  
 
@@ -256,7 +256,7 @@ activityIndicatorIOS
   :: forall attrs attrs_  
   . Union attrs attrs_ (ActivityIndicatorIOSProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 activityIndicatorIOS props = unsafeCreateNativeElement "ActivityIndicatorIOS" props
  
 
@@ -329,7 +329,7 @@ activityIndicator
   :: forall attrs attrs_  
   . Union attrs attrs_ (ActivityIndicatorProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 activityIndicator props = unsafeCreateNativeElement "ActivityIndicator" props
  
 
@@ -343,6 +343,7 @@ type ButtonProps_optional  =
   , disabled :: Boolean
   , testID :: String
   , key :: String
+  , children :: Array JSX
   )
 
 type ButtonProps_required   optional = 
@@ -425,7 +426,7 @@ checkBox
   :: forall attrs attrs_  
   . Union attrs attrs_ (CheckBoxProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 checkBox props = unsafeCreateNativeElement "CheckBox" props
  
 
@@ -910,7 +911,7 @@ inputAccessoryView
   :: forall attrs attrs_  
   . Union attrs attrs_ (InputAccessoryViewProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 inputAccessoryView props = unsafeCreateNativeElement "InputAccessoryView" props
  
 
@@ -991,7 +992,7 @@ keyboardAvoidingView
   :: forall attrs attrs_  
   . Union attrs attrs_ (KeyboardAvoidingViewProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 keyboardAvoidingView props = unsafeCreateNativeElement "KeyboardAvoidingView" props
  
 
@@ -1267,7 +1268,7 @@ mapView
   :: forall attrs attrs_  
   . Union attrs attrs_ (MapViewProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 mapView props = unsafeCreateNativeElement "MapView" props
  
 
@@ -1345,12 +1346,12 @@ type MaskedViewIOSProps_required   optional =
   )
 
 
-maskedViewIOS
+maskedView
   :: forall attrs attrs_  
   . Union attrs attrs_ (MaskedViewIOSProps_optional  )
   => Record ((MaskedViewIOSProps_required  ) attrs)
   -> JSX
-maskedViewIOS props = unsafeCreateNativeElement "MaskedViewIOS" props
+maskedView props = unsafeCreateNativeElement "MaskedView" props
 
 
 type NativeScrollEvent  = {
@@ -1463,7 +1464,7 @@ pickerIOSItem
   :: forall attrs attrs_  
   . Union attrs attrs_ (PickerIOSItemProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 pickerIOSItem props = unsafeCreateNativeElement "PickerIOSItem" props
  
 
@@ -1535,7 +1536,7 @@ pickerIOS
   :: forall attrs attrs_  
   . Union attrs attrs_ (PickerIOSProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 pickerIOS props = unsafeCreateNativeElement "PickerIOS" props
  
 
@@ -1633,7 +1634,7 @@ picker
   :: forall attrs attrs_  
   . Union attrs attrs_ (PickerProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 picker props = unsafeCreateNativeElement "Picker" props
  
 
@@ -1712,7 +1713,7 @@ progressBarAndroid
   :: forall attrs attrs_  
   . Union attrs attrs_ (ProgressBarAndroidProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 progressBarAndroid props = unsafeCreateNativeElement "ProgressBarAndroid" props
  
 
@@ -1787,7 +1788,7 @@ progressViewIOS
   :: forall attrs attrs_  
   . Union attrs attrs_ (ProgressViewIOSProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 progressViewIOS props = unsafeCreateNativeElement "ProgressViewIOS" props
  
 
@@ -1903,7 +1904,7 @@ recyclerViewBackedScrollView
   :: forall attrs attrs_  
   . Union attrs attrs_ (RecyclerViewBackedScrollViewProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 recyclerViewBackedScrollView props = unsafeCreateNativeElement "RecyclerViewBackedScrollView" props
  
 
@@ -2113,7 +2114,7 @@ scrollView
   :: forall attrs attrs_  
   . Union attrs attrs_ (ScrollViewProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 scrollView props = unsafeCreateNativeElement "ScrollView" props
  
 
@@ -2189,7 +2190,7 @@ segmentedControlIOS
   :: forall attrs attrs_  
   . Union attrs attrs_ (SegmentedControlIOSProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 segmentedControlIOS props = unsafeCreateNativeElement "SegmentedControlIOS" props
  
 
@@ -2272,7 +2273,7 @@ slider
   :: forall attrs attrs_  
   . Union attrs attrs_ (SliderProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 slider props = unsafeCreateNativeElement "Slider" props
  
 
@@ -2367,7 +2368,7 @@ statusBar
   :: forall attrs attrs_  
   . Union attrs attrs_ (StatusBarProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 statusBar props = unsafeCreateNativeElement "StatusBar" props
  
 
@@ -2469,7 +2470,7 @@ switchIOS
   :: forall attrs attrs_  
   . Union attrs attrs_ (SwitchIOSProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 switchIOS props = unsafeCreateNativeElement "SwitchIOS" props
  
 
@@ -2547,7 +2548,7 @@ switch
   :: forall attrs attrs_  
   . Union attrs attrs_ (SwitchProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 switch props = unsafeCreateNativeElement "Switch" props
  
 
@@ -2625,7 +2626,7 @@ tabBarIOSItem
   :: forall attrs attrs_  
   . Union attrs attrs_ (TabBarIOSItemProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 tabBarIOSItem props = unsafeCreateNativeElement "TabBarIOSItem" props
  
 
@@ -2700,7 +2701,7 @@ tabBarIOS
   :: forall attrs attrs_  
   . Union attrs attrs_ (TabBarIOSProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 tabBarIOS props = unsafeCreateNativeElement "TabBarIOS" props
  
 
@@ -2853,7 +2854,7 @@ textInput
   :: forall attrs attrs_  
   . Union attrs attrs_ (TextInputProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 textInput props = unsafeCreateNativeElement "TextInput" props
  
 
@@ -2917,7 +2918,7 @@ text
   :: forall attrs attrs_  
   . Union attrs attrs_ (TextProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 text props = unsafeCreateNativeElement "Text" props
  
 
@@ -2999,7 +3000,7 @@ toolbarAndroid
   :: forall attrs attrs_  
   . Union attrs attrs_ (ToolbarAndroidProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 toolbarAndroid props = unsafeCreateNativeElement "ToolbarAndroid" props
  
 
@@ -3051,7 +3052,7 @@ touchableHighlight
   :: forall attrs attrs_  
   . Union attrs attrs_ (TouchableHighlightProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 touchableHighlight props = unsafeCreateNativeElement "TouchableHighlight" props
  
 
@@ -3101,7 +3102,7 @@ touchableNativeFeedback
   :: forall attrs attrs_  
   . Union attrs attrs_ (TouchableNativeFeedbackProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 touchableNativeFeedback props = unsafeCreateNativeElement "TouchableNativeFeedback" props
  
 
@@ -3150,7 +3151,7 @@ touchableOpacity
   :: forall attrs attrs_  
   . Union attrs attrs_ (TouchableOpacityProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 touchableOpacity props = unsafeCreateNativeElement "TouchableOpacity" props
  
 
@@ -3198,7 +3199,7 @@ touchableWithoutFeedback
   :: forall attrs attrs_  
   . Union attrs attrs_ (TouchableWithoutFeedbackProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 touchableWithoutFeedback props = unsafeCreateNativeElement "TouchableWithoutFeedback" props
  
 
@@ -3285,7 +3286,7 @@ viewPagerAndroid
   :: forall attrs attrs_  
   . Union attrs attrs_ (ViewPagerAndroidProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 viewPagerAndroid props = unsafeCreateNativeElement "ViewPagerAndroid" props
  
 
@@ -3354,12 +3355,23 @@ view
   :: forall attrs attrs_  
   . Union attrs attrs_ (ViewProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 view props = unsafeCreateNativeElement "View" props
  
 
 view_ :: Array JSX -> JSX
 view_ children = view { children }
+
+safeAreaView
+  :: forall attrs attrs_  
+  . Union attrs attrs_ (ViewProps  )
+  => Record attrs
+  -> JSX
+safeAreaView props = unsafeCreateNativeElement "SafeAreaView" props
+ 
+
+safeAreaView_ :: Array JSX -> JSX
+safeAreaView_ children = safeAreaView { children }
 
 
 type ViewToken  = {
@@ -3502,7 +3514,7 @@ webView
   :: forall attrs attrs_  
   . Union attrs attrs_ (WebViewProps  )
   => Record attrs
-  -> JSX 
+  -> JSX
 webView props = unsafeCreateNativeElement "WebView" props
  
 
