@@ -87,6 +87,20 @@ const writeComponentProps = (props: Props): WrittenProps => {
 
 export const writeOtherProps = (props: Props): WrittenProps => {
 
+  
+  if(props.fields.length === 0){
+    // this is either a type alias of NativeSyntheticEvent<T> (of sorts) or a class that we can't create
+    if(props.parents[0] && props.parents[0].types[0] && props.parents[0].name === "NativeSyntheticEvent"){
+      const prop = `type ${props.name} = NativeSyntheticEvent ${props.parents[0].types[0]}` 
+      return { fns: [], props: [prop], foreignData: [] }
+    } else {
+
+      const prop = `foreign import data ${props.name} :: Type` 
+      return { fns: [], props: [prop], foreignData: [] }
+    }
+
+  }
+
   const optionalFields = props.fields.filter((field) => field.isOptional || field.fieldType.isOptional)
   const requiredFields = props.fields.filter((field) => !field.isOptional)
 
@@ -108,31 +122,6 @@ export const writeOtherProps = (props: Props): WrittenProps => {
 
 export const writeProps = (props: Props) : WrittenProps =>
   props.isComponentProps ? writeComponentProps(props) : writeOtherProps(props)
-
-/*
-export const writeForeignDataTypes = (props: Props): WrittenProps => {
-
-  const optionalFields = props.fields.filter((field) => field.isOptional || field.fieldType.isOptional)
-
-  const requiredFields = props.fields.filter((field) => !field.isOptional)
-
-  const functionBody = `${functionName(props)} = unsafeCoerce`
-  
-  const propsStrs: string[] = []
-  const fns: string[] = []
-
-  if(requiredFields.length){  
-    propsStrs.push(writeOptionalType(props)(optionalFields))
-    propsStrs.push(writeRequiredType(props)(requiredFields))
-    fns.push(writeRequiredFn(componentName(props))(functionBody)(props))
-  } else {
-    propsStrs.push(writeSingleType(props.name + "Row")(props)(optionalFields))
-    fns.push(writeOptionalFn(props.name + "Row")(componentName(props))(functionBody)(props))
-  }
-
-  return { fns, props: propsStrs, foreignData: collectForeignData(props.fields) }
-}
- */
 
 const filterForeignData = (props: Props[], foreignData: string[]): string[] => 
   foreignData.filter(d => ignoreForeignDataList.indexOf(d) < 0 && props.map(p => p.name).indexOf(d) < 0)
@@ -161,24 +150,9 @@ import Prim.Row (class Union)
 import React.Basic (JSX)
 import React.Basic.DOM.Internal (CSS)
 
+import React.Basic.Native.Events (NativeSyntheticEvent)
 import React.Basic.Native.Internal (unsafeCreateNativeElement)
 
-type NativeSynteticEvent e = {
-  nativeEvent :: e 
-, currentTarget :: Number 
-, target :: Number 
-, bubbles :: Boolean
-, cancelable :: Boolean
-, defaultPrevented :: Boolean
-, eventPhase :: Number
-, isTrusted :: Boolean
-, preventDefault :: Effect Unit
-, isDefaultPrevented :: Effect Boolean
-, stopPropagation :: Effect Unit
-, isPropagationStopped :: Effect Boolean
-, persist :: Effect Unit
-, timeStamp :: Number
-, type :: String
-}
+
 
 `

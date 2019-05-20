@@ -259,17 +259,30 @@ const handleTypes = (typeAliasMap: TypeAliasMap) => (interfaceName: string) => (
 export const handleInterface = (isComponentProps: boolean) => (typeAliasMap: TypeAliasMap) => (interfaceMap: InterfaceMap) => (bi: BaseInterface): Props => {
   const int = bi.iface
 
+
   const getParents = (): Props[] => {
     const array: Props[] = []
     if(int.heritageClauses !== undefined){
       int.heritageClauses.forEach((clause) => {
         clause.types.forEach((type) => {
+          const types: string[] = []
+          if(type.typeArguments){
+            type.typeArguments.forEach(arg => { 
+              if(ts.isTypeReferenceNode(arg) && ts.isIdentifier(arg.typeName)){
+                types.push(arg.typeName.escapedText.toString())
+              }
+            })
+          }
           const name = getExpressionName(type.expression)
           const maybeInterface = interfaceMap[name]
-          if(maybeInterface) array.push(handleInterface(isComponentProps)(typeAliasMap)(interfaceMap)({
-            iface: maybeInterface,
-            classNames: []
-          }))
+          if(maybeInterface){
+            const parentProps = handleInterface(isComponentProps)(typeAliasMap)(interfaceMap)({
+              iface: maybeInterface,
+              classNames: []
+            })
+            parentProps.types = parentProps.types.concat(types)
+            array.push(parentProps)
+          }
         })
       })
     }
@@ -278,24 +291,25 @@ export const handleInterface = (isComponentProps: boolean) => (typeAliasMap: Typ
 
   const typeParameters: string[] = []
   if(int.typeParameters){
-    int.typeParameters. forEach((param) => {
+    int.typeParameters.forEach((param) => {
       typeParameters.push(lowerCaseFirstLetter(param.name.escapedText.toString()))
     })
   }
+
 
   const parents = getParents()
   const parentFields = ([] as Field[]).concat(...parents.map((p) => p.fields))
 
   const properties: ts.PropertySignature[] = getPropertySignatures(int)
   const names: string[] = properties.map((p) => getPropertyName(p.name))
-  const types: ts.TypeNode[] = properties.map((prop) => prop.type).filter((type) => type !== undefined) as ts.TypeNode[]
+  const propertyTypes: ts.TypeNode[] = properties.map((prop) => prop.type).filter((type) => type !== undefined) as ts.TypeNode[]
   
-  if(properties.length !== types.length) throw ("Properties and types don't match" + int)
+  if(properties.length !== propertyTypes.length) throw ("Properties and types don't match" + int)
 
   const interfaceName = int.name.escapedText.toString()
   const allFields = properties.map((prop, i) => {
     const name = names[i]
-    const fieldType = handleTypes(typeAliasMap)(interfaceName)(name)(types[i])
+    const fieldType = handleTypes(typeAliasMap)(interfaceName)(name)(propertyTypes[i])
     const isOptional = prop.questionToken !== undefined
     const field = { fieldType, name, isOptional } 
     return field
@@ -316,7 +330,7 @@ export const handleInterface = (isComponentProps: boolean) => (typeAliasMap: Typ
 
   const fields = uniqueFields(allFields).sort(fieldCompare)
 
-  return { name: interfaceName, fields, typeParameters, isComponentProps, classNames: bi.classNames }
+  return { name: interfaceName, fields, typeParameters, isComponentProps, classNames: bi.classNames, parents, types: [] }
 }
 
 export const getBaseInterfaces = (interfaceMap: InterfaceMap, root: ts.Node): BaseInterface[] => {

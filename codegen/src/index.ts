@@ -48,6 +48,7 @@ const buildAdditionalProps = (names: string[], existingNames: string[], count: n
   const additionalProps = 
     names 
     .filter(name => existingNames.indexOf(name) < 0)
+    .filter(name => ignoreForeignDataList.indexOf(name) < 0)
     .filter(name => interfaceMap[name] !== undefined)
     .map(name => handleInterface(false)(typeAliasMap)(interfaceMap)({ iface: interfaceMap[name], classNames: []}))
 
@@ -64,7 +65,6 @@ const buildAdditionalProps = (names: string[], existingNames: string[], count: n
 const remainingProps = buildAdditionalProps(remainingTypeNames, props.map(p => p.name), 0)
 
 const allProps = props.concat(remainingProps).sort(propsCompare).map(writeProps)
-
 
 console.log(top)
 printWrittenProps(allProps)

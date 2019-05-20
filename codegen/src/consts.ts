@@ -15,7 +15,7 @@ export const fieldTypeNameReplacements: {[key:string]:string;} =
   }
 
 export const ignoreForeignDataList: string[] =
-  [ "Array", "CSS", "Date", "Element.JSX", "JSDate", "JSX", "StyleProp", "(Record ScrollViewProps)", "ReactElement.React", "iTemT", "itemT", "ComponentType.React", "Any", "(Object Foreign)", "NativeSynteticEvent" ]
+  [ "NativeSyntheticEvent", "Array", "CSS", "Date", "Element.JSX", "JSDate", "JSX", "StyleProp", "(Record ScrollViewProps)", "ReactElement.React", "iTemT", "itemT", "ComponentType.React", "Any", "(Object Foreign)"]
 
 export const noChildren: string[] =
   [ "ButtonProps" ]

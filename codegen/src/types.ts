@@ -19,8 +19,10 @@ export interface Props {
   name: string
   fields: Field[]
   typeParameters: string[]
+  types: string[]
   isComponentProps: boolean,
-  classNames: string[]
+  classNames: string[],
+  parents: Props[]
 }
 
 export interface WrittenProps { 

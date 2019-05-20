@@ -16,25 +16,10 @@ import Prim.Row (class Union)
 import React.Basic (JSX)
 import React.Basic.DOM.Internal (CSS)
 
+import React.Basic.Native.Events (NativeSyntheticEvent)
 import React.Basic.Native.Internal (unsafeCreateNativeElement)
 
-type NativeSynteticEvent e = {
-  nativeEvent :: e 
-, currentTarget :: Number 
-, target :: Number 
-, bubbles :: Boolean
-, cancelable :: Boolean
-, defaultPrevented :: Boolean
-, eventPhase :: Number
-, isTrusted :: Boolean
-, preventDefault :: Effect Unit
-, isDefaultPrevented :: Effect Boolean
-, stopPropagation :: Effect Unit
-, isPropagationStopped :: Effect Boolean
-, persist :: Effect Unit
-, timeStamp :: Number
-, type :: String
-}
+
 
 
 type ARTClippingRectangleProps  = 
@@ -511,9 +496,7 @@ datePickerIOS
 datePickerIOS props = unsafeCreateNativeElement "DatePickerIOS" props
 
 
-type DocumentSelectionState  = {
-    
-}
+foreign import data DocumentSelectionState :: Type
 
 
 type DrawerLayoutAndroidProps_optional  = 
@@ -596,9 +579,7 @@ drawerLayoutAndroid
 drawerLayoutAndroid props = unsafeCreateNativeElement "DrawerLayoutAndroid" props
 
 
-type DrawerSlideEvent  = {
-    
-}
+type DrawerSlideEvent = NativeSyntheticEvent NativeTouchEvent
 
 
 type FlatListProps_optional itemT = 
@@ -750,9 +731,7 @@ flatList
 flatList props = unsafeCreateNativeElement "FlatList" props
 
 
-type GestureResponderEvent  = {
-    
-}
+type GestureResponderEvent = NativeSyntheticEvent NativeTouchEvent
 
 
 type ImageBackgroundProps_optional  = 
@@ -1020,9 +999,7 @@ type ListRenderItemInfo itemT = {
 }
 
 
-type ListViewDataSource  = {
-    
-}
+foreign import data ListViewDataSource :: Type
 
 
 type ListViewProps_optional  = 
@@ -1394,11 +1371,6 @@ type NativeSegmentedControlIOSChangeEvent  = {
     selectedSegmentIndex :: Number
   , target :: Number
   , value :: String
-}
-
-
-type NativeSyntheticEvent t = {
-    
 }
 
 
@@ -2376,9 +2348,7 @@ statusBar_ :: Array JSX -> JSX
 statusBar_ children = statusBar { children }
 
 
-type SwipeableListViewDataSource  = {
-    
-}
+foreign import data SwipeableListViewDataSource :: Type
 
 
 type SwipeableListViewProps_optional  = 
