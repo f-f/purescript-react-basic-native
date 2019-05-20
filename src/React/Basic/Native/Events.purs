@@ -3,8 +3,6 @@ module React.Basic.Native.Events where
 import Prelude
 
 import Effect (Effect)
-import React.Basic.Events (SyntheticEvent)
-import Unsafe.Coerce (unsafeCoerce)
 
 type NativeSyntheticEvent e = {
   nativeEvent :: e 
@@ -23,6 +21,3 @@ type NativeSyntheticEvent e = {
 , timeStamp :: Number
 , type :: String
 }
-
-toSyntheticEvent :: forall e. NativeSyntheticEvent e -> SyntheticEvent
-toSyntheticEvent = unsafeCoerce
