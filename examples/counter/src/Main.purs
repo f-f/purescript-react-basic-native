@@ -2,9 +2,11 @@ module Main where
 
 import Prelude
 
+import Effect.Uncurried (mkEffectFn1)
 import React.Basic (Component, JSX, createComponent, make)
-import React.Basic.DOM.Events (capture_)
+import React.Basic.DOM.Events (capture)
 import React.Basic.Native (button) as RN
+import React.Basic.Native.Events (toSyntheticEvent) as RNE
 
 main :: JSX
 main = counter { label : "Increment" }
@@ -21,6 +23,6 @@ counter = make component { initialState, render }
 
     render self = 
       RN.button 
-        { onPress: capture_ $ self.setState \s -> s { counter = s.counter + 1 }
+        { onPress: mkEffectFn1 \_ -> self.setState \s -> s { counter = s.counter + 1 }
         , title: (self.props.label <> ": " <> show self.state.counter)
         }
