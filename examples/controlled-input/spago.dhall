@@ -1,7 +1,7 @@
 { name =
-    "controlled-input"
+    "counter"
 , dependencies =
-    [ "debug", "effect", "console", "react-native-basic" ]
+    [ "debug", "effect", "console", "react-basic-native" ]
 , packages =
     ./packages.dhall
 }
