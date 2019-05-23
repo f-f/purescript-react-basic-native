@@ -37,22 +37,34 @@ stopPropagation = unsafeEventFn \e -> unsafePerformEffect do
   _ <- (unsafeCoerce e).stopPropagation
   pure e
 
-{-
-type NativeSyntheticEvent e = {
-  nativeEvent :: e 
-, currentTarget :: Number 
-, target :: Number 
-, bubbles :: Boolean
-, cancelable :: Boolean
-, defaultPrevented :: Boolean
-, eventPhase :: Number
-, isTrusted :: Boolean
-, preventDefault :: Effect Unit
-, isDefaultPrevented :: Effect Boolean
-, stopPropagation :: Effect Unit
-, isPropagationStopped :: Effect Boolean
-, persist :: Effect Unit
-, timeStamp :: Number
-, type :: String
-}
--}
+currentTarget :: forall e. EventFn (NativeSyntheticEvent e) Number
+currentTarget = unsafeEventFn \e -> (unsafeCoerce e).currentTarget
+
+target :: forall e. EventFn (NativeSyntheticEvent e) Number
+target = unsafeEventFn \e -> (unsafeCoerce e).target
+
+bubbles :: forall e. EventFn (NativeSyntheticEvent e) Boolean 
+bubbles = unsafeEventFn \e -> (unsafeCoerce e).bubbles
+
+cancelable :: forall e. EventFn (NativeSyntheticEvent e) Boolean 
+cancelable = unsafeEventFn \e -> (unsafeCoerce e).cancelable
+
+defaultPrevented :: forall e. EventFn (NativeSyntheticEvent e) Boolean 
+defaultPrevented = unsafeEventFn \e -> (unsafeCoerce e).defaultPrevented
+
+eventPhase :: forall e. EventFn (NativeSyntheticEvent e) Number
+eventPhase = unsafeEventFn \e -> (unsafeCoerce e).eventPhase
+
+isTrusted :: forall e. EventFn (NativeSyntheticEvent e) Boolean 
+isTrusted = unsafeEventFn \e -> (unsafeCoerce e).isTrusted
+
+type_ :: forall e. EventFn (NativeSyntheticEvent e) String 
+type_ = unsafeEventFn \e -> (unsafeCoerce e).type
+
+isDefaultPrevented :: forall e. EventFn (NativeSyntheticEvent e) Boolean
+isDefaultPrevented = unsafeEventFn \e -> unsafePerformEffect do
+  (unsafeCoerce e).isDefaultPrevented
+
+isPropagationStopped :: forall e. EventFn (NativeSyntheticEvent e) Boolean
+isPropagationStopped = unsafeEventFn \e -> unsafePerformEffect do
+  (unsafeCoerce e).isPropagationStopped
