@@ -311,7 +311,8 @@ export const handleInterface = (isComponentProps: boolean) => (typeAliasMap: Typ
     const name = names[i]
     const fieldType = handleTypes(typeAliasMap)(interfaceName)(name)(propertyTypes[i])
     const isOptional = prop.questionToken !== undefined
-    const field = { fieldType, name, isOptional } 
+    const comments: string | undefined = getJSDoc(prop)
+    const field = { fieldType, name, isOptional, comments } 
     return field
   })
   .concat(parentFields)
@@ -330,7 +331,28 @@ export const handleInterface = (isComponentProps: boolean) => (typeAliasMap: Typ
 
   const fields = uniqueFields(allFields).sort(fieldCompare)
 
-  return { name: interfaceName, fields, typeParameters, isComponentProps, classNames: bi.classNames, parents, types: [] }
+  return { name: interfaceName, fields, typeParameters, isComponentProps, classNames: bi.classNames, parents, types: [], comments: bi.comments }
+}
+
+const getJSDoc = (node: any) => {
+  let str = ""
+  if(node.jsDoc && Array.isArray(node.jsDoc)){
+    node.jsDoc.forEach((doc: any) => {
+      if(doc.comment && doc.comment.trim()) str += doc.comment.trim() + "\n"
+      if(doc.tags && Array.isArray(doc.tags)){
+        doc.tags.forEach((tag: any) => {
+          if(tag.tagName && tag.tagName.escapedText && tag.comment && tag.comment.trim()){
+            str += `@${tag.tagName.escapedText} ${tag.comment}`.trim() + "\n"
+          }else if(tag.comment && tag.comment.trim()){
+            str += tag.comment.trim() + "\n"
+          }
+        })
+      }
+    })
+  }
+
+  if(str) return str
+  return undefined
 }
 
 export const getBaseInterfaces = (interfaceMap: InterfaceMap, root: ts.Node): BaseInterface[] => {
@@ -351,9 +373,12 @@ export const getBaseInterfaces = (interfaceMap: InterfaceMap, root: ts.Node): Ba
           if(entries[interfaceName]){
             entries[interfaceName].classNames.push(className)
           } else if (interfaceMap[interfaceName]){
+            const iface = interfaceMap[interfaceName]
+            const comments = getJSDoc(iface)
             entries[interfaceName] = {
-              iface: interfaceMap[interfaceName],
-              classNames: [className]
+              iface,
+              classNames: [className],
+              comments
             }
           }
         }

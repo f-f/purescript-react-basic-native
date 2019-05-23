@@ -12,7 +12,7 @@ export const collectForeignData = (fields: Field[]): string[] => {
 const writeField = (field: Field): string => {
   const typeName = fieldTypeNameReplacements[field.fieldType.name] || field.fieldType.name
   const name = (capitalize(field.name) === field.name) ?  `"${field.name}"` : field.name
-  return `${name} :: ${typeName}`
+  return `${writeComments(field, true)}${name} :: ${typeName}`
 }
 
 const typeVariables = (props: Props): string => 
@@ -20,21 +20,28 @@ const typeVariables = (props: Props): string =>
 
 const componentName = (name: string): string => name.replace(/Component/,"")
 const functionName = (name: string): string => lowerCaseFirstLetter(componentName(name))
+
+const writeComments = (thing: Field | Props, pad: boolean): string => {
+  const padding = pad ? "  " : "" 
+  return (thing.comments)
+    ? `\n${padding}` + thing.comments.split("\n").filter(str => str.trim()).map(str => `-- | ${str}`).join(`\n${padding}`) + `\n${padding}` 
+    : ""
+}
  
 const writeOptionalType = (props: Props) => (fields: Field[]): string => 
-  `type ${props.name}_optional ${typeVariables(props)}= 
-  ( ${fields.map(writeField).join("\n  , ")}
+  `${writeComments(props, false)}type ${props.name}_optional ${typeVariables(props)}= 
+  ( ${fields.map(writeField).join(",\n  ")}
   )`
 
 const writeRequiredType = (props: Props) => (fields: Field[]): string => 
-  `type ${props.name}_required ${typeVariables(props)} optional = 
-  ( ${fields.map(writeField).join("\n  , ")}
+  `${writeComments(props, false)}type ${props.name}_required ${typeVariables(props)} optional = 
+  ( ${fields.map(writeField).join(",\n  ")}
   | optional
   )`
  
 const writeSingleType = (typeName: string) => (props: Props) => (fields: Field[]): string => 
-  `type ${typeName} ${typeVariables(props)}= 
-  ( ${fields.map(writeField).join("\n  , ")}
+  `${writeComments(props, false)}type ${typeName} ${typeVariables(props)}= 
+  ( ${fields.map(writeField).join(",\n  ")}
   )`
 
 
@@ -65,8 +72,8 @@ const writeComponentProps = (props: Props): WrittenProps => {
 
   const functionBody = (name: string) =>  `${functionName(name)} props = unsafeCreateNativeElement "${componentName(name)}" props`
 
-  optionalFields.push({ name : "key", fieldType : { name : "String" }, isOptional : true })
-  if(noChildren.indexOf(functionName(props.name)) < 0) optionalFields.push({ name : "children", fieldType : { name : "Array JSX"}, isOptional : true })
+  optionalFields.push({ name : "key", fieldType : { name : "String" }, isOptional : true, comments: undefined })
+  if(noChildren.indexOf(functionName(props.name)) < 0) optionalFields.push({ name : "children", fieldType : { name : "Array JSX"}, isOptional : true, comments: undefined })
 
   const propsStrs: string[] = []
   const fns: string[] = []

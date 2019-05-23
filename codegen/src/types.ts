@@ -13,6 +13,7 @@ export interface Field {
   name: string
   fieldType: FieldType
   isOptional: boolean
+  comments: string | undefined
 }
 
 export interface Props {
@@ -22,7 +23,8 @@ export interface Props {
   types: string[]
   isComponentProps: boolean,
   classNames: string[],
-  parents: Props[]
+  parents: Props[],
+  comments: string | undefined
 }
 
 export interface WrittenProps { 
@@ -34,6 +36,7 @@ export interface WrittenProps {
 export interface BaseInterface {
   iface: ts.InterfaceDeclaration
   classNames: string[]
+  comments?: string
 }
 
 
