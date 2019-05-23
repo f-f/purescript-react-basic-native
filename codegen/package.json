@@ -13,7 +13,7 @@
     "codegen": "node lib/index.js > ../src/React/Basic/Native/Generated.purs"
   },
   "repository": {},
-  "license": "MIT",
+  "license": "Apache 2.0",
   "dependencies": {
     "@types/react-native": "^0.57.57"
   },
