@@ -8,7 +8,7 @@ let overrides = {=}
 
 let additions =
       { react-basic-native =
-          mkPackage (../../spago.dhall).dependencies "../../" "events"
+          mkPackage (../../spago.dhall).dependencies "../../" "master"
       , undefinable =
           mkPackage
           [ "functions", "maybe" ]
