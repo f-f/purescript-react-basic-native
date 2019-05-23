@@ -1,0 +1,22 @@
+{
+  "name": "purescript-react-basic-native",
+  "license": "Apache 2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dwhitney/purescript-react-basic-native.git"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "output"
+  ],
+  "dependencies": {
+    "purescript-effect": "^2.0.1",
+    "purescript-foreign-object": "^2.0.1",
+    "purescript-js-date": "^6.0.0",
+    "purescript-react-basic": "^9.0.0",
+    "purescript-undefinable": "^4.0.0"
+  },
+  "devDependencies": {}
+}
