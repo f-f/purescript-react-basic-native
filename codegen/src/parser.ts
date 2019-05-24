@@ -342,7 +342,12 @@ const getJSDoc = (node: any) => {
       if(doc.tags && Array.isArray(doc.tags)){
         doc.tags.forEach((tag: any) => {
           if(tag.tagName && tag.tagName.escapedText && tag.comment && tag.comment.trim()){
-            str += `@${tag.tagName.escapedText} ${tag.comment}`.trim() + "\n"
+            if(tag.tagName.escapedText === "see" && tag.comment.indexOf("http") === 0){
+
+              str += `${tag.tagName.escapedText} <${tag.comment.trim()}>\n`
+            } else {
+              str += ` __*${tag.tagName.escapedText}* ${tag.comment.trim()}\n`
+            }
           }else if(tag.comment && tag.comment.trim()){
             str += tag.comment.trim() + "\n"
           }
