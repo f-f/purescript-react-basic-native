@@ -193,22 +193,22 @@ aRTText_ children = aRTText { children }
 -- | see <https://facebook.github.io/react-native/docs/activityindicatorios.html#props>
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -216,7 +216,7 @@ aRTText_ children = aRTText { children }
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -224,10 +224,10 @@ aRTText_ children = aRTText { children }
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -241,7 +241,7 @@ aRTText_ children = aRTText { children }
 -- |        The foreground color of the spinner (default is gray).
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hidesWhenStopped`
 -- |        Whether the indicator should hide when not animating (true by default).
 -- | - `hitSlop`
@@ -265,7 +265,7 @@ aRTText_ children = aRTText { children }
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `nativeID`
 -- |        Used to reference react managed views from native code.
 -- | - `needsOffscreenAlphaCompositing`
@@ -283,15 +283,15 @@ aRTText_ children = aRTText { children }
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onLayout`
 -- |        Invoked on mount and layout changes with
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -380,19 +380,19 @@ aRTText_ children = aRTText { children }
 -- |        Used to locate this view in end-to-end tests.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 
 type ActivityIndicatorIOSProps  = 
   ( accessibilityActions :: (Array String)
@@ -470,22 +470,22 @@ activityIndicatorIOS_ children = activityIndicatorIOS { children }
 -- | see <https://facebook.github.io/react-native/docs/activityindicator.html#props>
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -493,7 +493,7 @@ activityIndicatorIOS_ children = activityIndicatorIOS { children }
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -501,10 +501,10 @@ activityIndicatorIOS_ children = activityIndicatorIOS { children }
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -518,7 +518,7 @@ activityIndicatorIOS_ children = activityIndicatorIOS { children }
 -- |        The foreground color of the spinner (default is gray).
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hidesWhenStopped`
 -- |        Whether the indicator should hide when not animating (true by default).
 -- | - `hitSlop`
@@ -542,7 +542,7 @@ activityIndicatorIOS_ children = activityIndicatorIOS { children }
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `nativeID`
 -- |        Used to reference react managed views from native code.
 -- | - `needsOffscreenAlphaCompositing`
@@ -560,16 +560,16 @@ activityIndicatorIOS_ children = activityIndicatorIOS { children }
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onLayout`
 -- |        Invoked on mount and layout changes with
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -658,19 +658,19 @@ activityIndicatorIOS_ children = activityIndicatorIOS { children }
 -- |        Used to locate this view in end-to-end tests.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 
 type ActivityIndicatorProps  = 
   ( accessibilityActions :: (Array String)
@@ -780,22 +780,22 @@ button props = unsafeCreateNativeElement "Button" props
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -803,7 +803,7 @@ button props = unsafeCreateNativeElement "Button" props
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -811,10 +811,10 @@ button props = unsafeCreateNativeElement "Button" props
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -826,7 +826,7 @@ button props = unsafeCreateNativeElement "Button" props
 -- |        If true the user won't be able to toggle the checkbox. Default value is false.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -848,7 +848,7 @@ button props = unsafeCreateNativeElement "Button" props
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `nativeID`
 -- |        Used to reference react managed views from native code.
 -- | - `needsOffscreenAlphaCompositing`
@@ -866,10 +866,10 @@ button props = unsafeCreateNativeElement "Button" props
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onChange`
 -- |        Used in case the props change removes the component.
 -- | - `onLayout`
@@ -877,7 +877,7 @@ button props = unsafeCreateNativeElement "Button" props
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -964,19 +964,19 @@ button props = unsafeCreateNativeElement "Button" props
 -- |        Used to locate this view in end-to-end tests.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `value`
 -- |        The value of the checkbox. If true the checkbox will be turned on. Default value is false.
 
@@ -1056,22 +1056,22 @@ checkBox_ children = checkBox { children }
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -1079,7 +1079,7 @@ checkBox_ children = checkBox { children }
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -1087,10 +1087,10 @@ checkBox_ children = checkBox { children }
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -1102,7 +1102,7 @@ checkBox_ children = checkBox { children }
 -- |        The currently selected date.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -1124,7 +1124,7 @@ checkBox_ children = checkBox { children }
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `locale`
 -- |        The date picker locale.
 -- | - `maximumDate`
@@ -1156,10 +1156,10 @@ checkBox_ children = checkBox { children }
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onDateChange`
 -- |        Date change handler.
 -- |        This is called when the user changes the date or time in the UI.
@@ -1169,7 +1169,7 @@ checkBox_ children = checkBox { children }
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -1258,19 +1258,19 @@ checkBox_ children = checkBox { children }
 -- |        For instance, to show times in Pacific Standard Time, pass -7 * 60.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 
 type DatePickerIOSProps_optional  = 
   ( accessibilityActions :: (Array String)
@@ -1337,22 +1337,22 @@ type DatePickerIOSProps_optional  =
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -1360,7 +1360,7 @@ type DatePickerIOSProps_optional  =
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -1368,10 +1368,10 @@ type DatePickerIOSProps_optional  =
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -1383,7 +1383,7 @@ type DatePickerIOSProps_optional  =
 -- |        The currently selected date.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -1405,7 +1405,7 @@ type DatePickerIOSProps_optional  =
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `locale`
 -- |        The date picker locale.
 -- | - `maximumDate`
@@ -1437,10 +1437,10 @@ type DatePickerIOSProps_optional  =
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onDateChange`
 -- |        Date change handler.
 -- |        This is called when the user changes the date or time in the UI.
@@ -1450,7 +1450,7 @@ type DatePickerIOSProps_optional  =
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -1539,19 +1539,19 @@ type DatePickerIOSProps_optional  =
 -- |        For instance, to show times in Pacific Standard Time, pass -7 * 60.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 
 type DatePickerIOSProps_required   optional = 
   ( date :: JSDate
@@ -1571,25 +1571,25 @@ datePickerIOS props = unsafeCreateNativeElement "DatePickerIOS" props
 foreign import data DocumentSelectionState :: Type
 
 
--- |  __*see* DrawerLayoutAndroid.android.js
+-- |  __*see* DrawerLayoutAndroid.android.js__
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -1597,7 +1597,7 @@ foreign import data DocumentSelectionState :: Type
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -1605,10 +1605,10 @@ foreign import data DocumentSelectionState :: Type
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -1642,7 +1642,7 @@ foreign import data DocumentSelectionState :: Type
 -- |        view that be pulled in from the edge of the window.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -1664,7 +1664,7 @@ foreign import data DocumentSelectionState :: Type
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `keyboardDismissMode`
 -- |        Determines whether the keyboard gets dismissed in response to a drag.
 -- |        - 'none' (the default), drags do not dismiss the keyboard.
@@ -1686,10 +1686,10 @@ foreign import data DocumentSelectionState :: Type
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onDrawerClose`
 -- |        Function called whenever the navigation view has been closed.
 -- | - `onDrawerOpen`
@@ -1711,7 +1711,7 @@ foreign import data DocumentSelectionState :: Type
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -1803,19 +1803,19 @@ foreign import data DocumentSelectionState :: Type
 -- |        Used to locate this view in end-to-end tests.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 
 type DrawerLayoutAndroidProps_optional  = 
   ( accessibilityActions :: (Array String)
@@ -1883,25 +1883,25 @@ type DrawerLayoutAndroidProps_optional  =
   ,  children :: Array JSX
   )
 
--- |  __*see* DrawerLayoutAndroid.android.js
+-- |  __*see* DrawerLayoutAndroid.android.js__
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -1909,7 +1909,7 @@ type DrawerLayoutAndroidProps_optional  =
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -1917,10 +1917,10 @@ type DrawerLayoutAndroidProps_optional  =
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -1954,7 +1954,7 @@ type DrawerLayoutAndroidProps_optional  =
 -- |        view that be pulled in from the edge of the window.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -1976,7 +1976,7 @@ type DrawerLayoutAndroidProps_optional  =
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `keyboardDismissMode`
 -- |        Determines whether the keyboard gets dismissed in response to a drag.
 -- |        - 'none' (the default), drags do not dismiss the keyboard.
@@ -1998,10 +1998,10 @@ type DrawerLayoutAndroidProps_optional  =
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onDrawerClose`
 -- |        Function called whenever the navigation view has been closed.
 -- | - `onDrawerOpen`
@@ -2023,7 +2023,7 @@ type DrawerLayoutAndroidProps_optional  =
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -2115,19 +2115,19 @@ type DrawerLayoutAndroidProps_optional  =
 -- |        Used to locate this view in end-to-end tests.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 
 type DrawerLayoutAndroidProps_required   optional = 
   ( renderNavigationView :: (Effect JSX)
@@ -2157,22 +2157,22 @@ type DrawerSlideEvent = NativeSyntheticEvent NativeTouchEvent
 -- |        Rendered at the very beginning of the list.
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -2180,7 +2180,7 @@ type DrawerSlideEvent = NativeSyntheticEvent NativeTouchEvent
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -2188,10 +2188,10 @@ type DrawerSlideEvent = NativeSyntheticEvent NativeTouchEvent
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -2296,7 +2296,7 @@ type DrawerSlideEvent = NativeSyntheticEvent NativeTouchEvent
 -- |        `ItemSeparatorComponent`.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -2336,7 +2336,7 @@ type DrawerSlideEvent = NativeSyntheticEvent NativeTouchEvent
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `keyExtractor`
 -- |        Used to extract a unique key for a given item at the specified index. Key is used for caching
 -- |        and as the react key to track item re-ordering. The default extractor checks `item.key`, then
@@ -2387,10 +2387,10 @@ type DrawerSlideEvent = NativeSyntheticEvent NativeTouchEvent
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onContentSizeChange`
 -- |        Called when scrollable content view of the ScrollView changes.
 -- |        Handler function is passed the content width and content height as parameters: (contentWidth, contentHeight)
@@ -2404,7 +2404,7 @@ type DrawerSlideEvent = NativeSyntheticEvent NativeTouchEvent
 -- |        within half the visible length of the list.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMomentumScrollBegin`
 -- |        Fires when scroll view has begun moving
 -- | - `onMomentumScrollEnd`
@@ -2506,7 +2506,7 @@ type DrawerSlideEvent = NativeSyntheticEvent NativeTouchEvent
 -- |        we opt to not include pointerEvents on style. On some platforms, we would need to implement it as a className anyways. Using style or not is an implementation detail of the platform.
 -- | - `progressViewOffset`
 -- |        Set this when offset is needed for the loading indicator to show correctly.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `refreshControl`
 -- |        A RefreshControl component, used to provide pull-to-refresh
 -- |        functionality for the ScrollView.
@@ -2550,7 +2550,7 @@ type DrawerSlideEvent = NativeSyntheticEvent NativeTouchEvent
 -- |        momentum events to be turned on (see sendMomentumEvents). This doesn't do
 -- |        anything out of the box and you need to implement a custom native
 -- |        FpsListener for it to be useful.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `scrollsToTop`
 -- |        When true the scroll view scrolls to top when the status bar is tapped.
 -- |        The default value is true.
@@ -2600,19 +2600,19 @@ type DrawerSlideEvent = NativeSyntheticEvent NativeTouchEvent
 -- |        Used to locate this view in end-to-end tests.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `updateCellsBatchingPeriod`
 -- |        Amount of time between low-pri item render batches, e.g. for rendering items quite a ways off
 -- |        screen. Similar fill rate/responsiveness tradeoff as `maxToRenderPerBatch`.
@@ -2772,22 +2772,22 @@ type FlatListProps_optional itemT =
 -- |        Rendered at the very beginning of the list.
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -2795,7 +2795,7 @@ type FlatListProps_optional itemT =
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -2803,10 +2803,10 @@ type FlatListProps_optional itemT =
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -2911,7 +2911,7 @@ type FlatListProps_optional itemT =
 -- |        `ItemSeparatorComponent`.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -2951,7 +2951,7 @@ type FlatListProps_optional itemT =
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `keyExtractor`
 -- |        Used to extract a unique key for a given item at the specified index. Key is used for caching
 -- |        and as the react key to track item re-ordering. The default extractor checks `item.key`, then
@@ -3002,10 +3002,10 @@ type FlatListProps_optional itemT =
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onContentSizeChange`
 -- |        Called when scrollable content view of the ScrollView changes.
 -- |        Handler function is passed the content width and content height as parameters: (contentWidth, contentHeight)
@@ -3019,7 +3019,7 @@ type FlatListProps_optional itemT =
 -- |        within half the visible length of the list.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMomentumScrollBegin`
 -- |        Fires when scroll view has begun moving
 -- | - `onMomentumScrollEnd`
@@ -3121,7 +3121,7 @@ type FlatListProps_optional itemT =
 -- |        we opt to not include pointerEvents on style. On some platforms, we would need to implement it as a className anyways. Using style or not is an implementation detail of the platform.
 -- | - `progressViewOffset`
 -- |        Set this when offset is needed for the loading indicator to show correctly.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `refreshControl`
 -- |        A RefreshControl component, used to provide pull-to-refresh
 -- |        functionality for the ScrollView.
@@ -3165,7 +3165,7 @@ type FlatListProps_optional itemT =
 -- |        momentum events to be turned on (see sendMomentumEvents). This doesn't do
 -- |        anything out of the box and you need to implement a custom native
 -- |        FpsListener for it to be useful.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `scrollsToTop`
 -- |        When true the scroll view scrolls to top when the status bar is tapped.
 -- |        The default value is true.
@@ -3215,19 +3215,19 @@ type FlatListProps_optional itemT =
 -- |        Used to locate this view in end-to-end tests.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `updateCellsBatchingPeriod`
 -- |        Amount of time between low-pri item render batches, e.g. for rendering items quite a ways off
 -- |        screen. Similar fill rate/responsiveness tradeoff as `maxToRenderPerBatch`.
@@ -3266,16 +3266,16 @@ type GestureResponderEvent = NativeSyntheticEvent NativeTouchEvent
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -3283,7 +3283,7 @@ type GestureResponderEvent = NativeSyntheticEvent NativeTouchEvent
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -3291,13 +3291,13 @@ type GestureResponderEvent = NativeSyntheticEvent NativeTouchEvent
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
 -- | - `blurRadius`
 -- |        blurRadius: the blur radius of the blur filter added to the image
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `capInsets`
 -- |        When the image is resized, the corners of the size specified by capInsets will stay a fixed size,
 -- |        but the center content and borders of the image will be stretched.
@@ -3325,7 +3325,7 @@ type GestureResponderEvent = NativeSyntheticEvent NativeTouchEvent
 -- |        displayed, typically after when it got downloaded from network.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onError`
 -- |        Invoked on load error with {nativeEvent: {error}}
 -- | - `onLayout`
@@ -3341,12 +3341,12 @@ type GestureResponderEvent = NativeSyntheticEvent NativeTouchEvent
 -- |        Invoked on load start
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onPartialLoad`
 -- |        Invoked when a partial load of the image is complete. The definition of
 -- |        what constitutes a "partial load" is loader specific though this is meant
 -- |        for progressive JPEG loads.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onProgress`
 -- |        Invoked on download progress with {nativeEvent: {loaded, total}}
 -- | - `resizeMethod`
@@ -3361,7 +3361,7 @@ type GestureResponderEvent = NativeSyntheticEvent NativeTouchEvent
 -- |        should be used if the image is smaller than the view. It should also be used if the
 -- |        image is slightly bigger than the view.
 -- |        More details about `resize` and `scale` can be found at http://frescolib.org/docs/resizing-rotating.html.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `resizeMode`
 -- |        Determines how to resize the image when the frame doesn't match the raw
 -- |        image dimensions.
@@ -3439,16 +3439,16 @@ type ImageBackgroundProps_optional  =
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -3456,7 +3456,7 @@ type ImageBackgroundProps_optional  =
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -3464,13 +3464,13 @@ type ImageBackgroundProps_optional  =
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
 -- | - `blurRadius`
 -- |        blurRadius: the blur radius of the blur filter added to the image
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `capInsets`
 -- |        When the image is resized, the corners of the size specified by capInsets will stay a fixed size,
 -- |        but the center content and borders of the image will be stretched.
@@ -3498,7 +3498,7 @@ type ImageBackgroundProps_optional  =
 -- |        displayed, typically after when it got downloaded from network.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onError`
 -- |        Invoked on load error with {nativeEvent: {error}}
 -- | - `onLayout`
@@ -3514,12 +3514,12 @@ type ImageBackgroundProps_optional  =
 -- |        Invoked on load start
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onPartialLoad`
 -- |        Invoked when a partial load of the image is complete. The definition of
 -- |        what constitutes a "partial load" is loader specific though this is meant
 -- |        for progressive JPEG loads.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onProgress`
 -- |        Invoked on download progress with {nativeEvent: {loaded, total}}
 -- | - `resizeMethod`
@@ -3534,7 +3534,7 @@ type ImageBackgroundProps_optional  =
 -- |        should be used if the image is smaller than the view. It should also be used if the
 -- |        image is slightly bigger than the view.
 -- |        More details about `resize` and `scale` can be found at http://frescolib.org/docs/resizing-rotating.html.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `resizeMode`
 -- |        Determines how to resize the image when the frame doesn't match the raw
 -- |        image dimensions.
@@ -3600,16 +3600,16 @@ type ImageProgressEventDataIOS  = {
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -3617,7 +3617,7 @@ type ImageProgressEventDataIOS  = {
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -3625,13 +3625,13 @@ type ImageProgressEventDataIOS  = {
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
 -- | - `blurRadius`
 -- |        blurRadius: the blur radius of the blur filter added to the image
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `capInsets`
 -- |        When the image is resized, the corners of the size specified by capInsets will stay a fixed size,
 -- |        but the center content and borders of the image will be stretched.
@@ -3659,7 +3659,7 @@ type ImageProgressEventDataIOS  = {
 -- |        displayed, typically after when it got downloaded from network.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onError`
 -- |        Invoked on load error with {nativeEvent: {error}}
 -- | - `onLayout`
@@ -3675,12 +3675,12 @@ type ImageProgressEventDataIOS  = {
 -- |        Invoked on load start
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onPartialLoad`
 -- |        Invoked when a partial load of the image is complete. The definition of
 -- |        what constitutes a "partial load" is loader specific though this is meant
 -- |        for progressive JPEG loads.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onProgress`
 -- |        Invoked on download progress with {nativeEvent: {loaded, total}}
 -- | - `resizeMethod`
@@ -3695,7 +3695,7 @@ type ImageProgressEventDataIOS  = {
 -- |        should be used if the image is smaller than the view. It should also be used if the
 -- |        image is slightly bigger than the view.
 -- |        More details about `resize` and `scale` can be found at http://frescolib.org/docs/resizing-rotating.html.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `resizeMode`
 -- |        Determines how to resize the image when the frame doesn't match the raw
 -- |        image dimensions.
@@ -3774,16 +3774,16 @@ type ImageProps_optional  =
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -3791,7 +3791,7 @@ type ImageProps_optional  =
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -3799,13 +3799,13 @@ type ImageProps_optional  =
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
 -- | - `blurRadius`
 -- |        blurRadius: the blur radius of the blur filter added to the image
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `capInsets`
 -- |        When the image is resized, the corners of the size specified by capInsets will stay a fixed size,
 -- |        but the center content and borders of the image will be stretched.
@@ -3833,7 +3833,7 @@ type ImageProps_optional  =
 -- |        displayed, typically after when it got downloaded from network.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onError`
 -- |        Invoked on load error with {nativeEvent: {error}}
 -- | - `onLayout`
@@ -3849,12 +3849,12 @@ type ImageProps_optional  =
 -- |        Invoked on load start
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onPartialLoad`
 -- |        Invoked when a partial load of the image is complete. The definition of
 -- |        what constitutes a "partial load" is loader specific though this is meant
 -- |        for progressive JPEG loads.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onProgress`
 -- |        Invoked on download progress with {nativeEvent: {loaded, total}}
 -- | - `resizeMethod`
@@ -3869,7 +3869,7 @@ type ImageProps_optional  =
 -- |        should be used if the image is smaller than the view. It should also be used if the
 -- |        image is slightly bigger than the view.
 -- |        More details about `resize` and `scale` can be found at http://frescolib.org/docs/resizing-rotating.html.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `resizeMode`
 -- |        Determines how to resize the image when the frame doesn't match the raw
 -- |        image dimensions.
@@ -3963,22 +3963,22 @@ type Insets  = {
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -3986,7 +3986,7 @@ type Insets  = {
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -3994,10 +3994,10 @@ type Insets  = {
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -4012,7 +4012,7 @@ type Insets  = {
 -- |        Default is true
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -4034,7 +4034,7 @@ type Insets  = {
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `keyboardVerticalOffset`
 -- |        This is the distance between the top of the user screen and the react native view,
 -- |        may be non-zero in some use cases.
@@ -4055,16 +4055,16 @@ type Insets  = {
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onLayout`
 -- |        Invoked on mount and layout changes with
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -4149,19 +4149,19 @@ type Insets  = {
 -- |        Used to locate this view in end-to-end tests.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 
 type KeyboardAvoidingViewProps  = 
   ( accessibilityActions :: (Array String)
@@ -4262,22 +4262,22 @@ foreign import data ListViewDataSource :: Type
 -- | see <https://facebook.github.io/react-native/docs/listview.html#props>
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -4285,7 +4285,7 @@ foreign import data ListViewDataSource :: Type
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -4293,10 +4293,10 @@ foreign import data ListViewDataSource :: Type
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -4378,7 +4378,7 @@ foreign import data ListViewDataSource :: Type
 -- |        needed in the general case.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -4417,7 +4417,7 @@ foreign import data ListViewDataSource :: Type
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `keyboardDismissMode`
 -- |        Determines whether the keyboard gets dismissed in response to a drag.
 -- |           - 'none' (the default) drags do not dismiss the keyboard.
@@ -4455,10 +4455,10 @@ foreign import data ListViewDataSource :: Type
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onChangeVisibleRows`
 -- |        (visibleRows, changedRows) => void
 -- |        Called when the set of visible rows changes.  `visibleRows` maps
@@ -4481,7 +4481,7 @@ foreign import data ListViewDataSource :: Type
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMomentumScrollBegin`
 -- |        Fires when scroll view has begun moving
 -- | - `onMomentumScrollEnd`
@@ -4635,7 +4635,7 @@ foreign import data ListViewDataSource :: Type
 -- |        momentum events to be turned on (see sendMomentumEvents). This doesn't do
 -- |        anything out of the box and you need to implement a custom native
 -- |        FpsListener for it to be useful.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `scrollRenderAheadDistance`
 -- |        How early to start rendering rows before they come on screen, in
 -- |        pixels.
@@ -4682,7 +4682,7 @@ foreign import data ListViewDataSource :: Type
 -- |        `stickyHeaderIndices={[0]}` will cause the first child to be fixed to the
 -- |        top of the scroll view. This property is not supported in conjunction
 -- |        with `horizontal={true}`.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `stickySectionHeadersEnabled`
 -- |        Makes the sections headers sticky. The sticky behavior means that it will scroll with the
 -- |        content at the top of the section until it reaches the top of the screen, at which point it
@@ -4695,19 +4695,19 @@ foreign import data ListViewDataSource :: Type
 -- |        Used to locate this view in end-to-end tests.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `zoomScale`
 -- |        The current scale of the scroll view content. The default value is 1.0.
 
@@ -4830,22 +4830,22 @@ type ListViewProps_optional  =
 -- | see <https://facebook.github.io/react-native/docs/listview.html#props>
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -4853,7 +4853,7 @@ type ListViewProps_optional  =
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -4861,10 +4861,10 @@ type ListViewProps_optional  =
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -4946,7 +4946,7 @@ type ListViewProps_optional  =
 -- |        needed in the general case.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -4985,7 +4985,7 @@ type ListViewProps_optional  =
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `keyboardDismissMode`
 -- |        Determines whether the keyboard gets dismissed in response to a drag.
 -- |           - 'none' (the default) drags do not dismiss the keyboard.
@@ -5023,10 +5023,10 @@ type ListViewProps_optional  =
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onChangeVisibleRows`
 -- |        (visibleRows, changedRows) => void
 -- |        Called when the set of visible rows changes.  `visibleRows` maps
@@ -5049,7 +5049,7 @@ type ListViewProps_optional  =
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMomentumScrollBegin`
 -- |        Fires when scroll view has begun moving
 -- | - `onMomentumScrollEnd`
@@ -5203,7 +5203,7 @@ type ListViewProps_optional  =
 -- |        momentum events to be turned on (see sendMomentumEvents). This doesn't do
 -- |        anything out of the box and you need to implement a custom native
 -- |        FpsListener for it to be useful.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `scrollRenderAheadDistance`
 -- |        How early to start rendering rows before they come on screen, in
 -- |        pixels.
@@ -5250,7 +5250,7 @@ type ListViewProps_optional  =
 -- |        `stickyHeaderIndices={[0]}` will cause the first child to be fixed to the
 -- |        top of the scroll view. This property is not supported in conjunction
 -- |        with `horizontal={true}`.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `stickySectionHeadersEnabled`
 -- |        Makes the sections headers sticky. The sticky behavior means that it will scroll with the
 -- |        content at the top of the section until it reaches the top of the screen, at which point it
@@ -5263,19 +5263,19 @@ type ListViewProps_optional  =
 -- |        Used to locate this view in end-to-end tests.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `zoomScale`
 -- |        The current scale of the scroll view content. The default value is 1.0.
 
@@ -5297,22 +5297,22 @@ listView props = unsafeCreateNativeElement "ListView" props
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -5320,7 +5320,7 @@ listView props = unsafeCreateNativeElement "ListView" props
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -5328,10 +5328,10 @@ listView props = unsafeCreateNativeElement "ListView" props
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -5341,7 +5341,7 @@ listView props = unsafeCreateNativeElement "ListView" props
 -- |        Set this property to false to disable this optimization and ensure that this View exists in the native view hierarchy.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -5363,7 +5363,7 @@ listView props = unsafeCreateNativeElement "ListView" props
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `nativeID`
 -- |        Used to reference react managed views from native code.
 -- | - `needsOffscreenAlphaCompositing`
@@ -5381,16 +5381,16 @@ listView props = unsafeCreateNativeElement "ListView" props
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onLayout`
 -- |        Invoked on mount and layout changes with
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -5475,19 +5475,19 @@ listView props = unsafeCreateNativeElement "ListView" props
 -- |        Used to locate this view in end-to-end tests.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 
 type MaskedViewIOSProps_optional  = 
   ( accessibilityActions :: (Array String)
@@ -5548,22 +5548,22 @@ type MaskedViewIOSProps_optional  =
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -5571,7 +5571,7 @@ type MaskedViewIOSProps_optional  =
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -5579,10 +5579,10 @@ type MaskedViewIOSProps_optional  =
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -5592,7 +5592,7 @@ type MaskedViewIOSProps_optional  =
 -- |        Set this property to false to disable this optimization and ensure that this View exists in the native view hierarchy.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -5614,7 +5614,7 @@ type MaskedViewIOSProps_optional  =
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `nativeID`
 -- |        Used to reference react managed views from native code.
 -- | - `needsOffscreenAlphaCompositing`
@@ -5632,16 +5632,16 @@ type MaskedViewIOSProps_optional  =
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onLayout`
 -- |        Invoked on mount and layout changes with
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -5726,19 +5726,19 @@ type MaskedViewIOSProps_optional  =
 -- |        Used to locate this view in end-to-end tests.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 
 type MaskedViewIOSProps_required   optional = 
   ( maskElement :: JSX
@@ -5909,7 +5909,7 @@ navigatorIOS
 navigatorIOS props = unsafeCreateNativeElement "NavigatorIOS" props
 
 
--- |  __*see* PickerIOS.ios.js
+-- |  __*see* PickerIOS.ios.js__
 
 type PickerIOSItemProps  = 
   ( label :: String
@@ -5932,25 +5932,25 @@ pickerIOSItem_ children = pickerIOSItem { children }
 
 
 -- | see <https://facebook.github.io/react-native/docs/pickerios.html>
--- |  __*see* PickerIOS.ios.js
+-- |  __*see* PickerIOS.ios.js__
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -5958,7 +5958,7 @@ pickerIOSItem_ children = pickerIOSItem { children }
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -5966,10 +5966,10 @@ pickerIOSItem_ children = pickerIOSItem { children }
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -5979,7 +5979,7 @@ pickerIOSItem_ children = pickerIOSItem { children }
 -- |        Set this property to false to disable this optimization and ensure that this View exists in the native view hierarchy.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -6001,7 +6001,7 @@ pickerIOSItem_ children = pickerIOSItem { children }
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `nativeID`
 -- |        Used to reference react managed views from native code.
 -- | - `needsOffscreenAlphaCompositing`
@@ -6019,16 +6019,16 @@ pickerIOSItem_ children = pickerIOSItem { children }
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onLayout`
 -- |        Invoked on mount and layout changes with
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -6113,19 +6113,19 @@ pickerIOSItem_ children = pickerIOSItem { children }
 -- |        Used to locate this view in end-to-end tests.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 
 type PickerIOSProps  = 
   ( accessibilityActions :: (Array String)
@@ -6199,7 +6199,7 @@ pickerIOS_ :: Array JSX -> JSX
 pickerIOS_ children = pickerIOS { children }
 
 
--- |  __*see* Picker.js
+-- |  __*see* Picker.js__
 
 type PickerItemProps_optional  = 
   ( color :: String
@@ -6209,7 +6209,7 @@ type PickerItemProps_optional  =
   ,  children :: Array JSX
   )
 
--- |  __*see* Picker.js
+-- |  __*see* Picker.js__
 
 type PickerItemProps_required   optional = 
   ( label :: String
@@ -6226,25 +6226,25 @@ pickerItem props = unsafeCreateNativeElement "PickerItem" props
 
 
 -- | see <https://facebook.github.io/react-native/docs/picker.html>
--- |  __*see* Picker.js
+-- |  __*see* Picker.js__
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -6252,7 +6252,7 @@ pickerItem props = unsafeCreateNativeElement "PickerItem" props
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -6260,10 +6260,10 @@ pickerItem props = unsafeCreateNativeElement "PickerItem" props
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -6274,10 +6274,10 @@ pickerItem props = unsafeCreateNativeElement "PickerItem" props
 -- | - `enabled`
 -- |        If set to false, the picker will be disabled, i.e. the user will not be able to make a
 -- |        selection.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -6299,15 +6299,15 @@ pickerItem props = unsafeCreateNativeElement "PickerItem" props
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `itemStyle`
 -- |        Style to apply to each of the item labels.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `mode`
 -- |        On Android, specifies how to display the selection items when the user taps on the picker:
 -- |           - 'dialog': Show a modal dialog. This is the default.
 -- |           - 'dropdown': Shows a dropdown anchored to the picker view
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `nativeID`
 -- |        Used to reference react managed views from native code.
 -- | - `needsOffscreenAlphaCompositing`
@@ -6325,16 +6325,16 @@ pickerItem props = unsafeCreateNativeElement "PickerItem" props
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onLayout`
 -- |        Invoked on mount and layout changes with
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -6406,7 +6406,7 @@ pickerItem props = unsafeCreateNativeElement "PickerItem" props
 -- |        we opt to not include pointerEvents on style. On some platforms, we would need to implement it as a className anyways. Using style or not is an implementation detail of the platform.
 -- | - `prompt`
 -- |        Prompt string for this picker, used on Android in dialog mode as the title of the dialog.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `removeClippedSubviews`
 -- |        This is a special performance property exposed by RCTView and is useful for scrolling content when there are many subviews,
 -- |        most of which are offscreen. For this property to be effective, it must be applied to a view that contains many subviews that extend outside its bound.
@@ -6432,19 +6432,19 @@ pickerItem props = unsafeCreateNativeElement "PickerItem" props
 -- |        Used to locate this view in end-to-end tests.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 
 type PickerProps  = 
   ( accessibilityActions :: (Array String)
@@ -6529,25 +6529,25 @@ type PointPropType  = {
 
 
 -- | see <https://facebook.github.io/react-native/docs/progressbarandroid.html>
--- |  __*see* ProgressBarAndroid.android.js
+-- |  __*see* ProgressBarAndroid.android.js__
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -6555,7 +6555,7 @@ type PointPropType  = {
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -6563,10 +6563,10 @@ type PointPropType  = {
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -6578,7 +6578,7 @@ type PointPropType  = {
 -- |        Color of the progress bar.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -6603,7 +6603,7 @@ type PointPropType  = {
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `nativeID`
 -- |        Used to reference react managed views from native code.
 -- | - `needsOffscreenAlphaCompositing`
@@ -6621,16 +6621,16 @@ type PointPropType  = {
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onLayout`
 -- |        Invoked on mount and layout changes with
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -6726,19 +6726,19 @@ type PointPropType  = {
 -- |        Used to locate this view in end-to-end tests.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 
 type ProgressBarAndroidProps  = 
   ( accessibilityActions :: (Array String)
@@ -6814,25 +6814,25 @@ progressBarAndroid_ children = progressBarAndroid { children }
 
 
 -- | see <https://facebook.github.io/react-native/docs/progressviewios.html>
--- |  __*see* ProgressViewIOS.ios.js
+-- |  __*see* ProgressViewIOS.ios.js__
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -6840,7 +6840,7 @@ progressBarAndroid_ children = progressBarAndroid { children }
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -6848,10 +6848,10 @@ progressBarAndroid_ children = progressBarAndroid { children }
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -6861,7 +6861,7 @@ progressBarAndroid_ children = progressBarAndroid { children }
 -- |        Set this property to false to disable this optimization and ensure that this View exists in the native view hierarchy.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -6883,7 +6883,7 @@ progressBarAndroid_ children = progressBarAndroid { children }
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `nativeID`
 -- |        Used to reference react managed views from native code.
 -- | - `needsOffscreenAlphaCompositing`
@@ -6901,16 +6901,16 @@ progressBarAndroid_ children = progressBarAndroid { children }
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onLayout`
 -- |        Invoked on mount and layout changes with
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -7007,19 +7007,19 @@ progressBarAndroid_ children = progressBarAndroid { children }
 -- |        The tint color of the progress bar track.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 
 type ProgressViewIOSProps  = 
   ( accessibilityActions :: (Array String)
@@ -7099,22 +7099,22 @@ progressViewIOS_ children = progressViewIOS { children }
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -7122,7 +7122,7 @@ progressViewIOS_ children = progressViewIOS { children }
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -7130,10 +7130,10 @@ progressViewIOS_ children = progressViewIOS { children }
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -7207,7 +7207,7 @@ progressViewIOS_ children = progressViewIOS { children }
 -- |        needed in the general case.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -7242,7 +7242,7 @@ progressViewIOS_ children = progressViewIOS { children }
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `keyboardDismissMode`
 -- |        Determines whether the keyboard gets dismissed in response to a drag.
 -- |           - 'none' (the default) drags do not dismiss the keyboard.
@@ -7280,10 +7280,10 @@ progressViewIOS_ children = progressViewIOS { children }
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onContentSizeChange`
 -- |        Called when scrollable content view of the ScrollView changes.
 -- |        Handler function is passed the content width and content height as parameters: (contentWidth, contentHeight)
@@ -7293,7 +7293,7 @@ progressViewIOS_ children = progressViewIOS { children }
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMomentumScrollBegin`
 -- |        Fires when scroll view has begun moving
 -- | - `onMomentumScrollEnd`
@@ -7413,7 +7413,7 @@ progressViewIOS_ children = progressViewIOS { children }
 -- |        momentum events to be turned on (see sendMomentumEvents). This doesn't do
 -- |        anything out of the box and you need to implement a custom native
 -- |        FpsListener for it to be useful.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `scrollsToTop`
 -- |        When true the scroll view scrolls to top when the status bar is tapped.
 -- |        The default value is true.
@@ -7463,19 +7463,19 @@ progressViewIOS_ children = progressViewIOS { children }
 -- |        Used to locate this view in end-to-end tests.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `zoomScale`
 -- |        The current scale of the scroll view content. The default value is 1.0.
 
@@ -7598,22 +7598,22 @@ recyclerViewBackedScrollView_ children = recyclerViewBackedScrollView { children
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -7621,7 +7621,7 @@ recyclerViewBackedScrollView_ children = recyclerViewBackedScrollView { children
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -7629,10 +7629,10 @@ recyclerViewBackedScrollView_ children = recyclerViewBackedScrollView { children
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -7646,7 +7646,7 @@ recyclerViewBackedScrollView_ children = recyclerViewBackedScrollView { children
 -- |        Whether the pull to refresh functionality is enabled.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -7668,7 +7668,7 @@ recyclerViewBackedScrollView_ children = recyclerViewBackedScrollView { children
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `nativeID`
 -- |        Used to reference react managed views from native code.
 -- | - `needsOffscreenAlphaCompositing`
@@ -7686,16 +7686,16 @@ recyclerViewBackedScrollView_ children = recyclerViewBackedScrollView { children
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onLayout`
 -- |        Invoked on mount and layout changes with
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -7766,7 +7766,7 @@ recyclerViewBackedScrollView_ children = recyclerViewBackedScrollView { children
 -- |        The background color of the refresh indicator.
 -- | - `progressViewOffset`
 -- |        Progress view top offset
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `refreshing`
 -- |        Whether the view should be indicating an active refresh.
 -- | - `removeClippedSubviews`
@@ -7797,19 +7797,19 @@ recyclerViewBackedScrollView_ children = recyclerViewBackedScrollView { children
 -- |        Title color.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 
 type RefreshControlProps_optional  = 
   ( accessibilityActions :: (Array String)
@@ -7879,22 +7879,22 @@ type RefreshControlProps_optional  =
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -7902,7 +7902,7 @@ type RefreshControlProps_optional  =
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -7910,10 +7910,10 @@ type RefreshControlProps_optional  =
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -7927,7 +7927,7 @@ type RefreshControlProps_optional  =
 -- |        Whether the pull to refresh functionality is enabled.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -7949,7 +7949,7 @@ type RefreshControlProps_optional  =
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `nativeID`
 -- |        Used to reference react managed views from native code.
 -- | - `needsOffscreenAlphaCompositing`
@@ -7967,16 +7967,16 @@ type RefreshControlProps_optional  =
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onLayout`
 -- |        Invoked on mount and layout changes with
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -8047,7 +8047,7 @@ type RefreshControlProps_optional  =
 -- |        The background color of the refresh indicator.
 -- | - `progressViewOffset`
 -- |        Progress view top offset
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `refreshing`
 -- |        Whether the view should be indicating an active refresh.
 -- | - `removeClippedSubviews`
@@ -8078,19 +8078,19 @@ type RefreshControlProps_optional  =
 -- |        Title color.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 
 type RefreshControlProps_required   optional = 
   ( refreshing :: Boolean
@@ -8124,22 +8124,22 @@ type Route  = {
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -8147,7 +8147,7 @@ type Route  = {
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -8155,10 +8155,10 @@ type Route  = {
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -8232,7 +8232,7 @@ type Route  = {
 -- |        needed in the general case.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -8267,7 +8267,7 @@ type Route  = {
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `keyboardDismissMode`
 -- |        Determines whether the keyboard gets dismissed in response to a drag.
 -- |           - 'none' (the default) drags do not dismiss the keyboard.
@@ -8305,10 +8305,10 @@ type Route  = {
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onContentSizeChange`
 -- |        Called when scrollable content view of the ScrollView changes.
 -- |        Handler function is passed the content width and content height as parameters: (contentWidth, contentHeight)
@@ -8318,7 +8318,7 @@ type Route  = {
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMomentumScrollBegin`
 -- |        Fires when scroll view has begun moving
 -- | - `onMomentumScrollEnd`
@@ -8438,7 +8438,7 @@ type Route  = {
 -- |        momentum events to be turned on (see sendMomentumEvents). This doesn't do
 -- |        anything out of the box and you need to implement a custom native
 -- |        FpsListener for it to be useful.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `scrollsToTop`
 -- |        When true the scroll view scrolls to top when the status bar is tapped.
 -- |        The default value is true.
@@ -8488,19 +8488,19 @@ type Route  = {
 -- |        Used to locate this view in end-to-end tests.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `zoomScale`
 -- |        The current scale of the scroll view content. The default value is 1.0.
 
@@ -8623,22 +8623,22 @@ scrollView_ children = scrollView { children }
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -8646,7 +8646,7 @@ scrollView_ children = scrollView { children }
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -8654,10 +8654,10 @@ scrollView_ children = scrollView { children }
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -8669,7 +8669,7 @@ scrollView_ children = scrollView { children }
 -- |        If false the user won't be able to interact with the control. Default value is true.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -8691,7 +8691,7 @@ scrollView_ children = scrollView { children }
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `momentary`
 -- |        If true, then selecting a segment won't persist visually.
 -- |        The onValueChange callback will still work as expected.
@@ -8712,10 +8712,10 @@ scrollView_ children = scrollView { children }
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onChange`
 -- |        Callback that is called when the user taps a segment;
 -- |        passes the event as an argument
@@ -8724,7 +8724,7 @@ scrollView_ children = scrollView { children }
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -8815,19 +8815,19 @@ scrollView_ children = scrollView { children }
 -- |        Accent color of the control.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `values`
 -- |        The labels for the control's segment buttons, in order.
 
@@ -8910,22 +8910,22 @@ segmentedControlIOS_ children = segmentedControlIOS { children }
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -8933,7 +8933,7 @@ segmentedControlIOS_ children = segmentedControlIOS { children }
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -8941,10 +8941,10 @@ segmentedControlIOS_ children = segmentedControlIOS { children }
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -8957,7 +8957,7 @@ segmentedControlIOS_ children = segmentedControlIOS { children }
 -- |        Default value is false.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -8979,7 +8979,7 @@ segmentedControlIOS_ children = segmentedControlIOS { children }
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `maximumTrackImage`
 -- |        Assigns a maximum track image. Only static images are supported.
 -- |        The leftmost pixel of the image will be stretched to fill the track.
@@ -9013,16 +9013,16 @@ segmentedControlIOS_ children = segmentedControlIOS { children }
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onLayout`
 -- |        Invoked on mount and layout changes with
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -9123,19 +9123,19 @@ segmentedControlIOS_ children = segmentedControlIOS { children }
 -- |        to fill the track.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `value`
 -- |        Initial value of the slider. The value should be between minimumValue
 -- |        and maximumValue, which default to 0 and 1 respectively.
@@ -9229,22 +9229,22 @@ slider_ children = slider { children }
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -9252,7 +9252,7 @@ slider_ children = slider { children }
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -9260,10 +9260,10 @@ slider_ children = slider { children }
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -9273,7 +9273,7 @@ slider_ children = slider { children }
 -- |        Set this property to false to disable this optimization and ensure that this View exists in the native view hierarchy.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -9295,7 +9295,7 @@ slider_ children = slider { children }
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `nativeID`
 -- |        Used to reference react managed views from native code.
 -- | - `needsOffscreenAlphaCompositing`
@@ -9313,16 +9313,16 @@ slider_ children = slider { children }
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onLayout`
 -- |        Invoked on mount and layout changes with
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -9407,19 +9407,19 @@ slider_ children = slider { children }
 -- |        Used to locate this view in end-to-end tests.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 
 type SnapshotViewIOSProps_optional  = 
   ( accessibilityActions :: (Array String)
@@ -9480,22 +9480,22 @@ type SnapshotViewIOSProps_optional  =
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -9503,7 +9503,7 @@ type SnapshotViewIOSProps_optional  =
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -9511,10 +9511,10 @@ type SnapshotViewIOSProps_optional  =
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -9524,7 +9524,7 @@ type SnapshotViewIOSProps_optional  =
 -- |        Set this property to false to disable this optimization and ensure that this View exists in the native view hierarchy.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -9546,7 +9546,7 @@ type SnapshotViewIOSProps_optional  =
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `nativeID`
 -- |        Used to reference react managed views from native code.
 -- | - `needsOffscreenAlphaCompositing`
@@ -9564,16 +9564,16 @@ type SnapshotViewIOSProps_optional  =
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onLayout`
 -- |        Invoked on mount and layout changes with
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -9658,19 +9658,19 @@ type SnapshotViewIOSProps_optional  =
 -- |        Used to locate this view in end-to-end tests.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 
 type SnapshotViewIOSProps_required   optional = 
   ( testIdentifier :: String
@@ -9775,22 +9775,22 @@ swipeableListView props = unsafeCreateNativeElement "SwipeableListView" props
 -- | https://facebook.github.io/react-native/docs/switchios.html#props
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -9798,7 +9798,7 @@ swipeableListView props = unsafeCreateNativeElement "SwipeableListView" props
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -9806,10 +9806,10 @@ swipeableListView props = unsafeCreateNativeElement "SwipeableListView" props
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -9821,7 +9821,7 @@ swipeableListView props = unsafeCreateNativeElement "SwipeableListView" props
 -- |        If true the user won't be able to toggle the switch. Default value is false.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -9843,7 +9843,7 @@ swipeableListView props = unsafeCreateNativeElement "SwipeableListView" props
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `nativeID`
 -- |        Used to reference react managed views from native code.
 -- | - `needsOffscreenAlphaCompositing`
@@ -9861,16 +9861,16 @@ swipeableListView props = unsafeCreateNativeElement "SwipeableListView" props
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onLayout`
 -- |        Invoked on mount and layout changes with
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -9963,19 +9963,19 @@ swipeableListView props = unsafeCreateNativeElement "SwipeableListView" props
 -- |        Background color when the switch is turned off.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `value`
 -- |        The value of the switch, if true the switch will be turned on. Default value is false.
 
@@ -10057,22 +10057,22 @@ switchIOS_ children = switchIOS { children }
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -10080,7 +10080,7 @@ switchIOS_ children = switchIOS { children }
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -10088,10 +10088,10 @@ switchIOS_ children = switchIOS { children }
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -10104,7 +10104,7 @@ switchIOS_ children = switchIOS { children }
 -- |        Default value is false.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -10129,7 +10129,7 @@ switchIOS_ children = switchIOS { children }
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `nativeID`
 -- |        Used to reference react managed views from native code.
 -- | - `needsOffscreenAlphaCompositing`
@@ -10147,16 +10147,16 @@ switchIOS_ children = switchIOS { children }
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onLayout`
 -- |        Invoked on mount and layout changes with
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -10254,19 +10254,19 @@ switchIOS_ children = switchIOS { children }
 -- |        Color when false and color when true
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `value`
 -- |        The value of the switch. If true the switch will be turned on.
 -- |        Default value is false.
@@ -10352,22 +10352,22 @@ switch_ children = switch { children }
 -- | see <https://facebook.github.io/react-native/docs/tabbarios-item.html#props>
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -10375,7 +10375,7 @@ switch_ children = switch { children }
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -10383,10 +10383,10 @@ switch_ children = switch { children }
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -10400,7 +10400,7 @@ switch_ children = switch { children }
 -- |        Set this property to false to disable this optimization and ensure that this View exists in the native view hierarchy.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -10424,7 +10424,7 @@ switch_ children = switch { children }
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `nativeID`
 -- |        Used to reference react managed views from native code.
 -- | - `needsOffscreenAlphaCompositing`
@@ -10442,16 +10442,16 @@ switch_ children = switch { children }
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onLayout`
 -- |        Invoked on mount and layout changes with
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -10555,19 +10555,19 @@ switch_ children = switch { children }
 -- |        Text that appears under the icon. It is ignored when a system icon is defined.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 
 type TabBarIOSItemProps  = 
   ( accessibilityActions :: (Array String)
@@ -10650,22 +10650,22 @@ tabBarIOSItem_ children = tabBarIOSItem { children }
 -- | see <https://facebook.github.io/react-native/docs/tabbarios.html#props>
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -10673,7 +10673,7 @@ tabBarIOSItem_ children = tabBarIOSItem { children }
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -10681,10 +10681,10 @@ tabBarIOSItem_ children = tabBarIOSItem { children }
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -10696,7 +10696,7 @@ tabBarIOSItem_ children = tabBarIOSItem { children }
 -- |        Set this property to false to disable this optimization and ensure that this View exists in the native view hierarchy.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -10718,7 +10718,7 @@ tabBarIOSItem_ children = tabBarIOSItem { children }
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `itemPositioning`
 -- |        Specifies tab bar item positioning. Available values are:
 -- |        - fill - distributes items across the entire width of the tab bar
@@ -10744,16 +10744,16 @@ tabBarIOSItem_ children = tabBarIOSItem { children }
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onLayout`
 -- |        Invoked on mount and layout changes with
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -10842,19 +10842,19 @@ tabBarIOSItem_ children = tabBarIOSItem { children }
 -- |        A Boolean value that indicates whether the tab bar is translucent
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `unselectedItemTintColor`
 -- |        Color of unselected tab icons. Available since iOS 10.
 -- | - `unselectedTintColor`
@@ -10972,22 +10972,22 @@ type TextInputKeyPressEventData  = {
 -- | see <https://facebook.github.io/react-native/docs/textinput.html#props>
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -10995,7 +10995,7 @@ type TextInputKeyPressEventData  = {
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -11003,10 +11003,10 @@ type TextInputKeyPressEventData  = {
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -11088,7 +11088,7 @@ type TextInputKeyPressEventData  = {
 -- |        The default value is false.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -11118,7 +11118,7 @@ type TextInputKeyPressEventData  = {
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `keyboardAppearance`
 -- |        Determines the color of the keyboard.
 -- | - `keyboardType`
@@ -11158,10 +11158,10 @@ type TextInputKeyPressEventData  = {
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onBlur`
 -- |        Callback that is called when the text input is blurred
 -- | - `onChange`
@@ -11190,7 +11190,7 @@ type TextInputKeyPressEventData  = {
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -11278,7 +11278,7 @@ type TextInputKeyPressEventData  = {
 -- |        re-used and re-composited with different parameters. The downside is that this can use up limited video memory, so this prop should be set back to false at the end of the interaction/animation.
 -- | - `returnKeyLabel`
 -- |        Sets the return key to the label. Use it instead of `returnKeyType`.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `returnKeyType`
 -- |        enum('default', 'go', 'google', 'join', 'next', 'route', 'search', 'send', 'yahoo', 'done', 'emergency-call')
 -- |        Determines how the return key should look.
@@ -11354,19 +11354,19 @@ type TextInputKeyPressEventData  = {
 -- |          - `'oneTimeCode'`
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `underlineColorAndroid`
 -- |        The color of the textInput underline.
 -- | - `value`
@@ -11517,16 +11517,16 @@ type TextInputSubmitEditingEventData  = {
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -11534,7 +11534,7 @@ type TextInputSubmitEditingEventData  = {
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -11542,7 +11542,7 @@ type TextInputSubmitEditingEventData  = {
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -11591,7 +11591,7 @@ type TextInputSubmitEditingEventData  = {
 -- |        This prop is commonly used with `ellipsizeMode`.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onLayout`
 -- |        Invoked on mount and layout changes with
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
@@ -11601,7 +11601,7 @@ type TextInputSubmitEditingEventData  = {
 -- |             *
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onPress`
 -- |        This function is called on press.
 -- |        Text intrinsically supports press handling with a default highlight state (which can be disabled with suppressHighlighting).
@@ -11671,22 +11671,22 @@ text_ children = text { children }
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -11694,7 +11694,7 @@ text_ children = text { children }
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -11702,10 +11702,10 @@ text_ children = text { children }
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -11737,7 +11737,7 @@ text_ children = text { children }
 -- |        align Toolbar content along well-known gridlines.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -11759,7 +11759,7 @@ text_ children = text { children }
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `logo`
 -- |        Sets the toolbar logo.
 -- | - `nativeID`
@@ -11781,10 +11781,10 @@ text_ children = text { children }
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onActionSelected`
 -- |        Callback that is called when an action is selected. The only
 -- |        argument that is passed to the callback is the position of the
@@ -11796,7 +11796,7 @@ text_ children = text { children }
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -11898,19 +11898,19 @@ text_ children = text { children }
 -- |        Sets the toolbar title color.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 
 type ToolbarAndroidProps  = 
   ( accessibilityActions :: (Array String)
@@ -12000,16 +12000,16 @@ toolbarAndroid_ children = toolbarAndroid { children }
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -12017,7 +12017,7 @@ toolbarAndroid_ children = toolbarAndroid { children }
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -12025,7 +12025,7 @@ toolbarAndroid_ children = toolbarAndroid { children }
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -12041,7 +12041,7 @@ toolbarAndroid_ children = toolbarAndroid { children }
 -- |        If true, disable all interactions for this component.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* TV preferred focus (see documentation for the View component).
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far your touch can start away from the button.
 -- |        This is added to pressRetentionOffset when moving off of the button.
@@ -12059,7 +12059,7 @@ toolbarAndroid_ children = toolbarAndroid { children }
 -- |              'no-hide-descendants' - The view is not important for accessibility, nor are any of its descendant views.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onBlur`
 -- |        When `accessible` is true (which is the default) this may be called when
 -- |        the OS-specific concept of "blur" occurs, meaning the element lost focus.
@@ -12075,7 +12075,7 @@ toolbarAndroid_ children = toolbarAndroid { children }
 -- |        {nativeEvent: {layout: {x, y, width, height}}}
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onPress`
 -- |        Called when the touch is released,
 -- |        but not if cancelled (e.g. by a scroll that steals the responder lock).
@@ -12102,7 +12102,7 @@ toolbarAndroid_ children = toolbarAndroid { children }
 -- |        pressMagnification: Defaults to 1.0.
 -- |        pressDuration: Defaults to 0.3.
 -- |        pressDelay: Defaults to 0.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `underlayColor`
 -- |        The color of the underlay that will show through when the touch is active.
 
@@ -12164,16 +12164,16 @@ touchableHighlight_ children = touchableHighlight { children }
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -12181,7 +12181,7 @@ touchableHighlight_ children = touchableHighlight { children }
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -12189,7 +12189,7 @@ touchableHighlight_ children = touchableHighlight { children }
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -12216,7 +12216,7 @@ touchableHighlight_ children = touchableHighlight { children }
 -- |        If true, disable all interactions for this component.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* TV preferred focus (see documentation for the View component).
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far your touch can start away from the button.
 -- |        This is added to pressRetentionOffset when moving off of the button.
@@ -12234,7 +12234,7 @@ touchableHighlight_ children = touchableHighlight { children }
 -- |              'no-hide-descendants' - The view is not important for accessibility, nor are any of its descendant views.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onBlur`
 -- |        When `accessible` is true (which is the default) this may be called when
 -- |        the OS-specific concept of "blur" occurs, meaning the element lost focus.
@@ -12248,7 +12248,7 @@ touchableHighlight_ children = touchableHighlight { children }
 -- |        {nativeEvent: {layout: {x, y, width, height}}}
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onPress`
 -- |        Called when the touch is released,
 -- |        but not if cancelled (e.g. by a scroll that steals the responder lock).
@@ -12273,7 +12273,7 @@ touchableHighlight_ children = touchableHighlight { children }
 -- |        pressMagnification: Defaults to 1.0.
 -- |        pressDuration: Defaults to 0.3.
 -- |        pressDelay: Defaults to 0.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 
 type TouchableNativeFeedbackProps  = 
   ( accessibilityComponentType :: String
@@ -12331,16 +12331,16 @@ touchableNativeFeedback_ children = touchableNativeFeedback { children }
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -12348,7 +12348,7 @@ touchableNativeFeedback_ children = touchableNativeFeedback { children }
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -12356,7 +12356,7 @@ touchableNativeFeedback_ children = touchableNativeFeedback { children }
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -12373,7 +12373,7 @@ touchableNativeFeedback_ children = touchableNativeFeedback { children }
 -- |        If true, disable all interactions for this component.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* TV preferred focus (see documentation for the View component).
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far your touch can start away from the button.
 -- |        This is added to pressRetentionOffset when moving off of the button.
@@ -12391,7 +12391,7 @@ touchableNativeFeedback_ children = touchableNativeFeedback { children }
 -- |              'no-hide-descendants' - The view is not important for accessibility, nor are any of its descendant views.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onBlur`
 -- |        When `accessible` is true (which is the default) this may be called when
 -- |        the OS-specific concept of "blur" occurs, meaning the element lost focus.
@@ -12405,7 +12405,7 @@ touchableNativeFeedback_ children = touchableNativeFeedback { children }
 -- |        {nativeEvent: {layout: {x, y, width, height}}}
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onPress`
 -- |        Called when the touch is released,
 -- |        but not if cancelled (e.g. by a scroll that steals the responder lock).
@@ -12430,7 +12430,7 @@ touchableNativeFeedback_ children = touchableNativeFeedback { children }
 -- |        pressMagnification: Defaults to 1.0.
 -- |        pressDuration: Defaults to 0.3.
 -- |        pressDelay: Defaults to 0.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 
 type TouchableOpacityProps  = 
   ( accessibilityComponentType :: String
@@ -12487,16 +12487,16 @@ touchableOpacity_ children = touchableOpacity { children }
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -12504,7 +12504,7 @@ touchableOpacity_ children = touchableOpacity { children }
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -12512,7 +12512,7 @@ touchableOpacity_ children = touchableOpacity { children }
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -12526,7 +12526,7 @@ touchableOpacity_ children = touchableOpacity { children }
 -- |        If true, disable all interactions for this component.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* TV preferred focus (see documentation for the View component).
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far your touch can start away from the button.
 -- |        This is added to pressRetentionOffset when moving off of the button.
@@ -12544,7 +12544,7 @@ touchableOpacity_ children = touchableOpacity { children }
 -- |              'no-hide-descendants' - The view is not important for accessibility, nor are any of its descendant views.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onBlur`
 -- |        When `accessible` is true (which is the default) this may be called when
 -- |        the OS-specific concept of "blur" occurs, meaning the element lost focus.
@@ -12558,7 +12558,7 @@ touchableOpacity_ children = touchableOpacity { children }
 -- |        {nativeEvent: {layout: {x, y, width, height}}}
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onPress`
 -- |        Called when the touch is released,
 -- |        but not if cancelled (e.g. by a scroll that steals the responder lock).
@@ -12583,7 +12583,7 @@ touchableOpacity_ children = touchableOpacity { children }
 -- |        pressMagnification: Defaults to 1.0.
 -- |        pressDuration: Defaults to 0.3.
 -- |        pressDelay: Defaults to 0.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 
 type TouchableWithoutFeedbackProps  = 
   ( accessibilityComponentType :: String
@@ -12647,22 +12647,22 @@ type ViewPagerAndroidOnPageSelectedEventData  = {
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -12670,7 +12670,7 @@ type ViewPagerAndroidOnPageSelectedEventData  = {
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -12678,10 +12678,10 @@ type ViewPagerAndroidOnPageSelectedEventData  = {
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -12691,7 +12691,7 @@ type ViewPagerAndroidOnPageSelectedEventData  = {
 -- |        Set this property to false to disable this optimization and ensure that this View exists in the native view hierarchy.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -12716,7 +12716,7 @@ type ViewPagerAndroidOnPageSelectedEventData  = {
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `keyboardDismissMode`
 -- |        Determines whether the keyboard gets dismissed in response to a drag.
 -- |           - 'none' (the default), drags do not dismiss the keyboard.
@@ -12738,16 +12738,16 @@ type ViewPagerAndroidOnPageSelectedEventData  = {
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onLayout`
 -- |        Invoked on mount and layout changes with
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -12858,19 +12858,19 @@ type ViewPagerAndroidOnPageSelectedEventData  = {
 -- |        Used to locate this view in end-to-end tests.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 
 type ViewPagerAndroidProps  = 
   ( accessibilityActions :: (Array String)
@@ -12951,22 +12951,22 @@ viewPagerAndroid_ children = viewPagerAndroid { children }
 -- | see <https://facebook.github.io/react-native/docs/view.html#props>
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -12974,7 +12974,7 @@ viewPagerAndroid_ children = viewPagerAndroid { children }
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -12982,10 +12982,10 @@ viewPagerAndroid_ children = viewPagerAndroid { children }
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -12995,7 +12995,7 @@ viewPagerAndroid_ children = viewPagerAndroid { children }
 -- |        Set this property to false to disable this optimization and ensure that this View exists in the native view hierarchy.
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -13017,7 +13017,7 @@ viewPagerAndroid_ children = viewPagerAndroid { children }
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `nativeID`
 -- |        Used to reference react managed views from native code.
 -- | - `needsOffscreenAlphaCompositing`
@@ -13035,16 +13035,16 @@ viewPagerAndroid_ children = viewPagerAndroid { children }
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onLayout`
 -- |        Invoked on mount and layout changes with
 -- |        {nativeEvent: { layout: {x, y, width, height}}}.
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMoveShouldSetResponder`
 -- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
 -- | - `onMoveShouldSetResponderCapture`
@@ -13129,19 +13129,19 @@ viewPagerAndroid_ children = viewPagerAndroid { children }
 -- |        Used to locate this view in end-to-end tests.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 
 type ViewProps  = 
   ( accessibilityActions :: (Array String)
@@ -13273,22 +13273,22 @@ type WebViewNativeConfig  = {
 -- | see <https://facebook.github.io/react-native/docs/webview.html#props>
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
 -- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
 -- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityElementsHidden`
 -- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
 -- |        are hidden to the screen reader.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityHint`
 -- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 -- | - `accessibilityIgnoresInvertColors`
 -- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityLabel`
 -- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
 -- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -13296,7 +13296,7 @@ type WebViewNativeConfig  = {
 -- |        Indicates to accessibility services whether the user should be notified when this view changes.
 -- |        Works for Android API >= 19 only.
 -- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android
+-- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
 -- | - `accessibilityStates`
@@ -13304,10 +13304,10 @@ type WebViewNativeConfig  = {
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessibilityViewIsModal`
 -- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
@@ -13327,7 +13327,7 @@ type WebViewNativeConfig  = {
 -- | - `bounces`
 -- |        Boolean value that determines whether the web view bounces
 -- |        when it reaches the edge of the content. The default value is `true`.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `collapsable`
 -- |        Views that are only used to layout their children or otherwise don't draw anything
 -- |        may be automatically removed from the native hierarchy as an optimization.
@@ -13358,7 +13358,7 @@ type WebViewNativeConfig  = {
 -- |        or not android
 -- | - `hasTVPreferredFocus`
 -- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `hitSlop`
 -- |        This defines how far a touch event can start away from the view.
 -- |        Typical interface guidelines recommend touch targets that are at least
@@ -13383,7 +13383,7 @@ type WebViewNativeConfig  = {
 -- | - `isTVSelectable`
 -- |        *(Apple TV only)* When set to true, this view will be focusable
 -- |        and navigable using the Apple TV remote.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `javaScriptEnabled`
 -- |        Used for android only, JS is enabled by default for WebView on iOS
 -- | - `mediaPlaybackRequiresUserAction`
@@ -13415,10 +13415,10 @@ type WebViewNativeConfig  = {
 -- | - `onAccessibilityAction`
 -- |        When `accessible` is true, the system will try to invoke this function
 -- |        when the user performs an accessibility custom action.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onError`
 -- |        Invoked when load fails
 -- | - `onLayout`
@@ -13432,7 +13432,7 @@ type WebViewNativeConfig  = {
 -- |        Invoked on load start
 -- | - `onMagicTap`
 -- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `onMessage`
 -- |        Invoked when window.postMessage is called from WebView.
 -- | - `onMoveShouldSetResponder`
@@ -13544,19 +13544,19 @@ type WebViewNativeConfig  = {
 -- |        Used to locate this view in end-to-end tests.
 -- | - `tvParallaxMagnification`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxProperties`
 -- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceX`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxShiftDistanceY`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `tvParallaxTiltAngle`
 -- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios
+-- |         __*platform* ios__
 -- | - `useWebKit`
 -- |        If `true`, use WKWebView instead of UIWebView.
 -- | - `userAgent`

@@ -346,7 +346,7 @@ const getJSDoc = (node: any) => {
 
               str += `${tag.tagName.escapedText} <${tag.comment.trim()}>\n`
             } else {
-              str += ` __*${tag.tagName.escapedText}* ${tag.comment.trim()}\n`
+              str += ` __*${tag.tagName.escapedText}* ${tag.comment.trim()}__\n`
             }
           }else if(tag.comment && tag.comment.trim()){
             str += tag.comment.trim() + "\n"
