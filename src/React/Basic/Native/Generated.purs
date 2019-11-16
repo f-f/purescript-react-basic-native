@@ -190,287 +190,18 @@ aRTText_ :: Array JSX -> JSX
 aRTText_ children = aRTText { children }
 
 
--- | see <https://facebook.github.io/react-native/docs/activityindicatorios.html#props>
--- | - `accessibilityActions`
--- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
--- | - `accessibilityComponentType`
--- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
--- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
--- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
--- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android__
--- | - `accessibilityElementsHidden`
--- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
--- |        are hidden to the screen reader.
--- |         __*platform* ios__
--- | - `accessibilityHint`
--- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
--- | - `accessibilityIgnoresInvertColors`
--- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios__
--- | - `accessibilityLabel`
--- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
--- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
--- | - `accessibilityLiveRegion`
--- |        Indicates to accessibility services whether the user should be notified when this view changes.
--- |        Works for Android API >= 19 only.
--- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android__
--- | - `accessibilityRole`
--- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
--- | - `accessibilityStates`
--- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
--- | - `accessibilityTraits`
--- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
--- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios__
--- | - `accessibilityViewIsModal`
--- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios__
--- | - `accessible`
--- |        When true, indicates that the view is an accessibility element.
--- |        By default, all the touchable elements are accessible.
--- | - `animating`
--- |        Whether to show the indicator (true, the default) or hide it (false).
--- | - `collapsable`
--- |        Views that are only used to layout their children or otherwise don't draw anything
--- |        may be automatically removed from the native hierarchy as an optimization.
--- |        Set this property to false to disable this optimization and ensure that this View exists in the native view hierarchy.
--- | - `color`
--- |        The foreground color of the spinner (default is gray).
--- | - `hasTVPreferredFocus`
--- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios__
--- | - `hidesWhenStopped`
--- |        Whether the indicator should hide when not animating (true by default).
--- | - `hitSlop`
--- |        This defines how far a touch event can start away from the view.
--- |        Typical interface guidelines recommend touch targets that are at least
--- |        30 - 40 points/density-independent pixels. If a Touchable view has
--- |        a height of 20 the touchable height can be extended to 40 with
--- |        hitSlop={{top: 10, bottom: 10, left: 0, right: 0}}
--- |        NOTE The touch area never extends past the parent view bounds and
--- |        the Z-index of sibling views always takes precedence if a touch
--- |        hits two overlapping views.
--- | - `importantForAccessibility`
--- |        Controls how view is important for accessibility which is if it fires accessibility events
--- |        and if it is reported to accessibility services that query the screen.
--- |        Works for Android only. See http://developer.android.com/reference/android/R.attr.html#importantForAccessibility for references.
--- |        Possible values:
--- |              'auto' - The system determines whether the view is important for accessibility - default (recommended).
--- |              'yes' - The view is important for accessibility.
--- |              'no' - The view is not important for accessibility.
--- |              'no-hide-descendants' - The view is not important for accessibility, nor are any of its descendant views.
--- | - `isTVSelectable`
--- |        *(Apple TV only)* When set to true, this view will be focusable
--- |        and navigable using the Apple TV remote.
--- |         __*platform* ios__
--- | - `nativeID`
--- |        Used to reference react managed views from native code.
--- | - `needsOffscreenAlphaCompositing`
--- |        Whether this view needs to rendered offscreen and composited with an alpha in order to preserve 100% correct colors and blending behavior.
--- |        The default (false) falls back to drawing the component and its children
--- |        with an alpha applied to the paint used to draw each element instead of rendering the full component offscreen and compositing it back with an alpha value.
--- |        This default may be noticeable and undesired in the case where the View you are setting an opacity on
--- |        has multiple overlapping elements (e.g. multiple overlapping Views, or text and a background).
--- |        Rendering offscreen to preserve correct alpha behavior is extremely expensive
--- |        and hard to debug for non-native developers, which is why it is not turned on by default.
--- |        If you do need to enable this property for an animation,
--- |        consider combining it with renderToHardwareTextureAndroid if the view contents are static (i.e. it doesn't need to be redrawn each frame).
--- |        If that property is enabled, this View will be rendered off-screen once,
--- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
--- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
--- | - `onAccessibilityTap`
--- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios__
--- | - `onLayout`
--- |        Invoked on mount and layout changes with
--- | - `onMagicTap`
--- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios__
--- | - `onMoveShouldSetResponder`
--- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
--- | - `onMoveShouldSetResponderCapture`
--- |        onStartShouldSetResponder and onMoveShouldSetResponder are called with a bubbling pattern,
--- |        where the deepest node is called first.
--- |        That means that the deepest component will become responder when multiple Views return true for *ShouldSetResponder handlers.
--- |        This is desirable in most cases, because it makes sure all controls and buttons are usable.
--- |        However, sometimes a parent will want to make sure that it becomes responder.
--- |        This can be handled by using the capture phase.
--- |        Before the responder system bubbles up from the deepest component,
--- |        it will do a capture phase, firing on*ShouldSetResponderCapture.
--- |        So if a parent View wants to prevent the child from becoming responder on a touch start,
--- |        it should have a onStartShouldSetResponderCapture handler which returns true.
--- | - `onResponderEnd`
--- |        If the View returns true and attempts to become the responder, one of the following will happen:
--- | - `onResponderGrant`
--- |        The View is now responding for touch events.
--- |        This is the time to highlight and show the user what is happening
--- | - `onResponderMove`
--- |        If the view is responding, the following handlers can be called:
--- |        The user is moving their finger
--- | - `onResponderReject`
--- |        Something else is the responder right now and will not release it
--- | - `onResponderRelease`
--- |        Fired at the end of the touch, ie "touchUp"
--- | - `onResponderTerminate`
--- |        The responder has been taken from the View.
--- |        Might be taken by other views after a call to onResponderTerminationRequest,
--- |        or might be taken by the OS without asking (happens with control center/ notification center on iOS)
--- | - `onResponderTerminationRequest`
--- |        Something else wants to become responder.
--- |        Should this view release the responder? Returning true allows release
--- | - `onStartShouldSetResponder`
--- |        A view can become the touch responder by implementing the correct negotiation methods.
--- |        There are two methods to ask the view if it wants to become responder:
--- |        Does this view want to become responder on the start of a touch?
--- | - `onStartShouldSetResponderCapture`
--- |        onStartShouldSetResponder and onMoveShouldSetResponder are called with a bubbling pattern,
--- |        where the deepest node is called first.
--- |        That means that the deepest component will become responder when multiple Views return true for *ShouldSetResponder handlers.
--- |        This is desirable in most cases, because it makes sure all controls and buttons are usable.
--- |        However, sometimes a parent will want to make sure that it becomes responder.
--- |        This can be handled by using the capture phase.
--- |        Before the responder system bubbles up from the deepest component,
--- |        it will do a capture phase, firing on*ShouldSetResponderCapture.
--- |        So if a parent View wants to prevent the child from becoming responder on a touch start,
--- |        it should have a onStartShouldSetResponderCapture handler which returns true.
--- | - `pointerEvents`
--- |        In the absence of auto property, none is much like CSS's none value. box-none is as if you had applied the CSS class:
--- |        .box-none {
--- |           pointer-events: none;
--- |        }
--- |        .box-none * {
--- |           pointer-events: all;
--- |        }
--- |        box-only is the equivalent of
--- |        .box-only {
--- |           pointer-events: all;
--- |        }
--- |        .box-only * {
--- |           pointer-events: none;
--- |        }
--- |        But since pointerEvents does not affect layout/appearance, and we are already deviating from the spec by adding additional modes,
--- |        we opt to not include pointerEvents on style. On some platforms, we would need to implement it as a className anyways. Using style or not is an implementation detail of the platform.
--- | - `removeClippedSubviews`
--- |        This is a special performance property exposed by RCTView and is useful for scrolling content when there are many subviews,
--- |        most of which are offscreen. For this property to be effective, it must be applied to a view that contains many subviews that extend outside its bound.
--- |        The subviews must also have overflow: hidden, as should the containing view (or one of its superviews).
--- | - `renderToHardwareTextureAndroid`
--- |        Whether this view should render itself (and all of its children) into a single hardware texture on the GPU.
--- |        On Android, this is useful for animations and interactions that only modify opacity, rotation, translation, and/or scale:
--- |        in those cases, the view doesn't have to be redrawn and display lists don't need to be re-executed. The texture can just be
--- |        re-used and re-composited with different parameters. The downside is that this can use up limited video memory, so this prop should be set back to false at the end of the interaction/animation.
--- | - `shouldRasterizeIOS`
--- |        Whether this view should be rendered as a bitmap before compositing.
--- |        On iOS, this is useful for animations and interactions that do not modify this component's dimensions nor its children;
--- |        for example, when translating the position of a static view, rasterization allows the renderer to reuse a cached bitmap of a static view
--- |        and quickly composite it during each frame.
--- |        Rasterization incurs an off-screen drawing pass and the bitmap consumes memory.
--- |        Test and measure when using this property.
--- | - `size`
--- |        Size of the indicator.
--- |        Small has a height of 20, large has a height of 36.
--- |        enum('small', 'large')
--- | - `testID`
--- |        Used to locate this view in end-to-end tests.
--- | - `tvParallaxMagnification`
--- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios__
--- | - `tvParallaxProperties`
--- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios__
--- | - `tvParallaxShiftDistanceX`
--- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios__
--- | - `tvParallaxShiftDistanceY`
--- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios__
--- | - `tvParallaxTiltAngle`
--- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios__
-
-type ActivityIndicatorIOSProps  = 
-  ( accessibilityActions :: (Array String)
-  ,  accessibilityComponentType :: String
-  ,  accessibilityElementsHidden :: Boolean
-  ,  accessibilityHint :: String
-  ,  accessibilityIgnoresInvertColors :: Boolean
-  ,  accessibilityLabel :: String
-  ,  accessibilityLiveRegion :: String
-  ,  accessibilityRole :: String
-  ,  accessibilityStates :: (Array String)
-  ,  accessibilityTraits :: (Array String)
-  ,  accessibilityViewIsModal :: Boolean
-  ,  accessible :: Boolean
-  ,  animating :: Boolean
-  ,  collapsable :: Boolean
-  ,  color :: String
-  ,  hasTVPreferredFocus :: Boolean
-  ,  hidesWhenStopped :: Boolean
-  ,  hitSlop :: Insets
-  ,  importantForAccessibility :: String
-  ,  isTVSelectable :: Boolean
-  ,  nativeID :: String
-  ,  needsOffscreenAlphaCompositing :: Boolean
-  ,  onAccessibilityAction :: (Effect Unit)
-  ,  onAccessibilityTap :: (Effect Unit)
-  ,  onLayout :: (EffectFn1 { nativeEvent :: { layout :: { x :: Number, y :: Number, width :: Number, height :: Number } } } Unit)
-  ,  onMagicTap :: (Effect Unit)
-  ,  onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
-  ,  onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  ,  onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
-  ,  onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
-  ,  onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
-  ,  onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
-  ,  onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
-  ,  onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
-  ,  onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
-  ,  onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
-  ,  onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
-  ,  onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  ,  onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
-  ,  onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
-  ,  onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
-  ,  onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
-  ,  onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
-  ,  pointerEvents :: String
-  ,  removeClippedSubviews :: Boolean
-  ,  renderToHardwareTextureAndroid :: Boolean
-  ,  shouldRasterizeIOS :: Boolean
-  ,  size :: String
-  ,  style :: CSS
-  ,  testID :: String
-  ,  tvParallaxMagnification :: Number
-  ,  tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
-  ,  tvParallaxShiftDistanceX :: Number
-  ,  tvParallaxShiftDistanceY :: Number
-  ,  tvParallaxTiltAngle :: Number
-  ,  key :: String
-  ,  children :: Array JSX
-  )
-
-
-activityIndicatorIOS
-  :: forall attrs attrs_  
-  . Union attrs attrs_ (ActivityIndicatorIOSProps  )
-  => Record attrs
-  -> JSX
-activityIndicatorIOS props = unsafeCreateNativeElement "ActivityIndicatorIOS" props
- 
-
-activityIndicatorIOS_ :: Array JSX -> JSX
-activityIndicatorIOS_ children = activityIndicatorIOS { children }
+type AccessibilityState  = {
+    busy  :: (Undefinable  Boolean)
+  , checked  :: (Undefinable  String)
+  , disabled  :: (Undefinable  Boolean)
+  , expanded  :: (Undefinable  Boolean)
+  , selected  :: (Undefinable  Boolean)
+}
 
 
 -- | see <https://facebook.github.io/react-native/docs/activityindicator.html#props>
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -496,8 +227,11 @@ activityIndicatorIOS_ children = activityIndicatorIOS { children }
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -558,9 +292,7 @@ activityIndicatorIOS_ children = activityIndicatorIOS { children }
 -- |        If that property is enabled, this View will be rendered off-screen once,
 -- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -673,7 +405,7 @@ activityIndicatorIOS_ children = activityIndicatorIOS { children }
 -- |         __*platform* ios__
 
 type ActivityIndicatorProps  = 
-  ( accessibilityActions :: (Array String)
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
   ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
@@ -681,6 +413,7 @@ type ActivityIndicatorProps  =
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
@@ -695,7 +428,7 @@ type ActivityIndicatorProps  =
   ,  isTVSelectable :: Boolean
   ,  nativeID :: String
   ,  needsOffscreenAlphaCompositing :: Boolean
-  ,  onAccessibilityAction :: (Effect Unit)
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   ,  onMagicTap :: (Effect Unit)
@@ -780,7 +513,6 @@ button props = unsafeCreateNativeElement "Button" props
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -806,8 +538,11 @@ button props = unsafeCreateNativeElement "Button" props
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -864,9 +599,7 @@ button props = unsafeCreateNativeElement "Button" props
 -- |        If that property is enabled, this View will be rendered off-screen once,
 -- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -981,7 +714,7 @@ button props = unsafeCreateNativeElement "Button" props
 -- |        The value of the checkbox. If true the checkbox will be turned on. Default value is false.
 
 type CheckBoxProps  = 
-  ( accessibilityActions :: (Array String)
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
   ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
@@ -989,6 +722,7 @@ type CheckBoxProps  =
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
@@ -1001,7 +735,7 @@ type CheckBoxProps  =
   ,  isTVSelectable :: Boolean
   ,  nativeID :: String
   ,  needsOffscreenAlphaCompositing :: Boolean
-  ,  onAccessibilityAction :: (Effect Unit)
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onChange :: (EffectFn1 Boolean Unit)
   ,  onLayout :: (EffectFn1 LayoutChangeEvent Unit)
@@ -1056,7 +790,6 @@ checkBox_ children = checkBox { children }
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -1082,8 +815,11 @@ checkBox_ children = checkBox { children }
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -1154,9 +890,7 @@ checkBox_ children = checkBox { children }
 -- |        If that property is enabled, this View will be rendered off-screen once,
 -- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -1273,7 +1007,7 @@ checkBox_ children = checkBox { children }
 -- |         __*platform* ios__
 
 type DatePickerIOSProps_optional  = 
-  ( accessibilityActions :: (Array String)
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
   ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
@@ -1281,6 +1015,7 @@ type DatePickerIOSProps_optional  =
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
@@ -1297,7 +1032,7 @@ type DatePickerIOSProps_optional  =
   ,  mode :: String
   ,  nativeID :: String
   ,  needsOffscreenAlphaCompositing :: Boolean
-  ,  onAccessibilityAction :: (Effect Unit)
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   ,  onMagicTap :: (Effect Unit)
@@ -1337,7 +1072,6 @@ type DatePickerIOSProps_optional  =
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -1363,8 +1097,11 @@ type DatePickerIOSProps_optional  =
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -1435,9 +1172,7 @@ type DatePickerIOSProps_optional  =
 -- |        If that property is enabled, this View will be rendered off-screen once,
 -- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -1574,7 +1309,6 @@ foreign import data DocumentSelectionState :: Type
 -- |  __*see* DrawerLayoutAndroid.android.js__
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -1600,8 +1334,11 @@ foreign import data DocumentSelectionState :: Type
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -1684,9 +1421,7 @@ foreign import data DocumentSelectionState :: Type
 -- |        If that property is enabled, this View will be rendered off-screen once,
 -- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -1818,7 +1553,7 @@ foreign import data DocumentSelectionState :: Type
 -- |         __*platform* ios__
 
 type DrawerLayoutAndroidProps_optional  = 
-  ( accessibilityActions :: (Array String)
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
   ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
@@ -1826,6 +1561,7 @@ type DrawerLayoutAndroidProps_optional  =
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
@@ -1842,7 +1578,7 @@ type DrawerLayoutAndroidProps_optional  =
   ,  keyboardDismissMode :: String
   ,  nativeID :: String
   ,  needsOffscreenAlphaCompositing :: Boolean
-  ,  onAccessibilityAction :: (Effect Unit)
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onDrawerClose :: (Effect Unit)
   ,  onDrawerOpen :: (Effect Unit)
@@ -1886,7 +1622,6 @@ type DrawerLayoutAndroidProps_optional  =
 -- |  __*see* DrawerLayoutAndroid.android.js__
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -1912,8 +1647,11 @@ type DrawerLayoutAndroidProps_optional  =
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -1996,9 +1734,7 @@ type DrawerLayoutAndroidProps_optional  =
 -- |        If that property is enabled, this View will be rendered off-screen once,
 -- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -2153,11 +1889,14 @@ type DrawerSlideEvent = NativeSyntheticEvent NativeTouchEvent
 -- |        Rendered when the list is empty.
 -- | - `ListFooterComponent`
 -- |        Rendered at the very end of the list.
+-- | - `ListFooterComponentStyle`
+-- |        Styling for internal View for ListFooterComponent
 -- | - `ListHeaderComponent`
 -- |        Rendered at the very beginning of the list.
+-- | - `ListHeaderComponentStyle`
+-- |        Styling for internal View for ListHeaderComponent
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -2183,8 +1922,11 @@ type DrawerSlideEvent = NativeSyntheticEvent NativeTouchEvent
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -2265,6 +2007,16 @@ type DrawerSlideEvent = NativeSyntheticEvent NativeTouchEvent
 -- | - `directionalLockEnabled`
 -- |        When true the ScrollView will try to lock to only vertical or horizontal
 -- |        scrolling while dragging.  The default value is false.
+-- | - `disableIntervalMomentum`
+-- |        When true, the scroll view stops on the next index (in relation to scroll position at release)
+-- |        regardless of how fast the gesture is. This can be used for horizontal pagination when the page
+-- |        is less than the width of the ScrollView. The default value is false.
+-- | - `disableScrollViewPanResponder`
+-- |        When true, the default JS pan responder on the ScrollView is disabled, and full control over
+-- |        touches inside the ScrollView is left to its child components. This is particularly useful
+-- |        if `snapToInterval` is enabled, since it does not follow typical touch patterns. Do not use
+-- |        this on regular ScrollView use cases without `snapToInterval` as it may cause unexpected
+-- |        touches to occur while scrolling. The default value is false.
 -- | - `disableVirtualization`
 -- |        DEPRECATED: Virtualization provides significant performance and memory optimizations, but fully
 -- |        unmounts react instances that are outside of the render window. You should only need to disable
@@ -2385,9 +2137,7 @@ type DrawerSlideEvent = NativeSyntheticEvent NativeTouchEvent
 -- |        Multiple columns can only be rendered with `horizontal={false}` and will zig-zag like a `flexWrap` layout.
 -- |        Items should all be the same height - masonry layouts are not supported.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -2631,8 +2381,10 @@ type FlatListProps_optional itemT =
   ( "ItemSeparatorComponent" :: JSX
   ,  "ListEmptyComponent" :: JSX
   ,  "ListFooterComponent" :: JSX
+  ,  "ListFooterComponentStyle" :: ViewStyle
   ,  "ListHeaderComponent" :: JSX
-  ,  accessibilityActions :: (Array String)
+  ,  "ListHeaderComponentStyle" :: ViewStyle
+  ,  accessibilityActions :: (Array ( { name :: String, label :: String }))
   ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
@@ -2640,6 +2392,7 @@ type FlatListProps_optional itemT =
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
@@ -2660,6 +2413,8 @@ type FlatListProps_optional itemT =
   ,  debug :: Boolean
   ,  decelerationRate :: String
   ,  directionalLockEnabled :: Boolean
+  ,  disableIntervalMomentum :: Boolean
+  ,  disableScrollViewPanResponder :: Boolean
   ,  disableVirtualization :: Boolean
   ,  endFillColor :: String
   ,  extraData :: Foreign
@@ -2688,7 +2443,7 @@ type FlatListProps_optional itemT =
   ,  needsOffscreenAlphaCompositing :: Boolean
   ,  nestedScrollEnabled :: Boolean
   ,  numColumns :: Number
-  ,  onAccessibilityAction :: (Effect Unit)
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onContentSizeChange :: (EffectFn2 Number Number Unit)
   ,  onEndReached :: ((EffectFn1 { distanceFromEnd :: Number } Unit))
@@ -2768,11 +2523,14 @@ type FlatListProps_optional itemT =
 -- |        Rendered when the list is empty.
 -- | - `ListFooterComponent`
 -- |        Rendered at the very end of the list.
+-- | - `ListFooterComponentStyle`
+-- |        Styling for internal View for ListFooterComponent
 -- | - `ListHeaderComponent`
 -- |        Rendered at the very beginning of the list.
+-- | - `ListHeaderComponentStyle`
+-- |        Styling for internal View for ListHeaderComponent
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -2798,8 +2556,11 @@ type FlatListProps_optional itemT =
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -2880,6 +2641,16 @@ type FlatListProps_optional itemT =
 -- | - `directionalLockEnabled`
 -- |        When true the ScrollView will try to lock to only vertical or horizontal
 -- |        scrolling while dragging.  The default value is false.
+-- | - `disableIntervalMomentum`
+-- |        When true, the scroll view stops on the next index (in relation to scroll position at release)
+-- |        regardless of how fast the gesture is. This can be used for horizontal pagination when the page
+-- |        is less than the width of the ScrollView. The default value is false.
+-- | - `disableScrollViewPanResponder`
+-- |        When true, the default JS pan responder on the ScrollView is disabled, and full control over
+-- |        touches inside the ScrollView is left to its child components. This is particularly useful
+-- |        if `snapToInterval` is enabled, since it does not follow typical touch patterns. Do not use
+-- |        this on regular ScrollView use cases without `snapToInterval` as it may cause unexpected
+-- |        touches to occur while scrolling. The default value is false.
 -- | - `disableVirtualization`
 -- |        DEPRECATED: Virtualization provides significant performance and memory optimizations, but fully
 -- |        unmounts react instances that are outside of the render window. You should only need to disable
@@ -3000,9 +2771,7 @@ type FlatListProps_optional itemT =
 -- |        Multiple columns can only be rendered with `horizontal={false}` and will zig-zag like a `flexWrap` layout.
 -- |        Items should all be the same height - masonry layouts are not supported.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -3261,6 +3030,8 @@ type GestureResponderEvent = NativeSyntheticEvent NativeTouchEvent
 
 
 
+-- | - `accessibilityActions`
+-- |        Provides an array of custom actions available for accessibility.
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -3286,11 +3057,17 @@ type GestureResponderEvent = NativeSyntheticEvent NativeTouchEvent
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
+-- |         __*platform* ios__
+-- | - `accessibilityViewIsModal`
+-- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
 -- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
@@ -3306,7 +3083,8 @@ type GestureResponderEvent = NativeSyntheticEvent NativeTouchEvent
 -- | - `defaultSource`
 -- |        A static image to display while downloading the final image off the network.
 -- | - `fadeDuration`
--- |        Duration of fade in animation.
+-- |        Duration of fade in animation in ms. Defaults to 300
+-- |         __*platform* android__
 -- | - `height`
 -- |        Required if loading images via 'uri' from drawable folder on Android
 -- |        Explanation: https://medium.com/@adamjacobb/react-native-performance-images-adf5843e120
@@ -3323,6 +3101,8 @@ type GestureResponderEvent = NativeSyntheticEvent NativeTouchEvent
 -- |        similarly to `source`, this property represents the resource used to render
 -- |        the loading indicator for the image, displayed until image is ready to be
 -- |        displayed, typically after when it got downloaded from network.
+-- | - `onAccessibilityAction`
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -3391,15 +3171,18 @@ type GestureResponderEvent = NativeSyntheticEvent NativeTouchEvent
 -- |        Explanation: https://medium.com/@adamjacobb/react-native-performance-images-adf5843e120
 
 type ImageBackgroundProps_optional  = 
-  ( accessibilityComponentType :: String
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
+  ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
   ,  accessibilityIgnoresInvertColors :: Boolean
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
+  ,  accessibilityViewIsModal :: Boolean
   ,  accessible :: Boolean
   ,  blurRadius :: Number
   ,  borderBottomLeftRadius :: Number
@@ -3414,6 +3197,7 @@ type ImageBackgroundProps_optional  =
   ,  imageStyle :: CSS
   ,  importantForAccessibility :: String
   ,  loadingIndicatorSource :: ImageURISource
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onError :: (EffectFn1 (NativeSyntheticEvent ImageErrorEventData) Unit)
   ,  onLayout :: (EffectFn1 LayoutChangeEvent Unit)
@@ -3434,6 +3218,8 @@ type ImageBackgroundProps_optional  =
   )
 
 
+-- | - `accessibilityActions`
+-- |        Provides an array of custom actions available for accessibility.
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -3459,11 +3245,17 @@ type ImageBackgroundProps_optional  =
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
+-- |         __*platform* ios__
+-- | - `accessibilityViewIsModal`
+-- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
 -- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
@@ -3479,7 +3271,8 @@ type ImageBackgroundProps_optional  =
 -- | - `defaultSource`
 -- |        A static image to display while downloading the final image off the network.
 -- | - `fadeDuration`
--- |        Duration of fade in animation.
+-- |        Duration of fade in animation in ms. Defaults to 300
+-- |         __*platform* android__
 -- | - `height`
 -- |        Required if loading images via 'uri' from drawable folder on Android
 -- |        Explanation: https://medium.com/@adamjacobb/react-native-performance-images-adf5843e120
@@ -3496,6 +3289,8 @@ type ImageBackgroundProps_optional  =
 -- |        similarly to `source`, this property represents the resource used to render
 -- |        the loading indicator for the image, displayed until image is ready to be
 -- |        displayed, typically after when it got downloaded from network.
+-- | - `onAccessibilityAction`
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -3595,6 +3390,8 @@ type ImageProgressEventDataIOS  = {
 
 
 
+-- | - `accessibilityActions`
+-- |        Provides an array of custom actions available for accessibility.
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -3620,11 +3417,17 @@ type ImageProgressEventDataIOS  = {
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
+-- |         __*platform* ios__
+-- | - `accessibilityViewIsModal`
+-- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
 -- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
@@ -3640,7 +3443,8 @@ type ImageProgressEventDataIOS  = {
 -- | - `defaultSource`
 -- |        A static image to display while downloading the final image off the network.
 -- | - `fadeDuration`
--- |        Duration of fade in animation.
+-- |        Duration of fade in animation in ms. Defaults to 300
+-- |         __*platform* android__
 -- | - `height`
 -- |        Required if loading images via 'uri' from drawable folder on Android
 -- |        Explanation: https://medium.com/@adamjacobb/react-native-performance-images-adf5843e120
@@ -3657,6 +3461,8 @@ type ImageProgressEventDataIOS  = {
 -- |        similarly to `source`, this property represents the resource used to render
 -- |        the loading indicator for the image, displayed until image is ready to be
 -- |        displayed, typically after when it got downloaded from network.
+-- | - `onAccessibilityAction`
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -3727,15 +3533,18 @@ type ImageProgressEventDataIOS  = {
 -- |        Explanation: https://medium.com/@adamjacobb/react-native-performance-images-adf5843e120
 
 type ImageProps_optional  = 
-  ( accessibilityComponentType :: String
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
+  ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
   ,  accessibilityIgnoresInvertColors :: Boolean
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
+  ,  accessibilityViewIsModal :: Boolean
   ,  accessible :: Boolean
   ,  blurRadius :: Number
   ,  borderBottomLeftRadius :: Number
@@ -3749,6 +3558,7 @@ type ImageProps_optional  =
   ,  height :: Number
   ,  importantForAccessibility :: String
   ,  loadingIndicatorSource :: ImageURISource
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onError :: (EffectFn1 (NativeSyntheticEvent ImageErrorEventData) Unit)
   ,  onLayout :: (EffectFn1 LayoutChangeEvent Unit)
@@ -3769,6 +3579,8 @@ type ImageProps_optional  =
   )
 
 
+-- | - `accessibilityActions`
+-- |        Provides an array of custom actions available for accessibility.
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -3794,11 +3606,17 @@ type ImageProps_optional  =
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
+-- |         __*platform* ios__
+-- | - `accessibilityViewIsModal`
+-- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
 -- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
@@ -3814,7 +3632,8 @@ type ImageProps_optional  =
 -- | - `defaultSource`
 -- |        A static image to display while downloading the final image off the network.
 -- | - `fadeDuration`
--- |        Duration of fade in animation.
+-- |        Duration of fade in animation in ms. Defaults to 300
+-- |         __*platform* android__
 -- | - `height`
 -- |        Required if loading images via 'uri' from drawable folder on Android
 -- |        Explanation: https://medium.com/@adamjacobb/react-native-performance-images-adf5843e120
@@ -3831,6 +3650,8 @@ type ImageProps_optional  =
 -- |        similarly to `source`, this property represents the resource used to render
 -- |        the loading indicator for the image, displayed until image is ready to be
 -- |        displayed, typically after when it got downloaded from network.
+-- | - `onAccessibilityAction`
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -3963,7 +3784,6 @@ type Insets  = {
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -3989,8 +3809,11 @@ type Insets  = {
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -4053,9 +3876,7 @@ type Insets  = {
 -- |        If that property is enabled, this View will be rendered off-screen once,
 -- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -4164,7 +3985,7 @@ type Insets  = {
 -- |         __*platform* ios__
 
 type KeyboardAvoidingViewProps  = 
-  ( accessibilityActions :: (Array String)
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
   ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
@@ -4172,6 +3993,7 @@ type KeyboardAvoidingViewProps  =
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
@@ -4187,7 +4009,7 @@ type KeyboardAvoidingViewProps  =
   ,  keyboardVerticalOffset :: Number
   ,  nativeID :: String
   ,  needsOffscreenAlphaCompositing :: Boolean
-  ,  onAccessibilityAction :: (Effect Unit)
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   ,  onMagicTap :: (Effect Unit)
@@ -4262,7 +4084,6 @@ foreign import data ListViewDataSource :: Type
 -- | see <https://facebook.github.io/react-native/docs/listview.html#props>
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -4288,8 +4109,11 @@ foreign import data ListViewDataSource :: Type
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -4364,6 +4188,16 @@ foreign import data ListViewDataSource :: Type
 -- | - `directionalLockEnabled`
 -- |        When true the ScrollView will try to lock to only vertical or horizontal
 -- |        scrolling while dragging.  The default value is false.
+-- | - `disableIntervalMomentum`
+-- |        When true, the scroll view stops on the next index (in relation to scroll position at release)
+-- |        regardless of how fast the gesture is. This can be used for horizontal pagination when the page
+-- |        is less than the width of the ScrollView. The default value is false.
+-- | - `disableScrollViewPanResponder`
+-- |        When true, the default JS pan responder on the ScrollView is disabled, and full control over
+-- |        touches inside the ScrollView is left to its child components. This is particularly useful
+-- |        if `snapToInterval` is enabled, since it does not follow typical touch patterns. Do not use
+-- |        this on regular ScrollView use cases without `snapToInterval` as it may cause unexpected
+-- |        touches to occur while scrolling. The default value is false.
 -- | - `enableEmptySections`
 -- |        Flag indicating whether empty section headers should be rendered.
 -- |        In the future release empty section headers will be rendered by
@@ -4453,9 +4287,7 @@ foreign import data ListViewDataSource :: Type
 -- | - `nestedScrollEnabled`
 -- |        Enables nested scrolling for Android API level 21+. Nested scrolling is supported by default on iOS.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -4712,7 +4544,7 @@ foreign import data ListViewDataSource :: Type
 -- |        The current scale of the scroll view content. The default value is 1.0.
 
 type ListViewProps_optional  = 
-  ( accessibilityActions :: (Array String)
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
   ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
@@ -4720,6 +4552,7 @@ type ListViewProps_optional  =
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
@@ -4738,6 +4571,8 @@ type ListViewProps_optional  =
   ,  contentOffset :: PointPropType
   ,  decelerationRate :: String
   ,  directionalLockEnabled :: Boolean
+  ,  disableIntervalMomentum :: Boolean
+  ,  disableScrollViewPanResponder :: Boolean
   ,  enableEmptySections :: Boolean
   ,  endFillColor :: String
   ,  hasTVPreferredFocus :: Boolean
@@ -4755,7 +4590,7 @@ type ListViewProps_optional  =
   ,  nativeID :: String
   ,  needsOffscreenAlphaCompositing :: Boolean
   ,  nestedScrollEnabled :: Boolean
-  ,  onAccessibilityAction :: (Effect Unit)
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onChangeVisibleRows :: (EffectFn2 (Array (Object Foreign)) (Array (Object Foreign)) Unit)
   ,  onContentSizeChange :: (EffectFn2 Number Number Unit)
@@ -4830,7 +4665,6 @@ type ListViewProps_optional  =
 -- | see <https://facebook.github.io/react-native/docs/listview.html#props>
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -4856,8 +4690,11 @@ type ListViewProps_optional  =
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -4932,6 +4769,16 @@ type ListViewProps_optional  =
 -- | - `directionalLockEnabled`
 -- |        When true the ScrollView will try to lock to only vertical or horizontal
 -- |        scrolling while dragging.  The default value is false.
+-- | - `disableIntervalMomentum`
+-- |        When true, the scroll view stops on the next index (in relation to scroll position at release)
+-- |        regardless of how fast the gesture is. This can be used for horizontal pagination when the page
+-- |        is less than the width of the ScrollView. The default value is false.
+-- | - `disableScrollViewPanResponder`
+-- |        When true, the default JS pan responder on the ScrollView is disabled, and full control over
+-- |        touches inside the ScrollView is left to its child components. This is particularly useful
+-- |        if `snapToInterval` is enabled, since it does not follow typical touch patterns. Do not use
+-- |        this on regular ScrollView use cases without `snapToInterval` as it may cause unexpected
+-- |        touches to occur while scrolling. The default value is false.
 -- | - `enableEmptySections`
 -- |        Flag indicating whether empty section headers should be rendered.
 -- |        In the future release empty section headers will be rendered by
@@ -5021,9 +4868,7 @@ type ListViewProps_optional  =
 -- | - `nestedScrollEnabled`
 -- |        Enables nested scrolling for Android API level 21+. Nested scrolling is supported by default on iOS.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -5297,7 +5142,6 @@ listView props = unsafeCreateNativeElement "ListView" props
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -5323,8 +5167,11 @@ listView props = unsafeCreateNativeElement "ListView" props
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -5379,9 +5226,7 @@ listView props = unsafeCreateNativeElement "ListView" props
 -- |        If that property is enabled, this View will be rendered off-screen once,
 -- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -5490,7 +5335,7 @@ listView props = unsafeCreateNativeElement "ListView" props
 -- |         __*platform* ios__
 
 type MaskedViewIOSProps_optional  = 
-  ( accessibilityActions :: (Array String)
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
   ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
@@ -5498,6 +5343,7 @@ type MaskedViewIOSProps_optional  =
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
@@ -5509,7 +5355,7 @@ type MaskedViewIOSProps_optional  =
   ,  isTVSelectable :: Boolean
   ,  nativeID :: String
   ,  needsOffscreenAlphaCompositing :: Boolean
-  ,  onAccessibilityAction :: (Effect Unit)
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   ,  onMagicTap :: (Effect Unit)
@@ -5548,7 +5394,6 @@ type MaskedViewIOSProps_optional  =
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -5574,8 +5419,11 @@ type MaskedViewIOSProps_optional  =
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -5630,9 +5478,7 @@ type MaskedViewIOSProps_optional  =
 -- |        If that property is enabled, this View will be rendered off-screen once,
 -- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -5810,15 +5656,6 @@ newtype NativeTouchEvent = NativeTouchEvent {
 }
 
 
-type NavState  = {
-    canGoBack  :: (Undefinable  Boolean)
-  , canGoForward  :: (Undefinable  Boolean)
-  , loading  :: (Undefinable  Boolean)
-  , title  :: (Undefinable  String)
-  , url  :: (Undefinable  String)
-}
-
-
 
 -- | - `barTintColor`
 -- |        The default background color of the navigation bar.
@@ -5935,7 +5772,6 @@ pickerIOSItem_ children = pickerIOSItem { children }
 -- |  __*see* PickerIOS.ios.js__
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -5961,8 +5797,11 @@ pickerIOSItem_ children = pickerIOSItem { children }
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -6017,9 +5856,7 @@ pickerIOSItem_ children = pickerIOSItem { children }
 -- |        If that property is enabled, this View will be rendered off-screen once,
 -- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -6128,7 +5965,7 @@ pickerIOSItem_ children = pickerIOSItem { children }
 -- |         __*platform* ios__
 
 type PickerIOSProps  = 
-  ( accessibilityActions :: (Array String)
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
   ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
@@ -6136,6 +5973,7 @@ type PickerIOSProps  =
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
@@ -6148,7 +5986,7 @@ type PickerIOSProps  =
   ,  itemStyle :: CSS
   ,  nativeID :: String
   ,  needsOffscreenAlphaCompositing :: Boolean
-  ,  onAccessibilityAction :: (Effect Unit)
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   ,  onMagicTap :: (Effect Unit)
@@ -6229,7 +6067,6 @@ pickerItem props = unsafeCreateNativeElement "PickerItem" props
 -- |  __*see* Picker.js__
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -6255,8 +6092,11 @@ pickerItem props = unsafeCreateNativeElement "PickerItem" props
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -6323,9 +6163,7 @@ pickerItem props = unsafeCreateNativeElement "PickerItem" props
 -- |        If that property is enabled, this View will be rendered off-screen once,
 -- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -6447,7 +6285,7 @@ pickerItem props = unsafeCreateNativeElement "PickerItem" props
 -- |         __*platform* ios__
 
 type PickerProps  = 
-  ( accessibilityActions :: (Array String)
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
   ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
@@ -6455,6 +6293,7 @@ type PickerProps  =
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
@@ -6469,7 +6308,7 @@ type PickerProps  =
   ,  mode :: String
   ,  nativeID :: String
   ,  needsOffscreenAlphaCompositing :: Boolean
-  ,  onAccessibilityAction :: (Effect Unit)
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   ,  onMagicTap :: (Effect Unit)
@@ -6532,7 +6371,6 @@ type PointPropType  = {
 -- |  __*see* ProgressBarAndroid.android.js__
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -6558,8 +6396,11 @@ type PointPropType  = {
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -6570,6 +6411,8 @@ type PointPropType  = {
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
+-- | - `animating`
+-- |        Whether to show the ProgressBar (true, the default) or hide it (false).
 -- | - `collapsable`
 -- |        Views that are only used to layout their children or otherwise don't draw anything
 -- |        may be automatically removed from the native hierarchy as an optimization.
@@ -6619,9 +6462,7 @@ type PointPropType  = {
 -- |        If that property is enabled, this View will be rendered off-screen once,
 -- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -6741,7 +6582,7 @@ type PointPropType  = {
 -- |         __*platform* ios__
 
 type ProgressBarAndroidProps  = 
-  ( accessibilityActions :: (Array String)
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
   ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
@@ -6749,10 +6590,12 @@ type ProgressBarAndroidProps  =
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
   ,  accessible :: Boolean
+  ,  animating :: Boolean
   ,  collapsable :: Boolean
   ,  color :: String
   ,  hasTVPreferredFocus :: Boolean
@@ -6762,7 +6605,7 @@ type ProgressBarAndroidProps  =
   ,  isTVSelectable :: Boolean
   ,  nativeID :: String
   ,  needsOffscreenAlphaCompositing :: Boolean
-  ,  onAccessibilityAction :: (Effect Unit)
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   ,  onMagicTap :: (Effect Unit)
@@ -6817,7 +6660,6 @@ progressBarAndroid_ children = progressBarAndroid { children }
 -- |  __*see* ProgressViewIOS.ios.js__
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -6843,8 +6685,11 @@ progressBarAndroid_ children = progressBarAndroid { children }
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -6899,9 +6744,7 @@ progressBarAndroid_ children = progressBarAndroid { children }
 -- |        If that property is enabled, this View will be rendered off-screen once,
 -- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -7022,7 +6865,7 @@ progressBarAndroid_ children = progressBarAndroid { children }
 -- |         __*platform* ios__
 
 type ProgressViewIOSProps  = 
-  ( accessibilityActions :: (Array String)
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
   ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
@@ -7030,6 +6873,7 @@ type ProgressViewIOSProps  =
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
@@ -7041,7 +6885,7 @@ type ProgressViewIOSProps  =
   ,  isTVSelectable :: Boolean
   ,  nativeID :: String
   ,  needsOffscreenAlphaCompositing :: Boolean
-  ,  onAccessibilityAction :: (Effect Unit)
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   ,  onMagicTap :: (Effect Unit)
@@ -7099,7 +6943,6 @@ progressViewIOS_ children = progressViewIOS { children }
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -7125,8 +6968,11 @@ progressViewIOS_ children = progressViewIOS { children }
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -7199,6 +7045,16 @@ progressViewIOS_ children = progressViewIOS { children }
 -- | - `directionalLockEnabled`
 -- |        When true the ScrollView will try to lock to only vertical or horizontal
 -- |        scrolling while dragging.  The default value is false.
+-- | - `disableIntervalMomentum`
+-- |        When true, the scroll view stops on the next index (in relation to scroll position at release)
+-- |        regardless of how fast the gesture is. This can be used for horizontal pagination when the page
+-- |        is less than the width of the ScrollView. The default value is false.
+-- | - `disableScrollViewPanResponder`
+-- |        When true, the default JS pan responder on the ScrollView is disabled, and full control over
+-- |        touches inside the ScrollView is left to its child components. This is particularly useful
+-- |        if `snapToInterval` is enabled, since it does not follow typical touch patterns. Do not use
+-- |        this on regular ScrollView use cases without `snapToInterval` as it may cause unexpected
+-- |        touches to occur while scrolling. The default value is false.
 -- | - `endFillColor`
 -- |        Sometimes a scrollview takes up more space than its content fills.
 -- |        When this is the case, this prop will fill the rest of the
@@ -7278,9 +7134,7 @@ progressViewIOS_ children = progressViewIOS { children }
 -- | - `nestedScrollEnabled`
 -- |        Enables nested scrolling for Android API level 21+. Nested scrolling is supported by default on iOS.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -7480,7 +7334,7 @@ progressViewIOS_ children = progressViewIOS { children }
 -- |        The current scale of the scroll view content. The default value is 1.0.
 
 type RecyclerViewBackedScrollViewProps  = 
-  ( accessibilityActions :: (Array String)
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
   ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
@@ -7488,6 +7342,7 @@ type RecyclerViewBackedScrollViewProps  =
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
@@ -7506,6 +7361,8 @@ type RecyclerViewBackedScrollViewProps  =
   ,  contentOffset :: PointPropType
   ,  decelerationRate :: String
   ,  directionalLockEnabled :: Boolean
+  ,  disableIntervalMomentum :: Boolean
+  ,  disableScrollViewPanResponder :: Boolean
   ,  endFillColor :: String
   ,  hasTVPreferredFocus :: Boolean
   ,  hitSlop :: Insets
@@ -7521,7 +7378,7 @@ type RecyclerViewBackedScrollViewProps  =
   ,  nativeID :: String
   ,  needsOffscreenAlphaCompositing :: Boolean
   ,  nestedScrollEnabled :: Boolean
-  ,  onAccessibilityAction :: (Effect Unit)
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onContentSizeChange :: (EffectFn2 Number Number Unit)
   ,  onLayout :: (EffectFn1 LayoutChangeEvent Unit)
@@ -7598,7 +7455,6 @@ recyclerViewBackedScrollView_ children = recyclerViewBackedScrollView { children
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -7624,8 +7480,11 @@ recyclerViewBackedScrollView_ children = recyclerViewBackedScrollView { children
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -7684,9 +7543,7 @@ recyclerViewBackedScrollView_ children = recyclerViewBackedScrollView { children
 -- |        If that property is enabled, this View will be rendered off-screen once,
 -- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -7812,7 +7669,7 @@ recyclerViewBackedScrollView_ children = recyclerViewBackedScrollView { children
 -- |         __*platform* ios__
 
 type RefreshControlProps_optional  = 
-  ( accessibilityActions :: (Array String)
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
   ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
@@ -7820,6 +7677,7 @@ type RefreshControlProps_optional  =
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
@@ -7833,7 +7691,7 @@ type RefreshControlProps_optional  =
   ,  isTVSelectable :: Boolean
   ,  nativeID :: String
   ,  needsOffscreenAlphaCompositing :: Boolean
-  ,  onAccessibilityAction :: (Effect Unit)
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   ,  onMagicTap :: (Effect Unit)
@@ -7879,7 +7737,6 @@ type RefreshControlProps_optional  =
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -7905,8 +7762,11 @@ type RefreshControlProps_optional  =
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -7965,9 +7825,7 @@ type RefreshControlProps_optional  =
 -- |        If that property is enabled, this View will be rendered off-screen once,
 -- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -8124,7 +7982,6 @@ type Route  = {
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -8150,8 +8007,11 @@ type Route  = {
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -8224,6 +8084,16 @@ type Route  = {
 -- | - `directionalLockEnabled`
 -- |        When true the ScrollView will try to lock to only vertical or horizontal
 -- |        scrolling while dragging.  The default value is false.
+-- | - `disableIntervalMomentum`
+-- |        When true, the scroll view stops on the next index (in relation to scroll position at release)
+-- |        regardless of how fast the gesture is. This can be used for horizontal pagination when the page
+-- |        is less than the width of the ScrollView. The default value is false.
+-- | - `disableScrollViewPanResponder`
+-- |        When true, the default JS pan responder on the ScrollView is disabled, and full control over
+-- |        touches inside the ScrollView is left to its child components. This is particularly useful
+-- |        if `snapToInterval` is enabled, since it does not follow typical touch patterns. Do not use
+-- |        this on regular ScrollView use cases without `snapToInterval` as it may cause unexpected
+-- |        touches to occur while scrolling. The default value is false.
 -- | - `endFillColor`
 -- |        Sometimes a scrollview takes up more space than its content fills.
 -- |        When this is the case, this prop will fill the rest of the
@@ -8303,9 +8173,7 @@ type Route  = {
 -- | - `nestedScrollEnabled`
 -- |        Enables nested scrolling for Android API level 21+. Nested scrolling is supported by default on iOS.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -8505,7 +8373,7 @@ type Route  = {
 -- |        The current scale of the scroll view content. The default value is 1.0.
 
 type ScrollViewProps  = 
-  ( accessibilityActions :: (Array String)
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
   ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
@@ -8513,6 +8381,7 @@ type ScrollViewProps  =
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
@@ -8531,6 +8400,8 @@ type ScrollViewProps  =
   ,  contentOffset :: PointPropType
   ,  decelerationRate :: String
   ,  directionalLockEnabled :: Boolean
+  ,  disableIntervalMomentum :: Boolean
+  ,  disableScrollViewPanResponder :: Boolean
   ,  endFillColor :: String
   ,  hasTVPreferredFocus :: Boolean
   ,  hitSlop :: Insets
@@ -8546,7 +8417,7 @@ type ScrollViewProps  =
   ,  nativeID :: String
   ,  needsOffscreenAlphaCompositing :: Boolean
   ,  nestedScrollEnabled :: Boolean
-  ,  onAccessibilityAction :: (Effect Unit)
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onContentSizeChange :: (EffectFn2 Number Number Unit)
   ,  onLayout :: (EffectFn1 LayoutChangeEvent Unit)
@@ -8623,7 +8494,6 @@ scrollView_ children = scrollView { children }
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -8649,8 +8519,11 @@ scrollView_ children = scrollView { children }
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -8710,9 +8583,7 @@ scrollView_ children = scrollView { children }
 -- |        If that property is enabled, this View will be rendered off-screen once,
 -- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -8832,7 +8703,7 @@ scrollView_ children = scrollView { children }
 -- |        The labels for the control's segment buttons, in order.
 
 type SegmentedControlIOSProps  = 
-  ( accessibilityActions :: (Array String)
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
   ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
@@ -8840,6 +8711,7 @@ type SegmentedControlIOSProps  =
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
@@ -8853,7 +8725,7 @@ type SegmentedControlIOSProps  =
   ,  momentary :: Boolean
   ,  nativeID :: String
   ,  needsOffscreenAlphaCompositing :: Boolean
-  ,  onAccessibilityAction :: (Effect Unit)
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onChange :: (EffectFn1 (NativeSyntheticEvent NativeSegmentedControlIOSChangeEvent) Unit)
   ,  onLayout :: (EffectFn1 LayoutChangeEvent Unit)
@@ -8910,7 +8782,6 @@ segmentedControlIOS_ children = segmentedControlIOS { children }
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -8936,8 +8807,11 @@ segmentedControlIOS_ children = segmentedControlIOS { children }
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -9011,9 +8885,7 @@ segmentedControlIOS_ children = segmentedControlIOS { children }
 -- |        If that property is enabled, this View will be rendered off-screen once,
 -- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -9144,7 +9016,7 @@ segmentedControlIOS_ children = segmentedControlIOS { children }
 -- |        the value during dragging.
 
 type SliderProps  = 
-  ( accessibilityActions :: (Array String)
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
   ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
@@ -9152,6 +9024,7 @@ type SliderProps  =
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
@@ -9170,7 +9043,7 @@ type SliderProps  =
   ,  minimumValue :: Number
   ,  nativeID :: String
   ,  needsOffscreenAlphaCompositing :: Boolean
-  ,  onAccessibilityAction :: (Effect Unit)
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   ,  onMagicTap :: (Effect Unit)
@@ -9229,7 +9102,6 @@ slider_ children = slider { children }
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -9255,8 +9127,11 @@ slider_ children = slider { children }
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -9311,9 +9186,7 @@ slider_ children = slider { children }
 -- |        If that property is enabled, this View will be rendered off-screen once,
 -- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -9422,7 +9295,7 @@ slider_ children = slider { children }
 -- |         __*platform* ios__
 
 type SnapshotViewIOSProps_optional  = 
-  ( accessibilityActions :: (Array String)
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
   ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
@@ -9430,6 +9303,7 @@ type SnapshotViewIOSProps_optional  =
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
@@ -9441,7 +9315,7 @@ type SnapshotViewIOSProps_optional  =
   ,  isTVSelectable :: Boolean
   ,  nativeID :: String
   ,  needsOffscreenAlphaCompositing :: Boolean
-  ,  onAccessibilityAction :: (Effect Unit)
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   ,  onMagicTap :: (Effect Unit)
@@ -9480,7 +9354,6 @@ type SnapshotViewIOSProps_optional  =
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -9506,8 +9379,11 @@ type SnapshotViewIOSProps_optional  =
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -9562,9 +9438,7 @@ type SnapshotViewIOSProps_optional  =
 -- |        If that property is enabled, this View will be rendered off-screen once,
 -- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -9692,6 +9566,7 @@ snapshotViewIOS props = unsafeCreateNativeElement "SnapshotViewIOS" props
 -- |        animated. Supported for backgroundColor, barStyle and hidden.
 -- | - `backgroundColor`
 -- |        The background color of the status bar.
+-- |         __*platform* android__
 -- | - `barStyle`
 -- |        Sets the color of the status bar text.
 -- | - `hidden`
@@ -9775,7 +9650,6 @@ swipeableListView props = unsafeCreateNativeElement "SwipeableListView" props
 -- | https://facebook.github.io/react-native/docs/switchios.html#props
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -9801,8 +9675,11 @@ swipeableListView props = unsafeCreateNativeElement "SwipeableListView" props
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -9859,9 +9736,7 @@ swipeableListView props = unsafeCreateNativeElement "SwipeableListView" props
 -- |        If that property is enabled, this View will be rendered off-screen once,
 -- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -9980,7 +9855,7 @@ swipeableListView props = unsafeCreateNativeElement "SwipeableListView" props
 -- |        The value of the switch, if true the switch will be turned on. Default value is false.
 
 type SwitchIOSProps  = 
-  ( accessibilityActions :: (Array String)
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
   ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
@@ -9988,6 +9863,7 @@ type SwitchIOSProps  =
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
@@ -10000,7 +9876,7 @@ type SwitchIOSProps  =
   ,  isTVSelectable :: Boolean
   ,  nativeID :: String
   ,  needsOffscreenAlphaCompositing :: Boolean
-  ,  onAccessibilityAction :: (Effect Unit)
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   ,  onMagicTap :: (Effect Unit)
@@ -10057,7 +9933,6 @@ switchIOS_ children = switchIOS { children }
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -10083,8 +9958,11 @@ switchIOS_ children = switchIOS { children }
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -10145,9 +10023,7 @@ switchIOS_ children = switchIOS { children }
 -- |        If that property is enabled, this View will be rendered off-screen once,
 -- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -10206,6 +10082,7 @@ switchIOS_ children = switchIOS { children }
 -- |        it should have a onStartShouldSetResponderCapture handler which returns true.
 -- | - `onTintColor`
 -- |        Background color when the switch is turned on.
+-- |         __*deprecated* use trackColor instead__
 -- | - `onValueChange`
 -- |        Invoked with the new value when the value changes.
 -- | - `pointerEvents`
@@ -10247,8 +10124,10 @@ switchIOS_ children = switchIOS { children }
 -- |        Color of the foreground switch grip.
 -- | - `thumbTintColor`
 -- |        Color of the foreground switch grip.
+-- |         __*deprecated* use thumbColor instead__
 -- | - `tintColor`
 -- |        Background color when the switch is turned off.
+-- |         __*deprecated* use trackColor instead__
 -- | - `trackColor`
 -- |        Custom colors for the switch track
 -- |        Color when false and color when true
@@ -10272,7 +10151,7 @@ switchIOS_ children = switchIOS { children }
 -- |        Default value is false.
 
 type SwitchProps  = 
-  ( accessibilityActions :: (Array String)
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
   ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
@@ -10280,6 +10159,7 @@ type SwitchProps  =
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
@@ -10293,7 +10173,7 @@ type SwitchProps  =
   ,  isTVSelectable :: Boolean
   ,  nativeID :: String
   ,  needsOffscreenAlphaCompositing :: Boolean
-  ,  onAccessibilityAction :: (Effect Unit)
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   ,  onMagicTap :: (Effect Unit)
@@ -10352,7 +10232,6 @@ switch_ children = switch { children }
 -- | see <https://facebook.github.io/react-native/docs/tabbarios-item.html#props>
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -10378,8 +10257,11 @@ switch_ children = switch { children }
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -10440,9 +10322,7 @@ switch_ children = switch { children }
 -- |        If that property is enabled, this View will be rendered off-screen once,
 -- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -10570,7 +10450,7 @@ switch_ children = switch { children }
 -- |         __*platform* ios__
 
 type TabBarIOSItemProps  = 
-  ( accessibilityActions :: (Array String)
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
   ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
@@ -10578,6 +10458,7 @@ type TabBarIOSItemProps  =
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
@@ -10592,7 +10473,7 @@ type TabBarIOSItemProps  =
   ,  isTVSelectable :: Boolean
   ,  nativeID :: String
   ,  needsOffscreenAlphaCompositing :: Boolean
-  ,  onAccessibilityAction :: (Effect Unit)
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   ,  onMagicTap :: (Effect Unit)
@@ -10650,7 +10531,6 @@ tabBarIOSItem_ children = tabBarIOSItem { children }
 -- | see <https://facebook.github.io/react-native/docs/tabbarios.html#props>
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -10676,8 +10556,11 @@ tabBarIOSItem_ children = tabBarIOSItem { children }
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -10742,9 +10625,7 @@ tabBarIOSItem_ children = tabBarIOSItem { children }
 -- |        If that property is enabled, this View will be rendered off-screen once,
 -- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -10861,7 +10742,7 @@ tabBarIOSItem_ children = tabBarIOSItem { children }
 -- |        Color of text on unselected tabs
 
 type TabBarIOSProps  = 
-  ( accessibilityActions :: (Array String)
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
   ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
@@ -10869,6 +10750,7 @@ type TabBarIOSProps  =
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
@@ -10882,7 +10764,7 @@ type TabBarIOSProps  =
   ,  itemPositioning :: String
   ,  nativeID :: String
   ,  needsOffscreenAlphaCompositing :: Boolean
-  ,  onAccessibilityAction :: (Effect Unit)
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   ,  onMagicTap :: (Effect Unit)
@@ -10972,7 +10854,6 @@ type TextInputKeyPressEventData  = {
 -- | see <https://facebook.github.io/react-native/docs/textinput.html#props>
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -10998,8 +10879,11 @@ type TextInputKeyPressEventData  = {
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -11156,9 +11040,7 @@ type TextInputKeyPressEventData  = {
 -- |        Sets the number of lines for a TextInput.
 -- |        Use it with multiline set to true to be able to fill the lines.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -11377,7 +11259,7 @@ type TextInputKeyPressEventData  = {
 -- |        or set/update maxLength to prevent unwanted edits without flicker.
 
 type TextInputProps  = 
-  ( accessibilityActions :: (Array String)
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
   ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
@@ -11385,6 +11267,7 @@ type TextInputProps  =
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
@@ -11420,7 +11303,7 @@ type TextInputProps  =
   ,  nativeID :: String
   ,  needsOffscreenAlphaCompositing :: Boolean
   ,  numberOfLines :: Number
-  ,  onAccessibilityAction :: (Effect Unit)
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onBlur :: (EffectFn1 (NativeSyntheticEvent TextInputFocusEventData) Unit)
   ,  onChange :: (EffectFn1 (NativeSyntheticEvent TextInputChangeEventData) Unit)
@@ -11512,6 +11395,8 @@ type TextInputSubmitEditingEventData  = {
 
 
 
+-- | - `accessibilityActions`
+-- |        Provides an array of custom actions available for accessibility.
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -11537,11 +11422,17 @@ type TextInputSubmitEditingEventData  = {
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
+-- |         __*platform* ios__
+-- | - `accessibilityViewIsModal`
+-- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
 -- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
@@ -11589,6 +11480,8 @@ type TextInputSubmitEditingEventData  = {
 -- |        layout, including line wrapping, such that the total number of lines
 -- |        does not exceed this number.
 -- |        This prop is commonly used with `ellipsizeMode`.
+-- | - `onAccessibilityAction`
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -11621,15 +11514,18 @@ type TextInputSubmitEditingEventData  = {
 -- |        default is `highQuality`.
 
 type TextProps  = 
-  ( accessibilityComponentType :: String
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
+  ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
   ,  accessibilityIgnoresInvertColors :: Boolean
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
+  ,  accessibilityViewIsModal :: Boolean
   ,  accessible :: Boolean
   ,  adjustsFontSizeToFit :: Boolean
   ,  allowFontScaling :: Boolean
@@ -11640,6 +11536,7 @@ type TextProps  =
   ,  minimumFontScale :: Number
   ,  nativeID :: String
   ,  numberOfLines :: Number
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   ,  onLongPress :: (EffectFn1 GestureResponderEvent Unit)
@@ -11671,7 +11568,6 @@ text_ children = text { children }
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -11697,8 +11593,11 @@ text_ children = text { children }
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -11779,9 +11678,7 @@ text_ children = text { children }
 -- |        If that property is enabled, this View will be rendered off-screen once,
 -- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -11913,7 +11810,7 @@ text_ children = text { children }
 -- |         __*platform* ios__
 
 type ToolbarAndroidProps  = 
-  ( accessibilityActions :: (Array String)
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
   ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
@@ -11921,6 +11818,7 @@ type ToolbarAndroidProps  =
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
@@ -11937,7 +11835,7 @@ type ToolbarAndroidProps  =
   ,  nativeID :: String
   ,  navIcon :: ImageURISource
   ,  needsOffscreenAlphaCompositing :: Boolean
-  ,  onAccessibilityAction :: (Effect Unit)
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onActionSelected :: (EffectFn1 Number Unit)
   ,  onIconClicked :: (Effect Unit)
@@ -11995,6 +11893,8 @@ toolbarAndroid_ children = toolbarAndroid { children }
 
 
 -- | see <https://facebook.github.io/react-native/docs/touchablehighlight.html#props>
+-- | - `accessibilityActions`
+-- |        Provides an array of custom actions available for accessibility.
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -12020,11 +11920,17 @@ toolbarAndroid_ children = toolbarAndroid { children }
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
+-- |         __*platform* ios__
+-- | - `accessibilityViewIsModal`
+-- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
 -- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
@@ -12057,6 +11963,8 @@ toolbarAndroid_ children = toolbarAndroid { children }
 -- |              'yes' - The view is important for accessibility.
 -- |              'no' - The view is not important for accessibility.
 -- |              'no-hide-descendants' - The view is not important for accessibility, nor are any of its descendant views.
+-- | - `onAccessibilityAction`
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -12107,15 +12015,18 @@ toolbarAndroid_ children = toolbarAndroid { children }
 -- |        The color of the underlay that will show through when the touch is active.
 
 type TouchableHighlightProps  = 
-  ( accessibilityComponentType :: String
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
+  ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
   ,  accessibilityIgnoresInvertColors :: Boolean
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
+  ,  accessibilityViewIsModal :: Boolean
   ,  accessible :: Boolean
   ,  activeOpacity :: Number
   ,  delayLongPress :: Number
@@ -12125,6 +12036,7 @@ type TouchableHighlightProps  =
   ,  hasTVPreferredFocus :: Boolean
   ,  hitSlop :: Insets
   ,  importantForAccessibility :: String
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onBlur :: (EffectFn1 (NativeSyntheticEvent TargetedEvent) Unit)
   ,  onFocus :: (EffectFn1 (NativeSyntheticEvent TargetedEvent) Unit)
@@ -12159,6 +12071,8 @@ touchableHighlight_ children = touchableHighlight { children }
 
 
 -- | see <https://facebook.github.io/react-native/docs/touchableopacity.html#props>
+-- | - `accessibilityActions`
+-- |        Provides an array of custom actions available for accessibility.
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -12184,11 +12098,17 @@ touchableHighlight_ children = touchableHighlight { children }
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
+-- |         __*platform* ios__
+-- | - `accessibilityViewIsModal`
+-- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
 -- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
@@ -12232,6 +12152,8 @@ touchableHighlight_ children = touchableHighlight { children }
 -- |              'yes' - The view is important for accessibility.
 -- |              'no' - The view is not important for accessibility.
 -- |              'no-hide-descendants' - The view is not important for accessibility, nor are any of its descendant views.
+-- | - `onAccessibilityAction`
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -12276,15 +12198,18 @@ touchableHighlight_ children = touchableHighlight { children }
 -- |         __*platform* ios__
 
 type TouchableNativeFeedbackProps  = 
-  ( accessibilityComponentType :: String
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
+  ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
   ,  accessibilityIgnoresInvertColors :: Boolean
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
+  ,  accessibilityViewIsModal :: Boolean
   ,  accessible :: Boolean
   ,  background :: (Object Foreign)
   ,  delayLongPress :: Number
@@ -12294,6 +12219,7 @@ type TouchableNativeFeedbackProps  =
   ,  hasTVPreferredFocus :: Boolean
   ,  hitSlop :: Insets
   ,  importantForAccessibility :: String
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onBlur :: (EffectFn1 (NativeSyntheticEvent TargetedEvent) Unit)
   ,  onFocus :: (EffectFn1 (NativeSyntheticEvent TargetedEvent) Unit)
@@ -12326,6 +12252,8 @@ touchableNativeFeedback_ children = touchableNativeFeedback { children }
 
 
 -- | see <https://facebook.github.io/react-native/docs/touchableopacity.html#props>
+-- | - `accessibilityActions`
+-- |        Provides an array of custom actions available for accessibility.
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -12351,11 +12279,17 @@ touchableNativeFeedback_ children = touchableNativeFeedback { children }
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
+-- |         __*platform* ios__
+-- | - `accessibilityViewIsModal`
+-- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
 -- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
@@ -12389,6 +12323,8 @@ touchableNativeFeedback_ children = touchableNativeFeedback { children }
 -- |              'yes' - The view is important for accessibility.
 -- |              'no' - The view is not important for accessibility.
 -- |              'no-hide-descendants' - The view is not important for accessibility, nor are any of its descendant views.
+-- | - `onAccessibilityAction`
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -12433,15 +12369,18 @@ touchableNativeFeedback_ children = touchableNativeFeedback { children }
 -- |         __*platform* ios__
 
 type TouchableOpacityProps  = 
-  ( accessibilityComponentType :: String
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
+  ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
   ,  accessibilityIgnoresInvertColors :: Boolean
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
+  ,  accessibilityViewIsModal :: Boolean
   ,  accessible :: Boolean
   ,  activeOpacity :: Number
   ,  delayLongPress :: Number
@@ -12451,6 +12390,7 @@ type TouchableOpacityProps  =
   ,  hasTVPreferredFocus :: Boolean
   ,  hitSlop :: Insets
   ,  importantForAccessibility :: String
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onBlur :: (EffectFn1 (NativeSyntheticEvent TargetedEvent) Unit)
   ,  onFocus :: (EffectFn1 (NativeSyntheticEvent TargetedEvent) Unit)
@@ -12482,6 +12422,8 @@ touchableOpacity_ children = touchableOpacity { children }
 
 
 -- | see <https://facebook.github.io/react-native/docs/touchablewithoutfeedback.html#props>
+-- | - `accessibilityActions`
+-- |        Provides an array of custom actions available for accessibility.
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -12507,11 +12449,17 @@ touchableOpacity_ children = touchableOpacity { children }
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
+-- |         __*platform* ios__
+-- | - `accessibilityViewIsModal`
+-- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
 -- |         __*platform* ios__
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
@@ -12542,6 +12490,8 @@ touchableOpacity_ children = touchableOpacity { children }
 -- |              'yes' - The view is important for accessibility.
 -- |              'no' - The view is not important for accessibility.
 -- |              'no-hide-descendants' - The view is not important for accessibility, nor are any of its descendant views.
+-- | - `onAccessibilityAction`
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -12586,15 +12536,18 @@ touchableOpacity_ children = touchableOpacity { children }
 -- |         __*platform* ios__
 
 type TouchableWithoutFeedbackProps  = 
-  ( accessibilityComponentType :: String
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
+  ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
   ,  accessibilityIgnoresInvertColors :: Boolean
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
+  ,  accessibilityViewIsModal :: Boolean
   ,  accessible :: Boolean
   ,  delayLongPress :: Number
   ,  delayPressIn :: Number
@@ -12603,6 +12556,7 @@ type TouchableWithoutFeedbackProps  =
   ,  hasTVPreferredFocus :: Boolean
   ,  hitSlop :: Insets
   ,  importantForAccessibility :: String
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onBlur :: (EffectFn1 (NativeSyntheticEvent TargetedEvent) Unit)
   ,  onFocus :: (EffectFn1 (NativeSyntheticEvent TargetedEvent) Unit)
@@ -12647,7 +12601,6 @@ type ViewPagerAndroidOnPageSelectedEventData  = {
 
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -12673,8 +12626,11 @@ type ViewPagerAndroidOnPageSelectedEventData  = {
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -12736,9 +12692,7 @@ type ViewPagerAndroidOnPageSelectedEventData  = {
 -- |        If that property is enabled, this View will be rendered off-screen once,
 -- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -12873,7 +12827,7 @@ type ViewPagerAndroidOnPageSelectedEventData  = {
 -- |         __*platform* ios__
 
 type ViewPagerAndroidProps  = 
-  ( accessibilityActions :: (Array String)
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
   ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
@@ -12881,6 +12835,7 @@ type ViewPagerAndroidProps  =
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
@@ -12894,7 +12849,7 @@ type ViewPagerAndroidProps  =
   ,  keyboardDismissMode :: String
   ,  nativeID :: String
   ,  needsOffscreenAlphaCompositing :: Boolean
-  ,  onAccessibilityAction :: (Effect Unit)
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   ,  onMagicTap :: (Effect Unit)
@@ -12951,7 +12906,6 @@ viewPagerAndroid_ children = viewPagerAndroid { children }
 -- | see <https://facebook.github.io/react-native/docs/view.html#props>
 -- | - `accessibilityActions`
 -- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
 -- | - `accessibilityComponentType`
 -- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
 -- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
@@ -12977,8 +12931,11 @@ viewPagerAndroid_ children = viewPagerAndroid { children }
 -- |         __*platform* android__
 -- | - `accessibilityRole`
 -- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
+-- | - `accessibilityState`
+-- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
 -- | - `accessibilityStates`
 -- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
+-- |         __*deprecated* : accessibilityState available in 0.60+__
 -- | - `accessibilityTraits`
 -- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
 -- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
@@ -13033,9 +12990,7 @@ viewPagerAndroid_ children = viewPagerAndroid { children }
 -- |        If that property is enabled, this View will be rendered off-screen once,
 -- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 -- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
+-- |        When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 -- | - `onAccessibilityTap`
 -- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 -- |         __*platform* ios__
@@ -13144,7 +13099,7 @@ viewPagerAndroid_ children = viewPagerAndroid { children }
 -- |         __*platform* ios__
 
 type ViewProps  = 
-  ( accessibilityActions :: (Array String)
+  ( accessibilityActions :: (Array ( { name :: String, label :: String }))
   ,  accessibilityComponentType :: String
   ,  accessibilityElementsHidden :: Boolean
   ,  accessibilityHint :: String
@@ -13152,6 +13107,7 @@ type ViewProps  =
   ,  accessibilityLabel :: String
   ,  accessibilityLiveRegion :: String
   ,  accessibilityRole :: String
+  ,  accessibilityState :: AccessibilityState
   ,  accessibilityStates :: (Array String)
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
@@ -13163,7 +13119,7 @@ type ViewProps  =
   ,  isTVSelectable :: Boolean
   ,  nativeID :: String
   ,  needsOffscreenAlphaCompositing :: Boolean
-  ,  onAccessibilityAction :: (Effect Unit)
+  ,  onAccessibilityAction :: (EffectFn1 (NativeSyntheticEvent ( { actionName :: String })) Unit)
   ,  onAccessibilityTap :: (Effect Unit)
   ,  onLayout :: (EffectFn1 LayoutChangeEvent Unit)
   ,  onMagicTap :: (Effect Unit)
@@ -13223,6 +13179,96 @@ safeAreaView_ :: Array JSX -> JSX
 safeAreaView_ children = safeAreaView { children }
 
 
+type ViewStyle  = {
+    alignContent  :: (Undefinable  String)
+  , alignItems  :: (Undefinable  String)
+  , alignSelf  :: (Undefinable  String)
+  , aspectRatio  :: (Undefinable  Number)
+  , backfaceVisibility  :: (Undefinable  String)
+  , backgroundColor  :: (Undefinable  String)
+  , borderBottomColor  :: (Undefinable  String)
+  , borderBottomEndRadius  :: (Undefinable  Number)
+  , borderBottomLeftRadius  :: (Undefinable  Number)
+  , borderBottomRightRadius  :: (Undefinable  Number)
+  , borderBottomStartRadius  :: (Undefinable  Number)
+  , borderBottomWidth  :: (Undefinable  Number)
+  , borderColor  :: (Undefinable  String)
+  , borderEndColor  :: (Undefinable  String)
+  , borderEndWidth  :: (Undefinable  String)
+  , borderLeftColor  :: (Undefinable  String)
+  , borderLeftWidth  :: (Undefinable  Number)
+  , borderRadius  :: (Undefinable  Number)
+  , borderRightColor  :: (Undefinable  String)
+  , borderRightWidth  :: (Undefinable  Number)
+  , borderStartColor  :: (Undefinable  String)
+  , borderStartWidth  :: (Undefinable  String)
+  , borderStyle  :: (Undefinable  String)
+  , borderTopColor  :: (Undefinable  String)
+  , borderTopEndRadius  :: (Undefinable  Number)
+  , borderTopLeftRadius  :: (Undefinable  Number)
+  , borderTopRightRadius  :: (Undefinable  Number)
+  , borderTopStartRadius  :: (Undefinable  Number)
+  , borderTopWidth  :: (Undefinable  Number)
+  , borderWidth  :: (Undefinable  Number)
+  , bottom  :: (Undefinable  String)
+  , direction  :: (Undefinable  String)
+  , display  :: (Undefinable  String)
+  , elevation  :: (Undefinable  Number)
+  , end  :: (Undefinable  String)
+  , flex  :: (Undefinable  Number)
+  , flexBasis  :: (Undefinable  String)
+  , flexDirection  :: (Undefinable  String)
+  , flexGrow  :: (Undefinable  Number)
+  , flexShrink  :: (Undefinable  Number)
+  , flexWrap  :: (Undefinable  String)
+  , height  :: (Undefinable  String)
+  , justifyContent  :: (Undefinable  String)
+  , left  :: (Undefinable  String)
+  , margin  :: (Undefinable  String)
+  , marginBottom  :: (Undefinable  String)
+  , marginEnd  :: (Undefinable  String)
+  , marginHorizontal  :: (Undefinable  String)
+  , marginLeft  :: (Undefinable  String)
+  , marginRight  :: (Undefinable  String)
+  , marginStart  :: (Undefinable  String)
+  , marginTop  :: (Undefinable  String)
+  , marginVertical  :: (Undefinable  String)
+  , maxHeight  :: (Undefinable  String)
+  , maxWidth  :: (Undefinable  String)
+  , minHeight  :: (Undefinable  String)
+  , minWidth  :: (Undefinable  String)
+  , opacity  :: (Undefinable  Number)
+  , overflow  :: (Undefinable  String)
+  , padding  :: (Undefinable  String)
+  , paddingBottom  :: (Undefinable  String)
+  , paddingEnd  :: (Undefinable  String)
+  , paddingHorizontal  :: (Undefinable  String)
+  , paddingLeft  :: (Undefinable  String)
+  , paddingRight  :: (Undefinable  String)
+  , paddingStart  :: (Undefinable  String)
+  , paddingTop  :: (Undefinable  String)
+  , paddingVertical  :: (Undefinable  String)
+  , position  :: (Undefinable  String)
+  , right  :: (Undefinable  String)
+  , rotation  :: (Undefinable  Number)
+  , scaleX  :: (Undefinable  Number)
+  , scaleY  :: (Undefinable  Number)
+  , shadowColor  :: (Undefinable  String)
+  , shadowOffset  :: (Undefinable  { width :: Number, height :: Number })
+  , shadowOpacity  :: (Undefinable  Number)
+  , shadowRadius  :: (Undefinable  Number)
+  , start  :: (Undefinable  String)
+  , testID  :: (Undefinable  String)
+  , top  :: (Undefinable  String)
+  , transform  :: (Undefinable  (Array (String)))
+  , transformMatrix  :: (Undefinable  (Array Number))
+  , translateX  :: (Undefinable  Number)
+  , translateY  :: (Undefinable  Number)
+  , width  :: (Undefinable  String)
+  , zIndex  :: (Undefinable  Number)
+}
+
+
 type ViewToken  = {
     index :: String
   , isViewable :: Boolean
@@ -13244,422 +13290,5 @@ type ViewabilityConfigCallbackPair  = {
     onViewableItemsChanged :: ((EffectFn1 { viewableItems :: (Array ViewToken), changed :: (Array ViewToken) } Unit))
   , viewabilityConfig :: ViewabilityConfig
 }
-
-
-type WebViewIOSLoadRequestEvent  = {
-    canGoBack :: Boolean
-  , canGoForward :: Boolean
-  , loading :: Boolean
-  , lockIdentifier :: Number
-  , navigationType :: String
-  , target :: Number
-  , title :: String
-  , url :: String
-}
-
-
-type WebViewMessageEventData  = {
-    data :: String
-}
-
-
-type WebViewNativeConfig  = {
-    component  :: (Undefinable  Foreign)
-  , props  :: (Undefinable  (Object Foreign))
-  , viewManager  :: (Undefinable  (Object Foreign))
-}
-
-
--- | see <https://facebook.github.io/react-native/docs/webview.html#props>
--- | - `accessibilityActions`
--- |        Provides an array of custom actions available for accessibility.
--- |         __*platform* ios__
--- | - `accessibilityComponentType`
--- |        In some cases, we also want to alert the end user of the type of selected component (i.e., that it is a “button”).
--- |        If we were using native buttons, this would work automatically. Since we are using javascript, we need to
--- |        provide a bit more context for TalkBack. To do so, you must specify the ‘accessibilityComponentType’ property
--- |        for any UI component. For instances, we support ‘button’, ‘radiobutton_checked’ and ‘radiobutton_unchecked’ and so on.
--- |         __*platform* android__
--- | - `accessibilityElementsHidden`
--- |        A Boolean value indicating whether the accessibility elements contained within this accessibility element
--- |        are hidden to the screen reader.
--- |         __*platform* ios__
--- | - `accessibilityHint`
--- |        An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
--- | - `accessibilityIgnoresInvertColors`
--- |        https://facebook.github.io/react-native/docs/accessibility#accessibilityignoresinvertcolorsios
--- |         __*platform* ios__
--- | - `accessibilityLabel`
--- |        Overrides the text that's read by the screen reader when the user interacts with the element. By default, the
--- |        label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
--- | - `accessibilityLiveRegion`
--- |        Indicates to accessibility services whether the user should be notified when this view changes.
--- |        Works for Android API >= 19 only.
--- |        See http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion for references.
--- |         __*platform* android__
--- | - `accessibilityRole`
--- |        Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on.
--- | - `accessibilityStates`
--- |        Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on.
--- | - `accessibilityTraits`
--- |        Accessibility traits tell a person using VoiceOver what kind of element they have selected.
--- |        Is this element a label? A button? A header? These questions are answered by accessibilityTraits.
--- |         __*platform* ios__
--- | - `accessibilityViewIsModal`
--- |        A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
--- |         __*platform* ios__
--- | - `accessible`
--- |        When true, indicates that the view is an accessibility element.
--- |        By default, all the touchable elements are accessible.
--- | - `allowFileAccess`
--- |        Sets whether the webview allows access to the file system.
--- | - `allowsInlineMediaPlayback`
--- |        Determines whether HTML5 videos play inline or use the native
--- |        full-screen controller. default value false
--- |        NOTE : "In order * for video to play inline, not only does
--- |        this property need to be set to true, but the video element
--- |        in the HTML document must also include the webkit-playsinline
--- |        attribute."
--- | - `automaticallyAdjustContentInsets`
--- |        Controls whether to adjust the content inset for web views that are
--- |        placed behind a navigation bar, tab bar, or toolbar. The default value
--- |        is `true`.
--- | - `bounces`
--- |        Boolean value that determines whether the web view bounces
--- |        when it reaches the edge of the content. The default value is `true`.
--- |         __*platform* ios__
--- | - `collapsable`
--- |        Views that are only used to layout their children or otherwise don't draw anything
--- |        may be automatically removed from the native hierarchy as an optimization.
--- |        Set this property to false to disable this optimization and ensure that this View exists in the native view hierarchy.
--- | - `contentInset`
--- |        The amount by which the web view content is inset from the edges of
--- |        the scroll view. Defaults to {top: 0, left: 0, bottom: 0, right: 0}.
--- | - `dataDetectorTypes`
--- |        Determines the types of data converted to clickable URLs in
--- |        the web view’s content. By default only phone numbers are detected.
--- |        You can provide one type or an array of many types.
--- |        Possible values for `dataDetectorTypes` are:
--- |        - `'phoneNumber'`
--- |        - `'link'`
--- |        - `'address'`
--- |        - `'calendarEvent'`
--- |        - `'none'`
--- |        - `'all'`
--- | - `decelerationRate`
--- |        A floating-point number that determines how quickly the scroll
--- |        view decelerates after the user lifts their finger. You may also
--- |        use string shortcuts "normal" and "fast" which match the
--- |        underlying iOS settings for UIScrollViewDecelerationRateNormal
--- |        and UIScrollViewDecelerationRateFast respectively.
--- |        - normal: 0.998 - fast: 0.99 (the default for iOS WebView)
--- | - `domStorageEnabled`
--- |        Used on Android only, controls whether DOM Storage is enabled
--- |        or not android
--- | - `hasTVPreferredFocus`
--- |        *(Apple TV only)* May be set to true to force the Apple TV focus engine to move focus to this view.
--- |         __*platform* ios__
--- | - `hitSlop`
--- |        This defines how far a touch event can start away from the view.
--- |        Typical interface guidelines recommend touch targets that are at least
--- |        30 - 40 points/density-independent pixels. If a Touchable view has
--- |        a height of 20 the touchable height can be extended to 40 with
--- |        hitSlop={{top: 10, bottom: 10, left: 0, right: 0}}
--- |        NOTE The touch area never extends past the parent view bounds and
--- |        the Z-index of sibling views always takes precedence if a touch
--- |        hits two overlapping views.
--- | - `importantForAccessibility`
--- |        Controls how view is important for accessibility which is if it fires accessibility events
--- |        and if it is reported to accessibility services that query the screen.
--- |        Works for Android only. See http://developer.android.com/reference/android/R.attr.html#importantForAccessibility for references.
--- |        Possible values:
--- |              'auto' - The system determines whether the view is important for accessibility - default (recommended).
--- |              'yes' - The view is important for accessibility.
--- |              'no' - The view is not important for accessibility.
--- |              'no-hide-descendants' - The view is not important for accessibility, nor are any of its descendant views.
--- | - `injectedJavaScript`
--- |        Set this to provide JavaScript that will be injected into the web page
--- |        when the view loads.
--- | - `isTVSelectable`
--- |        *(Apple TV only)* When set to true, this view will be focusable
--- |        and navigable using the Apple TV remote.
--- |         __*platform* ios__
--- | - `javaScriptEnabled`
--- |        Used for android only, JS is enabled by default for WebView on iOS
--- | - `mediaPlaybackRequiresUserAction`
--- |        Determines whether HTML5 audio & videos require the user to tap
--- |        before they can start playing. The default value is false.
--- | - `mixedContentMode`
--- |        Specifies the mixed content mode. i.e WebView will allow a secure origin to load content from any other origin.
--- |        Possible values for mixedContentMode are:
--- |        'never' (default) - WebView will not allow a secure origin to load content from an insecure origin.
--- |        'always' - WebView will allow a secure origin to load content from any other origin, even if that origin is insecure.
--- |        'compatibility' - WebView will attempt to be compatible with the approach of a modern web browser with regard to mixed content.
--- | - `nativeConfig`
--- |        Override the native component used to render the WebView. Enables a custom native
--- |        WebView which uses the same JavaScript as the original WebView.
--- | - `nativeID`
--- |        Used to reference react managed views from native code.
--- | - `needsOffscreenAlphaCompositing`
--- |        Whether this view needs to rendered offscreen and composited with an alpha in order to preserve 100% correct colors and blending behavior.
--- |        The default (false) falls back to drawing the component and its children
--- |        with an alpha applied to the paint used to draw each element instead of rendering the full component offscreen and compositing it back with an alpha value.
--- |        This default may be noticeable and undesired in the case where the View you are setting an opacity on
--- |        has multiple overlapping elements (e.g. multiple overlapping Views, or text and a background).
--- |        Rendering offscreen to preserve correct alpha behavior is extremely expensive
--- |        and hard to debug for non-native developers, which is why it is not turned on by default.
--- |        If you do need to enable this property for an animation,
--- |        consider combining it with renderToHardwareTextureAndroid if the view contents are static (i.e. it doesn't need to be redrawn each frame).
--- |        If that property is enabled, this View will be rendered off-screen once,
--- |        saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
--- | - `onAccessibilityAction`
--- |        When `accessible` is true, the system will try to invoke this function
--- |        when the user performs an accessibility custom action.
--- |         __*platform* ios__
--- | - `onAccessibilityTap`
--- |        When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
--- |         __*platform* ios__
--- | - `onError`
--- |        Invoked when load fails
--- | - `onLayout`
--- |        Invoked on mount and layout changes with
--- |        {nativeEvent: { layout: {x, y, width, height}}}.
--- | - `onLoad`
--- |        Invoked when load finish
--- | - `onLoadEnd`
--- |        Invoked when load either succeeds or fails
--- | - `onLoadStart`
--- |        Invoked on load start
--- | - `onMagicTap`
--- |        When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
--- |         __*platform* ios__
--- | - `onMessage`
--- |        Invoked when window.postMessage is called from WebView.
--- | - `onMoveShouldSetResponder`
--- |        Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
--- | - `onMoveShouldSetResponderCapture`
--- |        onStartShouldSetResponder and onMoveShouldSetResponder are called with a bubbling pattern,
--- |        where the deepest node is called first.
--- |        That means that the deepest component will become responder when multiple Views return true for *ShouldSetResponder handlers.
--- |        This is desirable in most cases, because it makes sure all controls and buttons are usable.
--- |        However, sometimes a parent will want to make sure that it becomes responder.
--- |        This can be handled by using the capture phase.
--- |        Before the responder system bubbles up from the deepest component,
--- |        it will do a capture phase, firing on*ShouldSetResponderCapture.
--- |        So if a parent View wants to prevent the child from becoming responder on a touch start,
--- |        it should have a onStartShouldSetResponderCapture handler which returns true.
--- | - `onNavigationStateChange`
--- |        Function that is invoked when the `WebView` loading starts or ends.
--- | - `onResponderEnd`
--- |        If the View returns true and attempts to become the responder, one of the following will happen:
--- | - `onResponderGrant`
--- |        The View is now responding for touch events.
--- |        This is the time to highlight and show the user what is happening
--- | - `onResponderMove`
--- |        If the view is responding, the following handlers can be called:
--- |        The user is moving their finger
--- | - `onResponderReject`
--- |        Something else is the responder right now and will not release it
--- | - `onResponderRelease`
--- |        Fired at the end of the touch, ie "touchUp"
--- | - `onResponderTerminate`
--- |        The responder has been taken from the View.
--- |        Might be taken by other views after a call to onResponderTerminationRequest,
--- |        or might be taken by the OS without asking (happens with control center/ notification center on iOS)
--- | - `onResponderTerminationRequest`
--- |        Something else wants to become responder.
--- |        Should this view release the responder? Returning true allows release
--- | - `onShouldStartLoadWithRequest`
--- |        Allows custom handling of any webview requests by a JS handler.
--- |        Return true or false from this method to continue loading the
--- |        request.
--- | - `onStartShouldSetResponder`
--- |        A view can become the touch responder by implementing the correct negotiation methods.
--- |        There are two methods to ask the view if it wants to become responder:
--- |        Does this view want to become responder on the start of a touch?
--- | - `onStartShouldSetResponderCapture`
--- |        onStartShouldSetResponder and onMoveShouldSetResponder are called with a bubbling pattern,
--- |        where the deepest node is called first.
--- |        That means that the deepest component will become responder when multiple Views return true for *ShouldSetResponder handlers.
--- |        This is desirable in most cases, because it makes sure all controls and buttons are usable.
--- |        However, sometimes a parent will want to make sure that it becomes responder.
--- |        This can be handled by using the capture phase.
--- |        Before the responder system bubbles up from the deepest component,
--- |        it will do a capture phase, firing on*ShouldSetResponderCapture.
--- |        So if a parent View wants to prevent the child from becoming responder on a touch start,
--- |        it should have a onStartShouldSetResponderCapture handler which returns true.
--- | - `originWhitelist`
--- |        List of origin strings to allow being navigated to.
--- |        The strings allow wildcards and get matched against just the origin (not the full URL).
--- |        If the user taps to navigate to a new page but the new page is not in this whitelist, the URL will be handled by the OS.
--- |        The default whitelisted origins are "http://" and "https://".
--- | - `pointerEvents`
--- |        In the absence of auto property, none is much like CSS's none value. box-none is as if you had applied the CSS class:
--- |        .box-none {
--- |           pointer-events: none;
--- |        }
--- |        .box-none * {
--- |           pointer-events: all;
--- |        }
--- |        box-only is the equivalent of
--- |        .box-only {
--- |           pointer-events: all;
--- |        }
--- |        .box-only * {
--- |           pointer-events: none;
--- |        }
--- |        But since pointerEvents does not affect layout/appearance, and we are already deviating from the spec by adding additional modes,
--- |        we opt to not include pointerEvents on style. On some platforms, we would need to implement it as a className anyways. Using style or not is an implementation detail of the platform.
--- | - `removeClippedSubviews`
--- |        This is a special performance property exposed by RCTView and is useful for scrolling content when there are many subviews,
--- |        most of which are offscreen. For this property to be effective, it must be applied to a view that contains many subviews that extend outside its bound.
--- |        The subviews must also have overflow: hidden, as should the containing view (or one of its superviews).
--- | - `renderError`
--- |        Function that returns a view to show if there's an error.
--- | - `renderLoading`
--- |        Function that returns a loading indicator.
--- | - `renderToHardwareTextureAndroid`
--- |        Whether this view should render itself (and all of its children) into a single hardware texture on the GPU.
--- |        On Android, this is useful for animations and interactions that only modify opacity, rotation, translation, and/or scale:
--- |        in those cases, the view doesn't have to be redrawn and display lists don't need to be re-executed. The texture can just be
--- |        re-used and re-composited with different parameters. The downside is that this can use up limited video memory, so this prop should be set back to false at the end of the interaction/animation.
--- | - `saveFormDataDisabled`
--- |        Controls whether form autocomplete data should be saved
--- | - `scalesPageToFit`
--- |        sets whether the webpage scales to fit the view and the user can change the scale
--- | - `scrollEnabled`
--- |        Boolean value that determines whether scrolling is enabled in the
--- |        `WebView`. The default value is `true`.
--- | - `shouldRasterizeIOS`
--- |        Whether this view should be rendered as a bitmap before compositing.
--- |        On iOS, this is useful for animations and interactions that do not modify this component's dimensions nor its children;
--- |        for example, when translating the position of a static view, rasterization allows the renderer to reuse a cached bitmap of a static view
--- |        and quickly composite it during each frame.
--- |        Rasterization incurs an off-screen drawing pass and the bitmap consumes memory.
--- |        Test and measure when using this property.
--- | - `startInLoadingState`
--- |        Boolean value that forces the `WebView` to show the loading view
--- |        on the first load.
--- | - `testID`
--- |        Used to locate this view in end-to-end tests.
--- | - `tvParallaxMagnification`
--- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 1.0.
--- |         __*platform* ios__
--- | - `tvParallaxProperties`
--- |        *(Apple TV only)* Object with properties to control Apple TV parallax effects.
--- |         __*platform* ios__
--- | - `tvParallaxShiftDistanceX`
--- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios__
--- | - `tvParallaxShiftDistanceY`
--- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 2.0.
--- |         __*platform* ios__
--- | - `tvParallaxTiltAngle`
--- |        *(Apple TV only)* May be used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.  Defaults to 0.05.
--- |         __*platform* ios__
--- | - `useWebKit`
--- |        If `true`, use WKWebView instead of UIWebView.
--- | - `userAgent`
--- |        Sets the user-agent for the WebView.
-
-type WebViewProps  = 
-  ( accessibilityActions :: (Array String)
-  ,  accessibilityComponentType :: String
-  ,  accessibilityElementsHidden :: Boolean
-  ,  accessibilityHint :: String
-  ,  accessibilityIgnoresInvertColors :: Boolean
-  ,  accessibilityLabel :: String
-  ,  accessibilityLiveRegion :: String
-  ,  accessibilityRole :: String
-  ,  accessibilityStates :: (Array String)
-  ,  accessibilityTraits :: (Array String)
-  ,  accessibilityViewIsModal :: Boolean
-  ,  accessible :: Boolean
-  ,  allowFileAccess :: Boolean
-  ,  allowsInlineMediaPlayback :: Boolean
-  ,  automaticallyAdjustContentInsets :: Boolean
-  ,  bounces :: Boolean
-  ,  collapsable :: Boolean
-  ,  contentInset :: Insets
-  ,  dataDetectorTypes :: (Array String)
-  ,  decelerationRate :: String
-  ,  domStorageEnabled :: Boolean
-  ,  hasTVPreferredFocus :: Boolean
-  ,  hitSlop :: Insets
-  ,  html :: String
-  ,  importantForAccessibility :: String
-  ,  injectedJavaScript :: String
-  ,  isTVSelectable :: Boolean
-  ,  javaScriptEnabled :: Boolean
-  ,  mediaPlaybackRequiresUserAction :: Boolean
-  ,  mixedContentMode :: String
-  ,  nativeConfig :: WebViewNativeConfig
-  ,  nativeID :: String
-  ,  needsOffscreenAlphaCompositing :: Boolean
-  ,  onAccessibilityAction :: (Effect Unit)
-  ,  onAccessibilityTap :: (Effect Unit)
-  ,  onError :: (EffectFn1 NavState Unit)
-  ,  onLayout :: (EffectFn1 LayoutChangeEvent Unit)
-  ,  onLoad :: (EffectFn1 NavState Unit)
-  ,  onLoadEnd :: (EffectFn1 NavState Unit)
-  ,  onLoadStart :: (EffectFn1 NavState Unit)
-  ,  onMagicTap :: (Effect Unit)
-  ,  onMessage :: (EffectFn1 (NativeSyntheticEvent WebViewMessageEventData) Unit)
-  ,  onMoveShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
-  ,  onMoveShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  ,  onNavigationStateChange :: (EffectFn1 NavState Unit)
-  ,  onResponderEnd :: (EffectFn1 GestureResponderEvent Unit)
-  ,  onResponderGrant :: (EffectFn1 GestureResponderEvent Unit)
-  ,  onResponderMove :: (EffectFn1 GestureResponderEvent Unit)
-  ,  onResponderReject :: (EffectFn1 GestureResponderEvent Unit)
-  ,  onResponderRelease :: (EffectFn1 GestureResponderEvent Unit)
-  ,  onResponderStart :: (EffectFn1 GestureResponderEvent Unit)
-  ,  onResponderTerminate :: (EffectFn1 GestureResponderEvent Unit)
-  ,  onResponderTerminationRequest :: (EffectFn1 GestureResponderEvent Boolean)
-  ,  onShouldStartLoadWithRequest :: (EffectFn1 WebViewIOSLoadRequestEvent Boolean)
-  ,  onStartShouldSetResponder :: (EffectFn1 GestureResponderEvent Boolean)
-  ,  onStartShouldSetResponderCapture :: (EffectFn1 GestureResponderEvent Boolean)
-  ,  onTouchCancel :: (EffectFn1 GestureResponderEvent Unit)
-  ,  onTouchEnd :: (EffectFn1 GestureResponderEvent Unit)
-  ,  onTouchEndCapture :: (EffectFn1 GestureResponderEvent Unit)
-  ,  onTouchMove :: (EffectFn1 GestureResponderEvent Unit)
-  ,  onTouchStart :: (EffectFn1 GestureResponderEvent Unit)
-  ,  originWhitelist :: (Array String)
-  ,  pointerEvents :: String
-  ,  removeClippedSubviews :: Boolean
-  ,  renderError :: (Effect JSX)
-  ,  renderLoading :: (Effect JSX)
-  ,  renderToHardwareTextureAndroid :: Boolean
-  ,  saveFormDataDisabled :: Boolean
-  ,  scalesPageToFit :: Boolean
-  ,  scrollEnabled :: Boolean
-  ,  shouldRasterizeIOS :: Boolean
-  ,  source :: (Object Foreign)
-  ,  startInLoadingState :: Boolean
-  ,  style :: CSS
-  ,  testID :: String
-  ,  tvParallaxMagnification :: Number
-  ,  tvParallaxProperties :: { enabled :: Boolean, shiftDistanceX :: Number, shiftDistanceY :: Number, tiltAngle :: Number, magnification :: Number, pressMagnification :: Number, pressDuration :: Number, pressDelay :: Number }
-  ,  tvParallaxShiftDistanceX :: Number
-  ,  tvParallaxShiftDistanceY :: Number
-  ,  tvParallaxTiltAngle :: Number
-  ,  url :: String
-  ,  useWebKit :: Boolean
-  ,  userAgent :: String
-  ,  key :: String
-  ,  children :: Array JSX
-  )
-
-
-webView
-  :: forall attrs attrs_  
-  . Union attrs attrs_ (WebViewProps  )
-  => Record attrs
-  -> JSX
-webView props = unsafeCreateNativeElement "WebView" props
- 
-
-webView_ :: Array JSX -> JSX
-webView_ children = webView { children }
 
 

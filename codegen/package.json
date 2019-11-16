@@ -15,7 +15,7 @@
   "repository": {},
   "license": "Apache 2.0",
   "dependencies": {
-    "@types/react-native": "^0.57.57"
+    "@types/react-native": "^0.60.22"
   },
   "devDependencies": {
     "@types/node": "7.0.4",
