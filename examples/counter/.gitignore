@@ -6,5 +6,6 @@ npm-debug.*
 *.key
 *.mobileprovision
 .spago
+web-build/
 output
 psc-package.json
