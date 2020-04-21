@@ -6570,6 +6570,8 @@ type PointPropType  = {
 -- | - `accessible`
 -- |        When true, indicates that the view is an accessibility element.
 -- |        By default, all the touchable elements are accessible.
+-- | - `animating`
+-- |        Whether to show the ProgressBar (true, the default) or hide it (false).
 -- | - `collapsable`
 -- |        Views that are only used to layout their children or otherwise don't draw anything
 -- |        may be automatically removed from the native hierarchy as an optimization.
@@ -6753,6 +6755,7 @@ type ProgressBarAndroidProps  =
   ,  accessibilityTraits :: (Array String)
   ,  accessibilityViewIsModal :: Boolean
   ,  accessible :: Boolean
+  ,  animating :: Boolean
   ,  collapsable :: Boolean
   ,  color :: String
   ,  hasTVPreferredFocus :: Boolean
