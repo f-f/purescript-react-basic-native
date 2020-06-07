@@ -4,7 +4,7 @@ You type stuff into a text input and it shows you what you typed
 
 ## Instructions
 
-These examples were built with [expo](https://expo.io/) and [spago](https://github.com/spacchetti/spago). 
+These examples were built with [expo](https://expo.io/) and [spago](https://github.com/purescript/spago). 
 
  
 * `npm install spago expo-cli --global`
