@@ -8,7 +8,7 @@ The event types in React Native are a little more rich than they are in React, s
 
 ## Setup
 
-* `npm install purescript-spago expo-cli --global`
+* `npm install spago expo-cli --global`
 * `spago install`
 * `spago build`
 

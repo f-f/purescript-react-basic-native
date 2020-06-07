@@ -7,7 +7,7 @@ You type stuff into a text input and it shows you what you typed
 These examples were built with [expo](https://expo.io/) and [spago](https://github.com/spacchetti/spago). 
 
  
-* `npm install purescript-spago expo-cli --global`
+* `npm install spago expo-cli --global`
 * `spago install`
 * `spago build`
 * `npm install`

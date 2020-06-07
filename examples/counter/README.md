@@ -7,7 +7,7 @@ Shows how to make a button that modifies internal state - it increments a counte
 These examples were built with [expo](https://expo.io/) and [spago](https://github.com/spacchetti/spago). 
 
  
-* `npm install purescript-spago expo-cli --global`
+* `npm install spago expo-cli --global`
 * `spago install`
 * `spago build`
 * `npm install`
