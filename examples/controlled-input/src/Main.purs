@@ -3,7 +3,7 @@ module Main where
 import Prelude
 
 import Data.Maybe (Maybe(..), maybe)
-import React.Basic (Component, JSX, createComponent, make)
+import React.Basic.Classic (Component, JSX, createComponent, make)
 import React.Basic (fragment) as React
 import React.Basic.Events (merge, EventFn)
 import React.Basic.Native (TextInputChangeEventData, string, text, textInput) as RN

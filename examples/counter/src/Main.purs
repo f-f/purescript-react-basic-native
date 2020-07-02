@@ -2,7 +2,7 @@ module Main where
 
 import Prelude
 
-import React.Basic (Component, JSX, createComponent, make)
+import React.Basic.Classic (Component, JSX, createComponent, make)
 import React.Basic.Native (button) as RN
 import React.Basic.Native.Events (capture_)
 
