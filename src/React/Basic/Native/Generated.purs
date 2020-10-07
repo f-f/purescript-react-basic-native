@@ -14,10 +14,9 @@ import Foreign (Foreign)
 import Foreign.Object (Object)
 import Prim.Row (class Union)
 import React.Basic (JSX)
-import React.Basic.DOM.Internal (CSS)
 
 import React.Basic.Native.Events (NativeSyntheticEvent)
-import React.Basic.Native.Internal (unsafeCreateNativeElement)
+import React.Basic.Native.Internal (CSS, unsafeCreateNativeElement)
 
 
 
