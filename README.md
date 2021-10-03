@@ -21,5 +21,5 @@ The event types in React Native are a little more rich than they are in React, s
 
 ## Examples
 
-* [Counters](examples/counters/README.md)
+* [Counter](examples/counter/README.md)
 * [Controlled Input](examples/controlled-input/README.md)
